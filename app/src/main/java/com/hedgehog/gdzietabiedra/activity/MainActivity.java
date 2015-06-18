@@ -1,57 +1,45 @@
 package com.hedgehog.gdzietabiedra.activity;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.ListFragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 
+import com.google.android.gms.maps.SupportMapFragment;
 import com.hedgehog.gdzietabiedra.R;
-import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
-import com.hedgehog.gdzietabiedra.pojo.Shops.ShopList;
-import com.hedgehog.gdzietabiedra.utils.Biedra;
+import com.hedgehog.gdzietabiedra.fragments.MapFragment;
+import com.hedgehog.gdzietabiedra.fragments.ShopListFragment;
+import com.hedgehog.gdzietabiedra.utils.Database;
+import com.rey.material.widget.TabPageIndicator;
 
-import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import java.util.Locale;
 
+import butterknife.ButterKnife;
 
 public class MainActivity extends ActionBarActivity {
 
-    Realm realm;
+    TabPageIndicator tabs;
+    ViewPager mPager;
+    PagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final TextView hello = (TextView) findViewById(R.id.hello);
-        realm = Realm.getInstance(this);
-        Biedra.shopApi.getShops(52.4235699, 16.9166683, new Callback<ShopList>() {
-            @Override
-            public void success(ShopList shopList, Response response) {
-                Log.d("sklepy", shopList.getShops().toString());
-
-                realm.beginTransaction();
-                realm.copyToRealmOrUpdate(shopList.getShops());
-                realm.commitTransaction();
-                RealmQuery<Shop> query = realm.where(Shop.class);
-
-                query.equalTo("id", "88");
-
-                RealmResults<Shop> result1 = query.findAll();
-                hello.setText(result1.toString());
-                Log.d("sklep ", result1.toString());
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });
+        tabs = (TabPageIndicator) findViewById(R.id.tabPage);
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+        tabs.setViewPager(mPager);
+//        Log.d("biedra", Database.getClosest().size() + "");
     }
 
     @Override
@@ -74,5 +62,46 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            Fragment fragment = null;
+            switch (position) {
+                case 0:
+                    fragment = new ShopListFragment();
+                    break;
+                case 1:
+                    fragment = new MapFragment();
+                    break;
+                default:
+                    break;
+            }
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 2;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            Locale l = Locale.getDefault();
+            switch (position) {
+                case 0:
+                    return getString(R.string.list).toUpperCase(l);
+                case 1:
+                    return getString(R.string.map).toUpperCase(l);
+            }
+            return null;
+        }
     }
 }

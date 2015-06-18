@@ -5,4 +5,5 @@ package com.hedgehog.gdzietabiedra.utils;
  */
 public class Const {
     public static String SERVER_URL = "http://www.biedronka.pl/api/mobile";
+    public static float radius = 10000;
 }

@@ -22,6 +22,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
+import io.realm.Realm;
 import io.realm.RealmObject;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
@@ -38,11 +39,14 @@ public class Biedra extends Application {
     private static Picasso picasso;
     private RestAdapter restAdapter;
     public static Api.Shop shopApi;
+    private static Realm realm;
+
+
 
     public void onCreate() {
 
-        Biedra.context = getApplicationContext();
-
+        context = getApplicationContext();
+        realm = Realm.getInstance(Biedra.getAppContext());
         CookieManager cookieManager = new CookieManager();
         cookieStore = cookieManager.getCookieStore();
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
@@ -84,7 +88,9 @@ public class Biedra extends Application {
 
         shopApi = restAdapter.create(Api.Shop.class);
     }
-
+    public static Realm getRealm() {
+        return realm;
+    }
     public static Context getAppContext() {
         return Biedra.context;
     }
