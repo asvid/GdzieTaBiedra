@@ -10,6 +10,9 @@ import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
 import com.hedgehog.gdzietabiedra.pojo.Shops.ShopList;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import io.realm.Realm;
@@ -53,7 +56,7 @@ public class Database {
         return query.findAll();
     }
 
-    public static List<Shop> getClosest(){
+    public static List<Shop> getListClosest(){
         Location lastLocation = ((LocationManager) Biedra.getAppContext().getSystemService(Context.LOCATION_SERVICE)).getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
         RealmResults<Shop> query = getAll();
         List<Shop> result = new ArrayList<Shop>();
@@ -64,10 +67,22 @@ public class Database {
             currentLoc.setLatitude(Double.parseDouble(current.getLatitude()));
             currentLoc.setLongitude(Double.parseDouble(current.getLongitude()));
             if(lastLocation.distanceTo(currentLoc) < Const.radius){
+                realm.beginTransaction();
+                current.setDistance(lastLocation.distanceTo(currentLoc) + "");
+                realm.commitTransaction();
                 result.add(current);
             }
         }
-
+        Log.d("database ", result.toString());
+        Collections.sort(result, new Comparator<Shop>() {
+            @Override
+            public int compare(Shop lhs, Shop rhs) {
+                if (Double.parseDouble(lhs.getDistance()) == Double.parseDouble(rhs.getDistance()))
+                    return 0;
+                return Double.parseDouble(lhs.getDistance()) < Double.parseDouble(rhs.getDistance()) ? -1 : 1;
+            }
+        });
+        Log.d("database ", result.toString());
         return result;
     }
 

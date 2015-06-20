@@ -47,6 +47,11 @@
                 <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
         </receiver>
+        <service
+            android:name=".utils.Notify"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

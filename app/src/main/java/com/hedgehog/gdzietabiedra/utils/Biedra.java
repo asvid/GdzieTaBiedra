@@ -2,6 +2,7 @@ package com.hedgehog.gdzietabiedra.utils;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
@@ -44,6 +45,8 @@ public class Biedra extends Application {
 
 
     public void onCreate() {
+        super.onCreate();
+        startService(new Intent(this, Notify.class));
 
         context = getApplicationContext();
         realm = Realm.getInstance(Biedra.getAppContext());

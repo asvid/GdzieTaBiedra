@@ -42,7 +42,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         SupportMapFragment fragment = new SupportMapFragment();
-        getFragmentManager().beginTransaction() .add(R.id.routeDisplay, fragment).commit();
+        //SupportMapFragment fm = (SupportMapFragment)  getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
+        getFragmentManager().beginTransaction() .add(R.id.map, fragment).commit();
 
         fragment.getMapAsync(this);
         return view;
