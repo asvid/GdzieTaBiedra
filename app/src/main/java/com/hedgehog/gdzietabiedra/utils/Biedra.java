@@ -46,7 +46,10 @@ public class Biedra extends Application {
 
     public void onCreate() {
         super.onCreate();
-        startService(new Intent(this, Notify.class));
+        if(Biedra.readBoolean(this, "radar", Const.radiusCheckDefault)){
+            Log.d("TAG", "notyfikacje start");
+            startService(new Intent(this, Notify.class));
+        }
 
         context = getApplicationContext();
         realm = Realm.getInstance(Biedra.getAppContext());
@@ -113,5 +116,16 @@ public class Biedra extends Application {
     public static String readFromPreferences(Context context, String preferenceName, String defaultValue) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         return sharedPreferences.getString(preferenceName, defaultValue);
+    }
+    public static void saveBoolean(Context context, String preferenceName, Boolean preferenceValue) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(preferenceName, preferenceValue);
+        editor.apply();
+    }
+
+    public static Boolean readBoolean(Context context, String preferenceName, Boolean defaultValue) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        return sharedPreferences.getBoolean(preferenceName, defaultValue);
     }
 }

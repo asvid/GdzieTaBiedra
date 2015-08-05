@@ -1,5 +1,6 @@
 package com.hedgehog.gdzietabiedra.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,6 +9,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,14 +19,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.hedgehog.gdzietabiedra.R;
 import com.hedgehog.gdzietabiedra.fragments.MapFragment;
 import com.hedgehog.gdzietabiedra.fragments.ShopListFragment;
+import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
 import com.hedgehog.gdzietabiedra.utils.Database;
+import com.hedgehog.gdzietabiedra.utils.MessageEvent;
 import com.rey.material.widget.TabPageIndicator;
 
 import java.util.Locale;
 
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     TabPageIndicator tabs;
     ViewPager mPager;
@@ -39,26 +44,42 @@ public class MainActivity extends ActionBarActivity {
         mPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         tabs.setViewPager(mPager);
-//        Log.d("biedra", Database.getClosest().size() + "");
+        EventBus.getDefault().register(this);
+
+        String shopId = getIntent().getStringExtra("shopId");
+        //Log.d("TAG", shopId);
+        if(shopId != null){
+            Log.d("TAG", shopId);
+            Shop mItem = Database.getById(shopId);
+            Log.d("TAG", mItem.toString());
+            EventBus.getDefault().post(new MessageEvent("pokaż sklep", mItem, MessageEvent.types.ITEM_CLICK));
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("tag", "onRestart");
+    }
+
+    public void onEvent(MessageEvent event){
+        if(event.type == MessageEvent.types.ITEM_CLICK)
+            mPager.setCurrentItem(1);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent settings = new Intent(this, Settings.class);
+            settings.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(settings);
         }
 
         return super.onOptionsItemSelected(item);
@@ -88,7 +109,6 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 2;
         }
 

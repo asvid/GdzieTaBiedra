@@ -1,6 +1,8 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.hedgehog.gdzietabiedra.fragments.MapFragment">
 
     <fragment
@@ -8,4 +10,16 @@
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</FrameLayout>
+
+    <com.rey.material.widget.Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Prowadź"
+        android:id="@+id/naviOn"
+        app:rd_enable="true"
+        app:rd_style="@style/Material.Drawable.Ripple.Touch"
+        app:rd_rippleType ="touch"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
+</RelativeLayout>

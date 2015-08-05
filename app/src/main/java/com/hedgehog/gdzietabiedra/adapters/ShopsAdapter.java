@@ -1,19 +1,22 @@
 package com.hedgehog.gdzietabiedra.adapters;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import com.hedgehog.gdzietabiedra.R;
 import com.hedgehog.gdzietabiedra.anim.AnimationUtils;
 
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
+import com.hedgehog.gdzietabiedra.utils.Api;
 import com.hedgehog.gdzietabiedra.utils.Biedra;
 import com.hedgehog.gdzietabiedra.viewHolders.ShopView;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,8 +27,11 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopView>{
     private List<Shop> mItems;
     private int mPreviousPosition;
 
+    private final List<Shop> filteredItems;
+
     public ShopsAdapter(List<Shop> data) {
         mItems = data;
+        this.filteredItems = new ArrayList<>();
     }
 
     @Override

@@ -18,6 +18,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.hedgehog.gdzietabiedra.R;
+import com.hedgehog.gdzietabiedra.activity.MainActivity;
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
 
 public class Notify extends Service implements LocationListener {
@@ -43,9 +44,8 @@ public class Notify extends Service implements LocationListener {
 
         //lastLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         lastLocation = mLocationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-        Log.d("pierwsza lokalizacja: ",lastLocation.toString());
 
-        if(Database.getAll().size() == 0){
+        if(Database.getAll().size() == 0 && lastLocation != null){
             Database.populate(lastLocation.getLatitude(), lastLocation.getLongitude());
         }
     }
@@ -58,12 +58,15 @@ public class Notify extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         lastLocation = location;
-        Shop closest = Database.getListClosest().get(0);
-                Log.d("najblizej: ", Double.parseDouble(closest.getDistance()) + "");
-        if(Double.parseDouble(closest.getDistance()) < Const.distanceAlertRange){
-            Log.d("location", lastLocation.toString());
-            sendNotification(getString(R.string.shop_close), getString(R.string.shop_close_text) + closest.getName() + ", " +closest.getImportQuery() , 0);
+        try{
+            Shop closest = Database.getListClosest().get(0);
+            if(Double.parseDouble(closest.getDistance()) < Const.distanceAlertRange){
+                sendNotification(getString(R.string.shop_close), getString(R.string.shop_close_text) + closest.getName() + ", " +closest.getImportQuery() , 0, closest.getId());
+            }
+        }catch (Exception e){
+
         }
+
     }
 
     @Override
@@ -80,7 +83,7 @@ public class Notify extends Service implements LocationListener {
     public void onProviderDisabled(String provider) {
 
     }
-    private void sendNotification(String title, String text, int mNotificationId){
+    private void sendNotification(String title, String text, int mNotificationId, String shopId){
 
         NotificationCompat.BigTextStyle inboxStyle =
                 new NotificationCompat.BigTextStyle();
@@ -88,12 +91,18 @@ public class Notify extends Service implements LocationListener {
         inboxStyle.setBigContentTitle(title);
         inboxStyle.bigText(text);
 
+        Intent notificationIntent = new Intent(Biedra.getAppContext(), MainActivity.class);
+        notificationIntent.putExtra("shopId", shopId);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent intent = PendingIntent.getActivity(Biedra.getAppContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(title)
                         .setContentText(text)
-                        .setStyle(inboxStyle);
+                        .setStyle(inboxStyle)
+                        .setContentIntent(intent);
 
         mBuilder.setLights(Color.RED, 500, 500);
 

@@ -19,9 +19,8 @@ public class WifiReceiver extends BroadcastReceiver {
         Location lastLocation = ((LocationManager) Biedra.getAppContext().getSystemService(Context.LOCATION_SERVICE)).getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
         NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
         if(info != null) {
-            if(info.isConnected()) {
+            if(info.isConnected() && lastLocation != null) {
                 Log.d("wifi ", "connected");
-
                 Database.populate(lastLocation.getLatitude(), lastLocation.getLongitude());
             }
         }

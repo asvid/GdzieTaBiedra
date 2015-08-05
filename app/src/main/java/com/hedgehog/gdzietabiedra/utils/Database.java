@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -38,6 +39,9 @@ public class Database {
                 realm.beginTransaction();
                 realm.copyToRealmOrUpdate(shopList.getShops());
                 realm.commitTransaction();
+
+                EventBus.getDefault().post(new MessageEvent("new data", MessageEvent.types.DATABASE_UPDATE));
+
             }
             @Override
             public void failure(RetrofitError error) {
@@ -53,7 +57,7 @@ public class Database {
 
     public static RealmResults<Shop> getAll(){
         RealmQuery<Shop> query = realm.where(Shop.class);
-        return query.findAll();
+        return query.findAllSorted("distance");
     }
 
     public static List<Shop> getListClosest(){
@@ -61,19 +65,21 @@ public class Database {
         RealmResults<Shop> query = getAll();
         List<Shop> result = new ArrayList<Shop>();
 
-        for(int i = 0, l = query.size(); i < l; i++){
-            Shop current = query.get(i);
-            Location currentLoc = new Location(lastLocation);
-            currentLoc.setLatitude(Double.parseDouble(current.getLatitude()));
-            currentLoc.setLongitude(Double.parseDouble(current.getLongitude()));
-            if(lastLocation.distanceTo(currentLoc) < Const.radius){
-                realm.beginTransaction();
-                current.setDistance(lastLocation.distanceTo(currentLoc) + "");
-                realm.commitTransaction();
-                result.add(current);
+        if(lastLocation != null){
+            for(int i = 0, l = query.size(); i < l; i++){
+                Shop current = query.get(i);
+                Location currentLoc = new Location(lastLocation);
+                currentLoc.setLatitude(Double.parseDouble(current.getLatitude()));
+                currentLoc.setLongitude(Double.parseDouble(current.getLongitude()));
+                if(lastLocation.distanceTo(currentLoc) < Const.radius){
+                    realm.beginTransaction();
+                    current.setDistance(lastLocation.distanceTo(currentLoc) + "");
+                    realm.commitTransaction();
+                    result.add(current);
+                }
             }
         }
-        Log.d("database ", result.toString());
+
         Collections.sort(result, new Comparator<Shop>() {
             @Override
             public int compare(Shop lhs, Shop rhs) {
@@ -82,8 +88,16 @@ public class Database {
                 return Double.parseDouble(lhs.getDistance()) < Double.parseDouble(rhs.getDistance()) ? -1 : 1;
             }
         });
-        Log.d("database ", result.toString());
         return result;
+    }
+
+    public static List<Shop> getByFilter(String filter){
+        RealmQuery<Shop> query = realm.where(Shop.class).contains("name", filter);
+        return query.findAll();
+    }
+    public static Shop getById(String id){
+        RealmQuery<Shop> query = realm.where(Shop.class).contains("id", id);
+        return query.findAll().get(0);
     }
 
 }

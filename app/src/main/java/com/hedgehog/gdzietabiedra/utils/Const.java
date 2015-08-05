@@ -9,4 +9,6 @@ public class Const {
     public static long locationTime = 1000;
     public static float distance = 300;
     public static double distanceAlertRange = 500;
+    public static String radiusDefault = "500";
+    public static Boolean radiusCheckDefault = false;
 }
