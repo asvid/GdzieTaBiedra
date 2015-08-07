@@ -67,6 +67,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             if(clickedMarker!=null){
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(clickedMarker.getPosition(), 16));
                 clickedMarker.showInfoWindow();
+                naviOn.setVisibility(View.VISIBLE);
             }else{
                 Marker marker = map.addMarker(new MarkerOptions()
                                 .position(new LatLng(Double.parseDouble(event.shop.getLatitude()), Double.parseDouble(event.shop.getLongitude())))
