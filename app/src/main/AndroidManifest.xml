@@ -41,6 +41,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,10 +49,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.Settings"
+            android:label="@string/title_activity_settings" >
+        </activity>
 
         <receiver android:name=".utils.WifiReceiver" >
             <intent-filter android:priority="100" >
                 <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".utils.GpsLocationReceiver">
+            <intent-filter>
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
@@ -61,10 +72,5 @@
             android:exported="true" >
         </service>
 
-        <activity
-            android:name=".activity.Settings"
-            android:label="@string/title_activity_settings" >
-        </activity>
     </application>
-
 </manifest>

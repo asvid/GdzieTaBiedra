@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hedgehog.gdzietabiedra.R;
@@ -30,6 +29,7 @@ public class ShopListFragment extends Fragment {
 
     RecyclerView recycler;
     ShopsAdapter mAdapter;
+    TextView emptyText;
     com.rey.material.widget.EditText searchInput;
 
     List<Shop> shops = new ArrayList<Shop>();
@@ -37,12 +37,34 @@ public class ShopListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
     }
 
     public void onEvent(MessageEvent event) {
         if(event.type == MessageEvent.types.DATABASE_UPDATE){
+            shops.clear();
+            shops.addAll(Database.getListClosest());
+            checkShopList();
             mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    private void checkShopList() {
+        if (shops.size() == 0){
+            emptyText.setVisibility(View.VISIBLE);
+        }else{
+            emptyText.setVisibility(View.GONE);
         }
     }
 
@@ -50,9 +72,12 @@ public class ShopListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
-
+        shops.clear();
         shops.addAll(Database.getListClosest());
         mAdapter = new ShopsAdapter(shops);
+        emptyText = (TextView) view.findViewById(R.id.emptyText);
+
+        checkShopList();
 
         recycler = (RecyclerView) view.findViewById(R.id.shopList);
         recycler.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
@@ -74,10 +99,12 @@ public class ShopListFragment extends Fragment {
                 shops.clear();
                 shops.addAll(Database.getByFilter(s.toString()));
                 mAdapter.notifyDataSetChanged();
+                checkShopList();
                 if(s.equals("")){
                     shops.clear();
                     shops.addAll(Database.getListClosest());
                     mAdapter.notifyDataSetChanged();
+                    checkShopList();
                 }
             }
 

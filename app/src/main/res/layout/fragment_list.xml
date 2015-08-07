@@ -27,6 +27,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:text="@string/Brak"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/emptyText"
         android:visibility="gone"

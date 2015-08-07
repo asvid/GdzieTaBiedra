@@ -5,12 +5,10 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
 import com.hedgehog.gdzietabiedra.pojo.Shops.ShopList;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -34,8 +32,6 @@ public class Database {
         Biedra.shopApi.getShops(lat, lng, new Callback<ShopList>() {
             @Override
             public void success(ShopList shopList, Response response) {
-                Log.d("sklepy", shopList.getShops().toString());
-
                 realm.beginTransaction();
                 realm.copyToRealmOrUpdate(shopList.getShops());
                 realm.commitTransaction();
@@ -57,7 +53,7 @@ public class Database {
 
     public static RealmResults<Shop> getAll(){
         RealmQuery<Shop> query = realm.where(Shop.class);
-        return query.findAllSorted("distance");
+        return query.findAll();
     }
 
     public static List<Shop> getListClosest(){
@@ -75,7 +71,9 @@ public class Database {
                     realm.beginTransaction();
                     current.setDistance(lastLocation.distanceTo(currentLoc) + "");
                     realm.commitTransaction();
-                    result.add(current);
+                    if(!result.contains(current)){
+                        result.add(current);
+                    }
                 }
             }
         }

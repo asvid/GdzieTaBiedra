@@ -8,20 +8,18 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import java.net.CookieHandler;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
-import java.net.CookieStore;
-import java.util.Date;
-
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.internal.bind.DateTypeAdapter;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
+
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+import java.net.CookieStore;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
@@ -47,7 +45,6 @@ public class Biedra extends Application {
     public void onCreate() {
         super.onCreate();
         if(Biedra.readBoolean(this, "radar", Const.radiusCheckDefault)){
-            Log.d("TAG", "notyfikacje start");
             startService(new Intent(this, Notify.class));
         }
 
@@ -86,7 +83,7 @@ public class Biedra extends Application {
                 .create();
 
         restAdapter = new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setLogLevel(RestAdapter.LogLevel.BASIC)
                 .setEndpoint(Const.SERVER_URL)
                 .setConverter(new GsonConverter(gson))
                 .setClient(new OkClient(okHttpClient))

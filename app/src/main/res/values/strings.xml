@@ -18,4 +18,8 @@
     <string name="searchHelper">np. miasto, ulica</string>
     <string name="Notivications">Informuj, jeśli Biedronka jest w poblizu</string>
     <string name="save">Zapisz</string>
+    <string name="gps_title">Włączyć lokalizację?</string>
+    <string name="gps_msg">Ta aplikacja potrzebuje do prawidłowego działania włączoną lokalizację, chcesz teraz zmienić ustawienia?</string>
+    <string name="no">Nie</string>
+    <string name="go_to_settings">Idź do ustawień</string>
 </resources>

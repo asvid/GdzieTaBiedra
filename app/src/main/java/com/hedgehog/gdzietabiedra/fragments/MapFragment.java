@@ -1,18 +1,12 @@
 package com.hedgehog.gdzietabiedra.fragments;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,21 +19,17 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.gson.Gson;
 import com.hedgehog.gdzietabiedra.R;
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
 import com.hedgehog.gdzietabiedra.utils.Biedra;
-import com.hedgehog.gdzietabiedra.utils.Const;
 import com.hedgehog.gdzietabiedra.utils.Database;
 import com.hedgehog.gdzietabiedra.utils.MessageEvent;
 import com.hedgehog.gdzietabiedra.utils.PopupAdapter;
 import com.rey.material.widget.Button;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,7 +48,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
         EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     public void onEvent(MessageEvent event) {
@@ -81,6 +81,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 );
                 markerList.put(event.shop.getId(), marker);
             }
+        }
+        if(event.type == MessageEvent.types.DATABASE_UPDATE){
+            Log.d("event", "update map");
+            putMarkers();
         }
     }
 
@@ -153,7 +157,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
     private void putMarkers() {
-        map.clear();
+        if(map!=null){
+            map.clear();
+        }
+
         List<Shop> shops = Database.getListClosest();
         for(int i = 0, l = shops.size(); i<l ; i++){
             Shop current = shops.get(i);

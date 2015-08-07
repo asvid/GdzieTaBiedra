@@ -3,19 +3,14 @@ package com.hedgehog.gdzietabiedra.utils;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.hedgehog.gdzietabiedra.R;
 import com.hedgehog.gdzietabiedra.activity.MainActivity;
@@ -60,7 +55,7 @@ public class Notify extends Service implements LocationListener {
         lastLocation = location;
         try{
             Shop closest = Database.getListClosest().get(0);
-            if(Double.parseDouble(closest.getDistance()) < Const.distanceAlertRange){
+            if(Double.parseDouble(closest.getDistance()) < Double.parseDouble(Biedra.readFromPreferences(this, "radiusValue", Const.radiusDefault))){
                 sendNotification(getString(R.string.shop_close), getString(R.string.shop_close_text) + closest.getName() + ", " +closest.getImportQuery() , 0, closest.getId());
             }
         }catch (Exception e){
