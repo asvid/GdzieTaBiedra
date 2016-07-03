@@ -15,3 +15,29 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn butterknife.internal.**
+-keep class **$$ViewInjector { *; }
+-keepnames class * { @butterknife.InjectView *;}
+
+-keep class io.realm.annotations.RealmModule
+-keep @io.realm.annotations.RealmModule class *
+-keep class io.realm.internal.Keep
+-keep @io.realm.internal.Keep class *
+-dontwarn javax.**
+-dontwarn io.realm.**
+
+-dontwarn com.facebook.android.BuildConfig
+-dontwarn rx.**
+-dontwarn okio.**
+-dontwarn com.squareup.okhttp.*
+-dontwarn retrofit.appengine.UrlFetchClient
+-keepattributes *Annotation*
+-keep class retrofit.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit.http.* <methods>;
+}
+-keepattributes Signature
+
+-keepclassmembers class ** {
+    public void onEvent(**);
+}

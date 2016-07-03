@@ -1,13 +1,16 @@
 package com.hedgehog.gdzietabiedra.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -37,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
     ViewPager mPager;
     PagerAdapter mPagerAdapter;
 
+
+    public void onEvent(MessageEvent event) {
+        if (event.type == MessageEvent.types.ITEM_CLICK)
+            mPager.setCurrentItem(1);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
         String shopId = getIntent().getStringExtra("shopId");
         //Log.d("TAG", shopId);
-        if(shopId != null){
+        if (shopId != null) {
             Shop mItem = Database.getById(shopId);
             EventBus.getDefault().post(new MessageEvent("pokaż sklep", mItem, MessageEvent.types.ITEM_CLICK));
         }
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -67,16 +77,18 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+
     private void checkGPS() {
-        LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE );
-        if(!manager.isProviderEnabled( LocationManager.GPS_PROVIDER )){
+        LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(R.string.gps_title);
             alert.setMessage(R.string.gps_msg);
             alert.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();}
+                    dialog.dismiss();
+                }
             });
             alert.setPositiveButton(R.string.go_to_settings, new DialogInterface.OnClickListener() {
 
@@ -87,22 +99,28 @@ public class MainActivity extends AppCompatActivity {
             });
             AlertDialog al_gps = alert.create();
             al_gps.show();
-        }else{
+        } else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             Location lastLocation = ((LocationManager) getSystemService(Context.LOCATION_SERVICE)).getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
             ConnectivityManager connManager = (ConnectivityManager) Biedra.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            if(mWifi != null) {
-                if(mWifi.isConnected() && lastLocation != null) {
-                    Database.populate(lastLocation.getLatitude(), lastLocation.getLongitude());
-                }
+
+            if (lastLocation != null) {
+                Database.populate(lastLocation.getLatitude(), lastLocation.getLongitude());
+
             }
         }
     }
 
-    public void onEvent(MessageEvent event){
-        if(event.type == MessageEvent.types.ITEM_CLICK)
-            mPager.setCurrentItem(1);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,5 +178,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkGPS();
     }
 }

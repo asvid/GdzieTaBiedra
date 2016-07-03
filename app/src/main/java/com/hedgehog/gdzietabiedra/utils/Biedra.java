@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -16,6 +17,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
+import io.fabric.sdk.android.Fabric;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -44,6 +46,7 @@ public class Biedra extends Application {
 
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         if(Biedra.readBoolean(this, "radar", Const.radiusCheckDefault)){
             startService(new Intent(this, Notify.class));
         }
