@@ -41,3 +41,7 @@
 -keepclassmembers class ** {
     public void onEvent(**);
 }
+
+-keep class com.hedgehog.gdzietabiedra.pojo.Shops.Shop
+-keep class com.hedgehog.gdzietabiedra.pojo.Shops.ShopList
+-keep class com.hedgehog.gdzietabiedra.utils.MessageEvent

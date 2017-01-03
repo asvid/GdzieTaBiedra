@@ -68,6 +68,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(clickedMarker.getPosition(), 16));
                 clickedMarker.showInfoWindow();
                 naviOn.setVisibility(View.VISIBLE);
+                currentMarker = clickedMarker;
             }else{
                 Marker marker = map.addMarker(new MarkerOptions()
                                 .position(new LatLng(Double.parseDouble(event.shop.getLatitude()), Double.parseDouble(event.shop.getLongitude())))
@@ -81,7 +82,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))
                 );
                 markerList.put(event.shop.getId(), marker);
+                currentMarker = marker;
             }
+
         }
         if(event.type == MessageEvent.types.DATABASE_UPDATE){
             Log.d("event", "update map");
