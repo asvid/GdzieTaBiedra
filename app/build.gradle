@@ -6,7 +6,7 @@ apply plugin: 'com.google.firebase.firebase-crash'
 def versionMajor = 1
 def versionMinor = 2
 def versionPatch = 0
-def versionBuild = 1
+def versionBuild = 3
 
 buildscript {
     repositories {
@@ -90,4 +90,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:10.2.0'
     compile 'com.github.rey5137:material:1.2.2'
     compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.github.asvid:Notti:0.0.6'
 }
+
+apply plugin: 'com.google.gms.google-services'

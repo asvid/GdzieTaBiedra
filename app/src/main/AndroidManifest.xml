@@ -68,7 +68,7 @@
         </receiver>
 
         <service
-            android:name=".utils.Notify"
+            android:name=".utils.NotificationService"
             android:enabled="true"
             android:exported="true" >
         </service>
