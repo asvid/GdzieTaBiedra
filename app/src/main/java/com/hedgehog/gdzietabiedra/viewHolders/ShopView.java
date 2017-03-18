@@ -38,7 +38,6 @@ public class ShopView extends RecyclerView.ViewHolder implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        Log.d("click", mItem.toString());
         EventBus.getDefault().post(new MessageEvent("pokaż sklep", mItem, MessageEvent.types.ITEM_CLICK));
     }
 }

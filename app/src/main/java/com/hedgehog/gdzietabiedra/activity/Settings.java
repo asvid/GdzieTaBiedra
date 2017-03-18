@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hedgehog.gdzietabiedra.R;
-import com.hedgehog.gdzietabiedra.utils.Biedra;
+import com.hedgehog.gdzietabiedra.App;
 import com.hedgehog.gdzietabiedra.utils.Const;
 import com.hedgehog.gdzietabiedra.utils.Notify;
 import com.rey.material.widget.Button;
@@ -35,10 +35,12 @@ public class Settings extends AppCompatActivity {
         saveBtn = (Button) findViewById(R.id.saveBtn);
 
         //set saved values or default ones
-        radiusSlider.setValue(Integer.parseInt(Biedra.readFromPreferences(this, "radiusValue", Const.radiusDefault)), true);
-        notificationCheckbox.setChecked(Biedra.readBoolean(this, "radar", Const.radiusCheckDefault));
+        radiusSlider.setValue(Integer.parseInt(
+                App.readFromPreferences(this, "radiusValue", Const.radiusDefault)), true);
+        notificationCheckbox.setChecked(App.readBoolean(this, "radar", Const.radiusCheckDefault));
 
-        radiusValue.setText(Biedra.readFromPreferences(this, "radiusValue", radiusSlider.getValue() + ""));
+        radiusValue.setText(
+                App.readFromPreferences(this, "radiusValue", radiusSlider.getValue() + ""));
 
         radiusSlider.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
             @Override
@@ -55,10 +57,11 @@ public class Settings extends AppCompatActivity {
     }
 
     private void saveSettings() {
-        Biedra.saveBoolean(this, "radar", notificationCheckbox.isChecked());
-        Biedra.saveToPreferences(this, "radiusValue", radiusSlider.getValue() + "");
+        App.saveBoolean(this, "radar", notificationCheckbox.isChecked());
+        App.saveToPreferences(this, "radiusValue", radiusSlider.getValue() + "");
 
-        Log.d("data ",Biedra.readFromPreferences(this, "radiusValue", Const.radiusDefault) + " / " + Biedra.readBoolean(this, "radar", Const.radiusCheckDefault));
+        Log.d("data ", App.readFromPreferences(this, "radiusValue", Const.radiusDefault) + " / " + App
+                .readBoolean(this, "radar", Const.radiusCheckDefault));
         if(notificationCheckbox.isChecked()){
             Log.d("TAG", "uruchamiam notyfikacje");
             startService(new Intent(this, Notify.class));

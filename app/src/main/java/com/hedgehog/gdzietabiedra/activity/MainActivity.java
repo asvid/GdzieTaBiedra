@@ -21,11 +21,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.hedgehog.gdzietabiedra.App;
 import com.hedgehog.gdzietabiedra.R;
 import com.hedgehog.gdzietabiedra.fragments.MapFragment;
 import com.hedgehog.gdzietabiedra.fragments.ShopListFragment;
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
-import com.hedgehog.gdzietabiedra.utils.Biedra;
 import com.hedgehog.gdzietabiedra.utils.Database;
 import com.hedgehog.gdzietabiedra.utils.MessageEvent;
 import com.rey.material.widget.TabPageIndicator;
@@ -59,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
         checkGPS();
 
         String shopId = getIntent().getStringExtra("shopId");
-        //Log.d("TAG", shopId);
         if (shopId != null) {
             Shop mItem = Database.getById(shopId);
-            EventBus.getDefault().post(new MessageEvent("pokaż sklep", mItem, MessageEvent.types.ITEM_CLICK));
+            EventBus.getDefault().post(new MessageEvent("pokaż sklep", mItem,
+                    MessageEvent.types.ITEM_CLICK));
         }
     }
 
@@ -79,28 +79,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkGPS() {
-        LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        LocationManager manager = (LocationManager) getSystemService(
+                LOCATION_SERVICE);
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(R.string.gps_title);
             alert.setMessage(R.string.gps_msg);
-            alert.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            alert.setNegativeButton(R.string.no,
+                    new DialogInterface.OnClickListener() {
 
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            alert.setPositiveButton(R.string.go_to_settings, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alert.setPositiveButton(R.string.go_to_settings,
+                    new DialogInterface.OnClickListener() {
 
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent I = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    startActivity(I);
-                }
-            });
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent I = new Intent(
+                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(I);
+                        }
+                    });
             AlertDialog al_gps = alert.create();
             al_gps.show();
         } else {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat
+                    .checkSelfPermission(this,
+                            Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -110,12 +117,18 @@ public class MainActivity extends AppCompatActivity {
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            Location lastLocation = ((LocationManager) getSystemService(Context.LOCATION_SERVICE)).getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-            ConnectivityManager connManager = (ConnectivityManager) Biedra.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            Location lastLocation = ((LocationManager) getSystemService(
+                    Context.LOCATION_SERVICE))
+                    .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+            ConnectivityManager connManager = (ConnectivityManager) App
+                    .getAppContext()
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mWifi = connManager
+                    .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
             if (lastLocation != null) {
-                Database.populate(lastLocation.getLatitude(), lastLocation.getLongitude());
+                Database.populate(lastLocation.getLatitude(),
+                        lastLocation.getLongitude());
 
             }
         }

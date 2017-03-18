@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">"Gdzie Ta Biedra"</string>
+
+    <string name="action_settings">"impostazioni"</string>
+
+    <string name="list">"Negozi"</string>
+    <string name="map">"Mappa"</string>
+    <string name="Brak">"Nessuna"</string>
+    <string name="shop_close">"Biedronka è vicino"</string>
+    <string name="shop_close_text">"Sei vicina Biedronka "</string>
+    <string name="title_activity_maps">"Mappa"</string>
+    <string name="icon">"Icona"</string>
+    <string name="title_activity_settings">"impostazioni"</string>
+    <string name="Wyszukaj">"Cerca"</string>
+    <string name="searchHelper">"strada, città"</string>
+    <string name="Notivications">"Avvisami se Biedronka è vicino"</string>
+    <string name="save">"Salva"</string>
+    <string name="gps_title">"Attivare localizzazione?"</string>
+    <string name="gps_msg">"Questa applicazione richiede la localizzazione attiva per il lavoro corretto, vuoi cambiare ora?"</string>
+    <string name="no">"
+No"</string>
+    <string name="go_to_settings">"Vai alle impostazioni"</string>
+</resources>

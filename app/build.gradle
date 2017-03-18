@@ -1,17 +1,28 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'realm-android'
+apply plugin: 'com.google.firebase.firebase-crash'
+
+def versionMajor = 1
+def versionMinor = 2
+def versionPatch = 0
+def versionBuild = 1
+
 buildscript {
     repositories {
-        maven { url 'https://maven.fabric.io/public' }
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
 }
-apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 
 
@@ -29,15 +40,17 @@ android {
     android.signingConfigs.release.keyPassword props.keyAliasPassword
 
 
-    compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
     defaultConfig {
         applicationId "com.hedgehog.gdzietabiedra"
-        minSdkVersion 10
-        targetSdkVersion 22
-        versionCode 12
-        versionName "1.1"
-        multiDexEnabled true
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}.${versionBuild}"
+        multiDexEnabled false
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         debug {
@@ -48,7 +61,11 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            zipAlignEnabled true
         }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
     lintOptions {
         abortOnError false
@@ -60,25 +77,17 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:support-v4:23.3.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile 'com.google.firebase:firebase-core:10.2.0'
+    compile 'com.google.firebase:firebase-crash:10.2.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp:2.2.0'
-    compile 'com.android.support:cardview-v7:23.3.0'
-    compile 'com.android.support:recyclerview-v7:23.3.0'
-    compile 'com.google.code.gson:gson:2.4'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.daimajia.easing:library:1.0.1@aar'
-    compile 'com.daimajia.androidanimations:library:1.1.3@aar'
+    compile 'com.google.code.gson:gson:2.7'
     compile 'it.neokree:MaterialTabs:0.11'
-    compile 'com.google.android.gms:play-services:8.4.0'
-    compile 'io.realm:realm-android:0.80.3'
-    compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'com.google.android.gms:play-services-maps:10.2.0'
     compile 'com.github.rey5137:material:1.2.2'
-    compile 'com.sothree.slidinguppanel:library:3.0.0'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.0@aar') {
-        transitive = true;
-    }
 }

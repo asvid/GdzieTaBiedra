@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "460307453620",
+    "firebase_url": "https://gdzietabiedra.firebaseio.com",
+    "project_id": "gdzietabiedra",
+    "storage_bucket": "gdzietabiedra.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460307453620:android:ddec2ab0cd29bcbe",
+        "android_client_info": {
+          "package_name": "com.hedgehog.gdzietabiedra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460307453620-msd3q6h31ho646kt5h0h2ua2jh71eodb.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "460307453620-bebptnogi2lhsj1v6rjp075kfs3hj3a3.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "460307453620-jfs63tdkqeesocuup2924mi6u351uv7p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hedgehog.gdzietabiedra",
+            "certificate_hash": "23cb840e19c62fd766920ac920a48ae27e237a19"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrRgIbx5EoR6yZERvX98wswJnBdx2w8MQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-68530276-3"
+          }
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460307453620-msd3q6h31ho646kt5h0h2ua2jh71eodb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.hedgehog.gdzietabiedra.R;
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
-import com.hedgehog.gdzietabiedra.utils.Biedra;
+import com.hedgehog.gdzietabiedra.App;
 import com.hedgehog.gdzietabiedra.utils.Database;
 import com.hedgehog.gdzietabiedra.utils.MessageEvent;
 import com.hedgehog.gdzietabiedra.utils.PopupAdapter;
@@ -136,7 +136,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         map.setTrafficEnabled(false);
         map.getUiSettings().setMapToolbarEnabled(false);
 
-        MapsInitializer.initialize(Biedra.getAppContext());
+        MapsInitializer.initialize(App.getAppContext());
 
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
         map.animateCamera(zoom);

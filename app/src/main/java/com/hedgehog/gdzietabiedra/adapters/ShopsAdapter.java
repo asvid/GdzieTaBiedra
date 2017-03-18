@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.hedgehog.gdzietabiedra.R;
 import com.hedgehog.gdzietabiedra.anim.AnimationUtils;
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
-import com.hedgehog.gdzietabiedra.utils.Biedra;
+import com.hedgehog.gdzietabiedra.App;
 import com.hedgehog.gdzietabiedra.viewHolders.ShopView;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopView>{
 
     @Override
     public ShopView onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(Biedra.getAppContext()).inflate(R.layout.shop_item, parent, false);
+        View view = LayoutInflater.from(App.getAppContext()).inflate(R.layout.shop_item, parent, false);
         return new ShopView(view);
     }
 

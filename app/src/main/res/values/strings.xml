@@ -1,25 +1,23 @@
 <resources>
     <string name="app_name">Gdzie Ta Biedra</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Ustawienia</string>
+    <string name="action_settings">Settings</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="list">Lista sklepów</string>
-    <string name="map">Mapa</string>
-    <string name="Brak">Brak</string>
-    <string name="shop_close">Biedronka w pobliżu</string>
-    <string name="shop_close_text">Jesteś niedaleko biedronki </string>
+    <string name="list">Shops</string>
+    <string name="map">Map</string>
+    <string name="Brak">None</string>
+    <string name="shop_close">Biedronka is close</string>
+    <string name="shop_close_text">You are near Biedronka </string>
     <string name="title_activity_maps">Map</string>
-    <string name="icon">Ikona</string>
-    <string name="title_activity_settings">Ustawienia</string>
-    <string name="Wyszukaj">Wyszukaj</string>
-    <string name="searchHelper">np. miasto, ulica</string>
-    <string name="Notivications">Informuj, jeśli Biedronka jest w poblizu</string>
-    <string name="save">Zapisz</string>
-    <string name="gps_title">Włączyć lokalizację?</string>
-    <string name="gps_msg">Ta aplikacja potrzebuje do prawidłowego działania włączoną lokalizację, chcesz teraz zmienić ustawienia?</string>
-    <string name="no">Nie</string>
-    <string name="go_to_settings">Idź do ustawień</string>
+    <string name="icon">Icon</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="Wyszukaj">Search</string>
+    <string name="searchHelper">street, city</string>
+    <string name="Notivications">Inform me if Biedronka is close</string>
+    <string name="save">Save</string>
+    <string name="gps_title">Turn on localization?</string>
+    <string name="gps_msg">This app requires localization turned on for proper work, do you
+    want change it now?</string>
+    <string name="no">No</string>
+    <string name="go_to_settings">Go to settings</string>
 </resources>

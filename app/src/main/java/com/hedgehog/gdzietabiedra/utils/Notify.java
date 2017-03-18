@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 
+import com.hedgehog.gdzietabiedra.App;
 import com.hedgehog.gdzietabiedra.R;
 import com.hedgehog.gdzietabiedra.activity.MainActivity;
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop;
@@ -30,22 +31,28 @@ public class Notify extends Service implements LocationListener {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
     @Override
-    public void onCreate(){
+    public void onCreate() {
         super.onCreate();
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        mLocationManager.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, Const.locationTime, Const.distance, this);
+        mLocationManager
+                .requestLocationUpdates(LocationManager.PASSIVE_PROVIDER,
+                        Const.locationTime, Const.distance, this);
 
         //lastLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        lastLocation = mLocationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+        lastLocation = mLocationManager
+                .getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 
-        if(Database.getAll().size() == 0 && lastLocation != null){
-            Database.populate(lastLocation.getLatitude(), lastLocation.getLongitude());
+        if (Database.getAll().size() == 0 && lastLocation != null) {
+            Database.populate(lastLocation.getLatitude(),
+                    lastLocation.getLongitude());
         }
     }
+
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
     }
 
@@ -53,12 +60,17 @@ public class Notify extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         lastLocation = location;
-        try{
+        try {
             Shop closest = Database.getListClosest().get(0);
-            if(Double.parseDouble(closest.getDistance()) < Double.parseDouble(Biedra.readFromPreferences(this, "radiusValue", Const.radiusDefault))){
-                sendNotification(getString(R.string.shop_close), getString(R.string.shop_close_text) + closest.getName() + ", " +closest.getImportQuery() , 0, closest.getId());
+            if (Double.parseDouble(closest.getDistance()) < Double.parseDouble(
+                    App.readFromPreferences(this, "radiusValue",
+                            Const.radiusDefault))) {
+                sendNotification(getString(R.string.shop_close),
+                        getString(R.string.shop_close_text) + " " + closest
+                                .getName() + "," + " " + closest
+                                .getImportQuery(), 0, closest.getId());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -78,32 +90,34 @@ public class Notify extends Service implements LocationListener {
     public void onProviderDisabled(String provider) {
 
     }
-    private void sendNotification(String title, String text, int mNotificationId, String shopId){
 
-        NotificationCompat.BigTextStyle inboxStyle =
-                new NotificationCompat.BigTextStyle();
+    private void sendNotification(String title, String text,
+                                  int mNotificationId, String shopId) {
+
+        NotificationCompat.BigTextStyle inboxStyle = new NotificationCompat.BigTextStyle();
 
         inboxStyle.setBigContentTitle(title);
         inboxStyle.bigText(text);
 
-        Intent notificationIntent = new Intent(Biedra.getAppContext(), MainActivity.class);
+        Intent notificationIntent = new Intent(App.getAppContext(),
+                MainActivity.class);
         notificationIntent.putExtra("shopId", shopId);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent intent = PendingIntent.getActivity(Biedra.getAppContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationIntent.setFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent intent = PendingIntent
+                .getActivity(App.getAppContext(), 0, notificationIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle(title)
-                        .setContentText(text)
-                        .setStyle(inboxStyle)
-                        .setContentIntent(intent);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                this).setSmallIcon(R.mipmap.ic_launcher).setContentTitle(title)
+                .setContentText(text).setStyle(inboxStyle)
+                .setContentIntent(intent);
 
         mBuilder.setLights(Color.RED, 500, 500);
 
 // Gets an instance of the NotificationManager service
-        NotificationManager mNotifyMgr =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager mNotifyMgr = (NotificationManager) getSystemService(
+                NOTIFICATION_SERVICE);
 // Builds the notification and issues it.
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }

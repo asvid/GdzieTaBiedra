@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">"Gdzie Ta Biedra"</string>
+
+    <string name="action_settings">"Настройки"</string>
+
+    <string name="list">"магазинов"</string>
+    <string name="map">"Карта"</string>
+    <string name="Brak">"Никто"</string>
+    <string name="shop_close">"Biedronka близко"</string>
+    <string name="shop_close_text">"Вы находитесь рядом с Biedronka "</string>
+    <string name="title_activity_maps">"Карта"</string>
+    <string name="icon">"Знак"</string>
+    <string name="title_activity_settings">"Настройки"</string>
+    <string name="Wyszukaj">"Поиск"</string>
+    <string name="searchHelper">"улица, город"</string>
+    <string name="Notivications">"Сообщите мне, если Biedronka близко"</string>
+    <string name="save">"Сохранить"</string>
+    <string name="gps_title">"Включите локализации?"</string>
+    <string name="gps_msg">"Это приложение требует локализации включен для правильной работы, вы хотите изменить это сейчас?"</string>
+    <string name="no">"Нет"</string>
+    <string name="go_to_settings">"Перейдите в настройки"</string>
+</resources>
