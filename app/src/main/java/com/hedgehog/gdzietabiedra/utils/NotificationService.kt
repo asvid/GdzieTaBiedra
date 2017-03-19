@@ -87,7 +87,6 @@ class NotificationService : Service(), LocationListener {
                 .getActivity(baseContext, 0, notificationIntent,
                              PendingIntent.FLAG_UPDATE_CURRENT)
 
-
         Di.notti
                 .show(NottiFactory.get(NottiFactory.TYPE.BIG_TEXT, title, text)
                               .setId(notificationId)

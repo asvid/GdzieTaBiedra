@@ -31,6 +31,7 @@ object Di {
     val notti: Notti by lazy {
         val lightSettings = LightSettings(Color.RED, 500, 500)
         val vibrationSettings = VibrationSettings(null, false)
-        Notti(context, NottiConf(R.mipmap.ic_launcher, vibrationSettings, lightSettings))
+        Notti(context, NottiConf(R.mipmap.ic_launcher, vibrationSettings, lightSettings)
+                .setSameID(true))
     }
 }
