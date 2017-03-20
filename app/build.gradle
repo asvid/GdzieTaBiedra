@@ -91,6 +91,7 @@ dependencies {
     compile 'com.github.rey5137:material:1.2.2'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.github.asvid:Notti:0.0.6'
+    compile "io.reactivex.rxjava2:rxjava:2.0.7"
 }
 
 apply plugin: 'com.google.gms.google-services'

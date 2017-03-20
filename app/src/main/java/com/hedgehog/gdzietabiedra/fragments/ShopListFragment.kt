@@ -18,7 +18,7 @@ import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.adapters.ShopsAdapter
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop
 import com.hedgehog.gdzietabiedra.utils.Database
-import com.hedgehog.gdzietabiedra.utils.MessageEvent
+import com.hedgehog.gdzietabiedra.utils.EventBusClasses
 import de.greenrobot.event.EventBus
 import java.util.*
 import kotlin.properties.Delegates
@@ -36,13 +36,11 @@ class ShopListFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    fun onEvent(event: MessageEvent) {
-        if (event.type === MessageEvent.types.DATABASE_UPDATE) {
-            shops.clear()
-            shops.addAll(Database.listClosest)
-            checkShopList()
-            mAdapter.notifyDataSetChanged()
-        }
+    fun onEvent(event: EventBusClasses.DatabaseUpdate) {
+        shops.clear()
+        shops.addAll(Database.listClosest)
+        checkShopList()
+        mAdapter.notifyDataSetChanged()
     }
 
     override fun onStart() {

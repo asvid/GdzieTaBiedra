@@ -4,10 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.location.LocationManager
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -15,53 +11,63 @@ import android.view.Menu
 import android.view.MenuItem
 import com.hedgehog.gdzietabiedra.Di
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.adapters.TabsAdapter
 import com.hedgehog.gdzietabiedra.fragments.MapFragment
-import com.hedgehog.gdzietabiedra.fragments.ShopListFragment
 import com.hedgehog.gdzietabiedra.utils.Database
-import com.hedgehog.gdzietabiedra.utils.MessageEvent
+import com.hedgehog.gdzietabiedra.utils.EventBusClasses
 import com.rey.material.widget.TabPageIndicator
 import de.greenrobot.event.EventBus
-import java.util.*
 import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
 
     internal var tabs: TabPageIndicator by Delegates.notNull()
     internal var mPager: ViewPager by Delegates.notNull()
-    internal var mPagerAdapter: PagerAdapter by Delegates.notNull()
+    internal var mPagerAdapter: TabsAdapter by Delegates.notNull()
 
 
-    fun onEvent(event: MessageEvent) {
-        if (event.type === MessageEvent.types.ITEM_CLICK)
-            mPager.currentItem = 1
+    fun onEvent(event: EventBusClasses.ShopSelected) {
+        mPager.currentItem = 1
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        tabs = findViewById(R.id.tabPage) as TabPageIndicator
-        mPager = findViewById(R.id.pager) as ViewPager
-        mPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
-        mPager.adapter = mPagerAdapter
-        tabs.setViewPager(mPager)
+        setTabs()
+        handleNotificationIntent(intent)
+    }
 
-        checkGPS()
-
+    private fun handleNotificationIntent(intent: Intent) {
         val shopId = intent.getStringExtra("shopId")
         if (shopId != null) {
-            val mItem = Database.getById(shopId)
-            EventBus.getDefault().post(MessageEvent("pokaż sklep", mItem,
-                                                    MessageEvent.types.ITEM_CLICK))
+            mPager.currentItem = 1
+            (mPagerAdapter.getItem(1) as MapFragment).setCurrentShop(shopId)
         }
     }
 
-    public override fun onStart() {
-        super.onStart()
+    private fun setTabs() {
+        tabs = findViewById(R.id.tabPage) as TabPageIndicator
+        mPager = findViewById(R.id.pager) as ViewPager
+        val titles = listOf<String>(getString(R.string.list), getString(R.string.map))
+        mPagerAdapter = TabsAdapter(supportFragmentManager, titles)
+        mPager.adapter = mPagerAdapter
+        tabs.setViewPager(mPager)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        checkGPS()
         EventBus.getDefault().register(this)
     }
 
-    public override fun onStop() {
-        super.onStop()
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent != null)
+            handleNotificationIntent(intent)
+    }
+
+    public override fun onPause() {
+        super.onPause()
         EventBus.getDefault().unregister(this)
     }
 
@@ -109,37 +115,5 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-    private inner class SectionsPagerAdapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(
-            fm) {
-
-        override fun getItem(position: Int): Fragment {
-            when (position) {
-                0    -> return ShopListFragment()
-                1    -> return MapFragment()
-                else -> {
-                    return ShopListFragment()
-                }
-            }
-        }
-
-        override fun getCount(): Int {
-            return 2
-        }
-
-        override fun getPageTitle(position: Int): CharSequence? {
-            val l = Locale.getDefault()
-            when (position) {
-                0 -> return getString(R.string.list).toUpperCase(l)
-                1 -> return getString(R.string.map).toUpperCase(l)
-            }
-            return null
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        checkGPS()
     }
 }

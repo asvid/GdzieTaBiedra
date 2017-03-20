@@ -2,11 +2,8 @@ package com.hedgehog.gdzietabiedra.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.anim.AnimationUtils
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop
 import com.hedgehog.gdzietabiedra.viewHolders.ShopView
 
@@ -25,11 +22,6 @@ class ShopsAdapter(private val mItems: List<Shop>) : RecyclerView.Adapter<ShopVi
     override fun onBindViewHolder(holder: ShopView, position: Int) {
         val item = mItems[position]
         holder.bindItem(item)
-        if (position > mPreviousPosition) {
-            AnimationUtils.animateFadeIn(holder, true)
-        } else {
-            AnimationUtils.animateFadeIn(holder, false)
-        }
         mPreviousPosition = position
     }
 

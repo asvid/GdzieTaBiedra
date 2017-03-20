@@ -1,11 +1,9 @@
 package com.hedgehog.gdzietabiedra.fragments
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,87 +12,79 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.hedgehog.gdzietabiedra.Di
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.pojo.Shops.Shop
 import com.hedgehog.gdzietabiedra.utils.Database
-import com.hedgehog.gdzietabiedra.utils.MessageEvent
+import com.hedgehog.gdzietabiedra.utils.EventBusClasses
 import com.hedgehog.gdzietabiedra.utils.PopupAdapter
 import com.rey.material.widget.Button
 import de.greenrobot.event.EventBus
-import java.util.*
+import io.reactivex.subjects.ReplaySubject
+import java.lang.Double
+import kotlin.properties.Delegates
 
-class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
+class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap
+.OnMapClickListener {
 
-    private var map: GoogleMap? = null
-    private var naviOn: Button? = null
+    private var map: GoogleMap by Delegates.notNull()
+    private var naviOn: Button by Delegates.notNull()
     private val markerList = HashMap<String, Marker>()
     private var currentMarker: Marker? = null
+    private var observable: ReplaySubject<GoogleMap> = ReplaySubject.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         EventBus.getDefault().register(this)
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         EventBus.getDefault().unregister(this)
     }
 
-    fun onEvent(event: MessageEvent) {
-        if (event.shop != null) {
-            val clickedMarker = markerList[event.shop.id]
-            if (clickedMarker != null) {
-                map!!.animateCamera(CameraUpdateFactory
-                                            .newLatLngZoom(clickedMarker.position, 16f))
-                clickedMarker.showInfoWindow()
-                naviOn!!.visibility = View.VISIBLE
-                currentMarker = clickedMarker
-            } else {
-                val marker = map!!.addMarker(MarkerOptions().position(
-                        LatLng(java.lang.Double.parseDouble(
-                                event.shop.latitude),
-                               java.lang.Double.parseDouble(
-                                       event.shop.longitude)))
-                                                     .title(event.shop.name).snippet(
-                        event.shop.street + " " + event
-                                .shop
-                                .streetNumber + "\n" + "pn-pt: " + event
-                                .shop
-                                .hours + "\n" + "so: " + event
-                                .shop
-                                .hoursSaturday + "\n" + "nd: " + event
-                                .shop.hoursSunday + "\n")
-                                                     .flat(false).icon(BitmapDescriptorFactory
-                                                                               .fromResource(R.mipmap.ic_launcher)))
-                markerList.put(event.shop.id!!, marker)
-                currentMarker = marker
-            }
-
-        }
-        if (event.type === MessageEvent.types.DATABASE_UPDATE) {
-            Log.d("event", "update map")
-            putMarkers()
-        }
+    private fun createAndSelectMarker(shop: Shop) {
+        val marker = map.addMarker(MarkerOptions().position(
+                LatLng(Double.parseDouble(
+                        shop.latitude),
+                       Double.parseDouble(
+                               shop.longitude)))
+                                           .title(shop.name).snippet(
+                shop.street + " " + shop.streetNumber + "\n" + "pn-pt: " +
+                        shop.hours + "\n" + "so: " +
+                        shop.hoursSaturday + "\n" + "nd: " +
+                        shop.hoursSunday + "\n")
+                                           .flat(false).icon(BitmapDescriptorFactory
+                                                                     .fromResource(R.mipmap.ic_launcher)))
+        markerList.put(shop.id!!, marker)
+        selectMarker(marker)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    private fun selectMarker(clickedMarker: Marker) {
+        map.animateCamera(CameraUpdateFactory
+                                  .newLatLngZoom(clickedMarker.position, 16f))
+        clickedMarker.showInfoWindow()
+        naviOn.visibility = View.VISIBLE
+        currentMarker = clickedMarker
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val view = inflater!!.inflate(R.layout.fragment_map, container, false)
+        val view = inflater.inflate(R.layout.fragment_map, container, false)
         val fragment = SupportMapFragment()
-        //SupportMapFragment fm = (SupportMapFragment)  getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
         fragmentManager.beginTransaction().add(R.id.map, fragment)
                 .commit()
         naviOn = view.findViewById(R.id.naviOn) as Button
-        naviOn!!.setOnClickListener { navigation() }
+        naviOn.setOnClickListener { openNavigation() }
         fragment.getMapAsync(this)
         return view
     }
 
-    private fun navigation() {
+    private fun openNavigation() {
         if (currentMarker != null) {
             val intent = Intent(android.content.Intent.ACTION_VIEW,
                                 Uri.parse(
@@ -105,76 +95,86 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         }
     }
 
-
-    override fun onAttach(activity: Activity?) {
-        super.onAttach(activity)
-
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-    }
-
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        map!!.isMyLocationEnabled = true
-        map!!.uiSettings.isMyLocationButtonEnabled = true
-        map!!.isTrafficEnabled = false
-        map!!.uiSettings.isMapToolbarEnabled = false
+        val lastLocation = Di.locationService.getLastLocation()!!
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                LatLng(lastLocation.latitude,
+                       lastLocation.longitude), 15f))
+        map.isMyLocationEnabled = true
+        map.uiSettings.isMyLocationButtonEnabled = true
+        map.isTrafficEnabled = false
+        map.uiSettings.isMapToolbarEnabled = false
 
         MapsInitializer.initialize(context)
-
-        val zoom = CameraUpdateFactory.zoomTo(16f)
-        map!!.animateCamera(zoom)
-
-
-        map!!.setInfoWindowAdapter(
+        map.setInfoWindowAdapter(
                 PopupAdapter(activity.layoutInflater))
-        map!!.setOnMarkerClickListener(this)
-        map!!.setOnMapClickListener(this)
+        map.setOnMarkerClickListener(this)
+        map.setOnMapClickListener(this)
+        putMarkers()
 
-        map!!.setOnMyLocationChangeListener { location ->
-            putMarkers()
-            map!!.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                    LatLng(location.latitude,
-                           location.longitude), 16f))
-        }
+        observable.onNext(map)
     }
 
     private fun putMarkers() {
-        if (map != null) {
-            map!!.clear()
-        }
-
+        map.clear()
         val shops = Database.listClosest
-        var i = 0
-        val l = shops.size
-        while (i < l) {
-            val current = shops[i]
-            val marker = map!!.addMarker(MarkerOptions().position(
-                    LatLng(java.lang.Double.parseDouble(current.latitude),
-                           java.lang.Double.parseDouble(current.longitude)))
-                                                 .title(current.name).snippet(
-                    current.street + " " + current
-                            .streetNumber + "\n" + "pn-pt: " + current
-                            .hours + "\n" + "so: " + current
-                            .hoursSaturday + "\n" + "nd: " + current
-                            .hoursSunday + "\n").flat(false)
-                                                 .icon(BitmapDescriptorFactory
-                                                               .fromResource(R.mipmap.ic_launcher)))
-            markerList.put(current.id!!, marker)
-            i++
+        shops.map {
+            markerList.put(it.id!!, getMarkerForShop(it))
         }
+    }
+
+    private fun getMarkerForShop(it: Shop): Marker {
+        return map.addMarker(MarkerOptions().position(
+                LatLng(Double.parseDouble(it.latitude),
+                       Double.parseDouble(it.longitude)))
+                                     .title(it.name).snippet(
+                it.street + " " +
+                        it.streetNumber + "\n" + "pn-pt: " +
+                        it.hours + "\n" + "so: " +
+                        it.hoursSaturday + "\n" + "nd: " +
+                        it.hoursSunday + "\n").flat(false)
+                                     .icon(BitmapDescriptorFactory
+                                                   .fromResource(R.mipmap.ic_launcher)))
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
         currentMarker = marker
-        naviOn!!.visibility = View.VISIBLE
+        naviOn.visibility = View.VISIBLE
         return false
     }
 
     override fun onMapClick(latLng: LatLng) {
         currentMarker = null
-        naviOn!!.visibility = View.GONE
+        naviOn.visibility = View.GONE
+    }
+
+    fun setCurrentShop(shopId: String?) {
+        val clickedMarker = markerList[shopId]
+        if (clickedMarker != null) {
+            observable.subscribe {
+                selectMarker(clickedMarker)
+            }
+        } else {
+            val shopInfo = Database.getShopInfo(shopId!!).first()
+            observable.subscribe {
+                createAndSelectMarker(shopInfo)
+            }
+        }
+    }
+
+    fun onEvent(event: EventBusClasses.DatabaseUpdate) {
+        putMarkers()
+    }
+
+    fun onEvent(event: EventBusClasses.ShopSelected) {
+        val shop = event.shop
+        val clickedMarker = markerList[shop.id]
+        if (clickedMarker != null) {
+            selectMarker(clickedMarker)
+        } else {
+            createAndSelectMarker(shop)
+        }
+
     }
 }

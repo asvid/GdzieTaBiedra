@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.TextView
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.pojo.Shops.Shop
-import com.hedgehog.gdzietabiedra.utils.MessageEvent
+import com.hedgehog.gdzietabiedra.utils.EventBusClasses
 import de.greenrobot.event.EventBus
 import kotlin.properties.Delegates
 
@@ -31,8 +31,6 @@ class ShopView(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClick
     }
 
     override fun onClick(v: View) {
-        EventBus.getDefault().post(MessageEvent("pokaż sklep",
-                                                mItem,
-                                                MessageEvent.types.ITEM_CLICK))
+        EventBus.getDefault().post(EventBusClasses.ShopSelected(mItem))
     }
 }

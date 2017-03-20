@@ -26,8 +26,7 @@ object Database {
                         realm.copyToRealmOrUpdate(shopList.shops)
                         realm.commitTransaction()
 
-                        EventBus.getDefault().post(MessageEvent("new data",
-                                                                MessageEvent.types.DATABASE_UPDATE))
+                        EventBus.getDefault().post(EventBusClasses.DatabaseUpdate())
 
                     }
 
