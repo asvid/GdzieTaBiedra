@@ -1,12 +1,16 @@
 package com.hedgehog.gdzietabiedra.fragments
 
 import android.content.Intent
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -25,7 +29,7 @@ import java.lang.Double
 import kotlin.properties.Delegates
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap
-.OnMapClickListener {
+.OnMapClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private var map: GoogleMap by Delegates.notNull()
     private var naviOn: Button by Delegates.notNull()
@@ -97,10 +101,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        val lastLocation = Di.locationService.getLastLocation()!!
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                LatLng(lastLocation.latitude,
-                       lastLocation.longitude), 15f))
+        setCurrentLocationOnMap()
         map.isMyLocationEnabled = true
         map.uiSettings.isMyLocationButtonEnabled = true
         map.isTrafficEnabled = false
@@ -114,6 +115,19 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         putMarkers()
 
         observable.onNext(map)
+    }
+
+    private fun setCurrentLocationOnMap() {
+        val lastLocation = Di.locationService.getLastLocation()
+        if (lastLocation != null)
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                    LatLng(lastLocation.latitude,
+                           lastLocation.longitude), 15f))
+        else if (mLastLocation != null) {
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                    LatLng(mLastLocation!!.latitude,
+                           mLastLocation!!.longitude), 15f))
+        }
     }
 
     private fun putMarkers() {
@@ -176,5 +190,33 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             createAndSelectMarker(shop)
         }
 
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+    }
+
+    private var mLastLocation: Location? = null
+
+    override fun onConnected(p0: Bundle?) {
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient)
+        observable.subscribe {
+            setCurrentLocationOnMap()
+        }
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+    }
+
+    private var mGoogleApiClient: GoogleApiClient? = null
+
+    fun setMyLocation() {
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = GoogleApiClient.Builder(activity)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build()
+        }
     }
 }
