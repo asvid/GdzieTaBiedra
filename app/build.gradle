@@ -1,0 +1,117 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+
+apply from: 'VersionUtils.gradle'
+
+def buildDateTime = project.hasProperty("devBuild") ? 100 : new Date().format("yyMMddHHmm").toInteger()
+
+android {
+
+    signingConfigs {
+        release
+    }
+    def props = new Properties()
+
+    props.load(new FileInputStream(rootProject.file("signing.conf")))
+    android.signingConfigs.release.storeFile rootProject.file(props.keyStore)
+    android.signingConfigs.release.storePassword props.keyStorePassword
+    android.signingConfigs.release.keyAlias props.keyAlias
+    android.signingConfigs.release.keyPassword props.keyAliasPassword
+
+    compileSdkVersion Build.compileSdkVersion
+    defaultConfig {
+        applicationId Build.appId
+        minSdkVersion Build.minSdkVersion
+        targetSdkVersion Build.targetSdkVersion
+        versionCode buildDateTime
+        versionName Build.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [appName: "@string/app_name"]
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            manifestPlaceholders = [appName: "Biedra - Debug"]
+            debuggable true
+            multiDexEnabled true
+            minifyEnabled false
+            ext.enableCrashlytics = false
+            ext.alwaysUpdateBuildId = false
+        }
+    }
+    flavorDimensions "stage"
+    productFlavors {
+        dev {
+            dimension "stage"
+            versionNameSuffix "-dev" // e.g 1.0-dev
+            applicationIdSuffix '.dev'
+            resConfigs("en", "xxhdpi")
+        }
+
+        prod {
+            dimension "stage"
+        }
+    }
+    variantFilter { variant ->
+        // 'dev' flavor is only available for debug build
+        if (!variant.buildType.name.equals('debug') && variant.getFlavors().get(0).name.equals("dev")) {
+            variant.setIgnore(true)
+        }
+        // 'prod' flavor is only available for release build
+        if (!(variant.buildType.name.equals('release')) && variant.getFlavors().get(0).name.equals("prod")) {
+            variant.setIgnore(true)
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    if (project.hasProperty('devBuild')) {
+        splits.abi.enable = false
+        splits.density.enable = false
+        aaptOptions.cruncherEnabled = false
+    }
+    dexOptions {
+        preDexLibraries = true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation External.kotlin
+    implementation Support.appcompat
+    implementation Support.constraint
+    implementation Support.recyclerView
+    implementation Support.design
+    implementation Support.constraint
+    //  pretty time
+    implementation External.prettyTime
+    //  Logging
+    implementation External.timber
+    //  RX
+    implementation External.rxjava2
+    implementation External.rxbinding
+    //  DI
+    implementation External.dagger
+    implementation External.daggerSupport
+    annotationProcessor Apt.daggerCompiler
+    annotationProcessor External.daggerProcessor
+    kapt External.daggerProcessor
+    kapt Apt.daggerCompiler
+    implementation External.gson
+    annotationProcessor Uber.ribCompilerTest
+    implementation Uber.ribs
+    testImplementation Uber.ribTestUtils
+    testImplementation TestDeps.junit
+    androidTestImplementation TestDeps.runner
+    androidTestImplementation TestDeps.espresso
+}
