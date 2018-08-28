@@ -3,6 +3,11 @@ package com.hedgehog.gdzietabiedra.ribs
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavInteractor
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -59,11 +64,20 @@ class RootBuilder(
       @RootScope
       @Provides
       @JvmStatic
+      internal fun provideNavigationListener(
+          rootInteractor: RootInteractor): BottomNavInteractor.Listener {
+        return rootInteractor.NavigationListener()
+      }
+
+      @RootScope
+      @Provides
+      @JvmStatic
       internal fun router(
           component: Component,
           view: RootView,
           interactor: RootInteractor): RootRouter {
-        return RootRouter(view, interactor, component)
+        return RootRouter(view, interactor, component, BottomNavBuilder(component),
+            ShopsListBuilder(component), MapBuilder(component), SettingsBuilder(component))
       }
     }
 
@@ -71,9 +85,15 @@ class RootBuilder(
   }
 
   @RootScope
-  @dagger.Component(modules = arrayOf(Module::class),
+  @dagger.Component(
+      modules = arrayOf(Module::class),
       dependencies = arrayOf(ParentComponent::class))
-  interface Component : InteractorBaseComponent<RootInteractor>, BuilderComponent {
+  interface Component : InteractorBaseComponent<RootInteractor>,
+      BuilderComponent,
+      BottomNavBuilder.ParentComponent,
+      ShopsListBuilder.ParentComponent,
+      MapBuilder.ParentComponent,
+      SettingsBuilder.ParentComponent {
 
     @dagger.Component.Builder
     interface Builder {

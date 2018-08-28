@@ -1,5 +1,6 @@
 package com.hedgehog.gdzietabiedra.ribs
 
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
@@ -18,8 +19,7 @@ class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>() {
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
-
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
+    router.attachBottomNav()
   }
 
   override fun willResignActive() {
@@ -32,4 +32,28 @@ class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>() {
    * Presenter interface implemented by this RIB's view.
    */
   interface RootPresenter
+
+  inner class NavigationListener : BottomNavInteractor.Listener {
+    override fun shopsListSelected() {
+      router.detachMap()
+      router.detachSettings()
+
+      router.attachShopslist()
+    }
+
+    override fun mapSelected() {
+      router.detachShopslist()
+      router.detachSettings()
+
+      router.attachMap()
+    }
+
+    override fun settingsSelected() {
+      router.detachMap()
+      router.detachShopslist()
+
+      router.attachSettings()
+    }
+
+  }
 }

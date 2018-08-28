@@ -1,27 +1,28 @@
 buildscript {
-    repositories {
-        google()
-        jcenter()
+  repositories {
+    google()
+    jcenter()
+    mavenCentral()
+  }
+  dependencies {
+    classpath ProjectDeps.gradlePlugin
+    classpath ProjectDeps.kotlinPlugin
+    classpath ProjectDeps.kotlinExtensions
+    classpath(ProjectDeps.firebasePlugin) {
+      exclude group: 'com.google.guava', module: 'guava-jdk5'
     }
-    dependencies {
-        classpath ProjectDeps.gradlePlugin
-        classpath ProjectDeps.kotlinPlugin
-        classpath ProjectDeps.kotlinExtensions
-        classpath(ProjectDeps.firebasePlugin) {
-            exclude group: 'com.google.guava', module: 'guava-jdk5'
-        }
-        classpath ProjectDeps.googleServices
-        classpath Realm.plugin
-    }
+    classpath ProjectDeps.googleServices
+    classpath Realm.plugin
+  }
 }
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+  repositories {
+    google()
+    jcenter()
+  }
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+  delete rootProject.buildDir
 }
