@@ -3,6 +3,7 @@ package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -44,7 +45,6 @@ class ShopsListBuilder(
   }
 
   interface ParentComponent {
-    // TODO: Define dependencies required from your parent interactor here.
   }
 
   @dagger.Module
@@ -72,8 +72,8 @@ class ShopsListBuilder(
   }
 
   @ShopsListScope
-  @dagger.Component(modules = arrayOf(Module::class),
-      dependencies = arrayOf(ParentComponent::class))
+  @dagger.Component(modules = [Module::class],
+      dependencies = [ParentComponent::class])
   interface Component : InteractorBaseComponent<ShopsListInteractor>, BuilderComponent {
 
     @dagger.Component.Builder
@@ -86,6 +86,9 @@ class ShopsListBuilder(
 
       fun parentComponent(component: ParentComponent): Builder
       fun build(): Component
+
+      @BindsInstance
+      fun shopsRepoository(shopsRepository: ShopsRepository): Builder
     }
   }
 

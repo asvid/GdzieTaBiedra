@@ -29,6 +29,7 @@ android {
     targetSdkVersion Build.targetSdkVersion
     versionCode buildDateTime
     versionName Build.versionName
+    vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     manifestPlaceholders = [appName: "@string/app_name"]
@@ -91,6 +92,7 @@ android {
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation External.kotlin
+  //  Support
   implementation Support.appcompat
   implementation Support.constraint
   implementation Support.recyclerView
@@ -111,9 +113,15 @@ dependencies {
   annotationProcessor External.daggerProcessor
   kapt External.daggerProcessor
   kapt Apt.daggerCompiler
+  //  Gson
   implementation External.gson
+  //  RIBs
   annotationProcessor Uber.ribCompilerTest
   implementation Uber.ribs
+  //  Realm
+  kapt Realm.nameHelper
+
+  //  Testing
   testImplementation Uber.ribTestUtils
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner

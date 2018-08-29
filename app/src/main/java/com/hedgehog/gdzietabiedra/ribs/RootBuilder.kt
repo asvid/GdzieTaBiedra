@@ -3,6 +3,7 @@ package com.hedgehog.gdzietabiedra.ribs
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.di.components.AppComponent
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavInteractor
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder
@@ -23,8 +24,8 @@ import javax.inject.Scope
  * TODO describe this scope's responsibility as a whole.
  */
 class RootBuilder(
-    dependency: ParentComponent) : ViewBuilder<RootView, RootRouter, RootBuilder.ParentComponent>(
-    dependency) {
+    dependency: AppComponent
+) : ViewBuilder<RootView, RootRouter, AppComponent>(dependency) {
 
   /**
    * Builds a new [RootRouter].
@@ -47,9 +48,7 @@ class RootBuilder(
     return inflater.inflate(R.layout.root_rib, parentViewGroup, false) as RootView
   }
 
-  interface ParentComponent {
-    // TODO: Define dependencies required from your parent interactor here.
-  }
+  interface ParentComponent : AppComponent
 
   @dagger.Module
   abstract class Module {
@@ -87,7 +86,7 @@ class RootBuilder(
   @RootScope
   @dagger.Component(
       modules = arrayOf(Module::class),
-      dependencies = arrayOf(ParentComponent::class))
+      dependencies = arrayOf(AppComponent::class))
   interface Component : InteractorBaseComponent<RootInteractor>,
       BuilderComponent,
       BottomNavBuilder.ParentComponent,
@@ -103,7 +102,7 @@ class RootBuilder(
       @BindsInstance
       fun view(view: RootView): Builder
 
-      fun parentComponent(component: ParentComponent): Builder
+      fun parentComponent(component: AppComponent): Builder
       fun build(): Component
     }
   }

@@ -11,7 +11,7 @@ object Versions {
   const val timber = "4.7.0"
   const val rx = "2.1.9"
   const val room = "1.0.0"
-  const val realm = "1.0.0"
+  const val realm = "5.4.2"
 }
 
 object ProjectDeps {
@@ -72,7 +72,7 @@ object External {
 }
 
 object Realm {
-  const val plugin = "io.realm:realm-gradle-plugin:5.4.0"
+  const val plugin = "io.realm:realm-gradle-plugin:${Versions.realm}"
   const val nameHelper = "dk.ilios:realmfieldnameshelper:1.1.1"
 }
 

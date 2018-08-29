@@ -15,6 +15,8 @@ class ShopsListInteractor : Interactor<ShopsListInteractor.ShopsListPresenter, S
 
   @Inject
   lateinit var presenter: ShopsListPresenter
+//  @Inject
+//  lateinit var shopsRepository: ShopsRepository
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
