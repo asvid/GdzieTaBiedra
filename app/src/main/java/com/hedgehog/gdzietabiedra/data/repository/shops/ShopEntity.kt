@@ -6,7 +6,7 @@ import io.realm.annotations.RealmClass
 import io.realm.annotations.Required
 
 @RealmClass
-open class Shop : RealmObject() {
+open class ShopEntity : RealmObject() {
 
   @PrimaryKey
   @Required
