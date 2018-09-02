@@ -5,7 +5,6 @@ import com.hedgehog.gdzietabiedra.domain.Shop
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
-import io.reactivex.Flowable
 import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
 import javax.inject.Inject
@@ -25,10 +24,13 @@ class ShopsListInteractor : Interactor<ShopsListInteractor.ShopsListPresenter, S
 
     override fun didBecomeActive(savedInstanceState: Bundle?) {
         super.didBecomeActive(savedInstanceState)
-
+        presenter.setView()
         shopsRepository.fetchAll().subscribeBy(
                 onComplete = { Timber.d("onComplete") },
-                onNext = { Timber.d("shops: $it") },
+                onNext = {
+                    Timber.d("shops: $it")
+                    presenter.populateList(it)
+                },
                 onError = { Timber.d("onError") })
     }
 
@@ -45,6 +47,6 @@ class ShopsListInteractor : Interactor<ShopsListInteractor.ShopsListPresenter, S
 
         fun setView()
 
-        fun populateList(shops: Flowable<Shop>)
+        fun populateList(shops: Collection<Shop>)
     }
 }

@@ -1,10 +1,11 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist
 
 import android.content.Context
+import android.support.v7.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import com.hedgehog.gdzietabiedra.domain.Shop
-import io.reactivex.Flowable
+import kotlinx.android.synthetic.main.shoplist_rib.view.*
 
 /**
  * Top level view for {@link ShopsListBuilder.ShopsListScope}.
@@ -15,18 +16,19 @@ class ShopsListView @JvmOverloads constructor(context: Context,
         attrs,
         defStyle), ShopsListInteractor.ShopsListPresenter {
 
-    lateinit var adapter: ShopListAdapter
+    private val adapter: ShopListAdapter = ShopListAdapter()
 
     override fun setView() {
+        shops_list.adapter = adapter
+        shops_list.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
     }
 
-    override fun populateList(shops: Flowable<Shop>) {
-
-        adapter = ShopListAdapter(shops.toObservable())
+    override fun populateList(shops: Collection<Shop>) {
+        adapter.updateData(shops.toList())
     }
 
 }
