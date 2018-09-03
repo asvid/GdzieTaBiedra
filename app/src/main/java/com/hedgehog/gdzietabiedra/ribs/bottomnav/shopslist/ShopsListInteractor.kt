@@ -6,6 +6,7 @@ import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
 import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.subjects.Subject
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -17,36 +18,37 @@ import javax.inject.Inject
 @RibInteractor
 class ShopsListInteractor : Interactor<ShopsListInteractor.ShopsListPresenter, ShopsListRouter>() {
 
-    @Inject
-    lateinit var presenter: ShopsListPresenter
-    @Inject
-    lateinit var shopsRepository: ShopsRepository
+  @Inject
+  lateinit var presenter: ShopsListPresenter
+  @Inject
+  lateinit var shopsRepository: ShopsRepository
 
-    override fun didBecomeActive(savedInstanceState: Bundle?) {
-        super.didBecomeActive(savedInstanceState)
-        presenter.setView()
-        shopsRepository.fetchAll().subscribeBy(
-                onComplete = { Timber.d("onComplete") },
-                onNext = {
-                    Timber.d("shops: $it")
-                    presenter.populateList(it)
-                },
-                onError = { Timber.d("onError") })
-    }
+  override fun didBecomeActive(savedInstanceState: Bundle?) {
+    super.didBecomeActive(savedInstanceState)
+    presenter.setView()
+    shopsRepository.fetchAll().subscribeBy(
+        onComplete = { Timber.d("onComplete") },
+        onNext = {
+          Timber.d("shops: $it")
+          presenter.populateList(it)
+        },
+        onError = { Timber.d("onError") })
 
-    override fun willResignActive() {
-        super.willResignActive()
+    presenter.listItemClicked().subscribeBy(
+        onNext = {
+          Timber.d("item clicked: $it")
+          presenter.showToast(it)
+        })
+  }
 
-        // TODO: Perform any required clean up here, or delete this method entirely if not needed.
-    }
+  /**
+   * Presenter interface implemented by this RIB's view.
+   */
+  interface ShopsListPresenter {
 
-    /**
-     * Presenter interface implemented by this RIB's view.
-     */
-    interface ShopsListPresenter {
-
-        fun setView()
-
-        fun populateList(shops: Collection<Shop>)
-    }
+    fun setView()
+    fun populateList(shops: Collection<Shop>)
+    fun listItemClicked(): Subject<Shop>
+    fun showToast(shop: Shop)
+  }
 }

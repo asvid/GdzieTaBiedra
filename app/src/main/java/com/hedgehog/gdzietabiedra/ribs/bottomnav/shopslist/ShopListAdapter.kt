@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.domain.Shop
@@ -14,6 +15,7 @@ import java.util.*
 class ShopListAdapter : RecyclerView.Adapter<ShopListItemVH>() {
 
     val itemClickSubject = PublishSubject.create<Shop>()
+    val itemMoreClicked = PublishSubject.create<Shop>()
     private var items: List<Shop> = Collections.emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopListItemVH {
@@ -28,7 +30,7 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListItemVH>() {
 
     override fun onBindViewHolder(holder: ShopListItemVH, position: Int) {
         val item = items[position]
-        holder.setViewHolder(item)
+        holder.setViewHolder(item, itemMoreClicked)
         holder.view.setOnClickListener {
             itemClickSubject.onNext(item)
         }
@@ -42,11 +44,15 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListItemVH>() {
 
 class ShopListItemVH(val view: View) : ViewHolder(view) {
 
-    fun setViewHolder(item: Shop) {
+    fun setViewHolder(item: Shop,
+                      itemMoreClicked: PublishSubject<Shop>) {
         view.findViewById<TextView>(R.id.shop_address).text = item.address
         view.findViewById<TextView>(R.id.shop_distance).text = generateDistanceText(
                 item.distance)
         view.findViewById<TextView>(R.id.shop_open_hours).text = item.openHours
+        view.findViewById<ImageButton>(R.id.more_options_button).setOnClickListener {
+            itemMoreClicked.onNext(item)
+        }
     }
 
     private fun generateDistanceText(distance: Int): CharSequence = "$distance m"
