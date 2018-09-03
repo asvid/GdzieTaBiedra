@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'joda-time:joda-time:2.10'
+    }
+}
+
+import org.joda.time.DateTime
+import org.joda.time.Minutes
+
+ext {
+    minutesVersionCode = getMinutesVersionCode()
+}
+
+def getMinutesVersionCode() {
+    def dateTime = new DateTime().getMillis() / 1000
+    def countSince = new DateTime("2017-01-01T00:00:00.000Z")
+    def countTo = new DateTime()
+    def periodTime = Minutes.minutesBetween(countSince, countTo)
+
+    return periodTime.getMinutes()
+}
+
+task printMinutesVersionCode {
+    group = "VersionUtils"
+    doLast {
+        print("version code: $minutesVersionCode")
+    }
+}
+
