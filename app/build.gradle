@@ -126,4 +126,5 @@ dependencies {
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso
+  implementation Google.maps
 }
