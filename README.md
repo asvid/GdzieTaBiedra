@@ -1,5 +1,7 @@
 # GdzieTaBiedra
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/747ae3752dd9414f967261ee27a173a2)](https://app.codacy.com/app/asvid/GdzieTaBiedra?utm_source=github.com&utm_medium=referral&utm_content=asvid/GdzieTaBiedra&utm_campaign=Badge_Grade_Settings)
+
 Aplikacja znajdująca biedronki w okolicy. Baza danych w telefonie aktualizowana wyącznie po WiFi, opcjonalne powiadomienia o biedronkach w pobliżu, przekierowanie do nawigacji po wybraniu biedronki etc.
 
 Użyte biblioteki:
