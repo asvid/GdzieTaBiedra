@@ -120,11 +120,14 @@ dependencies {
   implementation Uber.ribs
   //  Realm
   kapt Realm.nameHelper
+  //  Maps
+  implementation Google.maps
+  //  Permissions
+  implementation External.dexter
 
   //  Testing
   testImplementation Uber.ribTestUtils
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso
-  implementation Google.maps
 }
