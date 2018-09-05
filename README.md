@@ -1,1 +1,15 @@
-GdzieTaBiedra2
+## GdzieTaBiedra
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+Sandbox app that actually has users :)
+App searches nearby shops from `Biedronka` network, displays them on list and on map. 
+App can notify user if shop is in selected range and turn on navigation when user selects shop.
+
+
+App uses:
+- Uber RIBs architecture
+- Realm Database
+- Retrofit
+- RxJava
+- Dagger2
