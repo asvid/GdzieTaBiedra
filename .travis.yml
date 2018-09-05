@@ -10,6 +10,7 @@ install:
   - echo yes | sdkmanager "platforms;android-26" &>/dev/null
 
 script:
+  - chmod +x ./gradlew build connectedCheck
   - ./gradlew clean testDebug lintDebug jacocoDebugReport coveralls -Dscan --stacktrace
 
 branches:
