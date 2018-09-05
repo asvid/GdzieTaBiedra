@@ -29,6 +29,7 @@ android {
     applicationId Build.appId
     minSdkVersion Build.minSdkVersion
     targetSdkVersion Build.targetSdkVersion
+    compileSdkVersion Build.compileSdkVersion
     versionCode buildDateTime
     versionName Build.versionName
     vectorDrawables.useSupportLibrary = true
