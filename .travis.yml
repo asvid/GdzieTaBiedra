@@ -3,6 +3,9 @@ language: android
 jdk:
   - oraclejdk8
 
+before_install:
+  - yes | sdkmanager "platforms;android-27"
+  
 install:
   - echo yes | sdkmanager "tools" &>/dev/null
   - echo yes | sdkmanager "platform-tools" &>/dev/null
@@ -28,3 +31,6 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
