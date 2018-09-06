@@ -12,17 +12,7 @@ def buildDateTime = project.hasProperty("devBuild") ? 100 :
     new Date().format("yyMMddHHmm").toInteger()
 
 android {
-
-  signingConfigs {
-    release
-  }
   def props = new Properties()
-
-  props.load(new FileInputStream(rootProject.file("signing.conf")))
-  android.signingConfigs.release.storeFile rootProject.file(props.keyStore)
-  android.signingConfigs.release.storePassword props.keyStorePassword
-  android.signingConfigs.release.keyAlias props.keyAlias
-  android.signingConfigs.release.keyPassword props.keyAliasPassword
 
   compileSdkVersion Build.compileSdkVersion
   defaultConfig {
@@ -44,7 +34,6 @@ android {
       shrinkResources true
       multiDexEnabled true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-      signingConfig signingConfigs.release
     }
     debug {
       manifestPlaceholders = [appName: "Biedra - Debug"]
