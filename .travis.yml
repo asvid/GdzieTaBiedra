@@ -14,7 +14,7 @@ install:
 
 script:
   - chmod +x ./gradlew build connectedCheck
-  - ./gradlew clean testDebug lintDebug jacocoDebugReport coveralls -Dscan --no-daemon --stacktrace
+  - ./gradlew clean testDebug lintDevDebugUnitTest jacocoDebugReport coveralls -Dscan --no-daemon --stacktrace
 
 branches:
   except:
