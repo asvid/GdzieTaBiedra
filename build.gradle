@@ -16,6 +16,7 @@ buildscript {
     classpath ProjectDeps.dexcount
     classpath ProjectDeps.apkSize
     classpath ProjectDeps.coveralls
+    classpath ProjectDeps.jacoco
   }
 }
 
