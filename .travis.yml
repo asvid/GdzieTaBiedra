@@ -16,4 +16,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - ./gradlew clean testDevDebugUnitTest lintDevDebug -Dscan
+  - ./gradlew clean testDevDebugUnitTest lintDevDebug jacocoTestReport coveralls -Dscan
