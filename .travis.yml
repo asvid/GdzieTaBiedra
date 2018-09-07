@@ -14,7 +14,7 @@ install:
 
 script:
   - chmod +x ./gradlew build connectedCheck
-  - ./gradlew clean testDevDebugUnitTest lintDevDebug jacocoTestReport coveralls -Dscan --no-daemon --stacktrace
+  - ./gradlew clean testDevDebugUnitTest lintDevDebug -Dscan --no-daemon --stacktrace
 
 branches:
   except:
@@ -31,6 +31,3 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
