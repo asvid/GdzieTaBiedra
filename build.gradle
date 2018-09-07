@@ -13,6 +13,10 @@ buildscript {
     }
     classpath ProjectDeps.googleServices
     classpath Realm.plugin
+    classpath ProjectDeps.dexcount
+    classpath ProjectDeps.apkSize
+    classpath ProjectDeps.coveralls
+    classpath ProjectDeps.jacoco
   }
 }
 

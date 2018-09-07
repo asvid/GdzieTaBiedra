@@ -3,6 +3,10 @@ package com.hedgehog.gdzietabiedra.ribs.bottomnav.settings
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -18,8 +22,17 @@ class SettingsInteractor : Interactor<SettingsInteractor.SettingsPresenter, Sett
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
-
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
+    presenter.rangeChanges()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeBy(
+            onNext = {
+              Timber.d("range changed: $it")
+              presenter.setRangeTest("${50 + it * 1950 / 100} m")
+            })
+    presenter.rangeSet().subscribeBy(
+        onNext = {
+          Timber.d("range set: $it")
+        })
   }
 
   override fun willResignActive() {
@@ -31,5 +44,9 @@ class SettingsInteractor : Interactor<SettingsInteractor.SettingsPresenter, Sett
   /**
    * Presenter interface implemented by this RIB's view.
    */
-  interface SettingsPresenter
+  interface SettingsPresenter {
+    fun rangeChanges(): Observable<Int>
+    fun rangeSet(): Observable<Int>
+    fun setRangeTest(range: String)
+  }
 }

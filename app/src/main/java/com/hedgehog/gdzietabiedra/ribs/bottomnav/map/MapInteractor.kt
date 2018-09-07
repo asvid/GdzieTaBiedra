@@ -13,23 +13,26 @@ import javax.inject.Inject
 @RibInteractor
 class MapInteractor : Interactor<MapInteractor.MapPresenter, MapRouter>() {
 
-  @Inject
-  lateinit var presenter: MapPresenter
+    @Inject
+    lateinit var presenter: MapPresenter
 
-  override fun didBecomeActive(savedInstanceState: Bundle?) {
-    super.didBecomeActive(savedInstanceState)
+    override fun didBecomeActive(savedInstanceState: Bundle?) {
+        super.didBecomeActive(savedInstanceState)
 
-    // TODO: Add attachment logic here (RxSubscriptions, etc.).
-  }
+        presenter.initView()
+    }
 
-  override fun willResignActive() {
-    super.willResignActive()
+    override fun willResignActive() {
+        super.willResignActive()
 
-    // TODO: Perform any required clean up here, or delete this method entirely if not needed.
-  }
+        // TODO: Perform any required clean up here, or delete this method entirely if not needed.
+    }
 
-  /**
-   * Presenter interface implemented by this RIB's view.
-   */
-  interface MapPresenter
+    /**
+     * Presenter interface implemented by this RIB's view.
+     */
+    interface MapPresenter {
+
+        fun initView()
+    }
 }

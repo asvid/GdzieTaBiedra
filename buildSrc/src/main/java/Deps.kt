@@ -11,7 +11,7 @@ object Versions {
   const val timber = "4.7.0"
   const val rx = "2.1.9"
   const val room = "1.0.0"
-  const val realm = "1.0.0"
+  const val realm = "5.4.2"
 }
 
 object ProjectDeps {
@@ -20,12 +20,17 @@ object ProjectDeps {
   const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
   const val kotlinExtensions = "org.jetbrains.kotlin:kotlin-android-extensions:${Versions.kotlin}"
   const val firebasePlugin = "com.google.firebase:firebase-plugins:1.0.5"
+  const val dexcount = "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.3"
+  const val apkSize = "com.vanniktech:gradle-android-apk-size-plugin:0.4.0"
+  const val coveralls = "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
+  const val jacoco = "com.dicedmelon.gradle:jacoco-android:0.1.2"
 }
 
 object Build {
-  const val compileSdkVersion = 27
+  const val compileSdkVersion = 28
   const val minSdkVersion = 19
-  const val targetSdkVersion = 27
+  const val targetSdkVersion = 28
+  const val buildToolsVersion = "28.0.2"
   const val versionCode = versionMajor * 1000 + versionMinor * 100 + versionPatch * 10 + versionBuild
   const val versionName = "$versionMajor.$versionMinor.$versionPatch.$versionBuild"
   const val appId = "com.hedgehog.gdzietabiedra"
@@ -69,10 +74,11 @@ object External {
   const val leakcanaryDebug = "com.squareup.leakcanary:leakcanary-android:1.5.4"
   const val leakcanaryRelease = "com.squareup.leakcanary:leakcanary-android-no-op:1.5.4"
   const val gson = "com.google.code.gson:gson:2.8.2"
+  const val dexter = "com.karumi:dexter:5.0.0"
 }
 
 object Realm {
-  const val plugin = "io.realm:realm-gradle-plugin:5.4.0"
+  const val plugin = "io.realm:realm-gradle-plugin:${Versions.realm}"
   const val nameHelper = "dk.ilios:realmfieldnameshelper:1.1.1"
 }
 
@@ -86,4 +92,8 @@ object Firebase {
   const val core = "com.google.firebase:firebase-core:11.2.0"
   const val crash = "com.google.firebase:firebase-crash:11.2.0"
   const val messaging = "com.google.firebase:firebase-messaging:11.2.0"
+}
+
+object Google {
+  const val maps = "com.google.android.gms:play-services-maps:15.0.1"
 }
