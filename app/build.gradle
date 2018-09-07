@@ -19,7 +19,7 @@ android {
   compileSdkVersion Build.compileSdkVersion
   defaultConfig {
     applicationId Build.appId
-    buildToolsVersion '27.0.3'
+    buildToolsVersion Build.buildToolsVersion
     minSdkVersion Build.minSdkVersion
     targetSdkVersion Build.targetSdkVersion
     compileSdkVersion Build.compileSdkVersion

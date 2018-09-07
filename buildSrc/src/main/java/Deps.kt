@@ -27,9 +27,10 @@ object ProjectDeps {
 }
 
 object Build {
-  const val compileSdkVersion = 27
+  const val compileSdkVersion = 28
   const val minSdkVersion = 19
-  const val targetSdkVersion = 27
+  const val targetSdkVersion = 28
+  const val buildToolsVersion = "28.0.2"
   const val versionCode = versionMajor * 1000 + versionMinor * 100 + versionPatch * 10 + versionBuild
   const val versionName = "$versionMajor.$versionMinor.$versionPatch.$versionBuild"
   const val appId = "com.hedgehog.gdzietabiedra"
