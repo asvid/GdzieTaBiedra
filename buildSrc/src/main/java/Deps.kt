@@ -75,6 +75,8 @@ object External {
   const val leakcanaryRelease = "com.squareup.leakcanary:leakcanary-android-no-op:1.5.4"
   const val gson = "com.google.code.gson:gson:2.8.2"
   const val dexter = "com.karumi:dexter:5.0.0"
+  const val retrofit = "com.squareup.retrofit2:retrofit:2.4.0"
+  const val moshiConverter = "com.squareup.retrofit2:converter-moshi:2.4.0"
 }
 
 object Realm {
