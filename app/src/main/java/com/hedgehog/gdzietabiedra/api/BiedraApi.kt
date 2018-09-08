@@ -6,6 +6,7 @@ import retrofit2.http.Query
 
 interface BiedraApi {
 
-  @GET("shop/searchnearestlist")
-  fun listRepos(@Query("lat") lat: Float, @Query("lng") lng: Float): Call<List<Repo>>
+//  http://www.biedronka.pl/api/mobile/shop?lat=51&lon=21
+  @GET("shop")
+  fun listRepos(@Query("lat") lat: Float, @Query("lon") lng: Float): Call<List<ShopApi>>
 }
