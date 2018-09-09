@@ -3,6 +3,7 @@ package com.hedgehog.gdzietabiedra
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.os.Bundle
 import android.view.ViewGroup
+import com.hedgehog.gdzietabiedra.api.RetrofitClient
 import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import com.hedgehog.gdzietabiedra.ribs.RootBuilder
 import com.karumi.dexter.Dexter
@@ -14,6 +15,9 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.uber.rib.core.RibActivity
 import com.uber.rib.core.ViewRouter
 import dagger.android.AndroidInjection
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : RibActivity() {
@@ -52,4 +56,19 @@ class MainActivity : RibActivity() {
         override fun shopsRepository(): ShopsRepository = shopsRepository
       })
           .build(parentViewGroup)
+
+  override fun onResume() {
+    super.onResume()
+
+
+    RetrofitClient.biedraService.listRepos(51.802742F, 19.514333F)
+        .subscribeOn(Schedulers.newThread())
+        .subscribeBy(
+            onSuccess = {
+              Timber.d("biedras: $it")
+            },
+            onError = {
+              Timber.e("biedras error: $it")
+            })
+  }
 }

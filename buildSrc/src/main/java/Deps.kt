@@ -77,6 +77,7 @@ object External {
   const val dexter = "com.karumi:dexter:5.0.0"
   const val retrofit = "com.squareup.retrofit2:retrofit:2.4.0"
   const val moshiConverter = "com.squareup.retrofit2:converter-moshi:2.4.0"
+  const val retrofitRxAdapter = "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
 }
 
 object Realm {
