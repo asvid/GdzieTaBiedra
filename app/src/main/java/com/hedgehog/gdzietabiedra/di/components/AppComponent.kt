@@ -2,6 +2,7 @@ package com.hedgehog.gdzietabiedra.di.components
 
 import com.hedgehog.gdzietabiedra.App
 import com.hedgehog.gdzietabiedra.di.ActivityBinder
+import com.hedgehog.gdzietabiedra.di.modules.ApiModule
 import com.hedgehog.gdzietabiedra.di.modules.AppModule
 import com.hedgehog.gdzietabiedra.di.modules.DataModule
 import com.hedgehog.gdzietabiedra.di.modules.MigrationsModule
@@ -16,7 +17,9 @@ import javax.inject.Singleton
   ActivityBinder::class,
   AppModule::class,
   MigrationsModule::class,
-  DataModule::class])
+  DataModule::class,
+  ApiModule::class
+])
 interface AppComponent {
 
   fun inject(app: App)

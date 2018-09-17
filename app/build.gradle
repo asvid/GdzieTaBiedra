@@ -130,6 +130,7 @@ dependencies {
   implementation External.retrofit
   implementation External.moshiConverter
   implementation External.retrofitRxAdapter
+  implementation External.okhttpLoggingInterceptor
 
   //  Testing
   testImplementation Uber.ribTestUtils

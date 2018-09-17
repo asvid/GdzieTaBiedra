@@ -3,7 +3,7 @@ package com.hedgehog.gdzietabiedra
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.os.Bundle
 import android.view.ViewGroup
-import com.hedgehog.gdzietabiedra.api.RetrofitClient
+import com.hedgehog.gdzietabiedra.api.BiedraService
 import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import com.hedgehog.gdzietabiedra.ribs.RootBuilder
 import com.karumi.dexter.Dexter
@@ -23,6 +23,8 @@ import javax.inject.Inject
 class MainActivity : RibActivity() {
 
   lateinit var shopsRepository: ShopsRepository
+    @Inject set
+  lateinit var biedraApi: BiedraService
     @Inject set
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +63,7 @@ class MainActivity : RibActivity() {
     super.onResume()
 
 
-    RetrofitClient.biedraService.listRepos(51.802742F, 19.514333F)
+    biedraApi.listRepos(51.802742F, 19.514333F)
         .subscribeOn(Schedulers.newThread())
         .subscribeBy(
             onSuccess = {

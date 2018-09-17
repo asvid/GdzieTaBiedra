@@ -78,6 +78,7 @@ object External {
   const val retrofit = "com.squareup.retrofit2:retrofit:2.4.0"
   const val moshiConverter = "com.squareup.retrofit2:converter-moshi:2.4.0"
   const val retrofitRxAdapter = "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+  const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:3.10.0"
 }
 
 object Realm {
