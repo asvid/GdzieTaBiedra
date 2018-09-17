@@ -18,3 +18,9 @@ fun Date.print(format: String): String {
   val dateFormat = SimpleDateFormat(format)
   return dateFormat.format(this)
 }
+
+fun Double.round(decimals: Int): Double {
+  var multiplier = 1.0
+  repeat(decimals) { multiplier *= 10 }
+  return Math.round(this * multiplier) / multiplier
+}

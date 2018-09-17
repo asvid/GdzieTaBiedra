@@ -4,6 +4,7 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 import io.realm.annotations.Required
+import javax.annotation.Nullable
 
 @RealmClass
 open class ShopEntity : RealmObject() {
@@ -11,7 +12,7 @@ open class ShopEntity : RealmObject() {
   @PrimaryKey
   @Required
   var id: String = ""
-  @Required
+  @Nullable
   var shopNumber: Int? = null
 
   @Required
@@ -21,9 +22,9 @@ open class ShopEntity : RealmObject() {
 
   var streetNumber: String? = null
   @Required
-  var latitude: Long? = null
+  var latitude: Double? = null
   @Required
-  var longitude: Long? = null
+  var longitude: Double? = null
   @Required
   var hours: String? = null
 
@@ -31,7 +32,7 @@ open class ShopEntity : RealmObject() {
   var hoursSaturday: String? = null
   var hoursSunday: String? = null
 
-  var distance: Long? = null
+  var distance: Double? = null
 
   var bakery: Boolean = false
   var relax: Boolean = false

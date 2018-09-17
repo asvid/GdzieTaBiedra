@@ -9,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.domain.Shop
+import com.hedgehog.gdzietabiedra.utils.round
 import io.reactivex.subjects.PublishSubject
 import java.util.Collections
 
@@ -55,5 +56,5 @@ class ShopListItemVH(val view: View) : ViewHolder(view) {
     }
   }
 
-  private fun generateDistanceText(distance: Long?): CharSequence = "$distance m"
+  private fun generateDistanceText(distance: Double?): CharSequence = "${distance?.round(2)} m"
 }

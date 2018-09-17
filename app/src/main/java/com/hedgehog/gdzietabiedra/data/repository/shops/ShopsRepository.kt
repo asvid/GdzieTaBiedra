@@ -47,7 +47,7 @@ class ShopsRepository @Inject constructor(private val realmConfiguration: RealmC
     realm.executeTransaction {
       val realmList = RealmList<ShopEntity>()
       realmList.addAll(apiModels.toRealmEntity())
-      realm.insert(realmList)
+      realm.insertOrUpdate(realmList)
     }
     realm.close()
   }
@@ -72,13 +72,13 @@ private fun ShopsItem.toRealmEntity(): ShopEntity {
   output.street = this.street!!
   output.streetNumber = this.streetNumber.toString()
   output.shopNumber = this.shopNumber?.toInt()
-  output.latitude = this.latitude?.toLong()
-  output.longitude = this.longitude?.toLong()
+  output.latitude = this.latitude?.toDouble()
+  output.longitude = this.longitude?.toDouble()
   output.hours = this.hours
   output.hoursFriday = this.hoursFriday
   output.hoursSaturday = this.hoursSaturday
   output.hoursSunday = this.hoursSunday
-  output.distance = this.distance?.toLong()
+  output.distance = this.distance?.toDouble()
 
   output.atm = this.atm == "1"
   output.bakery = this.bakery == "1"
