@@ -126,6 +126,11 @@ dependencies {
   implementation Google.maps
   //  Permissions
   implementation External.dexter
+  //  Retrofit
+  implementation External.retrofit
+  implementation External.moshiConverter
+  implementation External.retrofitRxAdapter
+  implementation External.okhttpLoggingInterceptor
 
   //  Testing
   testImplementation Uber.ribTestUtils
