@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.api.BiedraService
 import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import com.hedgehog.gdzietabiedra.ribs.RootBuilder
+import com.hedgehog.gdzietabiedra.utils.applySchedulers
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -16,7 +17,6 @@ import com.uber.rib.core.RibActivity
 import com.uber.rib.core.ViewRouter
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -64,10 +64,13 @@ class MainActivity : RibActivity() {
 
 
     biedraApi.listRepos(51.802742F, 19.514333F)
-        .subscribeOn(Schedulers.newThread())
+        .compose(applySchedulers())
         .subscribeBy(
             onSuccess = {
               Timber.d("biedras: $it")
+              it.shops?.let {
+                shopsRepository.saveAll(it)
+              }
             },
             onError = {
               Timber.e("biedras error: $it")

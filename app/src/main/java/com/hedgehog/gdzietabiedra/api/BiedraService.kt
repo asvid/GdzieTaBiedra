@@ -1,5 +1,6 @@
 package com.hedgehog.gdzietabiedra.api
 
+import com.hedgehog.gdzietabiedra.api.response.shop.ShopsResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

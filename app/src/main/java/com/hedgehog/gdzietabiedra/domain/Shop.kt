@@ -1,7 +1,8 @@
 package com.hedgehog.gdzietabiedra.domain
 
 data class Shop(
-        val id: Int,
-        val address: String,
-        val distance: Int,
-        val openHours: String)
+    val id: String,
+    val address: String,
+    val distance: Long?,
+    val openHours: String?
+)

@@ -1,47 +1,93 @@
 package com.hedgehog.gdzietabiedra.data.repository.shops
 
-import asvid.github.io.roomapp.data.repository.RxCrudRepository
+import com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem
 import com.hedgehog.gdzietabiedra.domain.Shop
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
+import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.RealmList
+import javax.inject.Inject
 
-class ShopsRepository(realmConfiguration: RealmConfiguration) : RxCrudRepository<Shop, Long> {
+class ShopsRepository @Inject constructor(private val realmConfiguration: RealmConfiguration) {
 
-  override fun delete(model: Shop): Completable {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  fun fetchAll(): Flowable<Collection<Shop>> {
+    return Realm.getInstance(realmConfiguration)
+        .where(ShopEntity::class.java)
+        .findAll()
+        .asFlowable()
+        .map {
+          it.map {
+            it.toDomainModel()
+          }
+        }
   }
 
-  override fun deleteAll(models: Collection<Shop>): Completable {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
-
-  override fun fetchAll(): Flowable<Collection<Shop>> {
-    return Flowable.just(listOf(
-        Shop(1, "some address", 345, "6:00-22:00"),
-        Shop(2, "some address", 345, "6:00-22:00"),
-        Shop(3, "some address", 345, "6:00-22:00"),
-        Shop(4, "some address", 345, "6:00-22:00"),
-        Shop(5, "some address", 345, "6:00-22:00")))
-  }
-
-  override fun fetchById(id: Long): Single<Shop> {
+  fun fetchById(id: String): Single<Shop> {
     return Single.create<Shop> {
-      it.onSuccess(Shop(1, "some address", 345, "6:00-22:00"))
+      val realm = Realm.getInstance(realmConfiguration)
+      it.onSuccess(realm.where(ShopEntity::class.java)
+          .equalTo(ShopEntityFields.ID, id)
+          .findFirstAsync().toDomainModel())
+      realm.close()
     }
   }
 
-  override fun save(model: Shop): Single<Shop> {
-    return Single.create<Shop> {
-      it.onSuccess(model)
+  fun save(apiModel: ShopsItem) {
+    val realm = Realm.getInstance(realmConfiguration)
+    realm.executeTransaction {
+      val shopEntity = apiModel.toRealmEntity()
+      it.copyToRealmOrUpdate(shopEntity)
     }
+    realm.close()
   }
 
-  override fun saveAll(models: Collection<Shop>): Single<Collection<Shop>> {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  fun saveAll(apiModels: Collection<ShopsItem>) {
+    val realm = Realm.getInstance(realmConfiguration)
+    realm.executeTransaction {
+      val realmList = RealmList<ShopEntity>()
+      realmList.addAll(apiModels.toRealmEntity())
+      realm.insert(realmList)
+    }
+    realm.close()
   }
+}
+
+private fun ShopEntity.toDomainModel(): Shop {
+  return Shop(this.id, generateAddress(this), this.distance, this.hours)
+}
+
+fun generateAddress(shopEntity: ShopEntity): String {
+  return "${shopEntity.city}, ${shopEntity.street} ${shopEntity.streetNumber}"
+}
+
+private fun Collection<ShopsItem>.toRealmEntity(): Collection<ShopEntity> {
+  return this.map { it.toRealmEntity() }
+}
+
+private fun ShopsItem.toRealmEntity(): ShopEntity {
+  val output = ShopEntity()
+  output.id = this.id!!
+  output.city = this.city!!
+  output.street = this.street!!
+  output.streetNumber = this.streetNumber.toString()
+  output.shopNumber = this.shopNumber?.toInt()
+  output.latitude = this.latitude?.toLong()
+  output.longitude = this.longitude?.toLong()
+  output.hours = this.hours
+  output.hoursFriday = this.hoursFriday
+  output.hoursSaturday = this.hoursSaturday
+  output.hoursSunday = this.hoursSunday
+  output.distance = this.distance?.toLong()
+
+  output.atm = this.atm == "1"
+  output.bakery = this.bakery == "1"
+  output.relax = this.relax == "1"
+  output.cardPayment = this.cardPayment == "1"
+  output.isTaxFree = this.isTaxFree == "1"
+  output.isEuro = this.isEuro == "1"
+  output.isNew = this.jsonMemberNew == "1"
+  output.special = this.special?.toInt()
+  output.sublease = this.sublease
+  return output
 }
