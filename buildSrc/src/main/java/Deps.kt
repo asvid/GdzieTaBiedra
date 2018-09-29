@@ -7,7 +7,7 @@ object Versions {
   const val dagger = "2.12"
   const val support = "27.0.2"
   const val robolectric = "3.4.2"
-  const val kotlin = "1.2.21"
+  const val kotlin = "1.2.71"
   const val timber = "4.7.0"
   const val rx = "2.1.9"
   const val room = "1.0.0"
@@ -15,7 +15,7 @@ object Versions {
 }
 
 object ProjectDeps {
-  const val gradlePlugin = "com.android.tools.build:gradle:3.1.4"
+  const val gradlePlugin = "com.android.tools.build:gradle:3.2.0"
   const val googleServices = "com.google.gms:google-services:3.0.0"
   const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
   const val kotlinExtensions = "org.jetbrains.kotlin:kotlin-android-extensions:${Versions.kotlin}"

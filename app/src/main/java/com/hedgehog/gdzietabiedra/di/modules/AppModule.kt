@@ -6,7 +6,9 @@ import com.hedgehog.gdzietabiedra.di.components.MainActivityComponent
 import dagger.Module
 import dagger.Provides
 
-@Module(subcomponents = [MainActivityComponent::class])
+@Module(subcomponents = [
+  MainActivityComponent::class
+])
 class AppModule {
 
   @Provides
