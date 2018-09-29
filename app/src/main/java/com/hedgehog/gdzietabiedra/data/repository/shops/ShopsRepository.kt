@@ -1,47 +1,54 @@
 package com.hedgehog.gdzietabiedra.data.repository.shops
 
-import asvid.github.io.roomapp.data.repository.RxCrudRepository
+import com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem
 import com.hedgehog.gdzietabiedra.domain.Shop
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
+import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.RealmList
+import javax.inject.Inject
 
-class ShopsRepository(realmConfiguration: RealmConfiguration) : RxCrudRepository<Shop, Long> {
+class ShopsRepository @Inject constructor(private val realmConfiguration: RealmConfiguration) {
 
-  override fun delete(model: Shop): Completable {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  fun fetchAll(): Flowable<Collection<Shop>> {
+    return Realm.getInstance(realmConfiguration)
+        .where(ShopEntity::class.java)
+        .findAll()
+        .asFlowable()
+        .map { shops ->
+          shops.map {
+            it.toDomainModel()
+          }
+        }
   }
 
-  override fun deleteAll(models: Collection<Shop>): Completable {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
-
-  override fun fetchAll(): Flowable<Collection<Shop>> {
-    return Flowable.just(listOf(
-        Shop(1, "some address", 345, "6:00-22:00"),
-        Shop(2, "some address", 345, "6:00-22:00"),
-        Shop(3, "some address", 345, "6:00-22:00"),
-        Shop(4, "some address", 345, "6:00-22:00"),
-        Shop(5, "some address", 345, "6:00-22:00")))
-  }
-
-  override fun fetchById(id: Long): Single<Shop> {
+  fun fetchById(id: String): Single<Shop> {
     return Single.create<Shop> {
-      it.onSuccess(Shop(1, "some address", 345, "6:00-22:00"))
+      val realm = Realm.getInstance(realmConfiguration)
+      it.onSuccess(realm.where(ShopEntity::class.java)
+          .equalTo(ShopEntityFields.ID, id)
+          .findFirstAsync().toDomainModel())
+      realm.close()
     }
   }
 
-  override fun save(model: Shop): Single<Shop> {
-    return Single.create<Shop> {
-      it.onSuccess(model)
+  fun save(apiModel: ShopsItem) {
+    val realm = Realm.getInstance(realmConfiguration)
+    realm.executeTransaction {
+      val shopEntity = apiModel.toRealmEntity()
+      it.copyToRealmOrUpdate(shopEntity)
     }
+    realm.close()
   }
 
-  override fun saveAll(models: Collection<Shop>): Single<Collection<Shop>> {
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
+  fun saveAll(apiModels: Collection<ShopsItem>) {
+    val realm = Realm.getInstance(realmConfiguration)
+    realm.executeTransaction {
+      val realmList = RealmList<ShopEntity>()
+      realmList.addAll(apiModels.toRealmEntity())
+      realm.insertOrUpdate(realmList)
+    }
+    realm.close()
   }
 }

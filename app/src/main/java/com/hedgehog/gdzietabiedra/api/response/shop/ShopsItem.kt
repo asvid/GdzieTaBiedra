@@ -1,4 +1,4 @@
-package com.hedgehog.gdzietabiedra.api
+package com.hedgehog.gdzietabiedra.api.response.shop
 
 import com.squareup.moshi.Json
 

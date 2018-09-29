@@ -1,22 +1,23 @@
 package com.hedgehog.gdzietabiedra
 
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.os.Bundle
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.api.BiedraService
 import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import com.hedgehog.gdzietabiedra.ribs.RootBuilder
+import com.hedgehog.gdzietabiedra.utils.applySchedulers
 import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.PermissionListener
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.uber.rib.core.RibActivity
 import com.uber.rib.core.ViewRouter
 import dagger.android.AndroidInjection
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -30,25 +31,22 @@ class MainActivity : RibActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
+
     permissionCheck()
   }
 
   fun permissionCheck() {
 //    TODO this should be available from Dagger, but no time for it now :)
     Dexter.withActivity(this)
-        .withPermission(ACCESS_FINE_LOCATION)
-        .withListener(object : PermissionListener {
-          override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+        .withPermissions(ACCESS_FINE_LOCATION, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE)
+        .withListener(object : MultiplePermissionsListener {
+          override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
 
           }
 
-          override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?,
-              token: PermissionToken?) {
+          override fun onPermissionRationaleShouldBeShown(
+              permissions: MutableList<PermissionRequest>?, token: PermissionToken?) {
           }
-
-          override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-          }
-
         })
         .check()
   }
@@ -64,10 +62,12 @@ class MainActivity : RibActivity() {
 
 
     biedraApi.listRepos(51.802742F, 19.514333F)
-        .subscribeOn(Schedulers.newThread())
+        .compose(applySchedulers())
         .subscribeBy(
             onSuccess = {
-              Timber.d("biedras: $it")
+              it.shops?.let {
+                shopsRepository.saveAll(it)
+              }
             },
             onError = {
               Timber.e("biedras error: $it")
