@@ -11,7 +11,7 @@ import java.io.InputStream
 object CopyDb {
 
   fun initRealmDb(context: Context) {
-    copyBundledRealmFile(context.resources.openRawResource(R.raw.default0), "default0.realm",
+    copyBundledRealmFile(context.resources.openRawResource(R.raw.default1), "default1.realm",
         context)
   }
 

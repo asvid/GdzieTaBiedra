@@ -19,7 +19,7 @@ internal fun ShopsItem.toRealmEntity(): ShopEntity {
   val output = ShopEntity()
   output.id = this.id!!
   output.city = this.city!!
-  output.street = this.street!!
+  output.street = this.street?:""
   output.streetNumber = this.streetNumber.toString()
   output.shopNumber = this.shopNumber?.toInt()
   output.latitude = this.latitude?.toDouble()

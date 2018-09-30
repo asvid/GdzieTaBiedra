@@ -28,7 +28,7 @@ class DataModule {
     Realm.init(context)
     return RealmConfiguration.Builder()
         .schemaVersion(0)
-        .name("default0.realm")
+        .name("default1.realm")
         .migration(Migration(versionMigrations))
         .build()
   }
