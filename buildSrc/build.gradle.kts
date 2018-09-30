@@ -1,10 +1,9 @@
-
 repositories {
-    google()
+  google()
   jcenter()
   mavenCentral()
 }
 
 plugins {
-    `kotlin-dsl`
+  `kotlin-dsl`
 }
