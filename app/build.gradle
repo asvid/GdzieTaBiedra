@@ -8,13 +8,10 @@ apply plugin: 'com.vanniktech.android.apk.size'
 apply plugin: 'jacoco-android'
 apply plugin: 'com.github.kt3k.coveralls'
 
-apply from: 'VersionUtils.gradle'
-
-def buildDateTime = project.hasProperty("devBuild") ? 100 :
+def buildVersionCode = project.hasProperty("devBuild") ? 100 :
     new Date().format("yyMMddHHmm").toInteger()
 
 android {
-  def props = new Properties()
 
   compileSdkVersion Build.compileSdkVersion
   defaultConfig {
@@ -23,8 +20,8 @@ android {
     minSdkVersion Build.minSdkVersion
     targetSdkVersion Build.targetSdkVersion
     compileSdkVersion Build.compileSdkVersion
-    versionCode buildDateTime
-    versionName Build.versionName
+    versionCode buildVersionCode
+    versionName "2.0"
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -100,8 +97,6 @@ dependencies {
   implementation Support.recyclerView
   implementation Support.design
   implementation Support.constraint
-  //  pretty time
-  implementation External.prettyTime
   //  Logging
   implementation External.timber
   //  RX
@@ -111,12 +106,10 @@ dependencies {
   //  DI
   implementation External.dagger
   implementation External.daggerSupport
-  annotationProcessor Apt.daggerCompiler
+  annotationProcessor External.daggerCompiler
   annotationProcessor External.daggerProcessor
   kapt External.daggerProcessor
-  kapt Apt.daggerCompiler
-  //  Gson
-  implementation External.gson
+  kapt External.daggerCompiler
   //  RIBs
   annotationProcessor Uber.ribCompilerTest
   implementation Uber.ribs
