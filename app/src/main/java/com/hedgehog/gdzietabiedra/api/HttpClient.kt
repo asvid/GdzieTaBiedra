@@ -12,7 +12,7 @@ class HttpClient {
   private fun buildHttpClient(): OkHttpClient = OkHttpClient.Builder()
       .addInterceptor(HttpLoggingInterceptor(
           HttpLoggingInterceptor.Logger { message -> Timber.tag("OkHttp").d(message) })
-          .setLevel(HttpLoggingInterceptor.Level.BODY))
+          .setLevel(HttpLoggingInterceptor.Level.BASIC))
       .build()
 
   fun buildRetrofit(): Retrofit = Retrofit.Builder()

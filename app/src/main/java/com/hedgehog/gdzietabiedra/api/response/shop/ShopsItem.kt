@@ -4,90 +4,90 @@ import com.squareup.moshi.Json
 
 data class ShopsItem(
 
-    @Json(name = "import_query")
+    @field:Json(name = "import_query")
     val importQuery: String? = null,
 
-    @Json(name = "distance")
+    @field:Json(name = "distance")
     val distance: String? = null,
 
-    @Json(name = "city")
+    @field:Json(name = "city")
     val city: String? = null,
 
-    @Json(name = "latitude")
+    @field:Json(name = "latitude")
     val latitude: String? = null,
 
-    @Json(name = "is_tax_free")
+    @field:Json(name = "is_tax_free")
     val isTaxFree: String? = null,
 
-    @Json(name = "street")
+    @field:Json(name = "street")
     val street: String? = null,
 
-    @Json(name = "hours_sunday")
+    @field:Json(name = "hours_sunday")
     val hoursSunday: String? = null,
 
-    @Json(name = "import_update")
+    @field:Json(name = "import_update")
     val importUpdate: String? = null,
 
-    @Json(name = "id")
+    @field:Json(name = "id")
     val id: String? = null,
 
-    @Json(name = "atm")
+    @field:Json(name = "atm")
     val atm: String? = null,
 
-    @Json(name = "longitude")
+    @field:Json(name = "longitude")
     val longitude: String? = null,
 
-    @Json(name = "shop_dc_id")
+    @field:Json(name = "shop_dc_id")
     val shopDcId: String? = null,
 
-    @Json(name = "card_payment")
+    @field:Json(name = "card_payment")
     val cardPayment: String? = null,
 
-    @Json(name = "new")
+    @field:Json(name = "new")
     val jsonMemberNew: String? = null,
 
-    @Json(name = "hours")
+    @field:Json(name = "hours")
     val hours: String? = null,
 
-    @Json(name = "bakery")
+    @field:Json(name = "bakery")
     val bakery: String? = null,
 
-    @Json(name = "relax")
+    @field:Json(name = "relax")
     val relax: String? = null,
 
-    @Json(name = "sublease")
+    @field:Json(name = "sublease")
     val sublease: String? = null,
 
-    @Json(name = "created")
+    @field:Json(name = "created")
     val created: String? = null,
 
-    @Json(name = "city_slug")
+    @field:Json(name = "city_slug")
     val citySlug: String? = null,
 
-    @Json(name = "special")
+    @field:Json(name = "special")
     val special: String? = null,
 
-    @Json(name = "shop_province_teryt")
+    @field:Json(name = "shop_province_teryt")
     val shopProvinceTeryt: String? = null,
 
-    @Json(name = "hours_friday")
+    @field:Json(name = "hours_friday")
     val hoursFriday: String? = null,
 
-    @Json(name = "is_euro")
+    @field:Json(name = "is_euro")
     val isEuro: String? = null,
 
-    @Json(name = "name")
+    @field:Json(name = "name")
     val name: String? = null,
 
-    @Json(name = "street_number")
+    @field:Json(name = "street_number")
     val streetNumber: Any? = null,
 
-    @Json(name = "shop_number")
+    @field:Json(name = "shop_number")
     val shopNumber: String? = null,
 
-    @Json(name = "shop_city_id")
+    @field:Json(name = "shop_city_id")
     val shopCityId: String? = null,
 
-    @Json(name = "hours_saturday")
+    @field:Json(name = "hours_saturday")
     val hoursSaturday: String? = null
 )

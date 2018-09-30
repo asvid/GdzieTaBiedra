@@ -4,18 +4,18 @@ import com.squareup.moshi.Json
 
 data class ShopsResponse(
 
-    @Json(name = "result")
+    @field:Json(name = "result")
     val result: Int? = null,
 
-    @Json(name = "cdn_base")
+    @field:Json(name = "cdn_base")
     val cdnBase: String? = null,
 
-    @Json(name = "shops")
+    @field:Json(name = "shops")
     val shops: List<ShopsItem>? = null,
 
-    @Json(name = "error")
+    @field:Json(name = "error")
     val error: String? = null,
 
-    @Json(name = "timestamp")
+    @field:Json(name = "timestamp")
     val timestamp: Int? = null
 )
