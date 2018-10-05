@@ -38,7 +38,7 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListItemVH>() {
   }
 
   fun updateData(list: List<Shop>) {
-    items = list
+    items = list.sortedBy { it.distance }
     notifyDataSetChanged()
   }
 }

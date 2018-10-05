@@ -9,4 +9,5 @@ object Versions {
   const val okHttp = "3.10.0"
   const val retrofit = "2.4.0"
   const val leakCanary = "1.5.4"
+  const val googlePlayServices = "15.0.1"
 }

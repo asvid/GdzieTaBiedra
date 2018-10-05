@@ -6,6 +6,8 @@ import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.os.Bundle
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.api.BiedraService
+import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import com.hedgehog.gdzietabiedra.ribs.RootBuilder
 import com.karumi.dexter.Dexter
@@ -20,9 +22,11 @@ import javax.inject.Inject
 
 class MainActivity : RibActivity() {
 
-  lateinit var shopsRepository: ShopsRepository
-    @Inject set
   lateinit var biedraApi: BiedraService
+    @Inject set
+  lateinit var locationService: LocationService
+    @Inject set
+  lateinit var shopService: ShopService
     @Inject set
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +54,8 @@ class MainActivity : RibActivity() {
 
   override fun createRouter(parentViewGroup: ViewGroup): ViewRouter<*, *, *> =
       RootBuilder(object : RootBuilder.ParentComponent {
-        override fun shopsRepository(): ShopsRepository = shopsRepository
+        override fun locationService() = locationService
+        override fun shopServices() = shopService
       })
           .build(parentViewGroup)
 }

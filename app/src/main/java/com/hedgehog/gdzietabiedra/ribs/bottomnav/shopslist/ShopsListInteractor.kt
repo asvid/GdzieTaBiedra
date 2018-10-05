@@ -1,10 +1,13 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist
 
-import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
+import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.Subject
 import timber.log.Timber
@@ -21,24 +24,35 @@ class ShopsListInteractor : Interactor<ShopsListInteractor.ShopsListPresenter, S
   @Inject
   lateinit var presenter: ShopsListPresenter
   @Inject
-  lateinit var shopsRepository: ShopsRepository
+  lateinit var shopsService: ShopService
+  @Inject
+  lateinit var locationService: LocationService
+
+  private lateinit var compositeDisposable: CompositeDisposable
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
+    compositeDisposable = CompositeDisposable()
     presenter.setView()
-    shopsRepository.fetchAll().subscribeBy(
-        onComplete = { Timber.d("onComplete") },
-        onNext = {
-          Timber.d("shops: $it")
-          presenter.populateList(it)
-        },
-        onError = { Timber.d("onError") })
 
-    presenter.listItemClicked().subscribeBy(
-        onNext = {
-          Timber.d("item clicked: $it")
-          presenter.showToast(it)
-        })
+    locationService.getLocation().subscribeBy { location ->
+      shopsService.getShopsInRange(
+          location, 0.05
+      ).subscribeBy(
+          onComplete = { Timber.d("onComplete") },
+          onNext = {
+            Timber.d("shops: $it")
+            presenter.populateList(it)
+          },
+          onError = { Timber.d("onError") })
+          .addTo(compositeDisposable)
+
+      presenter.listItemClicked().subscribeBy(
+          onNext = {
+            Timber.d("item clicked: $it")
+            presenter.showToast(it)
+          }).addTo(compositeDisposable)
+    }.addTo(compositeDisposable)
   }
 
   /**

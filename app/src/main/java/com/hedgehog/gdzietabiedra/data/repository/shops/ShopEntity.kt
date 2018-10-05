@@ -21,12 +21,10 @@ open class ShopEntity : RealmObject() {
   var street: String = ""
 
   var streetNumber: String? = null
+  var latitude: Double = 0.0
+  var longitude: Double = 0.0
   @Required
-  var latitude: Double? = null
-  @Required
-  var longitude: Double? = null
-  @Required
-  var hours: String? = null
+  lateinit var hours: String
 
   var hoursFriday: String? = null
   var hoursSaturday: String? = null

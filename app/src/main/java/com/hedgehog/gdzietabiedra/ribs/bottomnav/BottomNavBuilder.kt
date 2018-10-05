@@ -19,8 +19,9 @@ import javax.inject.Scope
  * TODO describe this scope's responsibility as a whole.
  */
 class BottomNavBuilder(
-    dependency: ParentComponent) : ViewBuilder<BottomNavView, BottomNavRouter, BottomNavBuilder.ParentComponent>(
-    dependency) {
+    dependency: ParentComponent) :
+    ViewBuilder<BottomNavView, BottomNavRouter, BottomNavBuilder.ParentComponent>(
+        dependency) {
 
   /**
    * Builds a new [BottomNavRouter].
@@ -72,8 +73,8 @@ class BottomNavBuilder(
   }
 
   @BottomNavScope
-  @dagger.Component(modules = arrayOf(Module::class),
-      dependencies = arrayOf(ParentComponent::class))
+  @dagger.Component(modules = [Module::class],
+      dependencies = [ParentComponent::class])
   interface Component : InteractorBaseComponent<BottomNavInteractor>, BuilderComponent {
 
     @dagger.Component.Builder

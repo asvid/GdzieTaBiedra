@@ -4,7 +4,9 @@ import com.hedgehog.gdzietabiedra.App
 import com.hedgehog.gdzietabiedra.di.ActivityBinder
 import com.hedgehog.gdzietabiedra.di.modules.ApiModule
 import com.hedgehog.gdzietabiedra.di.modules.AppModule
+import com.hedgehog.gdzietabiedra.di.modules.AppServices
 import com.hedgehog.gdzietabiedra.di.modules.DataModule
+import com.hedgehog.gdzietabiedra.di.modules.LocationModule
 import com.hedgehog.gdzietabiedra.di.modules.MigrationsModule
 import dagger.BindsInstance
 import dagger.Component
@@ -18,7 +20,9 @@ import javax.inject.Singleton
   AppModule::class,
   MigrationsModule::class,
   DataModule::class,
-  ApiModule::class
+  ApiModule::class,
+  LocationModule::class,
+  AppServices::class
 ])
 interface AppComponent {
 
