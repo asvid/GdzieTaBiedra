@@ -41,5 +41,6 @@ object Firebase {
 }
 
 object Google {
-  const val maps = "com.google.android.gms:play-services-maps:15.0.1"
+  const val maps = "com.google.android.gms:play-services-maps:${Versions.googlePlayServices}"
+  const val location = "com.google.android.gms:play-services-location:${Versions.googlePlayServices}"
 }

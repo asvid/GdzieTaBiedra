@@ -1,10 +1,12 @@
 package com.hedgehog.gdzietabiedra.data.repository.shops
 
 import com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem
+import com.hedgehog.gdzietabiedra.domain.Point
 import com.hedgehog.gdzietabiedra.domain.Shop
 
 internal fun ShopEntity.toDomainModel(): Shop {
-  return Shop(this.id, generateAddress(this), this.distance, this.hours)
+  return Shop(this.id, generateAddress(this), this.distance, Point(this.latitude, this.longitude),
+      this.hours)
 }
 
 internal fun generateAddress(shopEntity: ShopEntity): String {
@@ -19,12 +21,12 @@ internal fun ShopsItem.toRealmEntity(): ShopEntity {
   val output = ShopEntity()
   output.id = this.id!!
   output.city = this.city!!
-  output.street = this.street?:""
+  output.street = this.street ?: ""
   output.streetNumber = this.streetNumber.toString()
   output.shopNumber = this.shopNumber?.toInt()
-  output.latitude = this.latitude?.toDouble()
-  output.longitude = this.longitude?.toDouble()
-  output.hours = this.hours
+  output.latitude = this.latitude?.toDouble() ?: 0.0
+  output.longitude = this.longitude?.toDouble() ?: 0.0
+  output.hours = this.hours ?: ""
   output.hoursFriday = this.hoursFriday
   output.hoursSaturday = this.hoursSaturday
   output.hoursSunday = this.hoursSunday

@@ -117,6 +117,7 @@ dependencies {
   kapt Realm.nameHelper
   //  Maps
   implementation Google.maps
+  implementation Google.location
   //  Permissions
   implementation External.dexter
   //  Retrofit
