@@ -3,6 +3,7 @@ package com.hedgehog.gdzietabiedra.ribs.bottomnav.map
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -44,7 +45,7 @@ class MapBuilder(
   }
 
   interface ParentComponent {
-    // TODO: Define dependencies required from your parent interactor here.
+    fun locationService(): LocationService
   }
 
   @dagger.Module

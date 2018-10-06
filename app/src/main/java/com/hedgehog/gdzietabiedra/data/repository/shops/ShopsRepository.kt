@@ -1,7 +1,7 @@
 package com.hedgehog.gdzietabiedra.data.repository.shops
 
+import com.github.asvid.biedra.domain.Position
 import com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem
-import com.hedgehog.gdzietabiedra.domain.Point
 import com.hedgehog.gdzietabiedra.domain.Shop
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -54,7 +54,7 @@ class ShopsRepository @Inject constructor(private val realmConfiguration: RealmC
   }
 
   fun fetchByLocationAndRange(
-      location: Point,
+      location: Position,
       range: Double
   ): Flowable<Collection<Shop>> {
     return Realm.getInstance(realmConfiguration)

@@ -1,11 +1,12 @@
 package com.hedgehog.gdzietabiedra.data.repository.shops
 
+import com.github.asvid.biedra.domain.Position
 import com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem
-import com.hedgehog.gdzietabiedra.domain.Point
 import com.hedgehog.gdzietabiedra.domain.Shop
 
 internal fun ShopEntity.toDomainModel(): Shop {
-  return Shop(this.id, generateAddress(this), this.distance, Point(this.latitude, this.longitude),
+  return Shop(this.id, generateAddress(this), this.distance,
+      Position(this.latitude, this.longitude),
       this.hours)
 }
 
