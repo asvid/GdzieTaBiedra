@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -46,6 +47,7 @@ class MapBuilder(
 
   interface ParentComponent {
     fun locationService(): LocationService
+    fun shopServices(): ShopService
   }
 
   @dagger.Module

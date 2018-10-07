@@ -59,7 +59,7 @@ class ShopsRepository @Inject constructor(private val realmConfiguration: RealmC
   ): Flowable<Collection<Shop>> {
     return Realm.getInstance(realmConfiguration)
         .where(ShopEntity::class.java)
-        .between(ShopEntityFields.LATITUDE, location.lat - range, location.lat + range)
+        .between(ShopEntityFields.LATITUDE, location.lat - range / 2, location.lat + range / 2)
         .between(ShopEntityFields.LONGITUDE, location.lng - range, location.lng + range)
         .findAll()
         .asFlowable()

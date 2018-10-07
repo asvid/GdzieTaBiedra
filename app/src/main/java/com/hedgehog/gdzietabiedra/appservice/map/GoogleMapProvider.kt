@@ -3,8 +3,10 @@ package com.hedgehog.gdzietabiedra.appservice.map
 import com.github.asvid.biedra.domain.Position
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.utils.toLatLng
 import com.hedgehog.gdzietabiedra.utils.toPosition
 import io.reactivex.Observable
@@ -16,7 +18,8 @@ class GoogleMapProvider private constructor() : IMapProvider {
 
   private lateinit var map: GoogleMap
   private val mapMarkers = hashMapOf<Marker, ShopMarker>()
-  private lateinit var markerSubject: PublishSubject<ShopMarker>
+  private val markerSubject: PublishSubject<ShopMarker> = PublishSubject.create()
+  private val mapClickSubject: PublishSubject<Any> = PublishSubject.create()
 
   companion object {
     fun create(googleMap: GoogleMap): GoogleMapProvider {
@@ -26,13 +29,15 @@ class GoogleMapProvider private constructor() : IMapProvider {
 
   private fun initialize(googleMap: GoogleMap) {
     this.map = googleMap
-
-    markerSubject = PublishSubject.create()
     this.map.setOnMarkerClickListener { marker ->
       mapMarkers[marker]?.let {
         markerSubject.onNext(it)
+        marker.showInfoWindow()
       }
       true
+    }
+    this.map.setOnMapClickListener {
+      mapClickSubject.onNext(Any())
     }
   }
 
@@ -41,6 +46,10 @@ class GoogleMapProvider private constructor() : IMapProvider {
       val markerOptions = MarkerOptions()
           .position(shopMarker.position.toLatLng())
           .title(shopMarker.shop.address)
+          .snippet(shopMarker.shop.openHours)
+          .icon(
+              BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)
+          )
       val marker = map.addMarker(markerOptions)
       mapMarkers[marker] = shopMarker
     }
@@ -52,11 +61,11 @@ class GoogleMapProvider private constructor() : IMapProvider {
 
   override fun shopMarkerClicked(): Observable<ShopMarker> = markerSubject
 
+  override fun mapClicked(): Observable<Any> = mapClickSubject
+
   override fun clearMap() {
     mapMarkers.clear()
     map.clear()
-    TODO(
-        "not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
   override fun goToPosition(position: Position) {

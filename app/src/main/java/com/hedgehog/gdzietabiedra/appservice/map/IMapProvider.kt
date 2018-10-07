@@ -14,4 +14,6 @@ interface IMapProvider {
   fun clearMap()
 
   fun goToPosition(position: Position)
+
+  fun mapClicked(): Observable<Any>
 }
