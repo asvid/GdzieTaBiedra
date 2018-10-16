@@ -4,16 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <SearchView
-        android:id="@+id/shop_search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+  <SearchView
+      android:id="@+id/shop_search_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/shops_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/shop_list_item" />
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/shops_list"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:scrollbarAlwaysDrawVerticalTrack="true"
+      android:scrollbars="vertical"
+      tools:listitem="@layout/shop_list_item"
+      />
 </com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListView>

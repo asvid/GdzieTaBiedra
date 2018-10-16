@@ -48,8 +48,7 @@ class ShopListItemVH(val view: View) : ViewHolder(view) {
   fun setViewHolder(item: Shop,
       itemMoreClicked: PublishSubject<Shop>) {
     view.findViewById<TextView>(R.id.shop_address).text = item.address
-    view.findViewById<TextView>(R.id.shop_distance).text = generateDistanceText(
-        item.distance)
+    view.findViewById<TextView>(R.id.shop_distance).text = generateDistanceText(item.distance)
     view.findViewById<TextView>(R.id.shop_open_hours).text = item.openHours
     view.findViewById<ImageButton>(R.id.more_options_button).setOnClickListener {
       itemMoreClicked.onNext(item)

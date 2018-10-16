@@ -7,7 +7,10 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.hedgehog.gdzietabiedra.domain.Shop
+import com.jakewharton.rxbinding2.widget.RxSearchView
+import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+import kotlinx.android.synthetic.main.shoplist_rib.view.shop_search_view
 import kotlinx.android.synthetic.main.shoplist_rib.view.shops_list
 
 /**
@@ -15,9 +18,10 @@ import kotlinx.android.synthetic.main.shoplist_rib.view.shops_list
  */
 class ShopsListView @JvmOverloads constructor(context: Context,
     attrs: AttributeSet? = null,
-    defStyle: Int = 0) : LinearLayout(context,
-    attrs,
-    defStyle), ShopsListInteractor.ShopsListPresenter {
+    defStyle: Int = 0
+) : LinearLayout(context, attrs, defStyle), ShopsListInteractor.ShopsListPresenter {
+
+  private val searchSubject = PublishSubject.create<String>()
 
   override fun showToast(shop: Shop) {
     Toast.makeText(context, "item with shop: ${shop.address} was clicked", Toast.LENGTH_LONG).show()
@@ -35,7 +39,13 @@ class ShopsListView @JvmOverloads constructor(context: Context,
     shops_list.adapter = adapter
     shops_list.addItemDecoration(dividerItemDecoration)
     shops_list.layoutManager = linearLayoutManager
+
+    RxSearchView.queryTextChanges(shop_search_view)
+        .map { it.toString() }
+        .subscribe(searchSubject)
   }
+
+  override fun observeSearch() = searchSubject
 
   override fun populateList(shops: Collection<Shop>) {
     adapter.updateData(shops.toList())
