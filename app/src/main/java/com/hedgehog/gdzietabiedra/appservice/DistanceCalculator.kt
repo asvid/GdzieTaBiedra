@@ -1,10 +1,10 @@
 package com.hedgehog.gdzietabiedra.appservice
 
-import com.hedgehog.gdzietabiedra.domain.Point
+import com.github.asvid.biedra.domain.Position
 
 class DistanceCalculator {
 
-  fun calculateDistance(pointA: Point, pointB: Point): Double {
+  fun calculateDistance(pointA: Position, pointB: Position): Double {
     val pk = (180f / Math.PI).toFloat()
 
     val a1 = pointA.lat / pk

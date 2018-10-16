@@ -1,7 +1,7 @@
 package com.hedgehog.gdzietabiedra.data.repository.shops
 
+import com.github.asvid.biedra.domain.Position
 import com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem
-import com.hedgehog.gdzietabiedra.domain.Point
 import com.hedgehog.gdzietabiedra.domain.Shop
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -54,12 +54,12 @@ class ShopsRepository @Inject constructor(private val realmConfiguration: RealmC
   }
 
   fun fetchByLocationAndRange(
-      location: Point,
+      location: Position,
       range: Double
   ): Flowable<Collection<Shop>> {
     return Realm.getInstance(realmConfiguration)
         .where(ShopEntity::class.java)
-        .between(ShopEntityFields.LATITUDE, location.lat - range, location.lat + range)
+        .between(ShopEntityFields.LATITUDE, location.lat - range / 2, location.lat + range / 2)
         .between(ShopEntityFields.LONGITUDE, location.lng - range, location.lng + range)
         .findAll()
         .asFlowable()

@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_dark">
+    >
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/map_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+  <com.google.android.gms.maps.MapView
+      android:id="@+id/map_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      />
+
+  <Button
+      android:id="@+id/map_navigation_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom"
+      android:text="@string/navigate_to_shop"
+      android:visibility="gone"
+      tool:visibility="visible"
+      />
 </com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapView>
