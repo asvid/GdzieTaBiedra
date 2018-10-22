@@ -1,5 +1,7 @@
 package com.hedgehog.gdzietabiedra.ribs
 
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapRouter
@@ -53,17 +55,17 @@ class RootRouter(
 
   fun attachMap() {
     Timber.d("attach map")
+    mapRouter?.let {
+      mapRouter?.view?.visibility = VISIBLE
+      return
+    }
     mapRouter = mapBuilder.build(view.viewContent())
     attachChild(mapRouter)
     view.viewContent().addView(mapRouter?.view)
   }
 
   fun detachMap() {
-    if (mapRouter != null) {
-      detachChild(mapRouter)
-      view.viewContent().removeView(mapRouter?.view)
-      mapRouter = null
-    }
+    mapRouter?.view?.visibility = GONE
   }
 
   fun attachSettings() {

@@ -41,6 +41,16 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListItemVH>() {
     items = list.sortedBy { it.distance }
     notifyDataSetChanged()
   }
+
+  fun addItem(shop: Shop) {
+    items = items.toMutableList().also { it.add(shop) }.toList()
+    notifyDataSetChanged()
+  }
+
+  fun clearItems() {
+    items = emptyList()
+    notifyDataSetChanged()
+  }
 }
 
 class ShopListItemVH(val view: View) : ViewHolder(view) {

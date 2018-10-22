@@ -7,6 +7,8 @@ interface IMapProvider {
 
   fun drawMarkers(points: Collection<ShopMarker>)
 
+  fun drawMarker(point: ShopMarker)
+
   fun readMapPosition(): Position
 
   fun shopMarkerClicked(): Observable<ShopMarker>
@@ -16,4 +18,6 @@ interface IMapProvider {
   fun goToPosition(position: Position)
 
   fun mapClicked(): Observable<Any>
+
+  fun mapMoved(): Observable<Position>
 }

@@ -4,12 +4,12 @@ import com.github.asvid.biedra.domain.Position
 import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.domain.Shop
+import com.hedgehog.gdzietabiedra.utils.async
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.RibInteractor
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.Subject
 import timber.log.Timber
@@ -43,43 +43,37 @@ class ShopsListInteractor :
     presenter.setView()
 
     locationService.getLocation()
-        .subscribeBy { location ->
-          this.location = location
-          shopsService.getShopsInRange(
-              location, RANGE
-          ).subscribeBy(
-              onNext = {
-                Timber.d("shops: $it")
-                presenter.populateList(it)
-              },
-              onError = { Timber.d("onError") })
-              .addTo(compositeDisposable)
-
-          presenter.listItemClicked().subscribeBy(
-              onNext = {
-                Timber.d("item clicked: $it")
-                presenter.showToast(it)
-              }).addTo(compositeDisposable)
-        }.addToDisposables()
-
-    presenter.observeSearch()
+        .async()
+        .toFlowable().flatMap {
+          shopsService.getShopsInRange(it, RANGE)
+        }
         .subscribeBy(
             onNext = {
-              Timber.d("searching for address: $it")
-              if (it.isEmpty()) {
-                shopsService.getShopsInRange(location, RANGE)
-                    .subscribeBy {
-                      presenter.populateList(it)
-                    }.addToDisposables()
-              } else {
-                shopsService.getShopsByAddress(it, location)
-                    .subscribeBy {
-                      presenter.populateList(it)
-                    }.addToDisposables()
-              }
-            },
-            onError = {
+              presenter.addToList(it)
+            })
+        .addToDisposables()
 
+
+    presenter.listItemClicked().subscribeBy(
+        onNext = {
+          Timber.d("item clicked: $it")
+          presenter.showToast(it)
+        }).addToDisposables()
+
+    presenter.observeSearch()
+        .async()
+        .doOnNext { presenter.clearList() }
+        .switchMap {
+          shopsService
+              .getShopsByAddress(it, location)
+              .toObservable()
+        }
+        .switchIfEmpty {
+          shopsService.getShopsInRange(location, RANGE)
+        }
+        .subscribeBy(
+            onNext = {
+              presenter.addToList(it)
             }).addToDisposables()
   }
 
@@ -90,8 +84,10 @@ class ShopsListInteractor :
 
     fun setView()
     fun populateList(shops: Collection<Shop>)
+    fun addToList(shop: Shop)
     fun listItemClicked(): Subject<Shop>
     fun showToast(shop: Shop)
     fun observeSearch(): Observable<String>
+    fun clearList()
   }
 }

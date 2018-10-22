@@ -20,6 +20,13 @@ class ShopsListView @JvmOverloads constructor(context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : LinearLayout(context, attrs, defStyle), ShopsListInteractor.ShopsListPresenter {
+  override fun addToList(shop: Shop) {
+    adapter.addItem(shop)
+  }
+
+  override fun clearList() {
+    adapter.clearItems()
+  }
 
   private val searchSubject = PublishSubject.create<String>()
 
