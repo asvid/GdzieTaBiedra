@@ -1,6 +1,6 @@
 ---
 engines:
- detect:
+ detekt:
    enabled: true
    exclude_paths:
      - config/engines.yml
