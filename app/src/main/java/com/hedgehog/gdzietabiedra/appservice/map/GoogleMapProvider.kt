@@ -55,6 +55,18 @@ class GoogleMapProvider private constructor() : IMapProvider {
     }
   }
 
+  override fun drawMarker(shopMarker: ShopMarker) {
+    val markerOptions = MarkerOptions()
+        .position(shopMarker.position.toLatLng())
+        .title(shopMarker.shop.address)
+        .snippet(shopMarker.shop.openHours)
+        .icon(
+            BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)
+        )
+    val marker = map.addMarker(markerOptions)
+    mapMarkers[marker] = shopMarker
+  }
+
   override fun readMapPosition(): Position {
     return map.cameraPosition.target.toPosition()
   }
@@ -71,7 +83,15 @@ class GoogleMapProvider private constructor() : IMapProvider {
   override fun goToPosition(position: Position) {
     map.animateCamera(
         CameraUpdateFactory
-            .newLatLngZoom(position.toLatLng(), DEFAULT_MAP_ZOOM)
+            .newLatLngZoom(position.toLatLng(), DEFAULT_MAP_ZOOM), 100, null
     )
+  }
+
+  override fun mapMoved(): Observable<Position> {
+    return Observable.fromPublisher {
+      this.map.setOnCameraIdleListener {
+        it.onNext(readMapPosition())
+      }
+    }
   }
 }

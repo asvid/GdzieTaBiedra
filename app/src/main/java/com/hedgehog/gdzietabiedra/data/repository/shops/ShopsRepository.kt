@@ -36,38 +36,43 @@ class ShopsRepository @Inject constructor(private val realmConfiguration: RealmC
     }
   }
 
-  fun fetchByAddress(address: String): Flowable<Collection<Shop>> {
+  fun fetchByAddress(
+      address: String,
+      count: Long): Flowable<Shop> {
     return Realm.getInstance(realmConfiguration)
-        .where(ShopEntity::class.java)
-        .beginGroup()
-        .like(ShopEntityFields.STREET, "*$address*", Case.INSENSITIVE)
-        .or()
-        .like(ShopEntityFields.CITY, "*$address*", Case.INSENSITIVE)
-        .endGroup()
-        .findAll()
-        .asFlowable()
-        .map { shops ->
-          shops.map {
-            it.toDomainModel()
-          }
+        .asFlowable().map { realm ->
+          realm.where(ShopEntity::class.java)
+              .beginGroup()
+              .like(ShopEntityFields.STREET, "*$address*", Case.INSENSITIVE)
+              .or()
+              .like(ShopEntityFields.CITY, "*$address*", Case.INSENSITIVE)
+              .endGroup()
+              .findAll()
+        }
+        .flatMapIterable { it -> it }
+        .take(count)
+        .map {
+          it.toDomainModel()
         }
   }
 
   fun fetchByLocationAndRange(
       location: Position,
-      range: Double
-  ): Flowable<Collection<Shop>> {
+      range: Double,
+      count: Long
+  ): Flowable<Shop> {
     return Realm.getInstance(realmConfiguration)
         .where(ShopEntity::class.java)
         .between(ShopEntityFields.LATITUDE, location.lat - range / 2, location.lat + range / 2)
         .between(ShopEntityFields.LONGITUDE, location.lng - range, location.lng + range)
         .findAll()
         .asFlowable()
-        .map { shops ->
-          shops.map {
-            it.toDomainModel()
-          }
+        .flatMapIterable { it -> it }
+        .take(count)
+        .map {
+          it.toDomainModel()
         }
+
   }
 
   fun save(apiModel: ShopsItem) {

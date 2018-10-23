@@ -41,6 +41,16 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListItemVH>() {
     items = list.sortedBy { it.distance }
     notifyDataSetChanged()
   }
+
+  fun addItem(shop: Shop) {
+    items = items.toMutableList().also { it.add(shop) }.toList()
+    notifyDataSetChanged()
+  }
+
+  fun clearItems() {
+    items = emptyList()
+    notifyDataSetChanged()
+  }
 }
 
 class ShopListItemVH(val view: View) : ViewHolder(view) {
@@ -48,8 +58,7 @@ class ShopListItemVH(val view: View) : ViewHolder(view) {
   fun setViewHolder(item: Shop,
       itemMoreClicked: PublishSubject<Shop>) {
     view.findViewById<TextView>(R.id.shop_address).text = item.address
-    view.findViewById<TextView>(R.id.shop_distance).text = generateDistanceText(
-        item.distance)
+    view.findViewById<TextView>(R.id.shop_distance).text = generateDistanceText(item.distance)
     view.findViewById<TextView>(R.id.shop_open_hours).text = item.openHours
     view.findViewById<ImageButton>(R.id.more_options_button).setOnClickListener {
       itemMoreClicked.onNext(item)
