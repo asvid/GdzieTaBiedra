@@ -35,7 +35,7 @@ class ShopsListInteractor :
 
   private lateinit var compositeDisposable: CompositeDisposable
 
-  private lateinit var location: Position
+  private lateinit var currentUserLocation: Position
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
@@ -44,7 +44,9 @@ class ShopsListInteractor :
 
     locationService.getLocation()
         .async()
-        .toFlowable().flatMap {
+        .toFlowable()
+        .flatMap {
+          currentUserLocation = it
           shopsService.getShopsInRange(it, RANGE)
         }
         .subscribeBy(
@@ -54,27 +56,37 @@ class ShopsListInteractor :
         .addToDisposables()
 
 
-    presenter.listItemClicked().subscribeBy(
-        onNext = {
-          Timber.d("item clicked: $it")
-          presenter.showToast(it)
-        }).addToDisposables()
+    presenter.listItemClicked()
+        .async()
+        .subscribeBy(
+            onNext = {
+              Timber.d("item clicked: $it")
+              presenter.showToast(it)
+            })
+        .addToDisposables()
 
     presenter.observeSearch()
         .async()
         .doOnNext { presenter.clearList() }
-        .switchMap {
-          shopsService
-              .getShopsByAddress(it, location)
-              .toObservable()
-        }
         .switchIfEmpty {
-          shopsService.getShopsInRange(location, RANGE)
+          shopsService.getShopsInRange(currentUserLocation, RANGE)
+        }
+        .flatMap {
+          if (it.isBlank()) {
+            shopsService
+                .getShopsInRange(currentUserLocation, RANGE)
+                .toObservable()
+          } else {
+            shopsService
+                .getShopsByAddress(it, currentUserLocation)
+                .toObservable()
+          }
         }
         .subscribeBy(
             onNext = {
               presenter.addToList(it)
-            }).addToDisposables()
+            })
+        .addToDisposables()
   }
 
   /**

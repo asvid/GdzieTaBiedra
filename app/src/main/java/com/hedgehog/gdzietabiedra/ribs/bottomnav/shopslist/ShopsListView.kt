@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.jakewharton.rxbinding2.widget.RxSearchView
+import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.shoplist_rib.view.shop_search_view
@@ -48,7 +49,9 @@ class ShopsListView @JvmOverloads constructor(context: Context,
     shops_list.layoutManager = linearLayoutManager
 
     RxSearchView.queryTextChanges(shop_search_view)
-        .map { it.toString() }
+        .map {
+          it.toString()
+        }
         .subscribe(searchSubject)
   }
 

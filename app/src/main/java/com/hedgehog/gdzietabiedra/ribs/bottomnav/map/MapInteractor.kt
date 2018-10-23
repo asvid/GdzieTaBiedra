@@ -7,6 +7,7 @@ import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.IMapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.ShopMarker
+import com.hedgehog.gdzietabiedra.utils.async
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.RibInteractor
@@ -38,14 +39,25 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
-    presenter.initView().zipWith(
-        locationService.getLocation(),
-        BiFunction<GoogleMap, Position, Position> { googleMap, position ->
-          mapProvider = GoogleMapProvider.create(googleMap)
-          mapProvider.goToPosition(position)
-          mapSubject.onNext(mapProvider)
-          position
-        })
+    handleMapInit()
+    handleMarkerClicks()
+    handleMapClicks()
+    handleMapMoved()
+    handleNavigationClicked()
+  }
+
+  private fun handleMapInit() {
+    presenter
+        .initView()
+        .zipWith(
+            locationService.getLocation()
+                .async(),
+            BiFunction<GoogleMap, Position, Position> { googleMap, position ->
+              mapProvider = GoogleMapProvider.create(googleMap)
+              mapProvider.goToPosition(position)
+              mapSubject.onNext(mapProvider)
+              position
+            })
         .toFlowable()
         .flatMap {
           shopsService.getShopsInRange(it, 0.1)
@@ -55,32 +67,11 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
               ShopMarker(shop.location, shop))
         }
         .addToDisposables()
+  }
 
-    mapSubject.concatMap {
-      it.shopMarkerClicked()
-    }.subscribe {
-      presenter.switchNavigationButton(true)
-    }.addToDisposables()
-
-    mapSubject.concatMap {
-      it.mapClicked()
-    }.subscribe {
-      presenter.switchNavigationButton(false)
-    }.addToDisposables()
-
-    mapSubject.concatMap { it.mapMoved() }
-        .toFlowable(LATEST)
-        .flatMap {
-          mapProvider.clearMap()
-          shopsService.getShopsInRange(it, 0.1)
-        }
-        .subscribe { shop ->
-          mapProvider.drawMarker(
-              ShopMarker(shop.location, shop))
-        }
-        .addToDisposables()
-
+  private fun handleNavigationClicked() {
     mapSubject
+        .async()
         .flatMap {
           it.shopMarkerClicked()
         }
@@ -95,6 +86,42 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
           presenter.startNavigation(it.position)
         }
         .addToDisposables()
+  }
+
+  private fun handleMapMoved() {
+    mapSubject
+        .async()
+        .concatMap { it.mapMoved() }
+        .toFlowable(LATEST)
+        .flatMap {
+          mapProvider.clearMap()
+          shopsService.getShopsInRange(it, 0.1)
+        }
+        .subscribe { shop ->
+          mapProvider.drawMarker(
+              ShopMarker(shop.location, shop))
+        }
+        .addToDisposables()
+  }
+
+  private fun handleMapClicks() {
+    mapSubject
+        .async()
+        .concatMap {
+          it.mapClicked()
+        }.subscribe {
+          presenter.switchNavigationButton(false)
+        }.addToDisposables()
+  }
+
+  private fun handleMarkerClicks() {
+    mapSubject
+        .async()
+        .concatMap {
+          it.shopMarkerClicked()
+        }.subscribe {
+          presenter.switchNavigationButton(true)
+        }.addToDisposables()
   }
 
   /**
