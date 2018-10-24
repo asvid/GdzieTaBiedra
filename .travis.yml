@@ -22,3 +22,8 @@ addons:
       secure: $SONAR_TOKEN
 script:
   - sonar-scanner
+
+branches:
+  only:
+  - master
+  - develop
