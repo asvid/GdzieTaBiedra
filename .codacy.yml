@@ -16,9 +16,3 @@ engines:
    enabled: true
    exclude_paths:
      - config/engines.yml
-exclude_paths:
-  - '.bundle/**'
-  - 'spec/**/*'
-  - 'benchmarks/**/*'
-  - '*.min.js'
-  - '**/tests/**'
