@@ -18,7 +18,7 @@ class BottomNavView @JvmOverloads constructor(
 ) : BottomNavigationView(context, attrs,
     defStyle), BottomNavInteractor.BottomNavPresenter {
 
-  private val behaviorRelay = BehaviorRelay.createDefault(MenuEvent.LIST)
+  private val behaviorRelay = BehaviorRelay.createDefault(MenuItem.LIST)
   private val menuRelay = behaviorRelay.toSerialized()
 
   override fun onFinishInflate() {
@@ -28,17 +28,23 @@ class BottomNavView @JvmOverloads constructor(
 
       Timber.d("view nav event: $item")
       when (item.itemId) {
-
-        R.id.navigation_list -> menuRelay.accept(MenuEvent.LIST)
-        R.id.navigation_map -> menuRelay.accept(MenuEvent.MAP)
-        R.id.navigation_settings -> menuRelay.accept(MenuEvent.SETTINGS)
+        R.id.navigation_list -> menuRelay.accept(MenuItem.LIST)
+        R.id.navigation_map -> menuRelay.accept(MenuItem.MAP)
+        R.id.navigation_settings -> menuRelay.accept(MenuItem.SETTINGS)
       }
-
       true
     }
   }
 
-  override fun menuEvents(): Observable<MenuEvent> {
+  override fun setActiveMenuItem(menuItem: MenuItem) {
+    selectedItemId = when (menuItem) {
+      MenuItem.LIST -> R.id.navigation_list
+      MenuItem.MAP -> R.id.navigation_map
+      MenuItem.SETTINGS -> R.id.navigation_settings
+    }
+  }
+
+  override fun menuEvents(): Observable<MenuItem> {
     return menuRelay.distinctUntilChanged()
   }
 }

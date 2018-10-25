@@ -5,12 +5,16 @@ import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
-import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavInteractor
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapEvent
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder
+import com.jakewharton.rxrelay2.PublishRelay
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -85,15 +89,36 @@ class RootBuilder(
             ShopsListBuilder(component), MapBuilder(component),
             SettingsBuilder(component))
       }
-    }
 
-    // TODO: Create provider methods for dependencies created by this Rib. These should be static.
+      @RootScope
+      @Provides
+      @JvmStatic
+      fun shopListRibRelay(): PublishRelay<ShopListEvent> = PublishRelay.create<ShopListEvent>()
+
+      @RootScope
+      @Provides
+      @JvmStatic
+      fun mapRibRelay(): PublishRelay<MapEvent> = PublishRelay.create<MapEvent>()
+
+      @RootScope
+      @Provides
+      @JvmStatic
+      internal fun listener(
+          shopListRibRelay: PublishRelay<ShopListEvent>
+      ): ShopListListener {
+        return object : ShopListListener {
+          override fun onShopSelected(shopSelected: ShopSelected) {
+            shopListRibRelay.accept(shopSelected)
+          }
+        }
+      }
+    }
   }
 
   @RootScope
   @dagger.Component(
-      modules = arrayOf(Module::class),
-      dependencies = arrayOf(ParentComponent::class))
+      modules = [Module::class],
+      dependencies = [ParentComponent::class])
   interface Component : InteractorBaseComponent<RootInteractor>,
       BuilderComponent,
       BottomNavBuilder.ParentComponent,

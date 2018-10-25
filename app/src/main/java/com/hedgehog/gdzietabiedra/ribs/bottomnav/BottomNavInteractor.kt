@@ -31,12 +31,14 @@ class BottomNavInteractor : Interactor<BottomNavInteractor.BottomNavPresenter, B
         .subscribe({ event ->
           Timber.d("nav event: $event")
           when (event) {
-            MenuEvent.LIST -> listener.shopsListSelected()
-            MenuEvent.MAP -> listener.mapSelected()
-            MenuEvent.SETTINGS -> listener.settingsSelected()
+            MenuItem.LIST -> listener.shopsListSelected()
+            MenuItem.MAP -> listener.mapSelected()
+            MenuItem.SETTINGS -> listener.settingsSelected()
 
           }
         }, { OnErrorNotImplementedException(it) }))
+
+    presenter.setActiveMenuItem(MenuItem.LIST)
   }
 
   override fun willResignActive() {
@@ -44,15 +46,12 @@ class BottomNavInteractor : Interactor<BottomNavInteractor.BottomNavPresenter, B
     disposables.clear()
   }
 
-  /**
-   * Presenter interface implemented by this RIB's view.
-   */
   interface BottomNavPresenter {
-    fun menuEvents(): Observable<MenuEvent>
+    fun menuEvents(): Observable<MenuItem>
+    fun setActiveMenuItem(menuItem: MenuItem)
   }
 
   interface Listener {
-
     fun shopsListSelected()
     fun mapSelected()
     fun settingsSelected()

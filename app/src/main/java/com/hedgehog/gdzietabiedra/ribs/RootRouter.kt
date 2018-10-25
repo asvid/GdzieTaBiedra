@@ -2,7 +2,9 @@ package com.hedgehog.gdzietabiedra.ribs
 
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavRouter
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapRouter
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder
@@ -27,16 +29,17 @@ class RootRouter(
     private val settingsBuilder: SettingsBuilder
 ) : ViewRouter<RootView, RootInteractor, RootBuilder.Component>(view, interactor, component) {
 
-  fun attachBottomNav() {
-    Timber.d("attach bottom nav")
-    val bottomNavRouter = bottomNavBuilder.build(view.viewNavigationLayout())
-    attachChild(bottomNavRouter)
-    view.viewNavigationLayout().addView(bottomNavRouter.view)
-  }
-
+  private var bottomNavRouter: BottomNavRouter? = null
   private var shopsListRouter: ShopsListRouter? = null
   private var mapRouter: MapRouter? = null
   private var settingsRouter: SettingsRouter? = null
+
+  fun attachBottomNav() {
+    Timber.d("attach bottom nav")
+    bottomNavRouter = bottomNavBuilder.build(view.viewNavigationLayout())
+    attachChild(bottomNavRouter)
+    view.viewNavigationLayout().addView(bottomNavRouter?.view)
+  }
 
   fun attachShopslist() {
     Timber.d("attach shops list")
@@ -55,12 +58,21 @@ class RootRouter(
 
   fun attachMap() {
     Timber.d("attach map")
+    bottomNavRouter?.view?.selectedItemId = R.id.navigation_map
     mapRouter?.let {
       mapRouter?.view?.visibility = VISIBLE
       return
     }
     mapRouter = mapBuilder.build(view.viewContent())
     attachChild(mapRouter)
+    view.viewContent().addView(mapRouter?.view)
+  }
+
+  fun attachMapHidden() {
+    Timber.d("attach map")
+    mapRouter = mapBuilder.build(view.viewContent())
+    attachChild(mapRouter)
+    mapRouter?.view?.visibility = GONE
     view.viewContent().addView(mapRouter?.view)
   }
 
