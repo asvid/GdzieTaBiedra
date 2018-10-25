@@ -57,7 +57,7 @@ class GoogleMapProvider private constructor() : IMapProvider {
           .title(shopMarker.shop.address)
           .snippet(shopMarker.shop.openHours)
           .icon(
-              BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)
+              BitmapDescriptorFactory.fromResource(R.mipmap.map_marker)
           )
       val marker = map.addMarker(markerOptions)
       mapMarkers[marker] = shopMarker
@@ -70,7 +70,7 @@ class GoogleMapProvider private constructor() : IMapProvider {
         .title(shopMarker.shop.address)
         .snippet(shopMarker.shop.openHours)
         .icon(
-            BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)
+            BitmapDescriptorFactory.fromResource(R.mipmap.map_marker)
         )
     val marker = map.addMarker(markerOptions)
     if (showInfo) marker.showInfoWindow()
