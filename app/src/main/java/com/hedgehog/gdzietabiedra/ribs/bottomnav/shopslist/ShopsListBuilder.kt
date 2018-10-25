@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
-import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -52,6 +51,7 @@ class ShopsListBuilder(
   interface ParentComponent {
     fun shopServices(): ShopService
     fun locationService(): LocationService
+    fun listener(): ShopListListener
   }
 
   @dagger.Module
@@ -75,8 +75,6 @@ class ShopsListBuilder(
         return ShopsListRouter(view, interactor, component)
       }
     }
-
-    // TODO: Create provider methods for dependencies created by this Rib. These should be static.
   }
 
   @ShopsListScope

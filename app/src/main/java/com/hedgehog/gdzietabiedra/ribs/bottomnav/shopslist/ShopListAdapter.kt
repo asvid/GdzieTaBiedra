@@ -12,6 +12,7 @@ import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.utils.round
 import io.reactivex.subjects.PublishSubject
 import java.util.Collections
+import kotlin.math.roundToInt
 
 class ShopListAdapter : RecyclerView.Adapter<ShopListItemVH>() {
 
@@ -43,7 +44,11 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListItemVH>() {
   }
 
   fun addItem(shop: Shop) {
-    items = items.toMutableList().also { it.add(shop) }.toList()
+    val tempList = items
+        .toMutableList()
+        .also { it.add(shop) }
+    tempList.sortBy { it.distance }
+    items = tempList.toList()
     notifyDataSetChanged()
   }
 
@@ -65,5 +70,12 @@ class ShopListItemVH(val view: View) : ViewHolder(view) {
     }
   }
 
-  private fun generateDistanceText(distance: Double?): CharSequence = "${distance?.round(2)} m"
+  private fun generateDistanceText(distance: Double?): CharSequence {
+    return when {
+      distance == null -> ""
+      distance > 5000 -> "${(distance / 1000).roundToInt()} km"
+      distance > 1000 -> "${(distance / 1000).round(2)} km"
+      else -> "${distance.roundToInt()} m"
+    }
+  }
 }

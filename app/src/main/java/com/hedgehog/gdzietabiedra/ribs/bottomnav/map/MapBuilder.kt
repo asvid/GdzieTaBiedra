@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
+import com.jakewharton.rxrelay2.PublishRelay
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -48,6 +49,7 @@ class MapBuilder(
   interface ParentComponent {
     fun locationService(): LocationService
     fun shopServices(): ShopService
+    fun mapEvents(): PublishRelay<MapEvent>
   }
 
   @dagger.Module
@@ -70,13 +72,11 @@ class MapBuilder(
         return MapRouter(view, interactor, component)
       }
     }
-
-    // TODO: Create provider methods for dependencies created by this Rib. These should be static.
   }
 
   @MapScope
-  @dagger.Component(modules = arrayOf(Module::class),
-      dependencies = arrayOf(ParentComponent::class))
+  @dagger.Component(modules = [Module::class],
+      dependencies = [ParentComponent::class])
   interface Component : InteractorBaseComponent<MapInteractor>, BuilderComponent {
 
     @dagger.Component.Builder

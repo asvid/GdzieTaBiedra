@@ -7,7 +7,10 @@ import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.IMapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.ShopMarker
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.utils.async
+import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
+import com.jakewharton.rxrelay2.PublishRelay
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.RibInteractor
@@ -33,6 +36,8 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
   lateinit var locationService: LocationService
   @Inject
   lateinit var shopsService: ShopService
+  @Inject
+  lateinit var mapEvents: PublishRelay<MapEvent>
 
   private lateinit var mapProvider: IMapProvider
   private val mapSubject = BehaviorSubject.create<IMapProvider>()
@@ -44,6 +49,24 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
     handleMapClicks()
     handleMapMoved()
     handleNavigationClicked()
+    handleShowingShopOnMap()
+  }
+
+  private fun handleShowingShopOnMap() {
+    mapSubject
+        .async()
+        .concatMap { mapEvents }
+        .flatMapCompletable {
+          Timber.d("map event: $it")
+          when (it) {
+            is ShopSelected -> {
+              mapProvider.selectShop(it.shop)
+            }
+          }
+        }
+        .subscribeWithErrorLogging {
+          Timber.d("mapSubject")
+        }
   }
 
   private fun handleMapInit() {
@@ -64,7 +87,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         }
         .subscribeBy { shop ->
           mapProvider.drawMarker(
-              ShopMarker(shop.location, shop))
+              ShopMarker.create(shop), false)
         }
         .addToDisposables()
   }
@@ -91,15 +114,18 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
   private fun handleMapMoved() {
     mapSubject
         .async()
-        .concatMap { it.mapMoved() }
+        .concatMap {
+          it.mapMoved()
+        }
         .toFlowable(LATEST)
         .flatMap {
+          presenter.switchNavigationButton(false)
           mapProvider.clearMap()
           shopsService.getShopsInRange(it, 0.1)
         }
         .subscribe { shop ->
           mapProvider.drawMarker(
-              ShopMarker(shop.location, shop))
+              ShopMarker.create(shop), false)
         }
         .addToDisposables()
   }

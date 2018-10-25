@@ -3,16 +3,25 @@ package com.hedgehog.gdzietabiedra.appservice.map
 import com.github.asvid.biedra.domain.Position
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.CLOSE
+import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.FAR
+import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.MEDIUM
+import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.utils.toLatLng
 import com.hedgehog.gdzietabiedra.utils.toPosition
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import timber.log.Timber
 
-const val DEFAULT_MAP_ZOOM = 13f
+private const val MEDIUM_MAP_ZOOM = 13f
+private const val CLOSE_MAP_ZOOM = 15f
+private const val FAR_MAP_ZOOM = 10f
 
 class GoogleMapProvider private constructor() : IMapProvider {
 
@@ -48,22 +57,23 @@ class GoogleMapProvider private constructor() : IMapProvider {
           .title(shopMarker.shop.address)
           .snippet(shopMarker.shop.openHours)
           .icon(
-              BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)
+              BitmapDescriptorFactory.fromResource(R.mipmap.map_marker)
           )
       val marker = map.addMarker(markerOptions)
       mapMarkers[marker] = shopMarker
     }
   }
 
-  override fun drawMarker(shopMarker: ShopMarker) {
+  override fun drawMarker(shopMarker: ShopMarker, showInfo: Boolean) {
     val markerOptions = MarkerOptions()
         .position(shopMarker.position.toLatLng())
         .title(shopMarker.shop.address)
         .snippet(shopMarker.shop.openHours)
         .icon(
-            BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)
+            BitmapDescriptorFactory.fromResource(R.mipmap.map_marker)
         )
     val marker = map.addMarker(markerOptions)
+    if (showInfo) marker.showInfoWindow()
     mapMarkers[marker] = shopMarker
   }
 
@@ -80,18 +90,44 @@ class GoogleMapProvider private constructor() : IMapProvider {
     map.clear()
   }
 
-  override fun goToPosition(position: Position) {
+  override fun goToPosition(position: Position, mapZoom: MapZoom) {
+    val googleMapZoom = when (mapZoom) {
+      CLOSE -> CLOSE_MAP_ZOOM
+      MEDIUM -> MEDIUM_MAP_ZOOM
+      FAR -> FAR_MAP_ZOOM
+    }
     map.animateCamera(
         CameraUpdateFactory
-            .newLatLngZoom(position.toLatLng(), DEFAULT_MAP_ZOOM), 100, null
+            .newLatLngZoom(position.toLatLng(), googleMapZoom), 100, null
     )
   }
 
   override fun mapMoved(): Observable<Position> {
-    return Observable.fromPublisher {
-      this.map.setOnCameraIdleListener {
-        it.onNext(readMapPosition())
-      }
-    }
+    return Observable
+        .fromPublisher<Boolean> {
+          map.setOnCameraMoveStartedListener { reason ->
+            when (reason) {
+              OnCameraMoveStartedListener.REASON_GESTURE -> it.onNext(true)
+              else -> it.onNext(false)
+            }
+          }
+        }
+        .flatMap { userInput ->
+          Timber.d("user input: $userInput")
+          Observable.fromPublisher<Position> { position ->
+            this.map.setOnCameraIdleListener {
+              if (userInput)
+                position.onNext(readMapPosition())
+            }
+          }
+        }
+  }
+
+  override fun selectShop(shop: Shop): Completable = Completable.fromAction {
+    map.clear()
+    val shopMarker = ShopMarker.create(shop)
+    drawMarker(shopMarker, true)
+    goToPosition(shop.location, CLOSE)
+    markerSubject.onNext(shopMarker)
   }
 }

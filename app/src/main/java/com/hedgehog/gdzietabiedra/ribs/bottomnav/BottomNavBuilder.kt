@@ -8,8 +8,6 @@ import com.uber.rib.core.ViewBuilder
 import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy.CLASS
 import javax.inject.Qualifier
 import javax.inject.Scope
 
@@ -68,8 +66,6 @@ class BottomNavBuilder(
         return BottomNavRouter(view, interactor, component)
       }
     }
-
-    // TODO: Create provider methods for dependencies created by this Rib. These should be static.
   }
 
   @BottomNavScope
@@ -95,10 +91,10 @@ class BottomNavBuilder(
   }
 
   @Scope
-  @Retention(CLASS)
+  @Retention
   internal annotation class BottomNavScope
 
   @Qualifier
-  @Retention(CLASS)
+  @Retention
   internal annotation class BottomNavInternal
 }

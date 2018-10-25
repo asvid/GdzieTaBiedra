@@ -4,6 +4,7 @@ import com.github.asvid.biedra.domain.Position
 import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.domain.Shop
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.utils.async
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
@@ -32,6 +33,8 @@ class ShopsListInteractor :
   lateinit var shopsService: ShopService
   @Inject
   lateinit var locationService: LocationService
+  @Inject
+  lateinit var listener: ShopListListener
 
   private lateinit var compositeDisposable: CompositeDisposable
 
@@ -61,7 +64,7 @@ class ShopsListInteractor :
         .subscribeBy(
             onNext = {
               Timber.d("item clicked: $it")
-              presenter.showToast(it)
+              listener.onShopSelected(ShopSelected(shop = it))
             })
         .addToDisposables()
 
@@ -89,9 +92,6 @@ class ShopsListInteractor :
         .addToDisposables()
   }
 
-  /**
-   * Presenter interface implemented by this RIB's view.
-   */
   interface ShopsListPresenter {
 
     fun setView()

@@ -1,8 +1,13 @@
 package com.hedgehog.gdzietabiedra.ribs
 
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavInteractor
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapEvent
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent
+import com.hedgehog.gdzietabiedra.utils.async
+import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
+import com.jakewharton.rxrelay2.PublishRelay
+import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
-import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
 import javax.inject.Inject
 
@@ -12,28 +17,36 @@ import javax.inject.Inject
  * TODO describe the logic of this scope.
  */
 @RibInteractor
-class RootInteractor : Interactor<RootInteractor.RootPresenter, RootRouter>() {
+class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>() {
 
   @Inject
   lateinit var presenter: RootPresenter
+  @Inject
+  lateinit var shopListRelay: PublishRelay<ShopListEvent>
+  @Inject
+  lateinit var mapRelay: PublishRelay<MapEvent>
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
     router.attachBottomNav()
+    router.attachMapHidden()
+    shopListRelay
+        .async()
+        .subscribeWithErrorLogging {
+          when (it) {
+            is ShopListEvent.ShopSelected -> {
+              NavigationListener().mapSelected()
+              mapRelay.accept(MapEvent.ShopSelected(it.shop))
+            }
+          }
+        }
+        .addToDisposables()
   }
 
-  override fun willResignActive() {
-    super.willResignActive()
-
-    // TODO: Perform any required clean up here, or delete this method entirely if not needed.
-  }
-
-  /**
-   * Presenter interface implemented by this RIB's view.
-   */
   interface RootPresenter
 
   inner class NavigationListener : BottomNavInteractor.Listener {
+
     override fun shopsListSelected() {
       router.detachMap()
       router.detachSettings()
