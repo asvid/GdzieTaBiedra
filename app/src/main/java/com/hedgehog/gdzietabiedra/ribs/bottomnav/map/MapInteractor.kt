@@ -49,7 +49,10 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
     handleMapClicks()
     handleMapMoved()
     handleNavigationClicked()
+    handleShowingShopOnMap()
+  }
 
+  private fun handleShowingShopOnMap() {
     mapSubject
         .async()
         .concatMap { mapEvents }
