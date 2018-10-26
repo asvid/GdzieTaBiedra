@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.api.BiedraService
 import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
-import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import com.hedgehog.gdzietabiedra.ribs.RootBuilder
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -32,11 +31,10 @@ class MainActivity : RibActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
-
     permissionCheck()
   }
 
-  fun permissionCheck() {
+  private fun permissionCheck() {
 //    TODO this should be available from Dagger, but no time for it now :)
     Dexter.withActivity(this)
         .withPermissions(ACCESS_FINE_LOCATION, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE)

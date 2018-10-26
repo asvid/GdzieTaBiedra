@@ -3,6 +3,9 @@ buildscript {
     google()
     jcenter()
     mavenCentral()
+    maven {
+      url 'https://maven.fabric.io/public'
+    }
   }
   dependencies {
     classpath ProjectDeps.gradlePlugin
@@ -17,6 +20,7 @@ buildscript {
     classpath ProjectDeps.apkSize
     classpath ProjectDeps.coveralls
     classpath ProjectDeps.jacoco
+    classpath ProjectDeps.crashlytics
   }
 }
 
@@ -29,6 +33,9 @@ allprojects {
     google()
     jcenter()
     mavenCentral()
+    maven {
+      url 'https://maven.google.com/'
+    }
   }
 }
 
