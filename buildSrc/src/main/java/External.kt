@@ -21,6 +21,10 @@ object External {
   const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
 
   const val dexter = "com.karumi:dexter:5.0.0"
+
+  const val firebaseCore = "com.google.firebase:firebase-core:16.0.4"
+  const val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.9.5"
+
 }
 
 object Realm {

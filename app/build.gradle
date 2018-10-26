@@ -7,6 +7,7 @@ apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'com.vanniktech.android.apk.size'
 apply plugin: 'jacoco-android'
 apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'io.fabric'
 
 def buildVersionCode = project.hasProperty("devBuild") ? 100 :
     new Date().format("yyMMddHHmm").toInteger()
@@ -127,6 +128,12 @@ dependencies {
   implementation External.moshiConverter
   implementation External.retrofitRxAdapter
   implementation External.okhttpLoggingInterceptor
+  //  Crash reporting and analytics
+  implementation External.firebaseCore
+  implementation External.crashlytics
+//  Leak detection
+  debugImplementation External.leakcanaryDebug
+  releaseImplementation External.leakcanaryRelease
 
   //  Testing
   testImplementation Uber.ribTestUtils
