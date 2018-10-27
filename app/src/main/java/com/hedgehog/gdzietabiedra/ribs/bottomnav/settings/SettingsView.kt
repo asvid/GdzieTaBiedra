@@ -7,9 +7,9 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.settings_rib.view.notification_range_seekbar
-import kotlinx.android.synthetic.main.settings_rib.view.notification_range_value
-import kotlinx.android.synthetic.main.settings_rib.view.notification_switch
+import kotlinx.android.synthetic.main.rib_settings.view.notification_range_seekbar
+import kotlinx.android.synthetic.main.rib_settings.view.notification_range_value
+import kotlinx.android.synthetic.main.rib_settings.view.notification_switch
 
 /**
  * Top level view for {@link SettingsBuilder.SettingsScope}.

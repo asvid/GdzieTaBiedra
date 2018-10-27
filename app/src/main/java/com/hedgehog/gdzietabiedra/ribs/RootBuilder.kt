@@ -51,7 +51,7 @@ class RootBuilder(
 
   override fun inflateView(inflater: LayoutInflater,
       parentViewGroup: ViewGroup): RootView? {
-    return inflater.inflate(R.layout.root_rib, parentViewGroup, false) as RootView
+    return inflater.inflate(R.layout.rib_root, parentViewGroup, false) as RootView
   }
 
   interface ParentComponent {

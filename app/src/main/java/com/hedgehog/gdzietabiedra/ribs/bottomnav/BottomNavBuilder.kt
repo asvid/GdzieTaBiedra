@@ -39,7 +39,7 @@ class BottomNavBuilder(
   }
 
   override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): BottomNavView? {
-    return inflater.inflate(R.layout.bottomnav_rib, parentViewGroup, false) as BottomNavView
+    return inflater.inflate(R.layout.rib_bottomnav, parentViewGroup, false) as BottomNavView
   }
 
   interface ParentComponent {
