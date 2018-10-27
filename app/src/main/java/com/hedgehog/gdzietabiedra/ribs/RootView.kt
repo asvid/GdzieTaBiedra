@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import kotlinx.android.synthetic.main.root_rib.view.content
-import kotlinx.android.synthetic.main.root_rib.view.contentLayout
+import kotlinx.android.synthetic.main.rib_root.view.content
+import kotlinx.android.synthetic.main.rib_root.view.contentLayout
 
 /**
  * Top level view for {@link RootBuilder.RootScope}.

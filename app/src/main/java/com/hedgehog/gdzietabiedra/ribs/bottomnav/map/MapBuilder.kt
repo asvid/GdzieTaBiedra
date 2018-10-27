@@ -43,7 +43,7 @@ class MapBuilder(
   }
 
   override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): MapView? {
-    return inflater.inflate(R.layout.map_rib, parentViewGroup, false) as MapView
+    return inflater.inflate(R.layout.rib_map, parentViewGroup, false) as MapView
   }
 
   interface ParentComponent {

@@ -50,7 +50,7 @@ android {
       dimension "stage"
       versionNameSuffix "-dev" // e.g 1.0-dev
       applicationIdSuffix '.dev'
-      resConfigs("en", "xxhdpi")
+      //      resConfigs("en", "xxhdpi")
     }
 
     prod {
@@ -59,13 +59,11 @@ android {
   }
   variantFilter { variant ->
     // 'dev' flavor is only available for debug build
-    if (!variant.buildType.name.equals('debug') && variant.getFlavors().get(0).name.equals("dev")) {
+    if (variant.buildType.name != 'debug' && variant.getFlavors().get(0).name == "dev") {
       variant.setIgnore(true)
     }
     // 'prod' flavor is only available for release build
-    if (!(variant.buildType.name.equals('release')) && variant.getFlavors().
-        get(0).name.
-        equals("prod")) {
+    if (!(variant.buildType.name == 'release') && variant.getFlavors().get(0).name == "prod") {
       variant.setIgnore(true)
     }
   }
@@ -100,6 +98,7 @@ dependencies {
   implementation Support.recyclerView
   implementation Support.design
   implementation Support.constraint
+  implementation Support.cardView
   //  Logging
   implementation External.timber
   //  RX
@@ -131,7 +130,7 @@ dependencies {
   //  Crash reporting and analytics
   implementation External.firebaseCore
   implementation External.crashlytics
-//  Leak detection
+  //  Leak detection
   debugImplementation External.leakcanaryDebug
   releaseImplementation External.leakcanaryRelease
 

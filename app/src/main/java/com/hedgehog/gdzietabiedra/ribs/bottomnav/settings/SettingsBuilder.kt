@@ -3,7 +3,6 @@ package com.hedgehog.gdzietabiedra.ribs.bottomnav.settings
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListView
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -41,7 +40,7 @@ class SettingsBuilder(
   }
 
   override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): SettingsView? {
-    return inflater.inflate(R.layout.settings_rib, parentViewGroup, false) as SettingsView
+    return inflater.inflate(R.layout.rib_settings, parentViewGroup, false) as SettingsView
   }
 
   interface ParentComponent {

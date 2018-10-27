@@ -1,5 +1,9 @@
 package com.hedgehog.gdzietabiedra.appservice.map
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Bitmap.createScaledBitmap
+import android.graphics.BitmapFactory
 import com.github.asvid.biedra.domain.Position
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -22,22 +26,29 @@ import timber.log.Timber
 private const val MEDIUM_MAP_ZOOM = 13f
 private const val CLOSE_MAP_ZOOM = 15f
 private const val FAR_MAP_ZOOM = 10f
+private const val MAP_MARKER_SIZE = 300
 
-class GoogleMapProvider private constructor() : IMapProvider {
+class GoogleMapProvider private constructor(private val context: Context) : MapProvider {
 
   private lateinit var map: GoogleMap
   private val mapMarkers = hashMapOf<Marker, ShopMarker>()
   private val markerSubject: PublishSubject<ShopMarker> = PublishSubject.create()
   private val mapClickSubject: PublishSubject<Any> = PublishSubject.create()
+  private val markerIcon = BitmapDescriptorFactory.fromBitmap(
+      resizeMapIcons(R.mipmap.bierdra_map_marker, MAP_MARKER_SIZE, MAP_MARKER_SIZE))
 
   companion object {
-    fun create(googleMap: GoogleMap): GoogleMapProvider {
-      return GoogleMapProvider().also { it.initialize(googleMap) }
+    fun create(googleMap: GoogleMap, context: Context): GoogleMapProvider {
+      return GoogleMapProvider(context)
+          .also {
+            it.initialize(googleMap, context)
+          }
     }
   }
 
-  private fun initialize(googleMap: GoogleMap) {
+  private fun initialize(googleMap: GoogleMap, context: Context) {
     this.map = googleMap
+    this.map.setInfoWindowAdapter(BiedraInfoAdapter(context))
     this.map.setOnMarkerClickListener { marker ->
       mapMarkers[marker]?.let {
         markerSubject.onNext(it)
@@ -52,16 +63,13 @@ class GoogleMapProvider private constructor() : IMapProvider {
 
   override fun drawMarkers(points: Collection<ShopMarker>) {
     points.forEach { shopMarker ->
-      val markerOptions = MarkerOptions()
-          .position(shopMarker.position.toLatLng())
-          .title(shopMarker.shop.address)
-          .snippet(shopMarker.shop.openHours)
-          .icon(
-              BitmapDescriptorFactory.fromResource(R.mipmap.map_marker)
-          )
-      val marker = map.addMarker(markerOptions)
-      mapMarkers[marker] = shopMarker
+      drawMarker(shopMarker, false)
     }
+  }
+
+  private fun resizeMapIcons(iconResId: Int, width: Int, height: Int): Bitmap {
+    val imageBitmap = BitmapFactory.decodeResource(context.resources, iconResId)
+    return createScaledBitmap(imageBitmap, width, height, false)
   }
 
   override fun drawMarker(shopMarker: ShopMarker, showInfo: Boolean) {
@@ -69,9 +77,7 @@ class GoogleMapProvider private constructor() : IMapProvider {
         .position(shopMarker.position.toLatLng())
         .title(shopMarker.shop.address)
         .snippet(shopMarker.shop.openHours)
-        .icon(
-            BitmapDescriptorFactory.fromResource(R.mipmap.map_marker)
-        )
+        .icon(markerIcon)
     val marker = map.addMarker(markerOptions)
     if (showInfo) marker.showInfoWindow()
     mapMarkers[marker] = shopMarker

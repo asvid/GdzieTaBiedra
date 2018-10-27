@@ -1,12 +1,11 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.map
 
 import com.github.asvid.biedra.domain.Position
-import com.google.android.gms.maps.GoogleMap
 import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
-import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
-import com.hedgehog.gdzietabiedra.appservice.map.IMapProvider
+import com.hedgehog.gdzietabiedra.appservice.map.MapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.ShopMarker
+import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
@@ -39,8 +38,8 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
   @Inject
   lateinit var mapEvents: PublishRelay<MapEvent>
 
-  private lateinit var mapProvider: IMapProvider
-  private val mapSubject = BehaviorSubject.create<IMapProvider>()
+  private lateinit var mapProvider: MapProvider
+  private val mapSubject = BehaviorSubject.create<MapProvider>()
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
@@ -75,10 +74,10 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         .zipWith(
             locationService.getLocation()
                 .async(),
-            BiFunction<GoogleMap, Position, Position> { googleMap, position ->
-              mapProvider = GoogleMapProvider.create(googleMap)
-              mapProvider.goToPosition(position)
-              mapSubject.onNext(mapProvider)
+            BiFunction<MapProvider, Position, Position> { mapProvider, position ->
+              this.mapProvider = mapProvider
+              this.mapProvider.goToPosition(position)
+              mapSubject.onNext(this.mapProvider)
               position
             })
         .toFlowable()
@@ -106,7 +105,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         }
         .subscribe {
           Timber.d("navigating to shop: $it")
-          presenter.startNavigation(it.position)
+          presenter.startNavigation(it.shop)
         }
         .addToDisposables()
   }
@@ -155,9 +154,9 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
    */
   interface MapPresenter {
 
-    fun initView(): Single<GoogleMap>
+    fun initView(): Single<MapProvider>
     fun navigationButtonListener(): Observable<*>
-    fun startNavigation(position: Position)
+    fun startNavigation(shop: Shop)
     fun switchNavigationButton(visible: Boolean)
   }
 }

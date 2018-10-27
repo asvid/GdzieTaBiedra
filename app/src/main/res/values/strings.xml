@@ -1,8 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Gdzie Ta Biedra</string>
+  <string name="app_name">Where is Biedronka</string>
   <string name="more_actions">more actions</string>
   <string name="notifications_title">Notifications</string>
   <string name="range">range</string>
   <string name="when_shop_is_in_area">when shop is in area</string>
   <string name="navigate_to_shop">navigate to shop</string>
+  <string name="address">Address:</string>
+  <string name="opening_hours">Opening hours:</string>
+  <string name="distance">Distance:</string>
+  <string name="list">List</string>
+  <string name="map">Map</string>
+  <string name="settings">Settings</string>
 </resources>

@@ -6,7 +6,7 @@ import com.hedgehog.gdzietabiedra.domain.Shop
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-interface IMapProvider {
+interface MapProvider {
 
   fun drawMarkers(points: Collection<ShopMarker>)
 

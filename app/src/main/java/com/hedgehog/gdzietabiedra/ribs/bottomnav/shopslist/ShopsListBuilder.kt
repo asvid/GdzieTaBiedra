@@ -44,7 +44,7 @@ class ShopsListBuilder(
 
   override fun inflateView(inflater: LayoutInflater,
       parentViewGroup: ViewGroup): ShopsListView? {
-    return inflater.inflate(R.layout.shoplist_rib, parentViewGroup,
+    return inflater.inflate(R.layout.rib_shoplist, parentViewGroup,
         false) as ShopsListView
   }
 
