@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<com.hedgehog.gdzietabiedra.ribs.splash.SplashView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".MainActivity"
     >
-
   <ImageView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       app:srcCompat="@mipmap/ic_launcher_foreground"
       />
-</FrameLayout>
+
+  <Button
+      android:id="@+id/splash_permissions_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom|center_horizontal"
+      android:text="@string/grant_permissions"
+      android:visibility="gone"
+      />
+</com.hedgehog.gdzietabiedra.ribs.splash.SplashView>

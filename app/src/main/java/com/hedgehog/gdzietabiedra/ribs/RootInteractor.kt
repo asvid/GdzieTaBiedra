@@ -3,14 +3,15 @@ package com.hedgehog.gdzietabiedra.ribs
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavInteractor
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapEvent
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent
+import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
+import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
-import com.karumi.dexter.MultiplePermissionsReport
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.RibInteractor
-import io.reactivex.subjects.BehaviorSubject
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -28,10 +29,11 @@ class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>(
   @Inject
   lateinit var mapRelay: PublishRelay<MapEvent>
   @Inject
-  lateinit var permissionSubject: BehaviorSubject<MultiplePermissionsReport>
+  lateinit var splashRelay: BehaviorRelay<SplashEvent>
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
+    router.attachSplashScreen()
     shopListRelay
         .async()
         .subscribeWithErrorLogging {
@@ -44,15 +46,13 @@ class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>(
         }
         .addToDisposables()
 
-    permissionSubject
+    splashRelay
         .async()
         .subscribeWithErrorLogging {
-          if (it.deniedPermissionResponses.isEmpty()) {
-            router.attachBottomNav()
-            router.attachMapHidden()
-          } else {
-            router.
-          }
+          Timber.d("splash relay: $it")
+          router.detachSplashScreen()
+          router.attachBottomNav()
+          router.attachMapHidden()
         }
         .addToDisposables()
   }

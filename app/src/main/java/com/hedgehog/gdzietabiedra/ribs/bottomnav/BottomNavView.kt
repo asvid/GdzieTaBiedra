@@ -29,7 +29,7 @@ class BottomNavView @JvmOverloads constructor(
       when (item.itemId) {
         R.id.navigation_list -> menuRelay.accept(MenuItem.LIST)
         R.id.navigation_map -> menuRelay.accept(MenuItem.MAP)
-//        R.id.navigation_settings -> menuRelay.accept(MenuItem.SETTINGS)
+        R.id.navigation_settings -> menuRelay.accept(MenuItem.SETTINGS)
       }
       true
     }
