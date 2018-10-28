@@ -12,4 +12,5 @@
   <string name="list">Lista</string>
   <string name="map">Mapa</string>
   <string name="settings">Ustawienia</string>
+  <string name="grant_permissions">Udziel uprawnień</string>
 </resources>
