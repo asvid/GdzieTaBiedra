@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.app.Service
 import com.crashlytics.android.Crashlytics
+import com.crashlytics.android.core.CrashlyticsCore
 import com.hedgehog.gdzietabiedra.di.components.DaggerAppComponent
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
@@ -48,7 +49,11 @@ class App : Application(), HasActivityInjector, HasServiceInjector {
   }
 
   private fun initFabric() {
-    Fabric.with(this, Crashlytics())
+    val crashlyticsKit = Crashlytics.Builder()
+        .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
+        .build()
+
+    Fabric.with(this, crashlyticsKit)
   }
 
   private fun initLeakCanary() {

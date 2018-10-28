@@ -15,6 +15,7 @@ import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder
 import com.jakewharton.rxrelay2.PublishRelay
+import com.karumi.dexter.DexterBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -57,6 +58,7 @@ class RootBuilder(
   interface ParentComponent {
     fun shopServices(): ShopService
     fun locationService(): LocationService
+    fun dexter(): DexterBuilder.Permission
   }
 
   @dagger.Module

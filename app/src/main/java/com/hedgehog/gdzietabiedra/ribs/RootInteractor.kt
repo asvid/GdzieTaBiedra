@@ -6,9 +6,11 @@ import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.Shop
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
 import com.jakewharton.rxrelay2.PublishRelay
+import com.karumi.dexter.MultiplePermissionsReport
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.RibInteractor
+import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject
 
 /**
@@ -25,11 +27,11 @@ class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>(
   lateinit var shopListRelay: PublishRelay<ShopListEvent>
   @Inject
   lateinit var mapRelay: PublishRelay<MapEvent>
+  @Inject
+  lateinit var permissionSubject: BehaviorSubject<MultiplePermissionsReport>
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
-    router.attachBottomNav()
-    router.attachMapHidden()
     shopListRelay
         .async()
         .subscribeWithErrorLogging {
@@ -38,6 +40,18 @@ class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>(
               NavigationListener().mapSelected()
               mapRelay.accept(MapEvent.ShopSelected(it.shop))
             }
+          }
+        }
+        .addToDisposables()
+
+    permissionSubject
+        .async()
+        .subscribeWithErrorLogging {
+          if (it.deniedPermissionResponses.isEmpty()) {
+            router.attachBottomNav()
+            router.attachMapHidden()
+          } else {
+            router.
           }
         }
         .addToDisposables()

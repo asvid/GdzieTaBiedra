@@ -17,6 +17,8 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.uber.rib.core.RibActivity
 import com.uber.rib.core.ViewRouter
 import dagger.android.AndroidInjection
+import io.reactivex.subjects.BehaviorSubject
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : RibActivity() {
@@ -27,11 +29,11 @@ class MainActivity : RibActivity() {
     @Inject set
   lateinit var shopService: ShopService
     @Inject set
+  private val permissionSubject = BehaviorSubject.create<MultiplePermissionsReport>()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
-    permissionCheck()
   }
 
   private fun permissionCheck() {
@@ -39,8 +41,9 @@ class MainActivity : RibActivity() {
     Dexter.withActivity(this)
         .withPermissions(ACCESS_FINE_LOCATION, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE)
         .withListener(object : MultiplePermissionsListener {
-          override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-
+          override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+            Timber.d("permissions checked: $report")
+            permissionSubject.onNext(report)
           }
 
           override fun onPermissionRationaleShouldBeShown(
@@ -54,6 +57,7 @@ class MainActivity : RibActivity() {
       RootBuilder(object : RootBuilder.ParentComponent {
         override fun locationService() = locationService
         override fun shopServices() = shopService
+        override fun dexter() = Dexter.withActivity(this@MainActivity)
       })
           .build(parentViewGroup)
 }

@@ -23,14 +23,13 @@ class BottomNavView @JvmOverloads constructor(
 
   override fun onFinishInflate() {
     super.onFinishInflate()
-
     setOnNavigationItemSelectedListener { item ->
 
       Timber.d("view nav event: $item")
       when (item.itemId) {
         R.id.navigation_list -> menuRelay.accept(MenuItem.LIST)
         R.id.navigation_map -> menuRelay.accept(MenuItem.MAP)
-        R.id.navigation_settings -> menuRelay.accept(MenuItem.SETTINGS)
+//        R.id.navigation_settings -> menuRelay.accept(MenuItem.SETTINGS)
       }
       true
     }
