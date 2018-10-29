@@ -23,7 +23,6 @@ class BottomNavView @JvmOverloads constructor(
 
   override fun onFinishInflate() {
     super.onFinishInflate()
-
     setOnNavigationItemSelectedListener { item ->
 
       Timber.d("view nav event: $item")

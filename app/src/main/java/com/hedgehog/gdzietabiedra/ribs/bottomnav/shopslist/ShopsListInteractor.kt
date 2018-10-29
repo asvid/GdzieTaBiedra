@@ -54,10 +54,12 @@ class ShopsListInteractor :
         }
         .subscribeBy(
             onNext = {
+              Timber.d("adding shop to list: $it")
               presenter.addToList(it)
-            })
+            }, onComplete = {
+          Timber.d("completed DB request")
+        })
         .addToDisposables()
-
 
     presenter.listItemClicked()
         .async()

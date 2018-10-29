@@ -14,15 +14,14 @@ import javax.inject.Inject
 
 class ShopsRepository @Inject constructor(private val realmConfiguration: RealmConfiguration) {
 
-  fun fetchAll(): Flowable<Collection<Shop>> {
+  fun fetchAll(): Flowable<Shop> {
     return Realm.getInstance(realmConfiguration)
         .where(ShopEntity::class.java)
         .findAll()
         .asFlowable()
-        .map { shops ->
-          shops.map {
-            it.toDomainModel()
-          }
+        .flatMapIterable { it -> it }
+        .map {
+          it.toDomainModel()
         }
   }
 

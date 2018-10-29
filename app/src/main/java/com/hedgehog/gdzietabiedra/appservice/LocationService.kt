@@ -15,8 +15,10 @@ class LocationService(val context: Context) {
     return Single.fromPublisher { subscriber ->
       fusedLocationClient.lastLocation
           .addOnSuccessListener {
-            subscriber.onNext(Position(it.latitude, it.longitude))
-            subscriber.onComplete()
+            it?.let {
+              subscriber.onNext(Position(it.latitude, it.longitude))
+              subscriber.onComplete()
+            }
           }
     }
   }

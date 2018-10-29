@@ -14,12 +14,19 @@ import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder
+import com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder
+import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent
+import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent.AllPermissionsGranted
+import com.hedgehog.gdzietabiedra.ribs.splash.SplashListener
+import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
+import com.karumi.dexter.DexterBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
+import timber.log.Timber
 import javax.inject.Qualifier
 import javax.inject.Scope
 
@@ -57,6 +64,7 @@ class RootBuilder(
   interface ParentComponent {
     fun shopServices(): ShopService
     fun locationService(): LocationService
+    fun dexter(): DexterBuilder.Permission
   }
 
   @dagger.Module
@@ -87,7 +95,8 @@ class RootBuilder(
         return RootRouter(view, interactor, component,
             BottomNavBuilder(component),
             ShopsListBuilder(component), MapBuilder(component),
-            SettingsBuilder(component))
+            SettingsBuilder(component),
+            SplashBuilder(component))
       }
 
       @RootScope
@@ -103,12 +112,31 @@ class RootBuilder(
       @RootScope
       @Provides
       @JvmStatic
+      fun splashRelay(): BehaviorRelay<SplashEvent> = BehaviorRelay.create<SplashEvent>()
+
+      @RootScope
+      @Provides
+      @JvmStatic
       internal fun listener(
           shopListRibRelay: PublishRelay<ShopListEvent>
       ): ShopListListener {
         return object : ShopListListener {
           override fun onShopSelected(shopSelected: ShopSelected) {
             shopListRibRelay.accept(shopSelected)
+          }
+        }
+      }
+
+      @RootScope
+      @Provides
+      @JvmStatic
+      internal fun splashListener(
+          splashRelay: BehaviorRelay<SplashEvent>
+      ): SplashListener {
+        return object : SplashListener {
+          override fun allPermissionsGranted() {
+            Timber.d("Root builder: allPermissionsGranted")
+            splashRelay.accept(AllPermissionsGranted)
           }
         }
       }
@@ -124,7 +152,8 @@ class RootBuilder(
       BottomNavBuilder.ParentComponent,
       ShopsListBuilder.ParentComponent,
       MapBuilder.ParentComponent,
-      SettingsBuilder.ParentComponent {
+      SettingsBuilder.ParentComponent,
+      SplashBuilder.ParentComponent {
 
     @dagger.Component.Builder
     interface Builder {

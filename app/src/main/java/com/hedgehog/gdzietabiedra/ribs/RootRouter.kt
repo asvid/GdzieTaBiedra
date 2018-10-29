@@ -11,6 +11,8 @@ import com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsRouter
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListRouter
+import com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder
+import com.hedgehog.gdzietabiedra.ribs.splash.SplashRouter
 import com.uber.rib.core.ViewRouter
 import timber.log.Timber
 
@@ -26,13 +28,15 @@ class RootRouter(
     private val bottomNavBuilder: BottomNavBuilder,
     private val shoplistBuilder: ShopsListBuilder,
     private val mapBuilder: MapBuilder,
-    private val settingsBuilder: SettingsBuilder
+    private val settingsBuilder: SettingsBuilder,
+    private val splashBuilder: SplashBuilder
 ) : ViewRouter<RootView, RootInteractor, RootBuilder.Component>(view, interactor, component) {
 
   private var bottomNavRouter: BottomNavRouter? = null
   private var shopsListRouter: ShopsListRouter? = null
   private var mapRouter: MapRouter? = null
   private var settingsRouter: SettingsRouter? = null
+  private var splashRouter: SplashRouter? = null
 
   fun attachBottomNav() {
     Timber.d("attach bottom nav")
@@ -92,6 +96,20 @@ class RootRouter(
       detachChild(settingsRouter)
       view.viewContent().removeView(settingsRouter?.view)
       settingsRouter = null
+    }
+  }
+
+  fun attachSplashScreen() {
+    splashRouter = splashBuilder.build(view.viewContent())
+    attachChild(splashRouter)
+    view.viewContent().addView(splashRouter?.view)
+  }
+
+  fun detachSplashScreen() {
+    if (splashRouter != null) {
+      detachChild(splashRouter)
+      view.viewContent().removeView(splashRouter?.view)
+      splashRouter = null
     }
   }
 

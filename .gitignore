@@ -18,3 +18,11 @@ signing\.conf
 buildSrc/build/
 
 google-services\.json
+
+upload_cert\.der
+
+encrypted_private_key_path
+
+*.apk
+
+app/prod/release/

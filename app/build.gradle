@@ -21,7 +21,7 @@ android {
     minSdkVersion Build.minSdkVersion
     targetSdkVersion Build.targetSdkVersion
     compileSdkVersion Build.compileSdkVersion
-    versionCode buildVersionCode
+    versionCode 20001
     versionName "2.0"
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -78,7 +78,6 @@ android {
   dexOptions {
     preDexLibraries = true
   }
-
   testOptions {
     animationsDisabled = true
     unitTests {
@@ -90,7 +89,6 @@ android {
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation project(path: ':domain')
-
   implementation External.kotlin
   //  Support
   implementation Support.appcompat
@@ -133,7 +131,6 @@ dependencies {
   //  Leak detection
   debugImplementation External.leakcanaryDebug
   releaseImplementation External.leakcanaryRelease
-
   //  Testing
   testImplementation Uber.ribTestUtils
   testImplementation TestDeps.junit

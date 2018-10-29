@@ -1,11 +1,10 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav
 
+import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
+import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
-import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.exceptions.OnErrorNotImplementedException
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -15,20 +14,18 @@ import javax.inject.Inject
  * TODO describe the logic of this scope.
  */
 @RibInteractor
-class BottomNavInteractor : Interactor<BottomNavInteractor.BottomNavPresenter, BottomNavRouter>() {
+class BottomNavInteractor : BaseInteractor<BottomNavInteractor.BottomNavPresenter, BottomNavRouter>() {
 
   @Inject
   lateinit var presenter: BottomNavPresenter
   @Inject
   lateinit var listener: Listener
 
-  private val disposables = CompositeDisposable()
-
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
 
-    disposables.add(presenter.menuEvents()
-        .subscribe({ event ->
+    presenter.menuEvents()
+        .subscribeWithErrorLogging { event ->
           Timber.d("nav event: $event")
           when (event) {
             MenuItem.LIST -> listener.shopsListSelected()
@@ -36,14 +33,9 @@ class BottomNavInteractor : Interactor<BottomNavInteractor.BottomNavPresenter, B
             MenuItem.SETTINGS -> listener.settingsSelected()
 
           }
-        }, { OnErrorNotImplementedException(it) }))
+        }.addToDisposables()
 
     presenter.setActiveMenuItem(MenuItem.LIST)
-  }
-
-  override fun willResignActive() {
-    super.willResignActive()
-    disposables.clear()
   }
 
   interface BottomNavPresenter {
