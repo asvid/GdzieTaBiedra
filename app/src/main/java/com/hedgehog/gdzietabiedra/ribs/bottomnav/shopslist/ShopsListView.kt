@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.utils.views.MarginItemDecoration
-import com.jakewharton.rxbinding3.widget.queryTextChangeEvents
+import com.jakewharton.rxbinding3.widget.queryTextChanges
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.rib_shoplist.view.shop_search_view
@@ -21,6 +21,7 @@ class ShopsListView @JvmOverloads constructor(context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : LinearLayout(context, attrs, defStyle), ShopsListInteractor.ShopsListPresenter {
+
   override fun addToList(shop: Shop) {
     adapter.addItem(shop)
   }
@@ -47,7 +48,7 @@ class ShopsListView @JvmOverloads constructor(context: Context,
     shops_list.addItemDecoration(MarginItemDecoration(
         resources.getDimension(R.dimen.default_padding).toInt()))
 
-    shop_search_view.queryTextChangeEvents()
+    shop_search_view.queryTextChanges()
         .map {
           it.toString()
         }

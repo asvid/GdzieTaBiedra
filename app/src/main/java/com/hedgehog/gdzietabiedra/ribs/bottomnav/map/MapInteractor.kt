@@ -84,10 +84,15 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         .flatMap {
           shopsService.getShopsInRange(it, 0.1)
         }
-        .subscribeBy { shop ->
-          mapProvider.drawMarker(
-              ShopMarker.create(shop), false)
-        }
+        .repeat()
+        .subscribeBy(
+            onNext = {
+              mapProvider.drawMarker(
+                  ShopMarker.create(it), false)
+            },
+            onError = {
+              Timber.d("ERROR: $it")
+            })
         .addToDisposables()
   }
 
@@ -103,7 +108,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
                 Observable.just(shopMarker)
               }
         }
-        .subscribe {
+        .subscribeWithErrorLogging {
           Timber.d("navigating to shop: $it")
           presenter.startNavigation(it.shop)
         }
@@ -122,7 +127,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
           mapProvider.clearMap()
           shopsService.getShopsInRange(it, 0.1)
         }
-        .subscribe { shop ->
+        .subscribeWithErrorLogging { shop ->
           mapProvider.drawMarker(
               ShopMarker.create(shop), false)
         }
@@ -134,9 +139,11 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         .async()
         .concatMap {
           it.mapClicked()
-        }.subscribe {
+        }
+        .subscribeWithErrorLogging {
           presenter.switchNavigationButton(false)
-        }.addToDisposables()
+        }
+        .addToDisposables()
   }
 
   private fun handleMarkerClicks() {
@@ -144,7 +151,8 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         .async()
         .concatMap {
           it.shopMarkerClicked()
-        }.subscribe {
+        }
+        .subscribeWithErrorLogging {
           presenter.switchNavigationButton(true)
         }.addToDisposables()
   }

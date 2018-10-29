@@ -26,3 +26,13 @@ encrypted_private_key_path
 *.apk
 
 app/prod/release/
+
+gp\.json
+
+fastlane/
+
+Gemfile
+
+Gemfile\.lock
+
+keystore\.properties

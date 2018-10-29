@@ -1,11 +1,14 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist
 
 import com.github.asvid.biedra.domain.Position
+import com.google.android.gms.location.LocationRequest
 import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.utils.async
+import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
+import com.patloew.rxlocation.RxLocation
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.RibInteractor
@@ -38,7 +41,7 @@ class ShopsListInteractor :
 
   private lateinit var compositeDisposable: CompositeDisposable
 
-  private lateinit var currentUserLocation: Position
+  private var currentUserLocation: Position? = null
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
@@ -52,30 +55,26 @@ class ShopsListInteractor :
           currentUserLocation = it
           shopsService.getShopsInRange(it, RANGE)
         }
+        .repeat()
         .subscribeBy(
             onNext = {
-              Timber.d("adding shop to list: $it")
               presenter.addToList(it)
-            }, onComplete = {
-          Timber.d("completed DB request")
-        })
+            },
+            onError = {
+              Timber.d("ERROR: $it")
+            })
         .addToDisposables()
 
     presenter.listItemClicked()
         .async()
-        .subscribeBy(
-            onNext = {
-              Timber.d("item clicked: $it")
-              listener.onShopSelected(ShopSelected(shop = it))
-            })
+        .subscribeWithErrorLogging {
+          listener.onShopSelected(ShopSelected(shop = it))
+        }
         .addToDisposables()
 
     presenter.observeSearch()
         .async()
         .doOnNext { presenter.clearList() }
-        .switchIfEmpty {
-          shopsService.getShopsInRange(currentUserLocation, RANGE)
-        }
         .flatMap {
           if (it.isBlank()) {
             shopsService
@@ -87,10 +86,9 @@ class ShopsListInteractor :
                 .toObservable()
           }
         }
-        .subscribeBy(
-            onNext = {
-              presenter.addToList(it)
-            })
+        .subscribeWithErrorLogging {
+          presenter.addToList(it)
+        }
         .addToDisposables()
   }
 
