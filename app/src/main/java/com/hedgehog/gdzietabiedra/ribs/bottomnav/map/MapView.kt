@@ -9,7 +9,7 @@ import android.widget.FrameLayout
 import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.MapProvider
 import com.hedgehog.gdzietabiedra.domain.Shop
-import com.jakewharton.rxbinding2.view.RxView
+import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.Single
 import kotlinx.android.synthetic.main.rib_map.view.map_navigation_button
@@ -31,6 +31,7 @@ class MapView @JvmOverloads constructor(
         publisher.onNext(GoogleMapProvider.create(it, context))
         publisher.onComplete()
         map_view.onResume()
+        it.setMyLocationEnabled(true)
       }
     }
   }
@@ -43,7 +44,7 @@ class MapView @JvmOverloads constructor(
     }
   }
 
-  override fun navigationButtonListener(): Observable<*> = RxView.clicks(map_navigation_button)
+  override fun navigationButtonListener(): Observable<Unit> = map_navigation_button.clicks()
 
   override fun startNavigation(shop: Shop) {
     val intent = Intent(android.content.Intent.ACTION_VIEW)

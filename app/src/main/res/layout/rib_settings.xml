@@ -60,6 +60,38 @@
   <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Here will be settings, some day."
+      android:text="@string/settings_testimony"
+      style="@style/TextAppearance.AppCompat.Body2"
       />
+  <TextView
+      android:id="@+id/settings_version_label"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:layout_marginTop="10dp"
+      tools:text="2.0.0 (200001)"
+      />
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:orientation="horizontal"
+      >
+    <Button
+        android:id="@+id/settings_email_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/email_me"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        />
+    <Button
+        android:id="@+id/settings_star_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/share_some_stars"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        />
+  </LinearLayout>
 </com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsView>

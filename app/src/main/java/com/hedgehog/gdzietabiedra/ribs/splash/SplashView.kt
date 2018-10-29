@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import com.jakewharton.rxbinding2.view.RxView
+import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.rib_splashscreen.view.splash_permissions_button
 
@@ -27,6 +27,6 @@ class SplashView @JvmOverloads constructor(
 
   override fun onFinishInflate() {
     super.onFinishInflate()
-    RxView.clicks(splash_permissions_button).subscribe(buttonSubject)
+    splash_permissions_button.clicks().subscribe(buttonSubject)
   }
 }

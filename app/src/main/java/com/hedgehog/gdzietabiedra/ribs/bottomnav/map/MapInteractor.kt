@@ -155,7 +155,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
   interface MapPresenter {
 
     fun initView(): Single<MapProvider>
-    fun navigationButtonListener(): Observable<*>
+    fun navigationButtonListener(): Observable<Unit>
     fun startNavigation(shop: Shop)
     fun switchNavigationButton(visible: Boolean)
   }
