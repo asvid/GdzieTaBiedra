@@ -1,11 +1,12 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.settings
 
+import com.hedgehog.gdzietabiedra.BuildConfig
+import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
+import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
-import com.uber.rib.core.Interactor
 import com.uber.rib.core.RibInteractor
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ import javax.inject.Inject
  * TODO describe the logic of this scope.
  */
 @RibInteractor
-class SettingsInteractor : Interactor<SettingsInteractor.SettingsPresenter, SettingsRouter>() {
+class SettingsInteractor : BaseInteractor<SettingsInteractor.SettingsPresenter, SettingsRouter>() {
 
   @Inject
   lateinit var presenter: SettingsPresenter
@@ -24,29 +25,40 @@ class SettingsInteractor : Interactor<SettingsInteractor.SettingsPresenter, Sett
     super.didBecomeActive(savedInstanceState)
     presenter.rangeChanges()
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribeBy(
-            onNext = {
-              Timber.d("range changed: $it")
-              presenter.setRangeTest("${50 + it * 1950 / 100} m")
-            })
-    presenter.rangeSet().subscribeBy(
-        onNext = {
+        .subscribeWithErrorLogging {
+          Timber.d("range changed: $it")
+          presenter.setRangeTest("${50 + it * 1950 / 100} m")
+        }
+        .addToDisposables()
+
+    presenter.rangeSet()
+        .subscribeWithErrorLogging {
           Timber.d("range set: $it")
-        })
+        }
+        .addToDisposables()
+
+    presenter.emailButtonSubject()
+        .subscribeWithErrorLogging {
+          presenter.openEmail()
+        }
+        .addToDisposables()
+    presenter.starsButtonSubject()
+        .subscribeWithErrorLogging {
+          presenter.openGooglePlay()
+        }
+        .addToDisposables()
+
+    presenter.setVersionName("${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
   }
 
-  override fun willResignActive() {
-    super.willResignActive()
-
-    // TODO: Perform any required clean up here, or delete this method entirely if not needed.
-  }
-
-  /**
-   * Presenter interface implemented by this RIB's view.
-   */
   interface SettingsPresenter {
     fun rangeChanges(): Observable<Int>
     fun rangeSet(): Observable<Int>
     fun setRangeTest(range: String)
+    fun emailButtonSubject(): Observable<Any>
+    fun starsButtonSubject(): Observable<Any>
+    fun openGooglePlay()
+    fun openEmail()
+    fun setVersionName(versionName: String)
   }
 }

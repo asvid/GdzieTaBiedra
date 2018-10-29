@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.utils.views.MarginItemDecoration
-import com.jakewharton.rxbinding2.widget.RxSearchView
+import com.jakewharton.rxbinding3.widget.queryTextChangeEvents
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.rib_shoplist.view.shop_search_view
@@ -47,7 +47,7 @@ class ShopsListView @JvmOverloads constructor(context: Context,
     shops_list.addItemDecoration(MarginItemDecoration(
         resources.getDimension(R.dimen.default_padding).toInt()))
 
-    RxSearchView.queryTextChanges(shop_search_view)
+    shop_search_view.queryTextChangeEvents()
         .map {
           it.toString()
         }

@@ -13,4 +13,11 @@
   <string name="map">Mapa</string>
   <string name="settings">Ustawienia</string>
   <string name="grant_permissions">Udziel uprawnień</string>
+  <string name="email_me">Napisz do mnie</string>
+  <string name="share_some_stars">Daj gwiazdki</string>
+  <string name="settings_testimony">To nie jest oficjalna aplikacja sieci Biedronka&#8482;, nie mam żadnego powiązania z tą firmą.
+\nTo jest projekt hobbistyczny, cyfrowa piaskownica w której mogę testować nowe biblioteki i rozwiązania w swoim wolnym czasie.
+\n
+\nProszę, miej to na uwadze oceniając lub komntując aplikację :)
+  </string>
 </resources>
