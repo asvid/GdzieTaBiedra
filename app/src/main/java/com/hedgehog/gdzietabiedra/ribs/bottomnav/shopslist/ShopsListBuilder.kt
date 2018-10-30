@@ -3,7 +3,7 @@ package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
@@ -50,7 +50,7 @@ class ShopsListBuilder(
 
   interface ParentComponent {
     fun shopServices(): ShopService
-    fun locationService(): LocationService
+    fun locationService(): LocationWatchdog
     fun listener(): ShopListListener
   }
 

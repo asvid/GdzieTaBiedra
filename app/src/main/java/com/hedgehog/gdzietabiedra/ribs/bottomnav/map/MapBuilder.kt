@@ -3,7 +3,7 @@ package com.hedgehog.gdzietabiedra.ribs.bottomnav.map
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.jakewharton.rxrelay2.PublishRelay
 import com.uber.rib.core.InteractorBaseComponent
@@ -47,7 +47,7 @@ class MapBuilder(
   }
 
   interface ParentComponent {
-    fun locationService(): LocationService
+    fun locationService(): LocationWatchdog
     fun shopServices(): ShopService
     fun mapEvents(): PublishRelay<MapEvent>
   }

@@ -1,7 +1,7 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist
 
 import com.github.asvid.biedra.domain.Position
-import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
@@ -10,6 +10,7 @@ import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.RibInteractor
+import io.reactivex.BackpressureStrategy.LATEST
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -33,7 +34,7 @@ class ShopsListInteractor :
   @Inject
   lateinit var shopsService: ShopService
   @Inject
-  lateinit var locationService: LocationService
+  lateinit var locationWatchdog: LocationWatchdog
   @Inject
   lateinit var listener: ShopListListener
 
@@ -43,17 +44,16 @@ class ShopsListInteractor :
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
-    compositeDisposable = CompositeDisposable()
     presenter.setView()
 
-    locationService.getLocation()
+    locationWatchdog.getLocation()
         .async()
-        .toFlowable()
+        .toFlowable(LATEST)
         .flatMap {
+          presenter.clearList()
           currentUserLocation = it
           shopsService.getShopsInRange(it, RANGE)
         }
-        .repeat()
         .subscribeBy(
             onNext = {
               presenter.addToList(it)

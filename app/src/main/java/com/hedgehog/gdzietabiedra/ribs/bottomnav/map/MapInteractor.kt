@@ -1,7 +1,6 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.map
 
-import com.github.asvid.biedra.domain.Position
-import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.appservice.map.MapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.ShopMarker
@@ -16,7 +15,6 @@ import com.uber.rib.core.RibInteractor
 import io.reactivex.BackpressureStrategy.LATEST
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
@@ -32,7 +30,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
   @Inject
   lateinit var presenter: MapPresenter
   @Inject
-  lateinit var locationService: LocationService
+  lateinit var locationWatchdog: LocationWatchdog
   @Inject
   lateinit var shopsService: ShopService
   @Inject
@@ -69,21 +67,23 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
   }
 
   private fun handleMapInit() {
-    presenter
-        .initView()
-        .zipWith(
-            locationService.getLocation(),
-            BiFunction<MapProvider, Position, Position> { mapProvider, position ->
-              this.mapProvider = mapProvider
-              this.mapProvider.goToPosition(position)
-              mapSubject.onNext(this.mapProvider)
-              position
-            })
-        .toFlowable()
+    presenter.initView()
+        .toObservable()
+        .map {
+          this.mapProvider = it
+          mapSubject.onNext(this.mapProvider)
+        }
+        .switchMap {
+          locationWatchdog.getLocation()
+        }
+        .map {
+          this.mapProvider.goToPosition(it)
+          it
+        }
+        .toFlowable(LATEST)
         .flatMap {
           shopsService.getShopsInRange(it, 0.1)
         }
-        .repeat()
         .subscribeBy(
             onNext = {
               mapProvider.drawMarker(
