@@ -1,14 +1,12 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist
 
 import com.github.asvid.biedra.domain.Position
-import com.google.android.gms.location.LocationRequest
 import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
-import com.patloew.rxlocation.RxLocation
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.RibInteractor

@@ -72,8 +72,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
     presenter
         .initView()
         .zipWith(
-            locationService.getLocation()
-                .async(),
+            locationService.getLocation(),
             BiFunction<MapProvider, Position, Position> { mapProvider, position ->
               this.mapProvider = mapProvider
               this.mapProvider.goToPosition(position)
