@@ -18,6 +18,10 @@ import java.util.concurrent.TimeUnit
 
 private val WARSAW = Position(52.229990, 21.011572)
 
+fun Position.isDefault(): Boolean {
+  return this == WARSAW
+}
+
 class LocationWatchdog(val context: Context) {
 
   private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
@@ -57,6 +61,8 @@ class LocationWatchdog(val context: Context) {
 
   fun getLocation() = locationSubject.startWith(WARSAW)
 
+  fun locationEnabledSubject() = locationEnabled
+
   private fun serviceUpdate() {
     val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -72,8 +78,9 @@ class LocationWatchdog(val context: Context) {
   }
 
   private fun publishDefaultLocation() {
-    if (!locationSubject.hasValue())
+    if (!locationSubject.hasValue()) {
       locationSubject.onNext(WARSAW)
+    }
   }
 
   private val gpsReceiver = object : BroadcastReceiver() {

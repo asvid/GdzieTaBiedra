@@ -44,26 +44,22 @@ class ShopsListInteractor :
     super.didBecomeActive(savedInstanceState)
     presenter.setView()
 
-    locationWatchdog.getLocation()
-        .async()
-        .toFlowable(LATEST)
-        .flatMap {
-          presenter.clearList()
-          currentUserLocation = it
-          shopsService.getShopsInRange(it, RANGE)
-        }
-        .subscribeWithErrorLogging {
-          presenter.addToList(it)
-        }
-        .addToDisposables()
+    fillListBasedOnLocation()
+    handleListItemClicks()
+    handleSearch()
+    handleLocationServiceWarningDisplay()
+  }
 
-    presenter.listItemClicked()
+  private fun handleLocationServiceWarningDisplay() {
+    locationWatchdog.locationEnabledSubject()
         .async()
-        .subscribeWithErrorLogging {
-          listener.onShopSelected(ShopSelected(shop = it))
-        }
-        .addToDisposables()
+        .filter { !it }
+        .subscribe {
+          presenter.displayLocationInfo()
+        }.addToDisposables()
+  }
 
+  private fun handleSearch() {
     presenter.observeSearch()
         .async()
         .doOnNext { presenter.clearList() }
@@ -84,6 +80,30 @@ class ShopsListInteractor :
         .addToDisposables()
   }
 
+  private fun handleListItemClicks() {
+    presenter.listItemClicked()
+        .async()
+        .subscribeWithErrorLogging {
+          listener.onShopSelected(ShopSelected(shop = it))
+        }
+        .addToDisposables()
+  }
+
+  private fun fillListBasedOnLocation() {
+    locationWatchdog.getLocation()
+        .async()
+        .toFlowable(LATEST)
+        .flatMap {
+          presenter.clearList()
+          currentUserLocation = it
+          shopsService.getShopsInRange(it, RANGE)
+        }
+        .subscribeWithErrorLogging {
+          presenter.addToList(it)
+        }
+        .addToDisposables()
+  }
+
   interface ShopsListPresenter {
 
     fun setView()
@@ -93,5 +113,6 @@ class ShopsListInteractor :
     fun showToast(shop: Shop)
     fun observeSearch(): Observable<String>
     fun clearList()
+    fun displayLocationInfo()
   }
 }

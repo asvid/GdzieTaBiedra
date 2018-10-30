@@ -1,6 +1,7 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist
 
 import android.content.Context
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.widget.LinearLayout
@@ -61,4 +62,7 @@ class ShopsListView @JvmOverloads constructor(context: Context,
     adapter.updateData(shops.toList())
   }
 
+  override fun displayLocationInfo() {
+    Snackbar.make(this, R.string.turn_on_location, Snackbar.LENGTH_LONG).show()
+  }
 }
