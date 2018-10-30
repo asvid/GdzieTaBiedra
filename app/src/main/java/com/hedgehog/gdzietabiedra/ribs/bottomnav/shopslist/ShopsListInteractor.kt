@@ -13,9 +13,7 @@ import com.uber.rib.core.RibInteractor
 import io.reactivex.BackpressureStrategy.LATEST
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.Subject
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -54,13 +52,9 @@ class ShopsListInteractor :
           currentUserLocation = it
           shopsService.getShopsInRange(it, RANGE)
         }
-        .subscribeBy(
-            onNext = {
-              presenter.addToList(it)
-            },
-            onError = {
-              Timber.d("ERROR: $it")
-            })
+        .subscribeWithErrorLogging {
+          presenter.addToList(it)
+        }
         .addToDisposables()
 
     presenter.listItemClicked()

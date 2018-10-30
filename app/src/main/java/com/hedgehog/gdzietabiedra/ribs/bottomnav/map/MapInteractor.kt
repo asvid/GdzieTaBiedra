@@ -15,7 +15,6 @@ import com.uber.rib.core.RibInteractor
 import io.reactivex.BackpressureStrategy.LATEST
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 import javax.inject.Inject
@@ -54,7 +53,6 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         .async()
         .concatMap { mapEvents }
         .flatMapCompletable {
-          Timber.d("map event: $it")
           when (it) {
             is ShopSelected -> {
               mapProvider.selectShop(it.shop)
@@ -68,30 +66,24 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
 
   private fun handleMapInit() {
     presenter.initView()
-        .toObservable()
-        .map {
+        .doOnSuccess {
           this.mapProvider = it
           mapSubject.onNext(this.mapProvider)
         }
-        .switchMap {
+        .flatMapObservable {
           locationWatchdog.getLocation()
         }
-        .map {
+        .doOnNext {
           this.mapProvider.goToPosition(it)
-          it
         }
         .toFlowable(LATEST)
         .flatMap {
           shopsService.getShopsInRange(it, 0.1)
         }
-        .subscribeBy(
-            onNext = {
-              mapProvider.drawMarker(
-                  ShopMarker.create(it), false)
-            },
-            onError = {
-              Timber.d("ERROR: $it")
-            })
+        .subscribeWithErrorLogging {
+          mapProvider.drawMarker(
+              ShopMarker.create(it), false)
+        }
         .addToDisposables()
   }
 
@@ -108,7 +100,6 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
               }
         }
         .subscribeWithErrorLogging {
-          Timber.d("navigating to shop: $it")
           presenter.startNavigation(it.shop)
         }
         .addToDisposables()

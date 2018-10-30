@@ -29,6 +29,7 @@ class MapView @JvmOverloads constructor(
       map_view.getMapAsync {
         Timber.d("map is loaded")
         publisher.onNext(GoogleMapProvider.create(it, context))
+        publisher.onComplete()
         map_view.onResume()
         it.setMyLocationEnabled(true)
       }
