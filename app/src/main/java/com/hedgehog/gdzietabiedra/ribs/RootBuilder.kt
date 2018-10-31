@@ -3,7 +3,7 @@ package com.hedgehog.gdzietabiedra.ribs
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavInteractor
@@ -63,7 +63,7 @@ class RootBuilder(
 
   interface ParentComponent {
     fun shopServices(): ShopService
-    fun locationService(): LocationService
+    fun locationService(): LocationWatchdog
     fun dexter(): DexterBuilder.Permission
   }
 

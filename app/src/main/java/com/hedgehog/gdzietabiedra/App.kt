@@ -6,6 +6,7 @@ import android.app.Service
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.hedgehog.gdzietabiedra.di.components.DaggerAppComponent
+import com.hedgehog.gdzietabiedra.utils.CrashlyticsTree
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -37,8 +38,6 @@ class App : Application(), HasActivityInjector, HasServiceInjector {
         .application(this)
         .build()
         .inject(this)
-
-    Timber.plant(DebugTree())
   }
 
   override fun onCreate() {
@@ -46,6 +45,11 @@ class App : Application(), HasActivityInjector, HasServiceInjector {
 
     initFabric()
     initLeakCanary()
+    initTimber()
+  }
+
+  private fun initTimber() {
+    Timber.plant(DebugTree(), CrashlyticsTree())
   }
 
   private fun initFabric() {

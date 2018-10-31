@@ -9,11 +9,22 @@ apply plugin: 'jacoco-android'
 apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'io.fabric'
 
-def buildVersionCode = project.hasProperty("devBuild") ? 100 :
-    new Date().format("yyMMddHHmm").toInteger()
+apply from: '../VersionUtils.gradle'
+
+def buildVersionCode = project.hasProperty("devBuild") ? 100 : minutesVersionCode
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-
+  signingConfigs {
+    config {
+      keyAlias keystoreProperties['keyAlias']
+      keyPassword keystoreProperties['keyPassword']
+      storeFile file(keystoreProperties['storeFile'])
+      storePassword keystoreProperties['storePassword']
+    }
+  }
   compileSdkVersion Build.compileSdkVersion
   defaultConfig {
     applicationId Build.appId
@@ -21,7 +32,7 @@ android {
     minSdkVersion Build.minSdkVersion
     targetSdkVersion Build.targetSdkVersion
     compileSdkVersion Build.compileSdkVersion
-    versionCode 20001
+    versionCode buildVersionCode
     versionName "2.0"
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -50,11 +61,11 @@ android {
       dimension "stage"
       versionNameSuffix "-dev" // e.g 1.0-dev
       applicationIdSuffix '.dev'
-      //      resConfigs("en", "xxhdpi")
+      resConfigs("en", "xxhdpi")
     }
-
     prod {
       dimension "stage"
+      signingConfig signingConfigs.config
     }
   }
   variantFilter { variant ->

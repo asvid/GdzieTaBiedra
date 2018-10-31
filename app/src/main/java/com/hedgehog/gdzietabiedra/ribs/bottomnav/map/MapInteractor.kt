@@ -1,7 +1,6 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.map
 
-import com.github.asvid.biedra.domain.Position
-import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.appservice.map.MapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.ShopMarker
@@ -16,8 +15,6 @@ import com.uber.rib.core.RibInteractor
 import io.reactivex.BackpressureStrategy.LATEST
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.functions.BiFunction
-import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 import javax.inject.Inject
@@ -32,7 +29,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
   @Inject
   lateinit var presenter: MapPresenter
   @Inject
-  lateinit var locationService: LocationService
+  lateinit var locationWatchdog: LocationWatchdog
   @Inject
   lateinit var shopsService: ShopService
   @Inject
@@ -56,7 +53,6 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         .async()
         .concatMap { mapEvents }
         .flatMapCompletable {
-          Timber.d("map event: $it")
           when (it) {
             is ShopSelected -> {
               mapProvider.selectShop(it.shop)
@@ -69,24 +65,24 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
   }
 
   private fun handleMapInit() {
-    presenter
-        .initView()
-        .zipWith(
-            locationService.getLocation()
-                .async(),
-            BiFunction<MapProvider, Position, Position> { mapProvider, position ->
-              this.mapProvider = mapProvider
-              this.mapProvider.goToPosition(position)
-              mapSubject.onNext(this.mapProvider)
-              position
-            })
-        .toFlowable()
+    presenter.initView()
+        .doOnSuccess {
+          this.mapProvider = it
+          mapSubject.onNext(this.mapProvider)
+        }
+        .flatMapObservable {
+          locationWatchdog.getLocation()
+        }
+        .doOnNext {
+          this.mapProvider.goToPosition(it)
+        }
+        .toFlowable(LATEST)
         .flatMap {
           shopsService.getShopsInRange(it, 0.1)
         }
-        .subscribeBy { shop ->
+        .subscribeWithErrorLogging {
           mapProvider.drawMarker(
-              ShopMarker.create(shop), false)
+              ShopMarker.create(it), false)
         }
         .addToDisposables()
   }
@@ -103,8 +99,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
                 Observable.just(shopMarker)
               }
         }
-        .subscribe {
-          Timber.d("navigating to shop: $it")
+        .subscribeWithErrorLogging {
           presenter.startNavigation(it.shop)
         }
         .addToDisposables()
@@ -122,7 +117,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
           mapProvider.clearMap()
           shopsService.getShopsInRange(it, 0.1)
         }
-        .subscribe { shop ->
+        .subscribeWithErrorLogging { shop ->
           mapProvider.drawMarker(
               ShopMarker.create(shop), false)
         }
@@ -134,9 +129,11 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         .async()
         .concatMap {
           it.mapClicked()
-        }.subscribe {
+        }
+        .subscribeWithErrorLogging {
           presenter.switchNavigationButton(false)
-        }.addToDisposables()
+        }
+        .addToDisposables()
   }
 
   private fun handleMarkerClicks() {
@@ -144,7 +141,8 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         .async()
         .concatMap {
           it.shopMarkerClicked()
-        }.subscribe {
+        }
+        .subscribeWithErrorLogging {
           presenter.switchNavigationButton(true)
         }.addToDisposables()
   }
