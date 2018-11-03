@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.ribs.RootBuilder
+import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
 import com.karumi.dexter.Dexter
 import com.uber.rib.core.RibActivity
 import com.uber.rib.core.ViewRouter
@@ -18,6 +19,8 @@ class MainActivity : RibActivity() {
   lateinit var locationWatchdog: LocationWatchdog
   @Inject
   lateinit var shopService: ShopService
+  @Inject
+  lateinit var analytics: Analytics
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
@@ -30,6 +33,7 @@ class MainActivity : RibActivity() {
         override fun locationService() = locationWatchdog
         override fun shopServices() = shopService
         override fun dexter() = Dexter.withActivity(this@MainActivity)
+        override fun analytics(): Analytics = analytics
       })
           .build(parentViewGroup)
 

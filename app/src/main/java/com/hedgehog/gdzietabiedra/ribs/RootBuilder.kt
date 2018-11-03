@@ -18,6 +18,7 @@ import com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent.AllPermissionsGranted
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashListener
+import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import com.karumi.dexter.DexterBuilder
@@ -57,7 +58,7 @@ class RootBuilder(
   }
 
   override fun inflateView(inflater: LayoutInflater,
-      parentViewGroup: ViewGroup): RootView? {
+                           parentViewGroup: ViewGroup): RootView? {
     return inflater.inflate(R.layout.rib_root, parentViewGroup, false) as RootView
   }
 
@@ -65,6 +66,7 @@ class RootBuilder(
     fun shopServices(): ShopService
     fun locationService(): LocationWatchdog
     fun dexter(): DexterBuilder.Permission
+    fun analytics(): Analytics
   }
 
   @dagger.Module

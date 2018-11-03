@@ -12,139 +12,142 @@ apply plugin: 'io.fabric'
 apply from: '../VersionUtils.gradle'
 
 def buildVersionCode = project.hasProperty("devBuild") ? 100 : minutesVersionCode
+
+
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+if (file(keystorePropertiesFile).exists())
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-  signingConfigs {
-    config {
-      keyAlias keystoreProperties['keyAlias']
-      keyPassword keystoreProperties['keyPassword']
-      storeFile file(keystoreProperties['storeFile'])
-      storePassword keystoreProperties['storePassword']
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile']
+            storePassword keystoreProperties['storePassword']
+        }
     }
-  }
-  compileSdkVersion Build.compileSdkVersion
-  defaultConfig {
-    applicationId Build.appId
-    buildToolsVersion Build.buildToolsVersion
-    minSdkVersion Build.minSdkVersion
-    targetSdkVersion Build.targetSdkVersion
     compileSdkVersion Build.compileSdkVersion
-    versionCode buildVersionCode
-    versionName "2.0"
-    vectorDrawables.useSupportLibrary = true
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    defaultConfig {
+        applicationId Build.appId
+        buildToolsVersion Build.buildToolsVersion
+        minSdkVersion Build.minSdkVersion
+        targetSdkVersion Build.targetSdkVersion
+        compileSdkVersion Build.compileSdkVersion
+        versionCode buildVersionCode
+        versionName "2.0"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-    manifestPlaceholders = [appName: "@string/app_name"]
-  }
-  buildTypes {
-    release {
-      minifyEnabled true
-      shrinkResources true
-      multiDexEnabled true
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        manifestPlaceholders = [appName: "@string/app_name"]
     }
-    debug {
-      manifestPlaceholders = [appName: "Biedra - Debug"]
-      debuggable true
-      multiDexEnabled true
-      minifyEnabled false
-      ext.enableCrashlytics = false
-      ext.alwaysUpdateBuildId = false
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            manifestPlaceholders = [appName: "Biedra - Debug"]
+            debuggable true
+            multiDexEnabled true
+            minifyEnabled false
+            ext.enableCrashlytics = false
+            ext.alwaysUpdateBuildId = false
+        }
     }
-  }
-  flavorDimensions "stage"
-  productFlavors {
-    dev {
-      dimension "stage"
-      versionNameSuffix "-dev" // e.g 1.0-dev
-      applicationIdSuffix '.dev'
-      resConfigs("en", "xxhdpi")
+    flavorDimensions "stage"
+    productFlavors {
+        dev {
+            dimension "stage"
+            versionNameSuffix "-dev" // e.g 1.0-dev
+            applicationIdSuffix '.dev'
+            resConfigs("en", "xxhdpi")
+        }
+        prod {
+            dimension "stage"
+            signingConfig signingConfigs.config
+        }
     }
-    prod {
-      dimension "stage"
-      signingConfig signingConfigs.config
+    variantFilter { variant ->
+        // 'dev' flavor is only available for debug build
+        if (variant.buildType.name != 'debug' && variant.getFlavors().get(0).name == "dev") {
+            variant.setIgnore(true)
+        }
+        // 'prod' flavor is only available for release build
+        if (!(variant.buildType.name == 'release') && variant.getFlavors().get(0).name == "prod") {
+            variant.setIgnore(true)
+        }
     }
-  }
-  variantFilter { variant ->
-    // 'dev' flavor is only available for debug build
-    if (variant.buildType.name != 'debug' && variant.getFlavors().get(0).name == "dev") {
-      variant.setIgnore(true)
+    lintOptions {
+        abortOnError false
     }
-    // 'prod' flavor is only available for release build
-    if (!(variant.buildType.name == 'release') && variant.getFlavors().get(0).name == "prod") {
-      variant.setIgnore(true)
+    if (project.hasProperty('devBuild')) {
+        splits.abi.enable = false
+        splits.density.enable = false
+        aaptOptions.cruncherEnabled = false
     }
-  }
-  lintOptions {
-    abortOnError false
-  }
-  if (project.hasProperty('devBuild')) {
-    splits.abi.enable = false
-    splits.density.enable = false
-    aaptOptions.cruncherEnabled = false
-  }
-  dexOptions {
-    preDexLibraries = true
-  }
-  testOptions {
-    animationsDisabled = true
-    unitTests {
-      returnDefaultValues = true
+    dexOptions {
+        preDexLibraries = true
     }
-  }
+    testOptions {
+        animationsDisabled = true
+        unitTests {
+            returnDefaultValues = true
+        }
+    }
 }
 
 dependencies {
-  implementation fileTree(include: ['*.jar'], dir: 'libs')
-  implementation project(path: ':domain')
-  implementation External.kotlin
-  //  Support
-  implementation Support.appcompat
-  implementation Support.constraint
-  implementation Support.recyclerView
-  implementation Support.design
-  implementation Support.constraint
-  implementation Support.cardView
-  //  Logging
-  implementation External.timber
-  //  RX
-  implementation External.rxjava2
-  implementation External.rxbinding
-  implementation External.rxkotlin
-  //  DI
-  implementation External.dagger
-  implementation External.daggerSupport
-  annotationProcessor External.daggerCompiler
-  annotationProcessor External.daggerProcessor
-  kapt External.daggerProcessor
-  kapt External.daggerCompiler
-  //  RIBs
-  annotationProcessor Uber.ribCompilerTest
-  implementation Uber.ribs
-  //  Realm
-  kapt Realm.nameHelper
-  //  Maps
-  implementation Google.maps
-  implementation Google.location
-  //  Permissions
-  implementation External.dexter
-  //  Retrofit
-  implementation External.retrofit
-  implementation External.moshiConverter
-  implementation External.retrofitRxAdapter
-  implementation External.okhttpLoggingInterceptor
-  //  Crash reporting and analytics
-  implementation External.firebaseCore
-  implementation External.crashlytics
-  //  Leak detection
-  debugImplementation External.leakcanaryDebug
-  releaseImplementation External.leakcanaryRelease
-  //  Testing
-  testImplementation Uber.ribTestUtils
-  testImplementation TestDeps.junit
-  androidTestImplementation TestDeps.runner
-  androidTestImplementation TestDeps.espresso
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(path: ':domain')
+    implementation External.kotlin
+    //  Support
+    implementation Support.appcompat
+    implementation Support.constraint
+    implementation Support.recyclerView
+    implementation Support.design
+    implementation Support.constraint
+    implementation Support.cardView
+    //  Logging
+    implementation External.timber
+    //  RX
+    implementation External.rxjava2
+    implementation External.rxbinding
+    implementation External.rxkotlin
+    //  DI
+    implementation External.dagger
+    implementation External.daggerSupport
+    annotationProcessor External.daggerCompiler
+    annotationProcessor External.daggerProcessor
+    kapt External.daggerProcessor
+    kapt External.daggerCompiler
+    //  RIBs
+    annotationProcessor Uber.ribCompilerTest
+    implementation Uber.ribs
+    //  Realm
+    kapt Realm.nameHelper
+    //  Maps
+    implementation Google.maps
+    implementation Google.location
+    //  Permissions
+    implementation External.dexter
+    //  Retrofit
+    implementation External.retrofit
+    implementation External.moshiConverter
+    implementation External.retrofitRxAdapter
+    implementation External.okhttpLoggingInterceptor
+    //  Crash reporting and analytics
+    implementation External.firebaseCore
+    implementation External.crashlytics
+    //  Leak detection
+    debugImplementation External.leakcanaryDebug
+    releaseImplementation External.leakcanaryRelease
+    //  Testing
+    testImplementation Uber.ribTestUtils
+    testImplementation TestDeps.junit
+    androidTestImplementation TestDeps.runner
+    androidTestImplementation TestDeps.espresso
 }
