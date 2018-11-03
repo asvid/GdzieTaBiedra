@@ -4,13 +4,15 @@ import com.github.asvid.biedra.domain.Position
 import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.domain.Shop
-import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.*
+import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.RibInteractor
-import io.reactivex.BackpressureStrategy.LATEST
+import io.reactivex.BackpressureStrategy.*
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.Subject
@@ -35,10 +37,14 @@ class ShopsListInteractor :
   lateinit var locationWatchdog: LocationWatchdog
   @Inject
   lateinit var listener: ShopListListener
+  @Inject
+  lateinit var analytics: Analytics
 
   private lateinit var compositeDisposable: CompositeDisposable
 
   private var currentUserLocation: Position? = null
+
+  override fun getRibName(): String = "Shop List"
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
@@ -48,6 +54,8 @@ class ShopsListInteractor :
     handleListItemClicks()
     handleSearch()
     handleLocationServiceWarningDisplay()
+
+    analytics.log(EventType.Screen(getRibName()))
   }
 
   private fun handleLocationServiceWarningDisplay() {

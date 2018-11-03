@@ -21,6 +21,8 @@ class BottomNavInteractor : BaseInteractor<BottomNavInteractor.BottomNavPresente
   @Inject
   lateinit var listener: Listener
 
+  override fun getRibName(): String = "Bottom Navigation"
+
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
 
