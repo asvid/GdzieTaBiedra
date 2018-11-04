@@ -1,6 +1,6 @@
 package com.hedgehog.gdzietabiedra.ribs.splash
 
-import android.Manifest.*
+import android.Manifest.permission
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
 import com.hedgehog.gdzietabiedra.utils.analytics.EventType
 import com.hedgehog.gdzietabiedra.utils.async

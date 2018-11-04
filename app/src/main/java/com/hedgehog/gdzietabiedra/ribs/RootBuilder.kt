@@ -19,6 +19,7 @@ import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent.AllPermissionsGranted
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashListener
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
+import com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import com.karumi.dexter.DexterBuilder

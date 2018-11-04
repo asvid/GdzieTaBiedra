@@ -2,7 +2,10 @@ package com.hedgehog.gdzietabiedra.ribs.bottomnav.settings
 
 import com.hedgehog.gdzietabiedra.BuildConfig
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
+import com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics
 import com.hedgehog.gdzietabiedra.utils.analytics.EventType
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.GIVE_STARS
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.SENDING_EMAIL
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
@@ -60,6 +63,7 @@ class SettingsInteractor : BaseInteractor<SettingsInteractor.SettingsPresenter, 
   private fun handleEmailButton() {
     presenter.emailButtonSubject()
         .subscribeWithErrorLogging {
+          analytics.log(EventType.Event(SENDING_EMAIL))
           presenter.openEmail()
         }
         .addToDisposables()
@@ -68,6 +72,7 @@ class SettingsInteractor : BaseInteractor<SettingsInteractor.SettingsPresenter, 
   private fun handleStarsButton() {
     presenter.starsButtonSubject()
         .subscribeWithErrorLogging {
+          analytics.log(EventType.Event(GIVE_STARS))
           presenter.openGooglePlay()
         }
         .addToDisposables()

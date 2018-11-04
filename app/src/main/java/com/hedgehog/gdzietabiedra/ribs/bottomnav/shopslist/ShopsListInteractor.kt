@@ -4,15 +4,19 @@ import com.github.asvid.biedra.domain.Position
 import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.domain.Shop
-import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.*
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
+import com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics
 import com.hedgehog.gdzietabiedra.utils.analytics.EventType
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.LIST_ITEM_CLICKED
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.SEARCH_SHOP_LIST
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.SHOW_LOCATION_WARNING
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
 import com.uber.rib.core.BaseInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.RibInteractor
-import io.reactivex.BackpressureStrategy.*
+import io.reactivex.BackpressureStrategy.LATEST
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.Subject
@@ -63,6 +67,7 @@ class ShopsListInteractor :
         .async()
         .filter { !it }
         .subscribe {
+          analytics.log(EventType.Event(SHOW_LOCATION_WARNING))
           presenter.displayLocationInfo()
         }.addToDisposables()
   }
@@ -72,6 +77,7 @@ class ShopsListInteractor :
         .async()
         .doOnNext { presenter.clearList() }
         .flatMap {
+          analytics.log(EventType.Event(SEARCH_SHOP_LIST))
           if (it.isBlank()) {
             shopsService
                 .getShopsInRange(currentUserLocation, RANGE)
@@ -92,6 +98,7 @@ class ShopsListInteractor :
     presenter.listItemClicked()
         .async()
         .subscribeWithErrorLogging {
+          analytics.log(EventType.Event(LIST_ITEM_CLICKED))
           listener.onShopSelected(ShopSelected(shop = it))
         }
         .addToDisposables()

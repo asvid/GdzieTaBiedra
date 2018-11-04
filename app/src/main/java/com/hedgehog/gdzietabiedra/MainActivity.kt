@@ -6,12 +6,12 @@ import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.ribs.RootBuilder
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
+import com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics
 import com.karumi.dexter.Dexter
 import com.uber.rib.core.RibActivity
 import com.uber.rib.core.ViewRouter
 import dagger.android.AndroidInjection
 import javax.inject.Inject
-
 
 class MainActivity : RibActivity() {
 
@@ -36,7 +36,6 @@ class MainActivity : RibActivity() {
         override fun analytics(): Analytics = analytics
       })
           .build(parentViewGroup)
-
 
   override fun onDestroy() {
     super.onDestroy()

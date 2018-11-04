@@ -21,8 +21,9 @@ import javax.inject.Scope
  * TODO describe this scope's responsibility as a whole.
  */
 class SplashBuilder(
-    dependency: ParentComponent) : ViewBuilder<SplashView, SplashRouter, SplashBuilder.ParentComponent>(
-    dependency) {
+    dependency: ParentComponent) :
+    ViewBuilder<SplashView, SplashRouter, SplashBuilder.ParentComponent>(
+        dependency) {
 
   /**
    * Builds a new [SplashRouter].

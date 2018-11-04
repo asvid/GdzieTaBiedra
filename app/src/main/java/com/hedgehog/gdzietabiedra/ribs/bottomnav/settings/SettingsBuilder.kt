@@ -20,8 +20,9 @@ import javax.inject.Scope
  * TODO describe this scope's responsibility as a whole.
  */
 class SettingsBuilder(
-    dependency: ParentComponent) : ViewBuilder<SettingsView, SettingsRouter, SettingsBuilder.ParentComponent>(
-    dependency) {
+    dependency: ParentComponent) :
+    ViewBuilder<SettingsView, SettingsRouter, SettingsBuilder.ParentComponent>(
+        dependency) {
 
   /**
    * Builds a new [SettingsRouter].
