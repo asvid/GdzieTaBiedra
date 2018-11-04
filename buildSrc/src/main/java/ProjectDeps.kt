@@ -1,5 +1,5 @@
 object ProjectDeps {
-  const val gradlePlugin = "com.android.tools.build:gradle:3.2.0"
+  const val gradlePlugin = "com.android.tools.build:gradle:3.2.1"
   const val googleServices = "com.google.gms:google-services:4.1.0"
   const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
   const val kotlinExtensions = "org.jetbrains.kotlin:kotlin-android-extensions:${Versions.kotlin}"

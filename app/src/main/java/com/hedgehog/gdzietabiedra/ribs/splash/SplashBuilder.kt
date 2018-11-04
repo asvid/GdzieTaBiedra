@@ -3,6 +3,7 @@ package com.hedgehog.gdzietabiedra.ribs.splash
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
 import com.karumi.dexter.DexterBuilder
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
@@ -20,8 +21,9 @@ import javax.inject.Scope
  * TODO describe this scope's responsibility as a whole.
  */
 class SplashBuilder(
-    dependency: ParentComponent) : ViewBuilder<SplashView, SplashRouter, SplashBuilder.ParentComponent>(
-    dependency) {
+    dependency: ParentComponent) :
+    ViewBuilder<SplashView, SplashRouter, SplashBuilder.ParentComponent>(
+        dependency) {
 
   /**
    * Builds a new [SplashRouter].
@@ -47,6 +49,7 @@ class SplashBuilder(
   interface ParentComponent {
     fun dexter(): DexterBuilder.Permission
     fun splashListener(): SplashListener
+    fun analytics(): Analytics
   }
 
   @dagger.Module

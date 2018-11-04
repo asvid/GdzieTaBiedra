@@ -12,16 +12,20 @@ apply plugin: 'io.fabric'
 apply from: '../VersionUtils.gradle'
 
 def buildVersionCode = project.hasProperty("devBuild") ? 100 : minutesVersionCode
+
+
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+if (file(keystorePropertiesFile).exists()) {
+  keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 
 android {
   signingConfigs {
     config {
       keyAlias keystoreProperties['keyAlias']
       keyPassword keystoreProperties['keyPassword']
-      storeFile file(keystoreProperties['storeFile'])
+      storeFile keystoreProperties['storeFile']
       storePassword keystoreProperties['storePassword']
     }
   }
@@ -60,7 +64,7 @@ android {
     dev {
       dimension "stage"
       versionNameSuffix "-dev" // e.g 1.0-dev
-      applicationIdSuffix '.dev'
+      //            applicationIdSuffix '.dev'
       resConfigs("en", "xxhdpi")
     }
     prod {
@@ -148,3 +152,5 @@ dependencies {
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso
 }
+
+apply plugin: 'com.google.gms.google-services'

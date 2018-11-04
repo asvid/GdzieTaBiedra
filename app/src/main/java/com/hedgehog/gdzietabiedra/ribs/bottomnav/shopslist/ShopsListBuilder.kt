@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
+import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -52,6 +53,7 @@ class ShopsListBuilder(
     fun shopServices(): ShopService
     fun locationService(): LocationWatchdog
     fun listener(): ShopListListener
+    fun analytics(): Analytics
   }
 
   @dagger.Module

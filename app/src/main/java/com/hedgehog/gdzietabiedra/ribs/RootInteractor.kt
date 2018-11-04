@@ -2,7 +2,7 @@ package com.hedgehog.gdzietabiedra.ribs
 
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavInteractor
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapEvent
-import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.*
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
@@ -21,6 +21,7 @@ import javax.inject.Inject
  */
 @RibInteractor
 class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>() {
+  override fun getRibName() = "Root"
 
   @Inject
   lateinit var presenter: RootPresenter
@@ -81,6 +82,5 @@ class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>(
 
       router.attachSettings()
     }
-
   }
 }
