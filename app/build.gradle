@@ -5,30 +5,29 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'com.vanniktech.android.apk.size'
-apply plugin: 'jacoco-android'
-apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'io.fabric'
 
 apply from: '../VersionUtils.gradle'
+apply from: '../jacoco.gradle'
 
 def buildVersionCode = project.hasProperty("devBuild") ? 100 : minutesVersionCode
 
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
-if (file(keystorePropertiesFile).exists()) {
-  keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
+
   signingConfigs {
     config {
-      keyAlias keystoreProperties['keyAlias']
-      keyPassword keystoreProperties['keyPassword']
-      storeFile keystoreProperties['storeFile']
-      storePassword keystoreProperties['storePassword']
+      keyAlias 'asvid'
+      keyPassword 'Rnk2ig&yj'
+      storeFile file('/home/adam/repo/GdzieTaBiedra/keystore.jks')
+      storePassword 'Rnk2ig&yj'
     }
   }
+
   compileSdkVersion Build.compileSdkVersion
   defaultConfig {
     applicationId Build.appId
@@ -36,6 +35,7 @@ android {
     minSdkVersion Build.minSdkVersion
     targetSdkVersion Build.targetSdkVersion
     compileSdkVersion Build.compileSdkVersion
+    multiDexEnabled true
     versionCode buildVersionCode
     versionName "2.0"
     vectorDrawables.useSupportLibrary = true
@@ -57,6 +57,7 @@ android {
       minifyEnabled false
       ext.enableCrashlytics = false
       ext.alwaysUpdateBuildId = false
+      testCoverageEnabled true
     }
   }
   flavorDimensions "stage"
@@ -99,6 +100,13 @@ android {
       returnDefaultValues = true
     }
   }
+  testOptions {
+    unitTests.all {
+      jacoco {
+        includeNoLocationClasses = true
+      }
+    }
+  }
 }
 
 dependencies {
@@ -127,6 +135,7 @@ dependencies {
   kapt External.daggerCompiler
   //  RIBs
   annotationProcessor Uber.ribCompilerTest
+  kapt Uber.ribCompilerTest
   implementation Uber.ribs
   //  Realm
   kapt Realm.nameHelper
@@ -148,6 +157,7 @@ dependencies {
   releaseImplementation External.leakcanaryRelease
   //  Testing
   testImplementation Uber.ribTestUtils
+  kapt Uber.ribTestUtils
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso

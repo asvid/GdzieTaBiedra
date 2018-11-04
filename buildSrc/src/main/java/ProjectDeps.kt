@@ -7,6 +7,5 @@ object ProjectDeps {
   const val dexcount = "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.3"
   const val apkSize = "com.vanniktech:gradle-android-apk-size-plugin:0.4.0"
   const val coveralls = "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
-  const val jacoco = "com.dicedmelon.gradle:jacoco-android:0.1.2"
   const val crashlytics = "io.fabric.tools:gradle:1.25.4"
 }
