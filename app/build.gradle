@@ -24,7 +24,7 @@ android {
     config {
       keyAlias keystoreProperties['keyAlias']
       keyPassword keystoreProperties['keyPassword']
-      storeFile file(keystoreProperties['storeFile'])
+      storeFile file(keystoreProperties['storeFile'] ?: "/")
       storePassword keystoreProperties['storePassword']
     }
   }
@@ -161,11 +161,18 @@ dokka {
   moduleName = ""
   outputFormat = "gfm"
 
+  includes = ['extra.md']
+
   includeNonPublic = false
   skipDeprecated = false
   reportUndocumented = false
   skipEmptyPackages = true
 
+  linkMapping {
+    dir = "src/main/java"
+    url = "https://github.com/asvid/GdzieTaBiedra/blob/master/app/src/main/java"
+    suffix = "#L"
+  }
   externalDocumentationLink {
     url = new URL("https://developer.android.com/reference/")
     packageListUrl = new URL("https://developer.android.com/reference/android/support/package-list")
