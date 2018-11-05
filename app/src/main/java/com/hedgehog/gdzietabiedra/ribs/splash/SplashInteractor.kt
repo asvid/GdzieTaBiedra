@@ -1,6 +1,8 @@
 package com.hedgehog.gdzietabiedra.ribs.splash
 
 import android.Manifest.permission
+import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
 import com.karumi.dexter.DexterBuilder
@@ -29,10 +31,16 @@ class SplashInteractor : BaseInteractor<SplashInteractor.SplashPresenter, Splash
   lateinit var dexter: DexterBuilder.Permission
   @Inject
   lateinit var splashListener: SplashListener
+  @Inject
+  lateinit var analytics: Analytics
+
+  override fun getRibName(): String = "Splash Screen"
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
     permissionCheck()
+
+    analytics.log(EventType.Screen(getRibName()))
   }
 
   private fun permissionCheck() {

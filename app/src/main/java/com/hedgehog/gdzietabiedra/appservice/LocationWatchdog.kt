@@ -18,10 +18,6 @@ import java.util.concurrent.TimeUnit
 
 private val WARSAW = Position(52.229990, 21.011572)
 
-fun Position.isDefault(): Boolean {
-  return this == WARSAW
-}
-
 class LocationWatchdog(val context: Context) {
 
   private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(

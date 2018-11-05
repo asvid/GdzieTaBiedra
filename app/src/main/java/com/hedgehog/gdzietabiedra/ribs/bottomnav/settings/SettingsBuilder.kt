@@ -3,6 +3,7 @@ package com.hedgehog.gdzietabiedra.ribs.bottomnav.settings
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
 import dagger.Binds
@@ -19,8 +20,9 @@ import javax.inject.Scope
  * TODO describe this scope's responsibility as a whole.
  */
 class SettingsBuilder(
-    dependency: ParentComponent) : ViewBuilder<SettingsView, SettingsRouter, SettingsBuilder.ParentComponent>(
-    dependency) {
+    dependency: ParentComponent) :
+    ViewBuilder<SettingsView, SettingsRouter, SettingsBuilder.ParentComponent>(
+        dependency) {
 
   /**
    * Builds a new [SettingsRouter].
@@ -44,7 +46,7 @@ class SettingsBuilder(
   }
 
   interface ParentComponent {
-    // TODO: Define dependencies required from your parent interactor here.
+    fun analytics(): Analytics
   }
 
   @dagger.Module

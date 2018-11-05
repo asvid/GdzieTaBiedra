@@ -12,9 +12,12 @@ apply plugin: 'io.fabric'
 apply from: '../VersionUtils.gradle'
 
 def buildVersionCode = project.hasProperty("devBuild") ? 100 : minutesVersionCode
+
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+if (file(keystorePropertiesFile).exists()) {
+  keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 
 android {
   signingConfigs {
@@ -60,7 +63,7 @@ android {
     dev {
       dimension "stage"
       versionNameSuffix "-dev" // e.g 1.0-dev
-      applicationIdSuffix '.dev'
+      //            applicationIdSuffix '.dev'
       resConfigs("en", "xxhdpi")
     }
     prod {
@@ -147,4 +150,38 @@ dependencies {
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso
+}
+
+apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'org.jetbrains.dokka-android'
+dokka {
+
+  outputDirectory = "$rootDir/docs"
+  moduleName = ""
+  outputFormat = "gfm"
+
+  includeNonPublic = false
+  skipDeprecated = false
+  reportUndocumented = false
+  skipEmptyPackages = true
+
+  externalDocumentationLink {
+    url = new URL("https://developer.android.com/reference/")
+    packageListUrl = new URL("https://developer.android.com/reference/android/support/package-list")
+  }
+  externalDocumentationLink {
+    url = new URL("https://docs.oracle.com/javase/7/docs/api/")
+  }
+  externalDocumentationLink {
+    url = new URL("http://reactivex.io/RxJava/javadoc/")
+  }
+  externalDocumentationLink {
+    url = new URL("http://jakewharton.github.io/timber/")
+  }
+
+  //  module links
+  externalDocumentationLink {
+    url = new URL("file://$outputDirectory/domain/")
+  }
 }

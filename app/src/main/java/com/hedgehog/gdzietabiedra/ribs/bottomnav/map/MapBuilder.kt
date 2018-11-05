@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
+import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
 import com.jakewharton.rxrelay2.PublishRelay
 import com.uber.rib.core.InteractorBaseComponent
 import com.uber.rib.core.ViewBuilder
@@ -50,6 +51,7 @@ class MapBuilder(
     fun locationService(): LocationWatchdog
     fun shopServices(): ShopService
     fun mapEvents(): PublishRelay<MapEvent>
+    fun analytics(): Analytics
   }
 
   @dagger.Module

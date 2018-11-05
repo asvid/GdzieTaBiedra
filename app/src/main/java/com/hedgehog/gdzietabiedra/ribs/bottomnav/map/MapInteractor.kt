@@ -6,6 +6,12 @@ import com.hedgehog.gdzietabiedra.appservice.map.MapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.ShopMarker
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapEvent.ShopSelected
+import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
+import com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.MAP_MOVE
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.NAVIGATION_START
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.SELECT_SHOP_ON_MAP
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
 import com.jakewharton.rxrelay2.PublishRelay
@@ -34,9 +40,13 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
   lateinit var shopsService: ShopService
   @Inject
   lateinit var mapEvents: PublishRelay<MapEvent>
+  @Inject
+  lateinit var analytics: Analytics
 
   private lateinit var mapProvider: MapProvider
   private val mapSubject = BehaviorSubject.create<MapProvider>()
+
+  override fun getRibName(): String = "Map"
 
   override fun didBecomeActive(savedInstanceState: Bundle?) {
     super.didBecomeActive(savedInstanceState)
@@ -46,6 +56,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
     handleMapMoved()
     handleNavigationClicked()
     handleShowingShopOnMap()
+    analytics.log(EventType.Screen(getRibName()))
   }
 
   private fun handleShowingShopOnMap() {
@@ -100,6 +111,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
               }
         }
         .subscribeWithErrorLogging {
+          analytics.log(EventType.Event(NAVIGATION_START))
           presenter.startNavigation(it.shop)
         }
         .addToDisposables()
@@ -113,6 +125,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
         }
         .toFlowable(LATEST)
         .flatMap {
+          analytics.log(EventType.Event(MAP_MOVE))
           presenter.switchNavigationButton(false)
           mapProvider.clearMap()
           shopsService.getShopsInRange(it, 0.1)
@@ -143,6 +156,7 @@ class MapInteractor : BaseInteractor<MapInteractor.MapPresenter, MapRouter>() {
           it.shopMarkerClicked()
         }
         .subscribeWithErrorLogging {
+          analytics.log(EventType.Event(SELECT_SHOP_ON_MAP))
           presenter.switchNavigationButton(true)
         }.addToDisposables()
   }
