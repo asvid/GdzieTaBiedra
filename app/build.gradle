@@ -179,4 +179,13 @@ dokka {
   externalDocumentationLink {
     url = new URL("http://jakewharton.github.io/timber/")
   }
+
+  //  module links
+  noStdlibLink = true
+  externalDocumentationLink {
+    url = new URL("file://$outputDirectory/domain/")
+    packageListUrl = new URL(url.toString() + "package-list")
+    System.out.println("URL: $url")
+    System.out.println("packageListUrl: $packageListUrl")
+  }
 }
