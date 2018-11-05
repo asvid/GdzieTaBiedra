@@ -21,10 +21,10 @@ android {
 
   signingConfigs {
     config {
-      keyAlias 'asvid'
-      keyPassword 'Rnk2ig&yj'
-      storeFile file('/home/adam/repo/GdzieTaBiedra/keystore.jks')
-      storePassword 'Rnk2ig&yj'
+      keyAlias keystoreProperties['keyAlias']
+      keyPassword keystoreProperties['keyPassword']
+      storeFile keystoreProperties['storeFile']
+      storePassword keystoreProperties['storePassword']
     }
   }
 
