@@ -1,8 +1,8 @@
 package com.hedgehog.gdzietabiedra.di.modules
 
 import android.content.Context
-import asvid.github.io.roomapp.data.migration.Migration
-import asvid.github.io.roomapp.data.migration.VersionMigration
+import com.hedgehog.gdzietabiedra.data.migration.Migration
+import com.hedgehog.gdzietabiedra.data.migration.VersionMigration
 import com.hedgehog.gdzietabiedra.data.CopyDb
 import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import dagger.Module

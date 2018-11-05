@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`ShopSelected(shop: Shop)`
+`ShopSelected(shop: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`)`

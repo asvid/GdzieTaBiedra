@@ -1,4 +1,4 @@
-[asvid.github.io.roomapp.data.repository](../index.md) / [RxCrudRepository](index.md) / [saveAll](./save-all.md)
+[com.hedgehog.gdzietabiedra.data.repository](../index.md) / [RxCrudRepository](index.md) / [saveAll](./save-all.md)
 
 # saveAll
 

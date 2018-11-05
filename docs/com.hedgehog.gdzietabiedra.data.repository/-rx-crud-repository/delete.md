@@ -1,4 +1,4 @@
-[asvid.github.io.roomapp.data.repository](../index.md) / [RxCrudRepository](index.md) / [delete](./delete.md)
+[com.hedgehog.gdzietabiedra.data.repository](../index.md) / [RxCrudRepository](index.md) / [delete](./delete.md)
 
 # delete
 

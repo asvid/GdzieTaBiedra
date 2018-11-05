@@ -1,6 +1,6 @@
-[asvid.github.io.roomapp.data.repository](./index.md)
+[com.hedgehog.gdzietabiedra.data.repository](./index.md)
 
-## Package asvid.github.io.roomapp.data.repository
+## Package com.hedgehog.gdzietabiedra.data.repository
 
 ### Types
 

@@ -1,4 +1,4 @@
-package asvid.github.io.roomapp.data.repository
+package com.hedgehog.gdzietabiedra.data.repository
 
 /**
  * Central repository marker interface.

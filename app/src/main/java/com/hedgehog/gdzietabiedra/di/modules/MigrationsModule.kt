@@ -1,7 +1,7 @@
 package com.hedgehog.gdzietabiedra.di.modules
 
-import asvid.github.io.roomapp.data.migration.Version0Migration
-import asvid.github.io.roomapp.data.migration.VersionMigration
+import com.hedgehog.gdzietabiedra.data.migration.Version0Migration
+import com.hedgehog.gdzietabiedra.data.migration.VersionMigration
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntKey

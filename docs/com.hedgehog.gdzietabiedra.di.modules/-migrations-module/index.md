@@ -14,4 +14,4 @@
 
 | Name | Summary |
 |---|---|
-| [provideVersion1Migration](provide-version1-migration.md) | `fun provideVersion1Migration(): `[`VersionMigration`](../../asvid.github.io.roomapp.data.migration/-version-migration/index.md) |
+| [provideVersion1Migration](provide-version1-migration.md) | `fun provideVersion1Migration(): `[`VersionMigration`](../../com.hedgehog.gdzietabiedra.data.migration/-version-migration/index.md) |

@@ -1,4 +1,4 @@
-package asvid.github.io.roomapp.data.migration
+package com.hedgehog.gdzietabiedra.data.migration
 
 import io.realm.DynamicRealm
 

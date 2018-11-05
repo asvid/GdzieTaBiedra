@@ -8,10 +8,10 @@
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ShopSelected(shop: Shop)` |
+| [&lt;init&gt;](-init-.md) | `ShopSelected(shop: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [shop](shop.md) | `val shop: Shop` |
+| [shop](shop.md) | `val shop: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md) |

@@ -24,7 +24,7 @@ android {
     config {
       keyAlias keystoreProperties['keyAlias']
       keyPassword keystoreProperties['keyPassword']
-      storeFile keystoreProperties['storeFile']
+      storeFile file(keystoreProperties['storeFile'])
       storePassword keystoreProperties['storePassword']
     }
   }
@@ -181,11 +181,7 @@ dokka {
   }
 
   //  module links
-  noStdlibLink = true
   externalDocumentationLink {
     url = new URL("file://$outputDirectory/domain/")
-    packageListUrl = new URL(url.toString() + "package-list")
-    System.out.println("URL: $url")
-    System.out.println("packageListUrl: $packageListUrl")
   }
 }

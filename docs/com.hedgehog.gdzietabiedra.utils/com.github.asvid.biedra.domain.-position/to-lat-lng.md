@@ -2,4 +2,4 @@
 
 # toLatLng
 
-`fun Position.toLatLng(): LatLng`
+`fun `[`Position`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.md)`.toLatLng(): LatLng`

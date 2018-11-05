@@ -18,5 +18,5 @@ Top level view for {@link MapBuilder.MapScope}.
 |---|---|
 | [initView](init-view.md) | `fun initView(): `[`Single`](http://reactivex.io/RxJava/javadoc/io/reactivex/Single.html)`<`[`MapProvider`](../../com.hedgehog.gdzietabiedra.appservice.map/-map-provider/index.md)`>` |
 | [navigationButtonListener](navigation-button-listener.md) | `fun navigationButtonListener(): `[`Observable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html)`<`[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`>` |
-| [startNavigation](start-navigation.md) | `fun startNavigation(shop: Shop): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [startNavigation](start-navigation.md) | `fun startNavigation(shop: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [switchNavigationButton](switch-navigation-button.md) | `fun switchNavigationButton(visible: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

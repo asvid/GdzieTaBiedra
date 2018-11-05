@@ -4,4 +4,4 @@
 
 | Name | Summary |
 |---|---|
-| [toLatLng](to-lat-lng.md) | `fun Position.toLatLng(): LatLng` |
+| [toLatLng](to-lat-lng.md) | `fun `[`Position`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.md)`.toLatLng(): LatLng` |

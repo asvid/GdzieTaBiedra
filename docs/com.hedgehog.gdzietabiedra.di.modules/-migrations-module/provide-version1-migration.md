@@ -2,4 +2,4 @@
 
 # provideVersion1Migration
 
-`@Provides @IntoMap @IntKey(0) fun provideVersion1Migration(): `[`VersionMigration`](../../asvid.github.io.roomapp.data.migration/-version-migration/index.md)
+`@Provides @IntoMap @IntKey(0) fun provideVersion1Migration(): `[`VersionMigration`](../../com.hedgehog.gdzietabiedra.data.migration/-version-migration/index.md)

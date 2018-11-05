@@ -15,14 +15,14 @@ $dokka.location:com.hedgehog.gdzietabiedra.utils$toDate(kotlin.String, kotlin.St
 $dokka.location:com.hedgehog.gdzietabiedra.utils$toLatLng(com.github.asvid.biedra.domain.Position)com.hedgehog.gdzietabiedra.utils/com.github.asvid.biedra.domain.-position/to-lat-lng.md
 $dokka.location:com.hedgehog.gdzietabiedra.utils$toLocalNumberFormat(kotlin.Int, java.util.Locale)com.hedgehog.gdzietabiedra.utils/kotlin.-int/to-local-number-format.md
 $dokka.location:com.hedgehog.gdzietabiedra.utils$toPosition(com.google.android.gms.maps.model.LatLng)com.hedgehog.gdzietabiedra.utils/com.google.android.gms.maps.model.-lat-lng/to-position.md
-asvid.github.io.roomapp.data.migration
-asvid.github.io.roomapp.data.repository
 com.hedgehog.gdzietabiedra
 com.hedgehog.gdzietabiedra.api
 com.hedgehog.gdzietabiedra.api.response.shop
 com.hedgehog.gdzietabiedra.appservice
 com.hedgehog.gdzietabiedra.appservice.map
 com.hedgehog.gdzietabiedra.data
+com.hedgehog.gdzietabiedra.data.migration
+com.hedgehog.gdzietabiedra.data.repository
 com.hedgehog.gdzietabiedra.data.repository.shops
 com.hedgehog.gdzietabiedra.di
 com.hedgehog.gdzietabiedra.di.components

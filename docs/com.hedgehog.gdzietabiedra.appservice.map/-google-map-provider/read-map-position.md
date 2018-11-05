@@ -2,7 +2,7 @@
 
 # readMapPosition
 
-`fun readMapPosition(): Position`
+`fun readMapPosition(): `[`Position`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.md)
 
 Overrides [MapProvider.readMapPosition](../-map-provider/read-map-position.md)
 

@@ -2,4 +2,4 @@
 
 # selectShop
 
-`abstract fun selectShop(shop: Shop): `[`Completable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Completable.html)
+`abstract fun selectShop(shop: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`): `[`Completable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Completable.html)

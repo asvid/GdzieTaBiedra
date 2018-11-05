@@ -1,8 +1,7 @@
-package asvid.github.io.roomapp.data.repository
+package com.hedgehog.gdzietabiedra.data.repository
 
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Maybe
 import io.reactivex.Single
 
 interface RxCrudRepository<M, I> : Repository<M, I> {

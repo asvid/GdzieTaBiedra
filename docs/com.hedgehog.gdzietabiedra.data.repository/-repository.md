@@ -1,4 +1,4 @@
-[asvid.github.io.roomapp.data.repository](index.md) / [Repository](./-repository.md)
+[com.hedgehog.gdzietabiedra.data.repository](index.md) / [Repository](./-repository.md)
 
 # Repository
 
@@ -9,8 +9,6 @@ Central repository marker interface.
 **Parameters**
 
 **Parameters**
-
-
 
 ### Inheritors
 

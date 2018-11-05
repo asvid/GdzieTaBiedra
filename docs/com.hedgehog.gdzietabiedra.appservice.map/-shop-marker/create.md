@@ -2,4 +2,4 @@
 
 # create
 
-`fun create(shop: Shop): `[`ShopMarker`](index.md)
+`fun create(shop: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`): `[`ShopMarker`](index.md)

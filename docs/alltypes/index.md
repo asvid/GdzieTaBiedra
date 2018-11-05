@@ -47,18 +47,18 @@
 | [com.hedgehog.gdzietabiedra.appservice.map.MapZoom](../com.hedgehog.gdzietabiedra.appservice.map/-map-zoom/index.md) |  |
 | [com.hedgehog.gdzietabiedra.utils.views.MarginItemDecoration](../com.hedgehog.gdzietabiedra.utils.views/-margin-item-decoration/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.MenuItem](../com.hedgehog.gdzietabiedra.ribs.bottomnav/-menu-item/index.md) |  |
-| [asvid.github.io.roomapp.data.migration.Migration](../asvid.github.io.roomapp.data.migration/-migration/index.md) |  |
+| [com.hedgehog.gdzietabiedra.data.migration.Migration](../com.hedgehog.gdzietabiedra.data.migration/-migration/index.md) |  |
 | [com.hedgehog.gdzietabiedra.di.modules.MigrationsModule](../com.hedgehog.gdzietabiedra.di.modules/-migrations-module/index.md) |  |
 | [io.reactivex.Observable](../com.hedgehog.gdzietabiedra.utils/io.reactivex.-observable/index.md) (extensions in package com.hedgehog.gdzietabiedra.utils) |  |
 | [com.github.asvid.biedra.domain.Position](../com.hedgehog.gdzietabiedra.utils/com.github.asvid.biedra.domain.-position/index.md) (extensions in package com.hedgehog.gdzietabiedra.utils) |  |
-| [asvid.github.io.roomapp.data.repository.Repository](../asvid.github.io.roomapp.data.repository/-repository.md) | Central repository marker interface. |
+| [com.hedgehog.gdzietabiedra.data.repository.Repository](../com.hedgehog.gdzietabiedra.data.repository/-repository.md) | Central repository marker interface. |
 | [com.uber.rib.core.RestorableRouter](../com.uber.rib.core/-restorable-router/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.RootBuilder](../com.hedgehog.gdzietabiedra.ribs/-root-builder/index.md) | Builder for the {@link RootScope}. |
 | [com.hedgehog.gdzietabiedra.ribs.RootInteractor](../com.hedgehog.gdzietabiedra.ribs/-root-interactor/index.md) | Coordinates Business Logic for [RootScope](#). |
 | [com.hedgehog.gdzietabiedra.ribs.RootListener](../com.hedgehog.gdzietabiedra.ribs/-root-listener/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.RootRouter](../com.hedgehog.gdzietabiedra.ribs/-root-router/index.md) | Adds and removes children of {@link RootBuilder.RootScope}. |
 | [com.hedgehog.gdzietabiedra.ribs.RootView](../com.hedgehog.gdzietabiedra.ribs/-root-view/index.md) | Top level view for {@link RootBuilder.RootScope}. |
-| [asvid.github.io.roomapp.data.repository.RxCrudRepository](../asvid.github.io.roomapp.data.repository/-rx-crud-repository/index.md) |  |
+| [com.hedgehog.gdzietabiedra.data.repository.RxCrudRepository](../com.hedgehog.gdzietabiedra.data.repository/-rx-crud-repository/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder](../com.hedgehog.gdzietabiedra.ribs.bottomnav.settings/-settings-builder/index.md) | Builder for the {@link SettingsScope}. |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsInteractor](../com.hedgehog.gdzietabiedra.ribs.bottomnav.settings/-settings-interactor/index.md) | Coordinates Business Logic for [SettingsScope](#). |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsRouter](../com.hedgehog.gdzietabiedra.ribs.bottomnav.settings/-settings-router/index.md) | Adds and removes children of {@link SettingsBuilder.SettingsScope}. |
@@ -84,5 +84,5 @@
 | [com.hedgehog.gdzietabiedra.ribs.splash.SplashRouter](../com.hedgehog.gdzietabiedra.ribs.splash/-splash-router/index.md) | Adds and removes children of {@link SplashBuilder.SplashScope}. |
 | [com.hedgehog.gdzietabiedra.ribs.splash.SplashView](../com.hedgehog.gdzietabiedra.ribs.splash/-splash-view/index.md) | Top level view for {@link SplashBuilder.SplashScope}. |
 | [kotlin.String](../com.hedgehog.gdzietabiedra.utils/kotlin.-string/index.md) (extensions in package com.hedgehog.gdzietabiedra.utils) |  |
-| [asvid.github.io.roomapp.data.migration.Version0Migration](../asvid.github.io.roomapp.data.migration/-version0-migration/index.md) |  |
-| [asvid.github.io.roomapp.data.migration.VersionMigration](../asvid.github.io.roomapp.data.migration/-version-migration/index.md) |  |
+| [com.hedgehog.gdzietabiedra.data.migration.Version0Migration](../com.hedgehog.gdzietabiedra.data.migration/-version0-migration/index.md) |  |
+| [com.hedgehog.gdzietabiedra.data.migration.VersionMigration](../com.hedgehog.gdzietabiedra.data.migration/-version-migration/index.md) |  |

@@ -1,6 +1,6 @@
-[asvid.github.io.roomapp.data.migration](./index.md)
+[com.hedgehog.gdzietabiedra.data.migration](./index.md)
 
-## Package asvid.github.io.roomapp.data.migration
+## Package com.hedgehog.gdzietabiedra.data.migration
 
 ### Types
 
