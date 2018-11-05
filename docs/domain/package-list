@@ -1,0 +1,5 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+
+com.github.asvid.biedra.domain
+com.hedgehog.gdzietabiedra.domain

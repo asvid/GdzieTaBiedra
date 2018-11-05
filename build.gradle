@@ -21,6 +21,7 @@ buildscript {
     classpath ProjectDeps.coveralls
     classpath ProjectDeps.jacoco
     classpath ProjectDeps.crashlytics
+    classpath ProjectDeps.dokka
   }
 }
 

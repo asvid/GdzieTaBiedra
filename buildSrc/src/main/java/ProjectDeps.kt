@@ -9,4 +9,5 @@ object ProjectDeps {
   const val coveralls = "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
   const val jacoco = "com.dicedmelon.gradle:jacoco-android:0.1.2"
   const val crashlytics = "io.fabric.tools:gradle:1.25.4"
+  const val dokka = "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.17"
 }
