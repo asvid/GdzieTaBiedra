@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MapProvider - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.hedgehog.gdzietabiedra.appservice.map</a>&nbsp;/&nbsp;<a href="./index.html">MapProvider</a><br/>
+<br/>
+<h1>MapProvider</h1>
+<code><span class="keyword">interface </span><span class="identifier">MapProvider</span></code>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="clear-map.html">clearMap</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">clearMap</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="draw-marker.html">drawMarker</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">drawMarker</span><span class="symbol">(</span><span class="identifier" id="com.hedgehog.gdzietabiedra.appservice.map.MapProvider$drawMarker(com.hedgehog.gdzietabiedra.appservice.map.ShopMarker, kotlin.Boolean)/point">point</span><span class="symbol">:</span>&nbsp;<a href="../-shop-marker/index.html"><span class="identifier">ShopMarker</span></a><span class="symbol">, </span><span class="identifier" id="com.hedgehog.gdzietabiedra.appservice.map.MapProvider$drawMarker(com.hedgehog.gdzietabiedra.appservice.map.ShopMarker, kotlin.Boolean)/showInfo">showInfo</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="draw-markers.html">drawMarkers</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">drawMarkers</span><span class="symbol">(</span><span class="identifier" id="com.hedgehog.gdzietabiedra.appservice.map.MapProvider$drawMarkers(kotlin.collections.Collection((com.hedgehog.gdzietabiedra.appservice.map.ShopMarker)))/points">points</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><span class="identifier">Collection</span></a><span class="symbol">&lt;</span><a href="../-shop-marker/index.html"><span class="identifier">ShopMarker</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="go-to-position.html">goToPosition</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">goToPosition</span><span class="symbol">(</span><span class="identifier" id="com.hedgehog.gdzietabiedra.appservice.map.MapProvider$goToPosition(com.github.asvid.biedra.domain.Position, com.hedgehog.gdzietabiedra.appservice.map.MapZoom)/position">position</span><span class="symbol">:</span>&nbsp;<a href="file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.html"><span class="identifier">Position</span></a><span class="symbol">, </span><span class="identifier" id="com.hedgehog.gdzietabiedra.appservice.map.MapProvider$goToPosition(com.github.asvid.biedra.domain.Position, com.hedgehog.gdzietabiedra.appservice.map.MapZoom)/mapZoom">mapZoom</span><span class="symbol">:</span>&nbsp;<a href="../-map-zoom/index.html"><span class="identifier">MapZoom</span></a>&nbsp;<span class="symbol">=</span>&nbsp;MEDIUM<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="map-clicked.html">mapClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">mapClicked</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="map-moved.html">mapMoved</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">mapMoved</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.html"><span class="identifier">Position</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="read-map-position.html">readMapPosition</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">readMapPosition</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.html"><span class="identifier">Position</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="select-shop.html">selectShop</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">selectShop</span><span class="symbol">(</span><span class="identifier" id="com.hedgehog.gdzietabiedra.appservice.map.MapProvider$selectShop(com.hedgehog.gdzietabiedra.domain.Shop)/shop">shop</span><span class="symbol">:</span>&nbsp;<a href="file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.html"><span class="identifier">Shop</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="http://reactivex.io/RxJava/javadoc/io/reactivex/Completable.html"><span class="identifier">Completable</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="shop-marker-clicked.html">shopMarkerClicked</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">shopMarkerClicked</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html"><span class="identifier">Observable</span></a><span class="symbol">&lt;</span><a href="../-shop-marker/index.html"><span class="identifier">ShopMarker</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-google-map-provider/index.html">GoogleMapProvider</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">GoogleMapProvider</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">MapProvider</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

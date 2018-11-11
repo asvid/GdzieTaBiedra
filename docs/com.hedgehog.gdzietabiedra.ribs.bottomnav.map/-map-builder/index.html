@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MapBuilder - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.hedgehog.gdzietabiedra.ribs.bottomnav.map</a>&nbsp;/&nbsp;<a href="./index.html">MapBuilder</a><br/>
+<br/>
+<h1>MapBuilder</h1>
+<code><span class="keyword">class </span><span class="identifier">MapBuilder</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewBuilder</span><span class="symbol">&lt;</span><a href="../-map-view/index.html"><span class="identifier">MapView</span></a><span class="symbol">,</span>&nbsp;<a href="../-map-router/index.html"><span class="identifier">MapRouter</span></a><span class="symbol">,</span>&nbsp;<a href="-parent-component/index.html"><span class="identifier">ParentComponent</span></a><span class="symbol">&gt;</span></code>
+<p>Builder for the {@link MapScope}.</p>
+<p>TODO describe this scope's responsibility as a whole.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-builder-component/index.html">BuilderComponent</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">BuilderComponent</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-component/index.html">Component</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Component</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">InteractorBaseComponent</span><span class="symbol">&lt;</span><a href="../-map-interactor/index.html"><span class="identifier">MapInteractor</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="-builder-component/index.html"><span class="identifier">BuilderComponent</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-module/index.html">Module</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Module</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-parent-component/index.html">ParentComponent</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ParentComponent</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">MapBuilder</span><span class="symbol">(</span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder$<init>(com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder.ParentComponent)/dependency">dependency</span><span class="symbol">:</span>&nbsp;<a href="-parent-component/index.html"><span class="identifier">ParentComponent</span></a><span class="symbol">)</span></code>
+<p>Builder for the {@link MapScope}.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="build.html">build</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">build</span><span class="symbol">(</span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder$build(android.view.ViewGroup)/parentViewGroup">parentViewGroup</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-map-router/index.html"><span class="identifier">MapRouter</span></a></code>
+<p>Builds a new <a href="../-map-router/index.html">MapRouter</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="inflate-view.html">inflateView</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">inflateView</span><span class="symbol">(</span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder$inflateView(android.view.LayoutInflater, android.view.ViewGroup)/inflater">inflater</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/LayoutInflater.html"><span class="identifier">LayoutInflater</span></a><span class="symbol">, </span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder$inflateView(android.view.LayoutInflater, android.view.ViewGroup)/parentViewGroup">parentViewGroup</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-map-view/index.html"><span class="identifier">MapView</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

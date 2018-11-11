@@ -1,0 +1,14 @@
+task printLocalDeps{
+  group "documentation"
+  doLast{
+    Set<ProjectDependency> deps =
+            project.configurations.collectMany {
+              it.allDependencies
+            }.findAll {
+              it instanceof ProjectDependency
+            }
+    deps.each {
+      println it.name
+    }
+  }
+}

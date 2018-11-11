@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist - </title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href="./index.html">com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist</a><br/>
+<br/>
+<h2>Package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-shop-list-adapter/index.html">ShopListAdapter</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ShopListAdapter</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView/Adapter.html"><span class="identifier">Adapter</span></a><span class="symbol">&lt;</span><a href="-shop-list-item-v-h/index.html"><span class="identifier">ShopListItemVH</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-shop-list-item-v-h/index.html">ShopListItemVH</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ShopListItemVH</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView/ViewHolder.html"><span class="identifier">ViewHolder</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-shop-list-listener/index.html">ShopListListener</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ShopListListener</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-shops-list-builder/index.html">ShopsListBuilder</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ShopsListBuilder</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewBuilder</span><span class="symbol">&lt;</span><a href="-shops-list-view/index.html"><span class="identifier">ShopsListView</span></a><span class="symbol">,</span>&nbsp;<a href="-shops-list-router/index.html"><span class="identifier">ShopsListRouter</span></a><span class="symbol">,</span>&nbsp;<a href="-shops-list-builder/-parent-component/index.html"><span class="identifier">ParentComponent</span></a><span class="symbol">&gt;</span></code>
+<p>Builder for the {@link ShopsListScope}.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-shops-list-interactor/index.html">ShopsListInteractor</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ShopsListInteractor</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.uber.rib.core/-base-interactor/index.html"><span class="identifier">BaseInteractor</span></a><span class="symbol">&lt;</span><a href="-shops-list-interactor/-shops-list-presenter/index.html"><span class="identifier">ShopsListPresenter</span></a><span class="symbol">,</span>&nbsp;<a href="-shops-list-router/index.html"><span class="identifier">ShopsListRouter</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-shops-list-router/index.html">ShopsListRouter</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ShopsListRouter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewRouter</span><span class="symbol">&lt;</span><a href="-shops-list-view/index.html"><span class="identifier">ShopsListView</span></a><span class="symbol">,</span>&nbsp;<a href="-shops-list-interactor/index.html"><span class="identifier">ShopsListInteractor</span></a><span class="symbol">,</span>&nbsp;<a href="-shops-list-builder/-component/index.html"><span class="identifier">Component</span></a><span class="symbol">&gt;</span></code>
+<p>Adds and removes children of {@link ShopsListBuilder.ShopsListScope}.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-shops-list-view/index.html">ShopsListView</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ShopsListView</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/widget/LinearLayout.html"><span class="identifier">LinearLayout</span></a><span class="symbol">, </span><a href="-shops-list-interactor/-shops-list-presenter/index.html"><span class="identifier">ShopsListPresenter</span></a></code>
+<p>Top level view for {@link ShopsListBuilder.ShopsListScope}.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-r-a-n-g-e.html">RANGE</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">RANGE</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a></code>
+<p>Coordinates Business Logic for <a href="#">ShopsListScope</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

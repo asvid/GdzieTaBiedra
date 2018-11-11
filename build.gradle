@@ -43,3 +43,81 @@ allprojects {
 task clean(type: Delete) {
   delete rootProject.buildDir
 }
+
+subprojects{
+
+  if(it.name == "app"){
+    apply plugin: 'com.android.application'
+  }else{
+    apply plugin: 'com.android.library'
+  }
+
+  apply plugin: 'org.jetbrains.dokka-android'
+  apply plugin: 'kotlin-android'
+  apply plugin: 'kotlin-android-extensions'
+  apply plugin: 'kotlin-kapt'
+
+  android{
+    compileSdkVersion Build.compileSdkVersion
+
+    defaultConfig {
+
+      buildToolsVersion Build.buildToolsVersion
+      minSdkVersion Build.minSdkVersion
+      targetSdkVersion Build.targetSdkVersion
+      compileSdkVersion Build.compileSdkVersion
+      versionCode 1
+      versionName "2.0"
+
+      testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+      abortOnError false
+    }
+    if (project.hasProperty('devBuild')) {
+      splits.abi.enable = false
+      splits.density.enable = false
+      aaptOptions.cruncherEnabled = false
+    }
+    dexOptions {
+      preDexLibraries = true
+    }
+    testOptions {
+      animationsDisabled = true
+      unitTests {
+        returnDefaultValues = true
+      }
+    }
+  }
+
+  dokka {
+
+    outputDirectory = "$rootDir/docs"
+    outputFormat = "html"
+
+    includeNonPublic = false
+    skipDeprecated = false
+    reportUndocumented = false
+    skipEmptyPackages = true
+
+    linkMapping {
+      dir = "src/main/java"
+      url = "https://github.com/asvid/GdzieTaBiedra/blob/master/app/src/main/java"
+      suffix = "#L"
+    }
+
+    externalDocumentationLink {
+      url = new URL("https://developer.android.com/reference/")
+      packageListUrl = new URL("https://developer.android.com/reference/android/support/package-list")
+    }
+    externalDocumentationLink {
+      url = new URL("https://docs.oracle.com/javase/7/docs/api/")
+    }
+    externalDocumentationLink {
+      url = new URL("http://reactivex.io/RxJava/javadoc/")
+    }
+    externalDocumentationLink {
+      url = new URL("http://jakewharton.github.io/timber/")
+    }
+  }
+}

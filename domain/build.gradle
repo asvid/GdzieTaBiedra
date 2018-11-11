@@ -1,24 +1,5 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-
 
 android {
-  compileSdkVersion Build.compileSdkVersion
-
-  defaultConfig {
-
-    buildToolsVersion Build.buildToolsVersion
-    minSdkVersion Build.minSdkVersion
-    targetSdkVersion Build.targetSdkVersion
-    compileSdkVersion Build.compileSdkVersion
-    versionCode 1
-    versionName "2.0"
-
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-  }
-
   buildTypes {
     release {
       minifyEnabled false
@@ -31,37 +12,8 @@ dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation External.kotlin
 }
-apply plugin: 'org.jetbrains.dokka-android'
+
 dokka {
-
-  outputFormat = "gfm"
   moduleName = project.name
-  outputDirectory = "$rootDir/docs"
-
   includes = ['extra.md']
-
-  includeNonPublic = false
-  skipDeprecated = false
-  reportUndocumented = false
-  skipEmptyPackages = true
-
-  linkMapping {
-    dir = "src/main/java"
-    url = "https://github.com/asvid/GdzieTaBiedra/blob/master/app/src/main/java"
-    suffix = "#L"
-  }
-
-  externalDocumentationLink {
-    url = new URL("https://developer.android.com/reference/")
-    packageListUrl = new URL("https://developer.android.com/reference/android/support/package-list")
-  }
-  externalDocumentationLink {
-    url = new URL("https://docs.oracle.com/javase/7/docs/api/")
-  }
-  externalDocumentationLink {
-    url = new URL("http://reactivex.io/RxJava/javadoc/")
-  }
-  externalDocumentationLink {
-    url = new URL("http://jakewharton.github.io/timber/")
-  }
 }

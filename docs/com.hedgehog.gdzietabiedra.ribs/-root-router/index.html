@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RootRouter - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.hedgehog.gdzietabiedra.ribs</a>&nbsp;/&nbsp;<a href="./index.html">RootRouter</a><br/>
+<br/>
+<h1>RootRouter</h1>
+<code><span class="keyword">class </span><span class="identifier">RootRouter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewRouter</span><span class="symbol">&lt;</span><a href="../-root-view/index.html"><span class="identifier">RootView</span></a><span class="symbol">,</span>&nbsp;<a href="../-root-interactor/index.html"><span class="identifier">RootInteractor</span></a><span class="symbol">,</span>&nbsp;<a href="../-root-builder/-component/index.html"><span class="identifier">Component</span></a><span class="symbol">&gt;</span></code>
+<p>Adds and removes children of {@link RootBuilder.RootScope}.</p>
+<p>TODO describe the possible child configurations of this scope.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">RootRouter</span><span class="symbol">(</span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.RootRouter$<init>(com.hedgehog.gdzietabiedra.ribs.RootView, com.hedgehog.gdzietabiedra.ribs.RootInteractor, com.hedgehog.gdzietabiedra.ribs.RootBuilder.Component, com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder, com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder)/view">view</span><span class="symbol">:</span>&nbsp;<a href="../-root-view/index.html"><span class="identifier">RootView</span></a><span class="symbol">, </span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.RootRouter$<init>(com.hedgehog.gdzietabiedra.ribs.RootView, com.hedgehog.gdzietabiedra.ribs.RootInteractor, com.hedgehog.gdzietabiedra.ribs.RootBuilder.Component, com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder, com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder)/interactor">interactor</span><span class="symbol">:</span>&nbsp;<a href="../-root-interactor/index.html"><span class="identifier">RootInteractor</span></a><span class="symbol">, </span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.RootRouter$<init>(com.hedgehog.gdzietabiedra.ribs.RootView, com.hedgehog.gdzietabiedra.ribs.RootInteractor, com.hedgehog.gdzietabiedra.ribs.RootBuilder.Component, com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder, com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder)/component">component</span><span class="symbol">:</span>&nbsp;<a href="../-root-builder/-component/index.html"><span class="identifier">Component</span></a><span class="symbol">, </span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.RootRouter$<init>(com.hedgehog.gdzietabiedra.ribs.RootView, com.hedgehog.gdzietabiedra.ribs.RootInteractor, com.hedgehog.gdzietabiedra.ribs.RootBuilder.Component, com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder, com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder)/bottomNavBuilder">bottomNavBuilder</span><span class="symbol">:</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav/-bottom-nav-builder/index.html"><span class="identifier">BottomNavBuilder</span></a><span class="symbol">, </span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.RootRouter$<init>(com.hedgehog.gdzietabiedra.ribs.RootView, com.hedgehog.gdzietabiedra.ribs.RootInteractor, com.hedgehog.gdzietabiedra.ribs.RootBuilder.Component, com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder, com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder)/shoplistBuilder">shoplistBuilder</span><span class="symbol">:</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shops-list-builder/index.html"><span class="identifier">ShopsListBuilder</span></a><span class="symbol">, </span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.RootRouter$<init>(com.hedgehog.gdzietabiedra.ribs.RootView, com.hedgehog.gdzietabiedra.ribs.RootInteractor, com.hedgehog.gdzietabiedra.ribs.RootBuilder.Component, com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder, com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder)/mapBuilder">mapBuilder</span><span class="symbol">:</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.map/-map-builder/index.html"><span class="identifier">MapBuilder</span></a><span class="symbol">, </span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.RootRouter$<init>(com.hedgehog.gdzietabiedra.ribs.RootView, com.hedgehog.gdzietabiedra.ribs.RootInteractor, com.hedgehog.gdzietabiedra.ribs.RootBuilder.Component, com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder, com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder)/settingsBuilder">settingsBuilder</span><span class="symbol">:</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.settings/-settings-builder/index.html"><span class="identifier">SettingsBuilder</span></a><span class="symbol">, </span><span class="identifier" id="com.hedgehog.gdzietabiedra.ribs.RootRouter$<init>(com.hedgehog.gdzietabiedra.ribs.RootView, com.hedgehog.gdzietabiedra.ribs.RootInteractor, com.hedgehog.gdzietabiedra.ribs.RootBuilder.Component, com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapBuilder, com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder, com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder)/splashBuilder">splashBuilder</span><span class="symbol">:</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs.splash/-splash-builder/index.html"><span class="identifier">SplashBuilder</span></a><span class="symbol">)</span></code>
+<p>Adds and removes children of {@link RootBuilder.RootScope}.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="attach-bottom-nav.html">attachBottomNav</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">attachBottomNav</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="attach-map.html">attachMap</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">attachMap</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="attach-map-hidden.html">attachMapHidden</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">attachMapHidden</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="attach-settings.html">attachSettings</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">attachSettings</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="attach-shopslist.html">attachShopslist</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">attachShopslist</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="attach-splash-screen.html">attachSplashScreen</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">attachSplashScreen</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="detach-map.html">detachMap</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">detachMap</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="detach-settings.html">detachSettings</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">detachSettings</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="detach-shopslist.html">detachShopslist</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">detachShopslist</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="detach-splash-screen.html">detachSplashScreen</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">detachSplashScreen</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

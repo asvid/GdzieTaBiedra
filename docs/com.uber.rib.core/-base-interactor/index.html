@@ -1,0 +1,148 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>BaseInteractor - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.uber.rib.core</a>&nbsp;/&nbsp;<a href="./index.html">BaseInteractor</a><br/>
+<br/>
+<h1>BaseInteractor</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">BaseInteractor</span><span class="symbol">&lt;</span><span class="identifier">P</span><span class="symbol">, </span><span class="identifier">R</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Router</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">Interactor</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<span class="keyword">out</span>&nbsp;<span class="identifier">InteractorBaseComponent</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Interactor</span><span class="symbol">&lt;</span><a href="index.html#P"><span class="identifier">P</span></a><span class="symbol">,</span>&nbsp;<a href="index.html#R"><span class="identifier">R</span></a><span class="symbol">&gt;</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">BaseInteractor</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="model-key.html">modelKey</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">modelKey</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="add-disposable.html">addDisposable</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addDisposable</span><span class="symbol">(</span><span class="identifier" id="com.uber.rib.core.BaseInteractor$addDisposable(io.reactivex.disposables.Disposable)/disposable">disposable</span><span class="symbol">:</span>&nbsp;<a href="http://reactivex.io/RxJava/javadoc/io/reactivex/disposables/Disposable.html"><span class="identifier">Disposable</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="add-to-disposables.html">addToDisposables</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="http://reactivex.io/RxJava/javadoc/io/reactivex/disposables/Disposable.html"><span class="identifier">Disposable</span></a><span class="symbol">.</span><span class="identifier">addToDisposables</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="did-become-active.html">didBecomeActive</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">didBecomeActive</span><span class="symbol">(</span><span class="identifier" id="com.uber.rib.core.BaseInteractor$didBecomeActive(com.uber.rib.core.Bundle)/savedInstanceState">savedInstanceState</span><span class="symbol">:</span>&nbsp;<span class="identifier">Bundle</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="get-rib-name.html">getRibName</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getRibName</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-save-instance-state.html">onSaveInstanceState</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onSaveInstanceState</span><span class="symbol">(</span><span class="identifier" id="com.uber.rib.core.BaseInteractor$onSaveInstanceState(com.uber.rib.core.Bundle)/outState">outState</span><span class="symbol">:</span>&nbsp;<span class="identifier">Bundle</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="restore-router.html">restoreRouter</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Router</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">Interactor</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">,</span>&nbsp;<span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<span class="keyword">out</span>&nbsp;<span class="identifier">InteractorBaseComponent</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">&gt;</span> <span class="identifier">restoreRouter</span><span class="symbol">(</span><span class="identifier" id="com.uber.rib.core.BaseInteractor$restoreRouter(java.lang.Class((com.uber.rib.core.BaseInteractor.restoreRouter.T)), java.io.Serializable)/clazz">clazz</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/java/lang/Class.html"><span class="identifier">Class</span></a><span class="symbol">&lt;</span><a href="restore-router.html#T"><span class="identifier">T</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.uber.rib.core.BaseInteractor$restoreRouter(java.lang.Class((com.uber.rib.core.BaseInteractor.restoreRouter.T)), java.io.Serializable)/childInfo">childInfo</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/java/io/Serializable.html"><span class="identifier">Serializable</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="will-resign-active.html">willResignActive</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">willResignActive</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav/-bottom-nav-interactor/index.html">BottomNavInteractor</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">BottomNavInteractor</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">BaseInteractor</span></a><span class="symbol">&lt;</span><a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav/-bottom-nav-interactor/-bottom-nav-presenter/index.html"><span class="identifier">BottomNavPresenter</span></a><span class="symbol">,</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav/-bottom-nav-router/index.html"><span class="identifier">BottomNavRouter</span></a><span class="symbol">&gt;</span></code>
+<p>Coordinates Business Logic for <a href="#">BottomNavScope</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.map/-map-interactor/index.html">MapInteractor</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">MapInteractor</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">BaseInteractor</span></a><span class="symbol">&lt;</span><a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.map/-map-interactor/-map-presenter/index.html"><span class="identifier">MapPresenter</span></a><span class="symbol">,</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.map/-map-router/index.html"><span class="identifier">MapRouter</span></a><span class="symbol">&gt;</span></code>
+<p>Coordinates Business Logic for <a href="#">MapScope</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.hedgehog.gdzietabiedra.ribs/-root-interactor/index.html">RootInteractor</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">RootInteractor</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">BaseInteractor</span></a><span class="symbol">&lt;</span><a href="../../com.hedgehog.gdzietabiedra.ribs/-root-interactor/-root-presenter.html"><span class="identifier">RootPresenter</span></a><span class="symbol">,</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs/-root-router/index.html"><span class="identifier">RootRouter</span></a><span class="symbol">&gt;</span></code>
+<p>Coordinates Business Logic for <a href="#">RootScope</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.settings/-settings-interactor/index.html">SettingsInteractor</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SettingsInteractor</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">BaseInteractor</span></a><span class="symbol">&lt;</span><a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.settings/-settings-interactor/-settings-presenter/index.html"><span class="identifier">SettingsPresenter</span></a><span class="symbol">,</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.settings/-settings-router/index.html"><span class="identifier">SettingsRouter</span></a><span class="symbol">&gt;</span></code>
+<p>Coordinates Business Logic for <a href="#">SettingsScope</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shops-list-interactor/index.html">ShopsListInteractor</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ShopsListInteractor</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">BaseInteractor</span></a><span class="symbol">&lt;</span><a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shops-list-interactor/-shops-list-presenter/index.html"><span class="identifier">ShopsListPresenter</span></a><span class="symbol">,</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shops-list-router/index.html"><span class="identifier">ShopsListRouter</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../com.hedgehog.gdzietabiedra.ribs.splash/-splash-interactor/index.html">SplashInteractor</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SplashInteractor</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">BaseInteractor</span></a><span class="symbol">&lt;</span><a href="../../com.hedgehog.gdzietabiedra.ribs.splash/-splash-interactor/-splash-presenter/index.html"><span class="identifier">SplashPresenter</span></a><span class="symbol">,</span>&nbsp;<a href="../../com.hedgehog.gdzietabiedra.ribs.splash/-splash-router/index.html"><span class="identifier">SplashRouter</span></a><span class="symbol">&gt;</span></code>
+<p>Coordinates Business Logic for <a href="#">SplashScope</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
