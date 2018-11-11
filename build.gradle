@@ -44,11 +44,11 @@ task clean(type: Delete) {
   delete rootProject.buildDir
 }
 
-subprojects{
+subprojects {
 
-  if(it.name == "app"){
+  if (it.name == "app") {
     apply plugin: 'com.android.application'
-  }else{
+  } else {
     apply plugin: 'com.android.library'
   }
 
@@ -57,7 +57,7 @@ subprojects{
   apply plugin: 'kotlin-android-extensions'
   apply plugin: 'kotlin-kapt'
 
-  android{
+  android {
     compileSdkVersion Build.compileSdkVersion
 
     defaultConfig {
@@ -88,6 +88,10 @@ subprojects{
         returnDefaultValues = true
       }
     }
+    compileOptions {
+      sourceCompatibility 1.8
+      targetCompatibility 1.8
+    }
   }
 
   dokka {
@@ -100,16 +104,6 @@ subprojects{
     reportUndocumented = false
     skipEmptyPackages = true
 
-    linkMapping {
-      dir = "src/main/java"
-      url = "https://github.com/asvid/GdzieTaBiedra/blob/master/app/src/main/java"
-      suffix = "#L"
-    }
-
-    externalDocumentationLink {
-      url = new URL("https://developer.android.com/reference/")
-      packageListUrl = new URL("https://developer.android.com/reference/android/support/package-list")
-    }
     externalDocumentationLink {
       url = new URL("https://docs.oracle.com/javase/7/docs/api/")
     }

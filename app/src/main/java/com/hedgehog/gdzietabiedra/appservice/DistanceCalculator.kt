@@ -2,8 +2,23 @@ package com.hedgehog.gdzietabiedra.appservice
 
 import com.github.asvid.biedra.domain.Position
 
+/**
+ *  [DistanceCalculator] contains methods to calculate distance between [Position]s
+ *
+ * */
 class DistanceCalculator {
 
+  /**
+   * calculates distance in straight line between 2 [Position]s
+   *
+   * @param pointA first position
+   * @param pointB second position
+   *
+   * @return [Double] distance in straight line between 2 [Position]s
+   *
+   * @sample [com.hedgehog.gdzietabiedra.appservice.DistanceCalculatorSamples.calculateDistance]
+   *
+   * */
   fun calculateDistance(pointA: Position, pointB: Position): Double {
     val pk = (180f / Math.PI).toFloat()
 
@@ -12,14 +27,17 @@ class DistanceCalculator {
     val b1 = pointB.lat / pk
     val b2 = pointB.lng / pk
 
-    val t1 = Math.cos(a1.toDouble()) * Math.cos(a2.toDouble()) * Math.cos(b1.toDouble()) * Math.cos(
-        b2.toDouble())
-    val t2 = Math.cos(a1.toDouble()) * Math.sin(a2.toDouble()) * Math.cos(b1.toDouble()) * Math.sin(
-        b2.toDouble())
-    val t3 = Math.sin(a1.toDouble()) * Math.sin(b1.toDouble())
+    val t1 = Math.cos(a1) * Math.cos(a2) * Math.cos(b1) * Math.cos(b2)
+    val t2 = Math.cos(a1) * Math.sin(a2) * Math.cos(b1) * Math.sin(
+        b2)
+    val t3 = Math.sin(a1) * Math.sin(b1)
     val tt = Math.acos(t1 + t2 + t3)
 
     return 6366000 * tt
   }
 
+
+  fun calculateTest(): java.awt.color.ColorSpace {
+    return java.util.Observable()
+  }
 }
