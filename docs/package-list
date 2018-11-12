@@ -1,20 +1,20 @@
-$dokka.format:html
-$dokka.linkExtension:html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$async(io.reactivex.Observable((com.hedgehog.gdzietabiedra.utils.async.T)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-observable/async.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$async(io.reactivex.Single((com.hedgehog.gdzietabiedra.utils.async.T)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-single/async.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$print(java.util.Date, kotlin.String)com.hedgehog.gdzietabiedra.utils/java.util.-date/print.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$round(kotlin.Double, kotlin.Int)com.hedgehog.gdzietabiedra.utils/kotlin.-double/round.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Completable)com.hedgehog.gdzietabiedra.utils/io.reactivex.-completable/subscribe-with-error-logging.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Completable, kotlin.Function0((kotlin.Unit)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-completable/subscribe-with-error-logging.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Flowable((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)), kotlin.Function1((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T, kotlin.Unit)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-flowable/subscribe-with-error-logging.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Observable((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-observable/subscribe-with-error-logging.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Observable((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)), kotlin.Function1((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T, kotlin.Unit)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-observable/subscribe-with-error-logging.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Single((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-single/subscribe-with-error-logging.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Single((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)), kotlin.Function1((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T, kotlin.Unit)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-single/subscribe-with-error-logging.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$toDate(kotlin.String, kotlin.String)com.hedgehog.gdzietabiedra.utils/kotlin.-string/to-date.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$toLatLng(com.github.asvid.biedra.domain.Position)com.hedgehog.gdzietabiedra.utils/com.github.asvid.biedra.domain.-position/to-lat-lng.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$toLocalNumberFormat(kotlin.Int, java.util.Locale)com.hedgehog.gdzietabiedra.utils/kotlin.-int/to-local-number-format.html
-$dokka.location:com.hedgehog.gdzietabiedra.utils$toPosition(com.google.android.gms.maps.model.LatLng)com.hedgehog.gdzietabiedra.utils/com.google.android.gms.maps.model.-lat-lng/to-position.html
+$dokka.format:gfm
+$dokka.linkExtension:md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$async(io.reactivex.Observable((com.hedgehog.gdzietabiedra.utils.async.T)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-observable/async.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$async(io.reactivex.Single((com.hedgehog.gdzietabiedra.utils.async.T)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-single/async.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$print(java.util.Date, kotlin.String)com.hedgehog.gdzietabiedra.utils/java.util.-date/print.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$round(kotlin.Double, kotlin.Int)com.hedgehog.gdzietabiedra.utils/kotlin.-double/round.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Completable)com.hedgehog.gdzietabiedra.utils/io.reactivex.-completable/subscribe-with-error-logging.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Completable, kotlin.Function0((kotlin.Unit)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-completable/subscribe-with-error-logging.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Flowable((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)), kotlin.Function1((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T, kotlin.Unit)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-flowable/subscribe-with-error-logging.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Observable((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-observable/subscribe-with-error-logging.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Observable((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)), kotlin.Function1((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T, kotlin.Unit)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-observable/subscribe-with-error-logging.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Single((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-single/subscribe-with-error-logging.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Single((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)), kotlin.Function1((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T, kotlin.Unit)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-single/subscribe-with-error-logging.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$toDate(kotlin.String, kotlin.String)com.hedgehog.gdzietabiedra.utils/kotlin.-string/to-date.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$toLocalNumberFormat(kotlin.Int, java.util.Locale)com.hedgehog.gdzietabiedra.utils/kotlin.-int/to-local-number-format.md
+$dokka.location:com.hedgehog.gdzietabiedra.utils$toPosition(com.google.android.gms.maps.model.LatLng)com.hedgehog.gdzietabiedra.utils/com.google.android.gms.maps.model.-lat-lng/to-position.md
+com.github.asvid.biedra.domain
 com.hedgehog.gdzietabiedra
 com.hedgehog.gdzietabiedra.api
 com.hedgehog.gdzietabiedra.api.response.shop
@@ -27,6 +27,7 @@ com.hedgehog.gdzietabiedra.data.repository.shops
 com.hedgehog.gdzietabiedra.di
 com.hedgehog.gdzietabiedra.di.components
 com.hedgehog.gdzietabiedra.di.modules
+com.hedgehog.gdzietabiedra.domain
 com.hedgehog.gdzietabiedra.ribs
 com.hedgehog.gdzietabiedra.ribs.bottomnav
 com.hedgehog.gdzietabiedra.ribs.bottomnav.map

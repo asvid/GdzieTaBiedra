@@ -133,29 +133,4 @@ dependencies {
 
 apply plugin: 'com.google.gms.google-services'
 
-tasks.dokka {
-  dependsOn(':domain:dokka')
-}
-
-dokka {
-  moduleName = ""
-
-  includes = ['extra.md']
-  samples = ['src/sample']
-  skipEmptyPackages = true
-
-  linkMapping {
-    dir = "${project.projectDir}/src/main/java"
-    url = "https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java"
-    suffix = "#L"
-
-    println "asdasdasdasd"
-    println dir
-    println url
-  }
-
-  //  module links
-  externalDocumentationLink {
-    url = new URL("file://$outputDirectory/domain/")
-  }
-}
+apply from: '../DokkaConfig.gradle'

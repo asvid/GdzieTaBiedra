@@ -52,7 +52,6 @@ subprojects {
     apply plugin: 'com.android.library'
   }
 
-  apply plugin: 'org.jetbrains.dokka-android'
   apply plugin: 'kotlin-android'
   apply plugin: 'kotlin-android-extensions'
   apply plugin: 'kotlin-kapt'
@@ -91,27 +90,6 @@ subprojects {
     compileOptions {
       sourceCompatibility 1.8
       targetCompatibility 1.8
-    }
-  }
-
-  dokka {
-
-    outputDirectory = "$rootDir/docs"
-    outputFormat = "html"
-
-    includeNonPublic = false
-    skipDeprecated = false
-    reportUndocumented = false
-    skipEmptyPackages = true
-
-    externalDocumentationLink {
-      url = new URL("https://docs.oracle.com/javase/7/docs/api/")
-    }
-    externalDocumentationLink {
-      url = new URL("http://reactivex.io/RxJava/javadoc/")
-    }
-    externalDocumentationLink {
-      url = new URL("http://jakewharton.github.io/timber/")
     }
   }
 }
