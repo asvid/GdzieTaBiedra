@@ -3,3 +3,7 @@
 # &lt;init&gt;
 
 `ShopService(shopsRepository: `[`ShopsRepository`](../../com.hedgehog.gdzietabiedra.data.repository.shops/-shops-repository/index.md)`, distanceCalculator: `[`DistanceCalculator`](../-distance-calculator/index.md)`)`
+
+Only class that provides access to [Shop](../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)s
+For the moment it's used only to return [Shop](../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)s from [ShopsRepository](../../com.hedgehog.gdzietabiedra.data.repository.shops/-shops-repository/index.md), but in future it might be used to manipulate data
+

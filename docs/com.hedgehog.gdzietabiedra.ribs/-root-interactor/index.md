@@ -2,11 +2,13 @@
 
 # RootInteractor
 
-`class RootInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`RootPresenter`](-root-presenter.md)`, `[`RootRouter`](../-root-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootInteractor.kt#L23)
+`class RootInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`RootPresenter`](-root-presenter.md)`, `[`RootRouter`](../-root-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootInteractor.kt#L25)
 
-Coordinates Business Logic for [RootScope](#).
+Coordinates Business Logic for [RootBuilder.RootScope](#).
 
-TODO describe the logic of this scope.
+Rooting main views
+[com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapView](../../com.hedgehog.gdzietabiedra.ribs.bottomnav.map/-map-view/index.md) is initialised always
+but it's shown only after user selects it at [com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavView](../../com.hedgehog.gdzietabiedra.ribs.bottomnav/-bottom-nav-view/index.md)
 
 ### Types
 
@@ -19,7 +21,7 @@ TODO describe the logic of this scope.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `RootInteractor()`<br>Coordinates Business Logic for [RootScope](#). |
+| [&lt;init&gt;](-init-.md) | `RootInteractor()`<br>Coordinates Business Logic for [RootBuilder.RootScope](#). |
 
 ### Properties
 

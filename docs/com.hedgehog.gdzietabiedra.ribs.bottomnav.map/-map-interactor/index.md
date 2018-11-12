@@ -2,9 +2,9 @@
 
 # MapInteractor
 
-`class MapInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`MapPresenter`](-map-presenter/index.md)`, `[`MapRouter`](../-map-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/map/MapInteractor.kt#L33)
+`class MapInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`MapPresenter`](-map-presenter/index.md)`, `[`MapRouter`](../-map-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/map/MapInteractor.kt#L30)
 
-Coordinates Business Logic for [MapScope](#).
+Coordinates Business Logic for [MapBuilder.MapScope](#).
 
 ### Types
 
@@ -16,7 +16,7 @@ Coordinates Business Logic for [MapScope](#).
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `MapInteractor()`<br>Coordinates Business Logic for [MapScope](#). |
+| [&lt;init&gt;](-init-.md) | `MapInteractor()`<br>Coordinates Business Logic for [MapBuilder.MapScope](#). |
 
 ### Properties
 

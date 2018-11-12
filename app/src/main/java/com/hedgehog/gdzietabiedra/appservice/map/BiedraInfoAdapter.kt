@@ -8,6 +8,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import com.hedgehog.gdzietabiedra.R
 
+/**
+ * Custom map [InfoAdapter] for displaying info about selected [Shop]
+ * */
 class BiedraInfoAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
 
   private val inflater = LayoutInflater.from(context)

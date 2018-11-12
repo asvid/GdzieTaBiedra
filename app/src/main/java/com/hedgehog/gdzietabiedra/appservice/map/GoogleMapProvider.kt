@@ -12,9 +12,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.CLOSE
-import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.FAR
-import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.MEDIUM
+import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.*
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.utils.toLatLng
 import com.hedgehog.gdzietabiedra.utils.toPosition
@@ -28,6 +26,9 @@ private const val CLOSE_MAP_ZOOM = 15f
 private const val FAR_MAP_ZOOM = 10f
 private const val MAP_MARKER_SIZE = 300
 
+/**
+ * Map provider build around [GoogleMap]
+ * */
 class GoogleMapProvider private constructor(private val context: Context) : MapProvider {
 
   private lateinit var map: GoogleMap

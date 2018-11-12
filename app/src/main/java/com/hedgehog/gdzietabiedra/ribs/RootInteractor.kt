@@ -2,7 +2,7 @@ package com.hedgehog.gdzietabiedra.ribs
 
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavInteractor
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapEvent
-import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.*
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
@@ -15,9 +15,11 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Coordinates Business Logic for [RootScope].
+ * Coordinates Business Logic for [RootBuilder.RootScope].
  *
- * TODO describe the logic of this scope.
+ * Rooting main views
+ * [com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapView] is initialised always
+ * but it's shown only after user selects it at [com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavView]
  */
 @RibInteractor
 class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>() {

@@ -19,8 +19,8 @@ TODO describe the possible child configurations of this scope.
 | Name | Summary |
 |---|---|
 | [attachBottomNav](attach-bottom-nav.md) | `fun attachBottomNav(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [attachMap](attach-map.md) | `fun attachMap(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [attachMapHidden](attach-map-hidden.md) | `fun attachMapHidden(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [attachMap](attach-map.md) | `fun attachMap(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Builds [com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapView](../../com.hedgehog.gdzietabiedra.ribs.bottomnav.map/-map-view/index.md) if it's not already build and shows is |
+| [attachMapHidden](attach-map-hidden.md) | `fun attachMapHidden(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Builds [com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapView](../../com.hedgehog.gdzietabiedra.ribs.bottomnav.map/-map-view/index.md) without showing it |
 | [attachSettings](attach-settings.md) | `fun attachSettings(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [attachShopslist](attach-shopslist.md) | `fun attachShopslist(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [attachSplashScreen](attach-splash-screen.md) | `fun attachSplashScreen(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

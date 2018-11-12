@@ -2,9 +2,9 @@
 
 # SettingsInteractor
 
-`class SettingsInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`SettingsPresenter`](-settings-presenter/index.md)`, `[`SettingsRouter`](../-settings-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/settings/SettingsInteractor.kt#L24)
+`class SettingsInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`SettingsPresenter`](-settings-presenter/index.md)`, `[`SettingsRouter`](../-settings-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/settings/SettingsInteractor.kt#L23)
 
-Coordinates Business Logic for [SettingsScope](#).
+Coordinates Business Logic for [SettingsBuilder.SettingsScope](#).
 
 TODO describe the logic of this scope.
 
@@ -18,7 +18,7 @@ TODO describe the logic of this scope.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `SettingsInteractor()`<br>Coordinates Business Logic for [SettingsScope](#). |
+| [&lt;init&gt;](-init-.md) | `SettingsInteractor()`<br>Coordinates Business Logic for [SettingsBuilder.SettingsScope](#). |
 
 ### Properties
 

@@ -18,7 +18,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Coordinates Business Logic for [SplashScope].
+ * Coordinates Business Logic for [SplashBuilder.SplashScope].
  *
  * TODO describe the logic of this scope.
  */

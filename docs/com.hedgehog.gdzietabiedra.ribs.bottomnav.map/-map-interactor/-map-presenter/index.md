@@ -2,7 +2,7 @@
 
 # MapPresenter
 
-`interface MapPresenter` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/map/MapInteractor.kt#L167)
+`interface MapPresenter` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/map/MapInteractor.kt#L164)
 
 Presenter interface implemented by this RIB's view.
 

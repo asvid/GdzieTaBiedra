@@ -4,7 +4,7 @@
 
 `class SplashInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`SplashPresenter`](-splash-presenter/index.md)`, `[`SplashRouter`](../-splash-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashInteractor.kt#L26)
 
-Coordinates Business Logic for [SplashScope](#).
+Coordinates Business Logic for [SplashBuilder.SplashScope](#).
 
 TODO describe the logic of this scope.
 
@@ -18,7 +18,7 @@ TODO describe the logic of this scope.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `SplashInteractor()`<br>Coordinates Business Logic for [SplashScope](#). |
+| [&lt;init&gt;](-init-.md) | `SplashInteractor()`<br>Coordinates Business Logic for [SplashBuilder.SplashScope](#). |
 
 ### Properties
 

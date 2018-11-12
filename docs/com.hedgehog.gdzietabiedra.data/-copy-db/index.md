@@ -2,7 +2,9 @@
 
 # CopyDb
 
-`object CopyDb` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/data/CopyDb.kt#L11)
+`object CopyDb` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/data/CopyDb.kt#L14)
+
+Builds RealmDb from prepared DB file
 
 ### Functions
 

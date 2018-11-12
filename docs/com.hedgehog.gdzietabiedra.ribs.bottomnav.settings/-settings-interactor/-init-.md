@@ -4,7 +4,7 @@
 
 `SettingsInteractor()`
 
-Coordinates Business Logic for [SettingsScope](#).
+Coordinates Business Logic for [SettingsBuilder.SettingsScope](#).
 
 TODO describe the logic of this scope.
 

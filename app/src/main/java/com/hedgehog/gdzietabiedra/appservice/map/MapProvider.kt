@@ -6,6 +6,9 @@ import com.hedgehog.gdzietabiedra.domain.Shop
 import io.reactivex.Completable
 import io.reactivex.Observable
 
+/**
+ * Interface that hides implementation of concrete maps provider, allows easy switch from Google Maps to OpenMaps etc.
+ * */
 interface MapProvider {
 
   fun drawMarkers(points: Collection<ShopMarker>)

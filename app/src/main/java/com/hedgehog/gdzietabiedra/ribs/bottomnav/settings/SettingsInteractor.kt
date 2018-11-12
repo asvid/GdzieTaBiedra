@@ -2,7 +2,6 @@ package com.hedgehog.gdzietabiedra.ribs.bottomnav.settings
 
 import com.hedgehog.gdzietabiedra.BuildConfig
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
-import com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics
 import com.hedgehog.gdzietabiedra.utils.analytics.EventType
 import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.GIVE_STARS
 import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.SENDING_EMAIL
@@ -16,7 +15,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Coordinates Business Logic for [SettingsScope].
+ * Coordinates Business Logic for [SettingsBuilder.SettingsScope].
  *
  * TODO describe the logic of this scope.
  */

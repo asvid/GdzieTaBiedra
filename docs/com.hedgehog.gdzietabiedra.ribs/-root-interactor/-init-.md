@@ -4,7 +4,9 @@
 
 `RootInteractor()`
 
-Coordinates Business Logic for [RootScope](#).
+Coordinates Business Logic for [RootBuilder.RootScope](#).
 
-TODO describe the logic of this scope.
+Rooting main views
+[com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapView](../../com.hedgehog.gdzietabiedra.ribs.bottomnav.map/-map-view/index.md) is initialised always
+but it's shown only after user selects it at [com.hedgehog.gdzietabiedra.ribs.bottomnav.BottomNavView](../../com.hedgehog.gdzietabiedra.ribs.bottomnav/-bottom-nav-view/index.md)
 

@@ -17,4 +17,3 @@
 | Name | Summary |
 |---|---|
 | [calculateDistance](calculate-distance.md) | `fun calculateDistance(pointA: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`, pointB: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`): `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)<br>calculates distance in straight line between 2 [Position](../../com.github.asvid.biedra.domain/-position/index.md)s |
-| [calculateTest](calculate-test.md) | `fun calculateTest(): `[`ColorSpace`](https://docs.oracle.com/javase/7/docs/api/java/awt/color/ColorSpace.html) |

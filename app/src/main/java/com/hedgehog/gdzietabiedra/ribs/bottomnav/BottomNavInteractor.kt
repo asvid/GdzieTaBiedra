@@ -9,7 +9,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Coordinates Business Logic for [BottomNavScope].
+ * Coordinates Business Logic for [BottomNavBuilder.BottomNavScope].
  *
  * TODO describe the logic of this scope.
  */

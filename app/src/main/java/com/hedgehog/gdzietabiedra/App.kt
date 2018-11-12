@@ -17,6 +17,9 @@ import timber.log.Timber
 import timber.log.Timber.DebugTree
 import javax.inject.Inject
 
+/**
+ * Application class, no rocket science here
+ * */
 class App : Application(), HasActivityInjector, HasServiceInjector {
 
   @Inject
@@ -32,6 +35,9 @@ class App : Application(), HasActivityInjector, HasServiceInjector {
     return dispatchingServiceInjector
   }
 
+  /**
+   *  Dagger 2 initialisation
+   * */
   init {
     DaggerAppComponent
         .builder()
@@ -40,6 +46,11 @@ class App : Application(), HasActivityInjector, HasServiceInjector {
         .inject(this)
   }
 
+  /**
+   * [Fabric] initialisation
+   * [LeakCanary] initialisation
+   * [Timber] initialisation
+   * */
   override fun onCreate() {
     super.onCreate()
 

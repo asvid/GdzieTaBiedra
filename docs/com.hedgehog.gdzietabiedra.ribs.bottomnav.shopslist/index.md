@@ -18,4 +18,4 @@
 
 | Name | Summary |
 |---|---|
-| [RANGE](-r-a-n-g-e.md) | `const val RANGE: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)<br>Coordinates Business Logic for [ShopsListScope](#). |
+| [RANGE](-r-a-n-g-e.md) | `const val RANGE: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)<br>Coordinates Business Logic for [ShopsListBuilder.ShopsListScope](#). |

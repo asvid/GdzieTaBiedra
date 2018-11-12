@@ -4,5 +4,5 @@
 
 `MapInteractor()`
 
-Coordinates Business Logic for [MapScope](#).
+Coordinates Business Logic for [MapBuilder.MapScope](#).
 
