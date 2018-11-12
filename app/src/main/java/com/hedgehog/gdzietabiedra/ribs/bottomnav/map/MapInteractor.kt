@@ -7,11 +7,8 @@ import com.hedgehog.gdzietabiedra.appservice.map.ShopMarker
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
-import com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics
 import com.hedgehog.gdzietabiedra.utils.analytics.EventType
-import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.MAP_MOVE
-import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.NAVIGATION_START
-import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.SELECT_SHOP_ON_MAP
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.*
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
 import com.jakewharton.rxrelay2.PublishRelay
@@ -26,7 +23,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * Coordinates Business Logic for [MapScope].
+ * Coordinates Business Logic for [MapBuilder.MapScope].
  *
  */
 @RibInteractor

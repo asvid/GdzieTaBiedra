@@ -2,7 +2,9 @@
 
 # GoogleMapProvider
 
-`class GoogleMapProvider : `[`MapProvider`](../-map-provider/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/map/GoogleMapProvider.kt#L31)
+`class GoogleMapProvider : `[`MapProvider`](../-map-provider/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/map/GoogleMapProvider.kt#L32)
+
+Map provider build around [GoogleMap](#)
 
 ### Functions
 

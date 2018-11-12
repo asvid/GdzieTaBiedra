@@ -2,7 +2,9 @@
 
 # MapProvider
 
-`interface MapProvider` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/map/MapProvider.kt#L9)
+`interface MapProvider` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/map/MapProvider.kt#L12)
+
+Interface that hides implementation of concrete maps provider, allows easy switch from Google Maps to OpenMaps etc.
 
 ### Functions
 
@@ -22,4 +24,4 @@
 
 | Name | Summary |
 |---|---|
-| [GoogleMapProvider](../-google-map-provider/index.md) | `class GoogleMapProvider : `[`MapProvider`](./index.md) |
+| [GoogleMapProvider](../-google-map-provider/index.md) | `class GoogleMapProvider : `[`MapProvider`](./index.md)<br>Map provider build around [GoogleMap](#) |

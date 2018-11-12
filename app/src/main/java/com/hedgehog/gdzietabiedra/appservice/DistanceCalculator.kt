@@ -35,9 +35,4 @@ class DistanceCalculator {
 
     return 6366000 * tt
   }
-
-
-  fun calculateTest(): java.awt.color.ColorSpace {
-    return java.util.Observable()
-  }
 }

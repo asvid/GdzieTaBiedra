@@ -1,6 +1,10 @@
 
 
-## Main app module
+## GdzieTaBiedra
+
+### Changelog
+
+### TODOs
 
 ### Packages
 
@@ -14,7 +18,6 @@
 | [com.hedgehog.gdzietabiedra.appservice.map](com.hedgehog.gdzietabiedra.appservice.map/index.md) |  |
 | [com.hedgehog.gdzietabiedra.data](com.hedgehog.gdzietabiedra.data/index.md) |  |
 | [com.hedgehog.gdzietabiedra.data.migration](com.hedgehog.gdzietabiedra.data.migration/index.md) |  |
-| [com.hedgehog.gdzietabiedra.data.repository](com.hedgehog.gdzietabiedra.data.repository/index.md) |  |
 | [com.hedgehog.gdzietabiedra.data.repository.shops](com.hedgehog.gdzietabiedra.data.repository.shops/index.md) |  |
 | [com.hedgehog.gdzietabiedra.di](com.hedgehog.gdzietabiedra.di/index.md) |  |
 | [com.hedgehog.gdzietabiedra.di.components](com.hedgehog.gdzietabiedra.di.components/index.md) |  |

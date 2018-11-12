@@ -60,6 +60,9 @@ class RootRouter(
     }
   }
 
+  /**
+   * Builds [com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapView] if it's not already build and shows is
+   * */
   fun attachMap() {
     Timber.d("attach map")
     bottomNavRouter?.view?.selectedItemId = R.id.navigation_map
@@ -72,6 +75,9 @@ class RootRouter(
     view.viewContent().addView(mapRouter?.view)
   }
 
+  /**
+   * Builds [com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapView] without showing it
+   * */
   fun attachMapHidden() {
     Timber.d("attach map")
     mapRouter = mapBuilder.build(view.viewContent())

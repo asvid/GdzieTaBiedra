@@ -2,7 +2,7 @@
 
 # ShopsListPresenter
 
-`interface ShopsListPresenter` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopsListInteractor.kt#L122)
+`interface ShopsListPresenter` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopsListInteractor.kt#L119)
 
 ### Functions
 

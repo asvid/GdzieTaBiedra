@@ -3,3 +3,6 @@
 # &lt;init&gt;
 
 `App()`
+
+Application class, no rocket science here
+

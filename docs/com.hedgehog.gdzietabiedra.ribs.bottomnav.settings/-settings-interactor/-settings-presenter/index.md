@@ -2,7 +2,7 @@
 
 # SettingsPresenter
 
-`interface SettingsPresenter` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/settings/SettingsInteractor.kt#L81)
+`interface SettingsPresenter` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/settings/SettingsInteractor.kt#L80)
 
 ### Functions
 

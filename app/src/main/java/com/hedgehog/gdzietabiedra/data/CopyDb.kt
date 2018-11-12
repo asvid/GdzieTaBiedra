@@ -8,6 +8,9 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 
+/**
+ * Builds RealmDb from prepared DB file
+ * */
 object CopyDb {
 
   fun initRealmDb(context: Context) {
@@ -16,7 +19,7 @@ object CopyDb {
   }
 
   private fun copyBundledRealmFile(inputStream: InputStream, outFileName: String,
-      context: Context): String? {
+                                   context: Context): String? {
     try {
       val file = File(context.filesDir, outFileName)
       if (file.exists()) return null

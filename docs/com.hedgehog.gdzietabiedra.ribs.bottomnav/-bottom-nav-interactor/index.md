@@ -4,7 +4,7 @@
 
 `class BottomNavInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`BottomNavPresenter`](-bottom-nav-presenter/index.md)`, `[`BottomNavRouter`](../-bottom-nav-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/BottomNavInteractor.kt#L17)
 
-Coordinates Business Logic for [BottomNavScope](#).
+Coordinates Business Logic for [BottomNavBuilder.BottomNavScope](#).
 
 TODO describe the logic of this scope.
 
@@ -19,7 +19,7 @@ TODO describe the logic of this scope.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `BottomNavInteractor()`<br>Coordinates Business Logic for [BottomNavScope](#). |
+| [&lt;init&gt;](-init-.md) | `BottomNavInteractor()`<br>Coordinates Business Logic for [BottomNavBuilder.BottomNavScope](#). |
 
 ### Properties
 

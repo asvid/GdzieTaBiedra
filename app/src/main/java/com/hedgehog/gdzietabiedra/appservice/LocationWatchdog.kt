@@ -29,10 +29,6 @@ class LocationWatchdog(val context: Context) {
 
   private val compositeDisposable = CompositeDisposable()
 
-  init {
-    Timber.d("LocationWatchdog init")
-  }
-
   private fun checkLocationAvailable() {
     Timber.d("checking if location is available")
     fusedLocationClient.locationAvailability
@@ -55,8 +51,14 @@ class LocationWatchdog(val context: Context) {
         }
   }
 
+  /**
+   * [BehaviorSubject] that returns current [Position] of user - default is [WARSAW] when no other is known
+   * */
   fun getLocation() = locationSubject.startWith(WARSAW)
 
+  /**
+   * [BehaviorSubject] that returns [Boolean] - true if location is enabled by user and false if it's not
+   * */
   fun locationEnabledSubject() = locationEnabled
 
   private fun serviceUpdate() {
@@ -87,6 +89,9 @@ class LocationWatchdog(val context: Context) {
     }
   }
 
+  /**
+   * Register to location data change, it should be called ASAP
+   * */
   fun register() {
     Timber.d("LocationWatchdog register")
     registrSubscribers()
@@ -126,6 +131,9 @@ class LocationWatchdog(val context: Context) {
         .addToDisposables()
   }
 
+  /**
+   * Unregister from location data changes, should be called when app is pausing
+   * */
   fun unregister() {
     Timber.d("LocationWatchdog unregister")
     context.unregisterReceiver(gpsReceiver)

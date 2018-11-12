@@ -2,4 +2,4 @@
 
 # presenter
 
-`@Inject lateinit var presenter: `[`RootPresenter`](-root-presenter.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootInteractor.kt#L27)
+`@Inject lateinit var presenter: `[`RootPresenter`](-root-presenter.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootInteractor.kt#L29)

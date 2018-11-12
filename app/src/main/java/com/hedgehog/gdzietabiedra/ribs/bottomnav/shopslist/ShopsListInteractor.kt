@@ -6,11 +6,8 @@ import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
-import com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics
 import com.hedgehog.gdzietabiedra.utils.analytics.EventType
-import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.LIST_ITEM_CLICKED
-import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.SEARCH_SHOP_LIST
-import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.SHOW_LOCATION_WARNING
+import com.hedgehog.gdzietabiedra.utils.analytics.EventType.Event.EventName.*
 import com.hedgehog.gdzietabiedra.utils.async
 import com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging
 import com.uber.rib.core.BaseInteractor
@@ -23,7 +20,7 @@ import io.reactivex.subjects.Subject
 import javax.inject.Inject
 
 /**
- * Coordinates Business Logic for [ShopsListScope].
+ * Coordinates Business Logic for [ShopsListBuilder.ShopsListScope].
  *
  * TODO describe the logic of this scope.
  */
