@@ -2,4 +2,4 @@
 
 # LOCATION_ON
 
-`LOCATION_ON`
+`LOCATION_ON` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/utils/analytics/EventType.kt#L26)

@@ -2,16 +2,16 @@
 
 # ShopSelected
 
-`class ShopSelected : `[`ShopListEvent`](../index.md)
+`class ShopSelected : `[`ShopListEvent`](../index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopListListener.kt#L10)
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `ShopSelected(shop: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`)` |
+| [&lt;init&gt;](-init-.md) | `ShopSelected(shop: `[`Shop`](../../../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)`)` |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [shop](shop.md) | `val shop: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md) |
+| [shop](shop.md) | `val shop: `[`Shop`](../../../../com.hedgehog.gdzietabiedra.domain/-shop/index.md) |

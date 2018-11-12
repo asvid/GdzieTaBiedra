@@ -2,7 +2,7 @@
 
 # NavigationListener
 
-`inner class NavigationListener : `[`Listener`](../../../com.hedgehog.gdzietabiedra.ribs.bottomnav/-bottom-nav-interactor/-listener/index.md)
+`inner class NavigationListener : `[`Listener`](../../../com.hedgehog.gdzietabiedra.ribs.bottomnav/-bottom-nav-interactor/-listener/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootInteractor.kt#L63)
 
 ### Constructors
 

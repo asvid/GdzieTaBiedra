@@ -2,4 +2,4 @@
 
 # rootRouter
 
-`abstract fun rootRouter(): `[`RootRouter`](../../-root-router/index.md)
+`abstract fun rootRouter(): `[`RootRouter`](../../-root-router/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootBuilder.kt#L176)

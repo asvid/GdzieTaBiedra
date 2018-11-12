@@ -2,7 +2,7 @@
 
 # RxCrudRepository
 
-`interface RxCrudRepository<M, I> : `[`Repository`](../-repository.md)`<`[`M`](index.md#M)`, `[`I`](index.md#I)`>`
+`interface RxCrudRepository<M, I> : `[`Repository`](../-repository.md)`<`[`M`](index.md#M)`, `[`I`](index.md#I)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/data/repository/RxCrudRepository.kt#L7)
 
 ### Functions
 

@@ -2,7 +2,7 @@
 
 # SettingsRouter
 
-`class SettingsRouter : ViewRouter<`[`SettingsView`](../-settings-view/index.md)`, `[`SettingsInteractor`](../-settings-interactor/index.md)`, `[`Component`](../-settings-builder/-component/index.md)`>`
+`class SettingsRouter : ViewRouter<`[`SettingsView`](../-settings-view/index.md)`, `[`SettingsInteractor`](../-settings-interactor/index.md)`, `[`Component`](../-settings-builder/-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/settings/SettingsRouter.kt#L12)
 
 Adds and removes children of {@link SettingsBuilder.SettingsScope}.
 

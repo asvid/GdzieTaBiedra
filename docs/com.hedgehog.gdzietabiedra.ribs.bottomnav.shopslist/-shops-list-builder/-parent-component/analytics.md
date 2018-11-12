@@ -2,4 +2,4 @@
 
 # analytics
 
-`abstract fun analytics(): `[`Analytics`](../../../com.hedgehog.gdzietabiedra.utils.analytics/-analytics/index.md)
+`abstract fun analytics(): `[`Analytics`](../../../com.hedgehog.gdzietabiedra.utils.analytics/-analytics/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopsListBuilder.kt#L56)

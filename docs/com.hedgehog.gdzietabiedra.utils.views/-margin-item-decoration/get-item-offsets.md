@@ -2,4 +2,4 @@
 
 # getItemOffsets
 
-`fun getItemOffsets(outRect: `[`Rect`](https://developer.android.com/reference/android/graphics/Rect.html)`, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`, parent: `[`RecyclerView`](https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html)`, state: `[`State`](https://developer.android.com/reference/android/support/v7/widget/RecyclerView/State.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun getItemOffsets(outRect: `[`Rect`](https://developer.android.com/reference/android/graphics/Rect.html)`, view: `[`View`](https://developer.android.com/reference/android/view/View.html)`, parent: RecyclerView, state: State): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/utils/views/MarginItemDecoration.kt#L8)

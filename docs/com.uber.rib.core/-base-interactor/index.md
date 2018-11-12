@@ -2,7 +2,7 @@
 
 # BaseInteractor
 
-`abstract class BaseInteractor<P, R : Router<out Interactor<*, *>, out InteractorBaseComponent<*>>> : Interactor<`[`P`](index.md#P)`, `[`R`](index.md#R)`>`
+`abstract class BaseInteractor<P, R : Router<out Interactor<*, *>, out InteractorBaseComponent<*>>> : Interactor<`[`P`](index.md#P)`, `[`R`](index.md#R)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/uber/rib/core/BaseInteractor.kt#L10)
 
 ### Constructors
 

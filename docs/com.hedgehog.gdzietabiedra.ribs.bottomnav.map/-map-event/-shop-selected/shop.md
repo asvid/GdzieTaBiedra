@@ -2,4 +2,4 @@
 
 # shop
 
-`val shop: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)
+`val shop: `[`Shop`](../../../com.hedgehog.gdzietabiedra.domain/-shop/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/map/MapEvent.kt#L6)

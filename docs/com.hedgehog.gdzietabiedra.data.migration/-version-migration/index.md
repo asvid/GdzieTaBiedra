@@ -2,7 +2,7 @@
 
 # VersionMigration
 
-`interface VersionMigration`
+`interface VersionMigration` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/data/migration/VersionMigration.kt#L5)
 
 ### Functions
 

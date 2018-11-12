@@ -2,7 +2,7 @@
 
 # ShopsResponse
 
-`data class ShopsResponse`
+`data class ShopsResponse` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/api/response/shop/ShopsResponse.kt#L5)
 
 ### Constructors
 

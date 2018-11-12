@@ -2,7 +2,7 @@
 
 # Builder
 
-`@Builder interface Builder`
+`@Builder interface Builder` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/map/MapBuilder.kt#L85)
 
 ### Functions
 

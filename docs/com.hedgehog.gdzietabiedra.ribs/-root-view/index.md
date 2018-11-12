@@ -2,7 +2,7 @@
 
 # RootView
 
-`class RootView : `[`LinearLayout`](https://developer.android.com/reference/android/widget/LinearLayout.html)`, `[`RootPresenter`](../-root-interactor/-root-presenter.md)
+`class RootView : `[`LinearLayout`](https://developer.android.com/reference/android/widget/LinearLayout.html)`, `[`RootPresenter`](../-root-interactor/-root-presenter.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootView.kt#L13)
 
 Top level view for {@link RootBuilder.RootScope}.
 

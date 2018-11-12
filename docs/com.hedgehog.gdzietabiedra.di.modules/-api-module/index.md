@@ -2,7 +2,7 @@
 
 # ApiModule
 
-`class ApiModule`
+`class ApiModule` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/di/modules/ApiModule.kt#L12)
 
 ### Constructors
 

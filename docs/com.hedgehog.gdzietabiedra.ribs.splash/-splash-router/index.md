@@ -2,7 +2,7 @@
 
 # SplashRouter
 
-`class SplashRouter : ViewRouter<`[`SplashView`](../-splash-view/index.md)`, `[`SplashInteractor`](../-splash-interactor/index.md)`, `[`Component`](../-splash-builder/-component/index.md)`>`
+`class SplashRouter : ViewRouter<`[`SplashView`](../-splash-view/index.md)`, `[`SplashInteractor`](../-splash-interactor/index.md)`, `[`Component`](../-splash-builder/-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashRouter.kt#L12)
 
 Adds and removes children of {@link SplashBuilder.SplashScope}.
 

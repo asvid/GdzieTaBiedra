@@ -2,16 +2,19 @@
 
 # DistanceCalculator
 
-`class DistanceCalculator`
+`class DistanceCalculator` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/DistanceCalculator.kt#L9)
+
+[DistanceCalculator](./index.md) contains methods to calculate distance between [Position](../../com.github.asvid.biedra.domain/-position/index.md)s
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `DistanceCalculator()` |
+| [&lt;init&gt;](-init-.md) | `DistanceCalculator()`<br>[DistanceCalculator](./index.md) contains methods to calculate distance between [Position](../../com.github.asvid.biedra.domain/-position/index.md)s |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [calculateDistance](calculate-distance.md) | `fun calculateDistance(pointA: `[`Position`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.md)`, pointB: `[`Position`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.md)`): `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html) |
+| [calculateDistance](calculate-distance.md) | `fun calculateDistance(pointA: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`, pointB: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`): `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)<br>calculates distance in straight line between 2 [Position](../../com.github.asvid.biedra.domain/-position/index.md)s |
+| [calculateTest](calculate-test.md) | `fun calculateTest(): `[`ColorSpace`](https://docs.oracle.com/javase/7/docs/api/java/awt/color/ColorSpace.html) |

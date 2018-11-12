@@ -3,3 +3,6 @@
 # &lt;init&gt;
 
 `DistanceCalculator()`
+
+[DistanceCalculator](index.md) contains methods to calculate distance between [Position](../../com.github.asvid.biedra.domain/-position/index.md)s
+

@@ -2,4 +2,4 @@
 
 # setViewHolder
 
-`fun setViewHolder(item: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`, itemMoreClicked: `[`PublishSubject`](http://reactivex.io/RxJava/javadoc/io/reactivex/subjects/PublishSubject.html)`<`[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun setViewHolder(item: `[`Shop`](../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)`, itemMoreClicked: `[`PublishSubject`](http://reactivex.io/RxJava/javadoc/io/reactivex/subjects/PublishSubject.html)`<`[`Shop`](../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopListAdapter.kt#L63)

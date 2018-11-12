@@ -2,4 +2,4 @@
 
 # fetchByLocationAndRange
 
-`fun fetchByLocationAndRange(location: `[`Position`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.md)`, range: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, count: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`): `[`Flowable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Flowable.html)`<`[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`>`
+`fun fetchByLocationAndRange(location: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`, range: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, count: `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html)`): `[`Flowable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Flowable.html)`<`[`Shop`](../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/data/repository/shops/ShopsRepository.kt#L58)

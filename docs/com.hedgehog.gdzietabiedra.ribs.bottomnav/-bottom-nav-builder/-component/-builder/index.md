@@ -2,7 +2,7 @@
 
 # Builder
 
-`@Builder interface Builder`
+`@Builder interface Builder` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/BottomNavBuilder.kt#L77)
 
 ### Functions
 

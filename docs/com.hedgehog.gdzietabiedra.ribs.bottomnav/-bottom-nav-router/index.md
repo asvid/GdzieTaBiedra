@@ -2,7 +2,7 @@
 
 # BottomNavRouter
 
-`class BottomNavRouter : ViewRouter<`[`BottomNavView`](../-bottom-nav-view/index.md)`, `[`BottomNavInteractor`](../-bottom-nav-interactor/index.md)`, `[`Component`](../-bottom-nav-builder/-component/index.md)`>`
+`class BottomNavRouter : ViewRouter<`[`BottomNavView`](../-bottom-nav-view/index.md)`, `[`BottomNavInteractor`](../-bottom-nav-interactor/index.md)`, `[`Component`](../-bottom-nav-builder/-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/BottomNavRouter.kt#L12)
 
 Adds and removes children of {@link BottomNavBuilder.BottomNavScope}.
 

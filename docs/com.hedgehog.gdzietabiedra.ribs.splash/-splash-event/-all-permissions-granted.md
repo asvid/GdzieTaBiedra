@@ -2,4 +2,4 @@
 
 # AllPermissionsGranted
 
-`object AllPermissionsGranted : `[`SplashEvent`](index.md)
+`object AllPermissionsGranted : `[`SplashEvent`](index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashEvent.kt#L4)

@@ -2,7 +2,7 @@
 
 # ShopsItem
 
-`data class ShopsItem`
+`data class ShopsItem` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/api/response/shop/ShopsItem.kt#L5)
 
 ### Constructors
 

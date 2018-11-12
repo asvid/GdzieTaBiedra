@@ -2,7 +2,7 @@
 
 # ShopsListRouter
 
-`class ShopsListRouter : ViewRouter<`[`ShopsListView`](../-shops-list-view/index.md)`, `[`ShopsListInteractor`](../-shops-list-interactor/index.md)`, `[`Component`](../-shops-list-builder/-component/index.md)`>`
+`class ShopsListRouter : ViewRouter<`[`ShopsListView`](../-shops-list-view/index.md)`, `[`ShopsListInteractor`](../-shops-list-interactor/index.md)`, `[`Component`](../-shops-list-builder/-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopsListRouter.kt#L12)
 
 Adds and removes children of {@link ShopsListBuilder.ShopsListScope}.
 

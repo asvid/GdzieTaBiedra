@@ -2,7 +2,7 @@
 
 # Module
 
-`abstract class Module`
+`abstract class Module` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/map/MapBuilder.kt#L58)
 
 ### Constructors
 

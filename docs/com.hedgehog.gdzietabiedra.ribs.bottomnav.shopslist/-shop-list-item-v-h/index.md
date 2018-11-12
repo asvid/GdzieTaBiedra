@@ -2,7 +2,7 @@
 
 # ShopListItemVH
 
-`class ShopListItemVH : `[`ViewHolder`](https://developer.android.com/reference/android/support/v7/widget/RecyclerView/ViewHolder.html)
+`class ShopListItemVH : ViewHolder` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopListAdapter.kt#L61)
 
 ### Constructors
 
@@ -20,4 +20,4 @@
 
 | Name | Summary |
 |---|---|
-| [setViewHolder](set-view-holder.md) | `fun setViewHolder(item: `[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`, itemMoreClicked: `[`PublishSubject`](http://reactivex.io/RxJava/javadoc/io/reactivex/subjects/PublishSubject.html)`<`[`Shop`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.hedgehog.gdzietabiedra.domain/-shop/index.md)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [setViewHolder](set-view-holder.md) | `fun setViewHolder(item: `[`Shop`](../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)`, itemMoreClicked: `[`PublishSubject`](http://reactivex.io/RxJava/javadoc/io/reactivex/subjects/PublishSubject.html)`<`[`Shop`](../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

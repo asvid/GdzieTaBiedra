@@ -2,7 +2,7 @@
 
 # SplashBuilder
 
-`class SplashBuilder : ViewBuilder<`[`SplashView`](../-splash-view/index.md)`, `[`SplashRouter`](../-splash-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>`
+`class SplashBuilder : ViewBuilder<`[`SplashView`](../-splash-view/index.md)`, `[`SplashRouter`](../-splash-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashBuilder.kt#L23)
 
 Builder for the {@link SplashScope}.
 

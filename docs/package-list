@@ -12,9 +12,9 @@ $dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.re
 $dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Single((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-single/subscribe-with-error-logging.md
 $dokka.location:com.hedgehog.gdzietabiedra.utils$subscribeWithErrorLogging(io.reactivex.Single((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T)), kotlin.Function1((com.hedgehog.gdzietabiedra.utils.subscribeWithErrorLogging.T, kotlin.Unit)))com.hedgehog.gdzietabiedra.utils/io.reactivex.-single/subscribe-with-error-logging.md
 $dokka.location:com.hedgehog.gdzietabiedra.utils$toDate(kotlin.String, kotlin.String)com.hedgehog.gdzietabiedra.utils/kotlin.-string/to-date.md
-$dokka.location:com.hedgehog.gdzietabiedra.utils$toLatLng(com.github.asvid.biedra.domain.Position)com.hedgehog.gdzietabiedra.utils/com.github.asvid.biedra.domain.-position/to-lat-lng.md
 $dokka.location:com.hedgehog.gdzietabiedra.utils$toLocalNumberFormat(kotlin.Int, java.util.Locale)com.hedgehog.gdzietabiedra.utils/kotlin.-int/to-local-number-format.md
 $dokka.location:com.hedgehog.gdzietabiedra.utils$toPosition(com.google.android.gms.maps.model.LatLng)com.hedgehog.gdzietabiedra.utils/com.google.android.gms.maps.model.-lat-lng/to-position.md
+com.github.asvid.biedra.domain
 com.hedgehog.gdzietabiedra
 com.hedgehog.gdzietabiedra.api
 com.hedgehog.gdzietabiedra.api.response.shop
@@ -27,6 +27,7 @@ com.hedgehog.gdzietabiedra.data.repository.shops
 com.hedgehog.gdzietabiedra.di
 com.hedgehog.gdzietabiedra.di.components
 com.hedgehog.gdzietabiedra.di.modules
+com.hedgehog.gdzietabiedra.domain
 com.hedgehog.gdzietabiedra.ribs
 com.hedgehog.gdzietabiedra.ribs.bottomnav
 com.hedgehog.gdzietabiedra.ribs.bottomnav.map

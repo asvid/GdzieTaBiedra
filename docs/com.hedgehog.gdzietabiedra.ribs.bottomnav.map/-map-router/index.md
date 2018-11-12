@@ -2,7 +2,7 @@
 
 # MapRouter
 
-`class MapRouter : ViewRouter<`[`MapView`](../-map-view/index.md)`, `[`MapInteractor`](../-map-interactor/index.md)`, `[`Component`](../-map-builder/-component/index.md)`>`
+`class MapRouter : ViewRouter<`[`MapView`](../-map-view/index.md)`, `[`MapInteractor`](../-map-interactor/index.md)`, `[`Component`](../-map-builder/-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/map/MapRouter.kt#L12)
 
 Adds and removes children of {@link MapBuilder.MapScope}.
 

@@ -2,4 +2,4 @@
 
 # build
 
-`abstract fun build(): `[`AppComponent`](../index.md)
+`abstract fun build(): `[`AppComponent`](../index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/di/components/AppComponent.kt#L37)

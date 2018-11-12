@@ -2,7 +2,7 @@
 
 # ShopListListener
 
-`interface ShopListListener`
+`interface ShopListListener` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopListListener.kt#L6)
 
 ### Types
 

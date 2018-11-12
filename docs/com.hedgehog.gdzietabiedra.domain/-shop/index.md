@@ -1,8 +1,8 @@
-[domain](../../index.md) / [com.hedgehog.gdzietabiedra.domain](../index.md) / [Shop](./index.md)
+[com.hedgehog.gdzietabiedra.domain](../index.md) / [Shop](./index.md)
 
 # Shop
 
-`data class Shop`
+`data class Shop` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/domain/src/main/java/com/github/asvid/biedra/domain/Shop.kt#L5)
 
 ### Constructors
 

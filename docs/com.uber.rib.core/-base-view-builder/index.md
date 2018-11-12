@@ -2,7 +2,7 @@
 
 # BaseViewBuilder
 
-`abstract class BaseViewBuilder<ViewType : `[`View`](https://developer.android.com/reference/android/view/View.html)`, RouterT : Router<*, *>, DependencyT> : ViewBuilder<`[`ViewType`](index.md#ViewType)`, `[`RouterT`](index.md#RouterT)`, `[`DependencyT`](index.md#DependencyT)`>`
+`abstract class BaseViewBuilder<ViewType : `[`View`](https://developer.android.com/reference/android/view/View.html)`, RouterT : Router<*, *>, DependencyT> : ViewBuilder<`[`ViewType`](index.md#ViewType)`, `[`RouterT`](index.md#RouterT)`, `[`DependencyT`](index.md#DependencyT)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/uber/rib/core/BaseViewBuilder.kt#L7)
 
 ### Constructors
 

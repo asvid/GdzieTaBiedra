@@ -43,3 +43,53 @@ allprojects {
 task clean(type: Delete) {
   delete rootProject.buildDir
 }
+
+subprojects {
+
+  if (it.name == "app") {
+    apply plugin: 'com.android.application'
+  } else {
+    apply plugin: 'com.android.library'
+  }
+
+  apply plugin: 'kotlin-android'
+  apply plugin: 'kotlin-android-extensions'
+  apply plugin: 'kotlin-kapt'
+
+  android {
+    compileSdkVersion Build.compileSdkVersion
+
+    defaultConfig {
+
+      buildToolsVersion Build.buildToolsVersion
+      minSdkVersion Build.minSdkVersion
+      targetSdkVersion Build.targetSdkVersion
+      compileSdkVersion Build.compileSdkVersion
+      versionCode 1
+      versionName "2.0"
+
+      testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+      abortOnError false
+    }
+    if (project.hasProperty('devBuild')) {
+      splits.abi.enable = false
+      splits.density.enable = false
+      aaptOptions.cruncherEnabled = false
+    }
+    dexOptions {
+      preDexLibraries = true
+    }
+    testOptions {
+      animationsDisabled = true
+      unitTests {
+        returnDefaultValues = true
+      }
+    }
+    compileOptions {
+      sourceCompatibility 1.8
+      targetCompatibility 1.8
+    }
+  }
+}

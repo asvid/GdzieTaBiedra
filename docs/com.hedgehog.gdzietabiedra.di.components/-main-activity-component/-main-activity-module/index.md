@@ -2,7 +2,7 @@
 
 # MainActivityModule
 
-`abstract class MainActivityModule`
+`abstract class MainActivityModule` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/di/components/ActivityComponents.kt#L15)
 
 ### Constructors
 

@@ -2,7 +2,7 @@
 
 # RestorableRouter
 
-`interface RestorableRouter`
+`interface RestorableRouter` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/uber/rib/core/RestorableRouter.kt#L5)
 
 ### Functions
 

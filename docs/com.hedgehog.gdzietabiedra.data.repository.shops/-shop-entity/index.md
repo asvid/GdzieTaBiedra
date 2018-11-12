@@ -2,7 +2,7 @@
 
 # ShopEntity
 
-`open class ShopEntity : RealmObject`
+`open class ShopEntity : RealmObject` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/data/repository/shops/ShopEntity.kt#L10)
 
 ### Constructors
 

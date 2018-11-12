@@ -2,4 +2,4 @@
 
 # dexter
 
-`@Inject lateinit var dexter: Permission`
+`@Inject lateinit var dexter: Permission` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashInteractor.kt#L31)

@@ -2,7 +2,7 @@
 
 # SplashEvent
 
-`sealed class SplashEvent`
+`sealed class SplashEvent` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashEvent.kt#L3)
 
 ### Types
 

@@ -1,4 +1,4 @@
-[domain](../index.md) / [com.hedgehog.gdzietabiedra.domain](./index.md)
+[com.hedgehog.gdzietabiedra.domain](./index.md)
 
 ## Package com.hedgehog.gdzietabiedra.domain
 

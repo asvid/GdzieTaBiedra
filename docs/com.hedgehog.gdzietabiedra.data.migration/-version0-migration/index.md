@@ -2,7 +2,7 @@
 
 # Version0Migration
 
-`class Version0Migration : `[`VersionMigration`](../-version-migration/index.md)
+`class Version0Migration : `[`VersionMigration`](../-version-migration/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/data/migration/Version0Migration.kt#L5)
 
 ### Constructors
 

@@ -2,7 +2,7 @@
 
 # SplashListener
 
-`interface SplashListener`
+`interface SplashListener` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashListener.kt#L3)
 
 ### Functions
 

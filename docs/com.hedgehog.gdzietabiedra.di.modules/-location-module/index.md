@@ -2,7 +2,7 @@
 
 # LocationModule
 
-`class LocationModule`
+`class LocationModule` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/di/modules/LocationModule.kt#L12)
 
 ### Constructors
 

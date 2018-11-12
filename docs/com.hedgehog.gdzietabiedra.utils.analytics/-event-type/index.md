@@ -2,7 +2,7 @@
 
 # EventType
 
-`sealed class EventType`
+`sealed class EventType` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/utils/analytics/EventType.kt#L9)
 
 ### Types
 

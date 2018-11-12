@@ -1,4 +1,4 @@
-[domain](../index.md) / [com.github.asvid.biedra.domain](./index.md)
+[com.github.asvid.biedra.domain](./index.md)
 
 ## Package com.github.asvid.biedra.domain
 

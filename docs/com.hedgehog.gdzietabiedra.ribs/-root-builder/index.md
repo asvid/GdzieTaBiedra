@@ -2,7 +2,7 @@
 
 # RootBuilder
 
-`class RootBuilder : ViewBuilder<`[`RootView`](../-root-view/index.md)`, `[`RootRouter`](../-root-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>`
+`class RootBuilder : ViewBuilder<`[`RootView`](../-root-view/index.md)`, `[`RootRouter`](../-root-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootBuilder.kt#L40)
 
 Builder for the {@link RootScope}.
 

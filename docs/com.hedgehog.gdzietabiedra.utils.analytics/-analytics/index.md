@@ -2,7 +2,7 @@
 
 # Analytics
 
-`interface Analytics`
+`interface Analytics` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/utils/analytics/Analytics.kt#L3)
 
 ### Functions
 

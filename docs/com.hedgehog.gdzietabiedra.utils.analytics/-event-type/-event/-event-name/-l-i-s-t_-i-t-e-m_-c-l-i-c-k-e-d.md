@@ -2,4 +2,4 @@
 
 # LIST_ITEM_CLICKED
 
-`LIST_ITEM_CLICKED`
+`LIST_ITEM_CLICKED` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/utils/analytics/EventType.kt#L27)

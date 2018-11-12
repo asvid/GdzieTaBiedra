@@ -2,7 +2,7 @@
 
 # SplashView
 
-`class SplashView : `[`FrameLayout`](https://developer.android.com/reference/android/widget/FrameLayout.html)`, `[`SplashPresenter`](../-splash-interactor/-splash-presenter/index.md)
+`class SplashView : `[`FrameLayout`](https://developer.android.com/reference/android/widget/FrameLayout.html)`, `[`SplashPresenter`](../-splash-interactor/-splash-presenter/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashView.kt#L14)
 
 Top level view for {@link SplashBuilder.SplashScope}.
 

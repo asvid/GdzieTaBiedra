@@ -2,7 +2,7 @@
 
 # BottomNavPresenter
 
-`interface BottomNavPresenter`
+`interface BottomNavPresenter` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/BottomNavInteractor.kt#L43)
 
 ### Functions
 
@@ -15,4 +15,4 @@
 
 | Name | Summary |
 |---|---|
-| [BottomNavView](../../-bottom-nav-view/index.md) | `class BottomNavView : `[`BottomNavigationView`](https://developer.android.com/reference/android/support/design/widget/BottomNavigationView.html)`, `[`BottomNavPresenter`](./index.md)<br>Top level view for {@link BottomNavBuilder.BottomNavScope}. |
+| [BottomNavView](../../-bottom-nav-view/index.md) | `class BottomNavView : BottomNavigationView, `[`BottomNavPresenter`](./index.md)<br>Top level view for {@link BottomNavBuilder.BottomNavScope}. |

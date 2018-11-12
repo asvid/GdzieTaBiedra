@@ -2,7 +2,7 @@
 
 # AppServices
 
-`class AppServices`
+`class AppServices` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/di/modules/AppServices.kt#L14)
 
 ### Constructors
 

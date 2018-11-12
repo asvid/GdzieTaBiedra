@@ -26,7 +26,8 @@
 | [com.hedgehog.gdzietabiedra.utils.CrashlyticsTree](../com.hedgehog.gdzietabiedra.utils/-crashlytics-tree/index.md) |  |
 | [com.hedgehog.gdzietabiedra.di.modules.DataModule](../com.hedgehog.gdzietabiedra.di.modules/-data-module/index.md) |  |
 | [java.util.Date](../com.hedgehog.gdzietabiedra.utils/java.util.-date/index.md) (extensions in package com.hedgehog.gdzietabiedra.utils) |  |
-| [com.hedgehog.gdzietabiedra.appservice.DistanceCalculator](../com.hedgehog.gdzietabiedra.appservice/-distance-calculator/index.md) |  |
+| [com.hedgehog.gdzietabiedra.appservice.DistanceCalculator](../com.hedgehog.gdzietabiedra.appservice/-distance-calculator/index.md) | [DistanceCalculator](../com.hedgehog.gdzietabiedra.appservice/-distance-calculator/index.md) contains methods to calculate distance between [Position](../com.github.asvid.biedra.domain/-position/index.md)s |
+| [com.hedgehog.gdzietabiedra.appservice.DistanceCalculatorSamples](../com.hedgehog.gdzietabiedra.appservice/-distance-calculator-samples/index.md) |  |
 | [kotlin.Double](../com.hedgehog.gdzietabiedra.utils/kotlin.-double/index.md) (extensions in package com.hedgehog.gdzietabiedra.utils) |  |
 | [com.hedgehog.gdzietabiedra.utils.analytics.EventType](../com.hedgehog.gdzietabiedra.utils.analytics/-event-type/index.md) |  |
 | [com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics](../com.hedgehog.gdzietabiedra.utils.analytics/-firebase-analytics/index.md) |  |
@@ -52,7 +53,7 @@
 | [com.hedgehog.gdzietabiedra.data.migration.Migration](../com.hedgehog.gdzietabiedra.data.migration/-migration/index.md) |  |
 | [com.hedgehog.gdzietabiedra.di.modules.MigrationsModule](../com.hedgehog.gdzietabiedra.di.modules/-migrations-module/index.md) |  |
 | [io.reactivex.Observable](../com.hedgehog.gdzietabiedra.utils/io.reactivex.-observable/index.md) (extensions in package com.hedgehog.gdzietabiedra.utils) |  |
-| [com.github.asvid.biedra.domain.Position](../com.hedgehog.gdzietabiedra.utils/com.github.asvid.biedra.domain.-position/index.md) (extensions in package com.hedgehog.gdzietabiedra.utils) |  |
+| [com.github.asvid.biedra.domain.Position](../com.github.asvid.biedra.domain/-position/index.md) |  |
 | [com.hedgehog.gdzietabiedra.data.repository.Repository](../com.hedgehog.gdzietabiedra.data.repository/-repository.md) | Central repository marker interface. |
 | [com.uber.rib.core.RestorableRouter](../com.uber.rib.core/-restorable-router/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.RootBuilder](../com.hedgehog.gdzietabiedra.ribs/-root-builder/index.md) | Builder for the {@link RootScope}. |
@@ -65,6 +66,7 @@
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsInteractor](../com.hedgehog.gdzietabiedra.ribs.bottomnav.settings/-settings-interactor/index.md) | Coordinates Business Logic for [SettingsScope](#). |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsRouter](../com.hedgehog.gdzietabiedra.ribs.bottomnav.settings/-settings-router/index.md) | Adds and removes children of {@link SettingsBuilder.SettingsScope}. |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsView](../com.hedgehog.gdzietabiedra.ribs.bottomnav.settings/-settings-view/index.md) | Top level view for {@link SettingsBuilder.SettingsScope}. |
+| [com.hedgehog.gdzietabiedra.domain.Shop](../com.hedgehog.gdzietabiedra.domain/-shop/index.md) |  |
 | [com.hedgehog.gdzietabiedra.data.repository.shops.ShopEntity](../com.hedgehog.gdzietabiedra.data.repository.shops/-shop-entity/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListAdapter](../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shop-list-adapter/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListItemVH](../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shop-list-item-v-h/index.md) |  |

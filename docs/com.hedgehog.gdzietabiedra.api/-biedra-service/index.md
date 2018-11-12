@@ -2,7 +2,7 @@
 
 # BiedraService
 
-`interface BiedraService`
+`interface BiedraService` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/api/BiedraService.kt#L8)
 
 ### Functions
 

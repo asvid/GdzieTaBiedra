@@ -2,7 +2,7 @@
 
 # SettingsBuilder
 
-`class SettingsBuilder : ViewBuilder<`[`SettingsView`](../-settings-view/index.md)`, `[`SettingsRouter`](../-settings-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>`
+`class SettingsBuilder : ViewBuilder<`[`SettingsView`](../-settings-view/index.md)`, `[`SettingsRouter`](../-settings-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/settings/SettingsBuilder.kt#L22)
 
 Builder for the {@link SettingsScope}.
 

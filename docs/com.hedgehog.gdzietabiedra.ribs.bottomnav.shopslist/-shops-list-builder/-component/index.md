@@ -2,7 +2,7 @@
 
 # Component
 
-`@Component([Module], [ParentComponent]) interface Component : InteractorBaseComponent<`[`ShopsListInteractor`](../../-shops-list-interactor/index.md)`>, `[`BuilderComponent`](../-builder-component/index.md)
+`@Component([Module], [ParentComponent]) interface Component : InteractorBaseComponent<`[`ShopsListInteractor`](../../-shops-list-interactor/index.md)`>, `[`BuilderComponent`](../-builder-component/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopsListBuilder.kt#L85)
 
 ### Types
 

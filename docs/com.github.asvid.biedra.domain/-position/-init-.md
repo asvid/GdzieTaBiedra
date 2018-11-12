@@ -1,4 +1,4 @@
-[domain](../../index.md) / [com.github.asvid.biedra.domain](../index.md) / [Position](index.md) / [&lt;init&gt;](./-init-.md)
+[com.github.asvid.biedra.domain](../index.md) / [Position](index.md) / [&lt;init&gt;](./-init-.md)
 
 # &lt;init&gt;
 

@@ -1,4 +1,4 @@
-[domain](../../index.md) / [com.hedgehog.gdzietabiedra.domain](../index.md) / [Shop](index.md) / [&lt;init&gt;](./-init-.md)
+[com.hedgehog.gdzietabiedra.domain](../index.md) / [Shop](index.md) / [&lt;init&gt;](./-init-.md)
 
 # &lt;init&gt;
 

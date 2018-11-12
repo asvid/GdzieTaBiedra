@@ -2,4 +2,4 @@
 
 # toPosition
 
-`fun LatLng.toPosition(): `[`Position`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.md)
+`fun LatLng.toPosition(): `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/utils/ExtensionMethods.kt#L32)

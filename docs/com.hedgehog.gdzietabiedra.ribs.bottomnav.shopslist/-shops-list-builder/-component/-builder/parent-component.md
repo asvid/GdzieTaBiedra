@@ -2,4 +2,4 @@
 
 # parentComponent
 
-`abstract fun parentComponent(component: `[`ParentComponent`](../../-parent-component/index.md)`): `[`Builder`](index.md)
+`abstract fun parentComponent(component: `[`ParentComponent`](../../-parent-component/index.md)`): `[`Builder`](index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopsListBuilder.kt#L96)

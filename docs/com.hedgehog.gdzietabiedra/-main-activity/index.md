@@ -2,7 +2,7 @@
 
 # MainActivity
 
-`class MainActivity : RibActivity`
+`class MainActivity : RibActivity` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/MainActivity.kt#L16)
 
 ### Constructors
 

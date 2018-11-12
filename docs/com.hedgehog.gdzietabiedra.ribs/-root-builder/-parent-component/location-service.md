@@ -2,4 +2,4 @@
 
 # locationService
 
-`abstract fun locationService(): `[`LocationWatchdog`](../../../com.hedgehog.gdzietabiedra.appservice/-location-watchdog/index.md)
+`abstract fun locationService(): `[`LocationWatchdog`](../../../com.hedgehog.gdzietabiedra.appservice/-location-watchdog/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootBuilder.kt#L68)

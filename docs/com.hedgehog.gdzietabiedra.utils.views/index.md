@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [MarginItemDecoration](-margin-item-decoration/index.md) | `class MarginItemDecoration : `[`ItemDecoration`](https://developer.android.com/reference/android/support/v7/widget/RecyclerView/ItemDecoration.html) |
+| [MarginItemDecoration](-margin-item-decoration/index.md) | `class MarginItemDecoration : ItemDecoration` |

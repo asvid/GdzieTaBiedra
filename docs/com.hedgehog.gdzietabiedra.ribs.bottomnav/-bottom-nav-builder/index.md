@@ -2,7 +2,7 @@
 
 # BottomNavBuilder
 
-`class BottomNavBuilder : ViewBuilder<`[`BottomNavView`](../-bottom-nav-view/index.md)`, `[`BottomNavRouter`](../-bottom-nav-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>`
+`class BottomNavBuilder : ViewBuilder<`[`BottomNavView`](../-bottom-nav-view/index.md)`, `[`BottomNavRouter`](../-bottom-nav-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/BottomNavBuilder.kt#L19)
 
 Builder for the {@link BottomNavScope}.
 

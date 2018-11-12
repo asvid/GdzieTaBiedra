@@ -6,6 +6,7 @@
 
 | Name | Summary |
 |---|---|
+| [com.github.asvid.biedra.domain](com.github.asvid.biedra.domain/index.md) |  |
 | [com.hedgehog.gdzietabiedra](com.hedgehog.gdzietabiedra/index.md) |  |
 | [com.hedgehog.gdzietabiedra.api](com.hedgehog.gdzietabiedra.api/index.md) |  |
 | [com.hedgehog.gdzietabiedra.api.response.shop](com.hedgehog.gdzietabiedra.api.response.shop/index.md) |  |
@@ -18,6 +19,7 @@
 | [com.hedgehog.gdzietabiedra.di](com.hedgehog.gdzietabiedra.di/index.md) |  |
 | [com.hedgehog.gdzietabiedra.di.components](com.hedgehog.gdzietabiedra.di.components/index.md) |  |
 | [com.hedgehog.gdzietabiedra.di.modules](com.hedgehog.gdzietabiedra.di.modules/index.md) |  |
+| [com.hedgehog.gdzietabiedra.domain](com.hedgehog.gdzietabiedra.domain/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs](com.hedgehog.gdzietabiedra.ribs/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav](com.hedgehog.gdzietabiedra.ribs.bottomnav/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.map](com.hedgehog.gdzietabiedra.ribs.bottomnav.map/index.md) |  |

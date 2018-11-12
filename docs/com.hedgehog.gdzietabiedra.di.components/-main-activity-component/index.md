@@ -2,7 +2,7 @@
 
 # MainActivityComponent
 
-`@Subcomponent([MainActivityModule]) interface MainActivityComponent : AndroidInjector<`[`MainActivity`](../../com.hedgehog.gdzietabiedra/-main-activity/index.md)`>`
+`@Subcomponent([MainActivityModule]) interface MainActivityComponent : AndroidInjector<`[`MainActivity`](../../com.hedgehog.gdzietabiedra/-main-activity/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/di/components/ActivityComponents.kt#L9)
 
 ### Types
 

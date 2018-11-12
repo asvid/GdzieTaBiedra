@@ -2,7 +2,7 @@
 
 # MapBuilder
 
-`class MapBuilder : ViewBuilder<`[`MapView`](../-map-view/index.md)`, `[`MapRouter`](../-map-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>`
+`class MapBuilder : ViewBuilder<`[`MapView`](../-map-view/index.md)`, `[`MapRouter`](../-map-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/map/MapBuilder.kt#L25)
 
 Builder for the {@link MapScope}.
 

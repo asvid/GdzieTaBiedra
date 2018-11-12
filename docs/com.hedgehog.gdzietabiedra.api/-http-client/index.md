@@ -2,7 +2,7 @@
 
 # HttpClient
 
-`class HttpClient`
+`class HttpClient` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/api/HttpClient.kt#L10)
 
 ### Constructors
 

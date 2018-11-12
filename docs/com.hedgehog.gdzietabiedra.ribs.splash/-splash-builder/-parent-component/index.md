@@ -2,7 +2,7 @@
 
 # ParentComponent
 
-`interface ParentComponent`
+`interface ParentComponent` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashBuilder.kt#L49)
 
 ### Functions
 

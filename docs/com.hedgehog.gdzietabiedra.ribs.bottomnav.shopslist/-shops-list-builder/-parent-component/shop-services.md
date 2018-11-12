@@ -2,4 +2,4 @@
 
 # shopServices
 
-`abstract fun shopServices(): `[`ShopService`](../../../com.hedgehog.gdzietabiedra.appservice/-shop-service/index.md)
+`abstract fun shopServices(): `[`ShopService`](../../../com.hedgehog.gdzietabiedra.appservice/-shop-service/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopsListBuilder.kt#L53)

@@ -2,7 +2,7 @@
 
 # Component
 
-`@Component([Module], [ParentComponent]) interface Component : InteractorBaseComponent<`[`BottomNavInteractor`](../../-bottom-nav-interactor/index.md)`>, `[`BuilderComponent`](../-builder-component/index.md)
+`@Component([Module], [ParentComponent]) interface Component : InteractorBaseComponent<`[`BottomNavInteractor`](../../-bottom-nav-interactor/index.md)`>, `[`BuilderComponent`](../-builder-component/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/BottomNavBuilder.kt#L74)
 
 ### Types
 

@@ -2,7 +2,7 @@
 
 # ShopsListBuilder
 
-`class ShopsListBuilder : ViewBuilder<`[`ShopsListView`](../-shops-list-view/index.md)`, `[`ShopsListRouter`](../-shops-list-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>`
+`class ShopsListBuilder : ViewBuilder<`[`ShopsListView`](../-shops-list-view/index.md)`, `[`ShopsListRouter`](../-shops-list-router/index.md)`, `[`ParentComponent`](-parent-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopsListBuilder.kt#L24)
 
 Builder for the {@link ShopsListScope}.
 

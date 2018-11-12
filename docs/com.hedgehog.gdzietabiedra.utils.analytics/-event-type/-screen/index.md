@@ -2,7 +2,7 @@
 
 # Screen
 
-`class Screen : `[`EventType`](../index.md)
+`class Screen : `[`EventType`](../index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/utils/analytics/EventType.kt#L14)
 
 ### Constructors
 

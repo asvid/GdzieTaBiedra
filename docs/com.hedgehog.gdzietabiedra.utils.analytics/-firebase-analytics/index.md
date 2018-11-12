@@ -2,7 +2,7 @@
 
 # FirebaseAnalytics
 
-`class FirebaseAnalytics : `[`Analytics`](../-analytics/index.md)
+`class FirebaseAnalytics : `[`Analytics`](../-analytics/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/utils/analytics/FirebaseAnalytics.kt#L6)
 
 ### Constructors
 

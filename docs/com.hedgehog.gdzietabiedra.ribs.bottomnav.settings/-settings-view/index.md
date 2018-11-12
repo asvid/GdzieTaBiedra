@@ -2,7 +2,7 @@
 
 # SettingsView
 
-`class SettingsView : `[`LinearLayout`](https://developer.android.com/reference/android/widget/LinearLayout.html)`, `[`SettingsPresenter`](../-settings-interactor/-settings-presenter/index.md)
+`class SettingsView : `[`LinearLayout`](https://developer.android.com/reference/android/widget/LinearLayout.html)`, `[`SettingsPresenter`](../-settings-interactor/-settings-presenter/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/settings/SettingsView.kt#L25)
 
 Top level view for {@link SettingsBuilder.SettingsScope}.
 

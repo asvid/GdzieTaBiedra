@@ -2,7 +2,7 @@
 
 # ShopsListInteractor
 
-`class ShopsListInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`ShopsListPresenter`](-shops-list-presenter/index.md)`, `[`ShopsListRouter`](../-shops-list-router/index.md)`>`
+`class ShopsListInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`ShopsListPresenter`](-shops-list-presenter/index.md)`, `[`ShopsListRouter`](../-shops-list-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopsListInteractor.kt#L33)
 
 ### Types
 

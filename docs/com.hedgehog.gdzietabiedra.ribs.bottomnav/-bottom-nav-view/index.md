@@ -2,7 +2,7 @@
 
 # BottomNavView
 
-`class BottomNavView : `[`BottomNavigationView`](https://developer.android.com/reference/android/support/design/widget/BottomNavigationView.html)`, `[`BottomNavPresenter`](../-bottom-nav-interactor/-bottom-nav-presenter/index.md)
+`class BottomNavView : BottomNavigationView, `[`BottomNavPresenter`](../-bottom-nav-interactor/-bottom-nav-presenter/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/BottomNavView.kt#L14)
 
 Top level view for {@link BottomNavBuilder.BottomNavScope}.
 

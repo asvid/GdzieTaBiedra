@@ -2,7 +2,7 @@
 
 # CrashlyticsTree
 
-`class CrashlyticsTree : `[`Tree`](http://jakewharton.github.io/timber/timber/log/Timber/Tree.html)
+`class CrashlyticsTree : `[`Tree`](http://jakewharton.github.io/timber/timber/log/Timber/Tree.html) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/utils/CrashlyticsTree.kt#L12)
 
 ### Constructors
 

@@ -2,7 +2,7 @@
 
 # BuilderComponent
 
-`interface BuilderComponent`
+`interface BuilderComponent` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashBuilder.kt#L97)
 
 ### Functions
 

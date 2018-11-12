@@ -2,7 +2,7 @@
 
 # MapEvent
 
-`sealed class MapEvent`
+`sealed class MapEvent` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/map/MapEvent.kt#L5)
 
 ### Types
 

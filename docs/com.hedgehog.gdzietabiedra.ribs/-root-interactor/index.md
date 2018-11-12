@@ -2,7 +2,7 @@
 
 # RootInteractor
 
-`class RootInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`RootPresenter`](-root-presenter.md)`, `[`RootRouter`](../-root-router/index.md)`>`
+`class RootInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`RootPresenter`](-root-presenter.md)`, `[`RootRouter`](../-root-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootInteractor.kt#L23)
 
 Coordinates Business Logic for [RootScope](#).
 

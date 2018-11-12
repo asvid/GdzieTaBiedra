@@ -2,7 +2,7 @@
 
 # ActivityBinder
 
-`abstract class ActivityBinder`
+`abstract class ActivityBinder` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/di/ActivityBinder.kt#L14)
 
 ### Constructors
 

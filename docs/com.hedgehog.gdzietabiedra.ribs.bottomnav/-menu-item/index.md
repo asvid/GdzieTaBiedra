@@ -2,7 +2,7 @@
 
 # MenuItem
 
-`enum class MenuItem`
+`enum class MenuItem` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/MenuItem.kt#L3)
 
 ### Enum Values
 

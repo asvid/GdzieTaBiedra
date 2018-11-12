@@ -2,7 +2,7 @@
 
 # AppComponent
 
-`@Singleton @Component([AndroidSupportInjectionModule, ActivityBinder, AppModule, MigrationsModule, DataModule, ApiModule, LocationModule, AppServices]) interface AppComponent`
+`@Singleton @Component([AndroidSupportInjectionModule, ActivityBinder, AppModule, MigrationsModule, DataModule, ApiModule, LocationModule, AppServices]) interface AppComponent` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/di/components/AppComponent.kt#L27)
 
 ### Types
 

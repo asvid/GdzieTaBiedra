@@ -2,7 +2,7 @@
 
 # Repository
 
-`interface Repository<M, I>`
+`interface Repository<M, I>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/data/repository/Repository.kt#L9)
 
 Central repository marker interface.
 

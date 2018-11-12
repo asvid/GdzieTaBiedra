@@ -2,7 +2,7 @@
 
 # RootRouter
 
-`class RootRouter : ViewRouter<`[`RootView`](../-root-view/index.md)`, `[`RootInteractor`](../-root-interactor/index.md)`, `[`Component`](../-root-builder/-component/index.md)`>`
+`class RootRouter : ViewRouter<`[`RootView`](../-root-view/index.md)`, `[`RootInteractor`](../-root-interactor/index.md)`, `[`Component`](../-root-builder/-component/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/RootRouter.kt#L24)
 
 Adds and removes children of {@link RootBuilder.RootScope}.
 

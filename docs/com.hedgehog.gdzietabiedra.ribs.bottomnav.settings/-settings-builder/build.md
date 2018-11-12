@@ -2,7 +2,7 @@
 
 # build
 
-`fun build(parentViewGroup: `[`ViewGroup`](https://developer.android.com/reference/android/view/ViewGroup.html)`): `[`SettingsRouter`](../-settings-router/index.md)
+`fun build(parentViewGroup: `[`ViewGroup`](https://developer.android.com/reference/android/view/ViewGroup.html)`): `[`SettingsRouter`](../-settings-router/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/settings/SettingsBuilder.kt#L33)
 
 Builds a new [SettingsRouter](../-settings-router/index.md).
 

@@ -2,7 +2,7 @@
 
 # SettingsInteractor
 
-`class SettingsInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`SettingsPresenter`](-settings-presenter/index.md)`, `[`SettingsRouter`](../-settings-router/index.md)`>`
+`class SettingsInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`SettingsPresenter`](-settings-presenter/index.md)`, `[`SettingsRouter`](../-settings-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/settings/SettingsInteractor.kt#L24)
 
 Coordinates Business Logic for [SettingsScope](#).
 

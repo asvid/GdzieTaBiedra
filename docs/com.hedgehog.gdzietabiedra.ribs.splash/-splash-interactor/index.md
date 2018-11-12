@@ -2,7 +2,7 @@
 
 # SplashInteractor
 
-`class SplashInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`SplashPresenter`](-splash-presenter/index.md)`, `[`SplashRouter`](../-splash-router/index.md)`>`
+`class SplashInteractor : `[`BaseInteractor`](../../com.uber.rib.core/-base-interactor/index.md)`<`[`SplashPresenter`](-splash-presenter/index.md)`, `[`SplashRouter`](../-splash-router/index.md)`>` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashInteractor.kt#L26)
 
 Coordinates Business Logic for [SplashScope](#).
 

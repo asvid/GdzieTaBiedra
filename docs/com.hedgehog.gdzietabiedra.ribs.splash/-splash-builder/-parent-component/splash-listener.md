@@ -2,4 +2,4 @@
 
 # splashListener
 
-`abstract fun splashListener(): `[`SplashListener`](../../-splash-listener/index.md)
+`abstract fun splashListener(): `[`SplashListener`](../../-splash-listener/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/splash/SplashBuilder.kt#L51)

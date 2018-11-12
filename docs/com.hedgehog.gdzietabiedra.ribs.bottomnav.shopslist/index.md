@@ -6,8 +6,8 @@
 
 | Name | Summary |
 |---|---|
-| [ShopListAdapter](-shop-list-adapter/index.md) | `class ShopListAdapter : `[`Adapter`](https://developer.android.com/reference/android/support/v7/widget/RecyclerView/Adapter.html)`<`[`ShopListItemVH`](-shop-list-item-v-h/index.md)`>` |
-| [ShopListItemVH](-shop-list-item-v-h/index.md) | `class ShopListItemVH : `[`ViewHolder`](https://developer.android.com/reference/android/support/v7/widget/RecyclerView/ViewHolder.html) |
+| [ShopListAdapter](-shop-list-adapter/index.md) | `class ShopListAdapter : Adapter<`[`ShopListItemVH`](-shop-list-item-v-h/index.md)`>` |
+| [ShopListItemVH](-shop-list-item-v-h/index.md) | `class ShopListItemVH : ViewHolder` |
 | [ShopListListener](-shop-list-listener/index.md) | `interface ShopListListener` |
 | [ShopsListBuilder](-shops-list-builder/index.md) | `class ShopsListBuilder : ViewBuilder<`[`ShopsListView`](-shops-list-view/index.md)`, `[`ShopsListRouter`](-shops-list-router/index.md)`, `[`ParentComponent`](-shops-list-builder/-parent-component/index.md)`>`<br>Builder for the {@link ShopsListScope}. |
 | [ShopsListInteractor](-shops-list-interactor/index.md) | `class ShopsListInteractor : `[`BaseInteractor`](../com.uber.rib.core/-base-interactor/index.md)`<`[`ShopsListPresenter`](-shops-list-interactor/-shops-list-presenter/index.md)`, `[`ShopsListRouter`](-shops-list-router/index.md)`>` |

@@ -2,4 +2,4 @@
 
 # readMapPosition
 
-`abstract fun readMapPosition(): `[`Position`](file:/home/adam/repo/GdzieTaBiedra/docs/domain/com.github.asvid.biedra.domain/-position/index.md)
+`abstract fun readMapPosition(): `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/map/MapProvider.kt#L15)

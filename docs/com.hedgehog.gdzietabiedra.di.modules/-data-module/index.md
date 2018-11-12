@@ -2,7 +2,7 @@
 
 # DataModule
 
-`class DataModule`
+`class DataModule` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/di/modules/DataModule.kt#L19)
 
 ### Constructors
 

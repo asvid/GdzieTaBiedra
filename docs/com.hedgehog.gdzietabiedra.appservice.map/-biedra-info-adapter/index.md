@@ -2,7 +2,7 @@
 
 # BiedraInfoAdapter
 
-`class BiedraInfoAdapter : InfoWindowAdapter`
+`class BiedraInfoAdapter : InfoWindowAdapter` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/map/BiedraInfoAdapter.kt#L11)
 
 ### Constructors
 

@@ -2,7 +2,7 @@
 
 # MigrationsModule
 
-`class MigrationsModule`
+`class MigrationsModule` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/di/modules/MigrationsModule.kt#L11)
 
 ### Constructors
 

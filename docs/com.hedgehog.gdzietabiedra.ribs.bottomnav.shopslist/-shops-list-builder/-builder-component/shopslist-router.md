@@ -2,4 +2,4 @@
 
 # shopslistRouter
 
-`abstract fun shopslistRouter(): `[`ShopsListRouter`](../../-shops-list-router/index.md)
+`abstract fun shopslistRouter(): `[`ShopsListRouter`](../../-shops-list-router/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/ribs/bottomnav/shopslist/ShopsListBuilder.kt#L102)
