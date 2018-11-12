@@ -27,7 +27,6 @@
 | [com.hedgehog.gdzietabiedra.di.modules.DataModule](../com.hedgehog.gdzietabiedra.di.modules/-data-module/index.md) |  |
 | [java.util.Date](../com.hedgehog.gdzietabiedra.utils/java.util.-date/index.md) (extensions in package com.hedgehog.gdzietabiedra.utils) |  |
 | [com.hedgehog.gdzietabiedra.appservice.DistanceCalculator](../com.hedgehog.gdzietabiedra.appservice/-distance-calculator/index.md) | [DistanceCalculator](../com.hedgehog.gdzietabiedra.appservice/-distance-calculator/index.md) contains methods to calculate distance between [Position](../com.github.asvid.biedra.domain/-position/index.md)s |
-| [com.hedgehog.gdzietabiedra.appservice.DistanceCalculatorSamples](../com.hedgehog.gdzietabiedra.appservice/-distance-calculator-samples/index.md) |  |
 | [kotlin.Double](../com.hedgehog.gdzietabiedra.utils/kotlin.-double/index.md) (extensions in package com.hedgehog.gdzietabiedra.utils) |  |
 | [com.hedgehog.gdzietabiedra.utils.analytics.EventType](../com.hedgehog.gdzietabiedra.utils.analytics/-event-type/index.md) |  |
 | [com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics](../com.hedgehog.gdzietabiedra.utils.analytics/-firebase-analytics/index.md) |  |

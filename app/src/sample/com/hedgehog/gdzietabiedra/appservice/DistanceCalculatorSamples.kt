@@ -2,6 +2,9 @@ package com.hedgehog.gdzietabiedra.appservice
 
 import com.github.asvid.biedra.domain.Position
 
+/**
+ * @suppress
+ * */
 class DistanceCalculatorSamples {
 
   fun calculateDistance() {
