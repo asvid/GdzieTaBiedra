@@ -10,4 +10,9 @@ android {
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation External.kotlin
+
+  //  Testing
+  testImplementation TestDeps.junit
+  androidTestImplementation TestDeps.runner
+  androidTestImplementation TestDeps.espresso
 }
