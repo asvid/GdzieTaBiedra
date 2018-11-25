@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.domain.Shop
+import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.utils.views.MarginItemDecoration
 import com.jakewharton.rxbinding3.widget.queryTextChanges
 import io.reactivex.subjects.PublishSubject

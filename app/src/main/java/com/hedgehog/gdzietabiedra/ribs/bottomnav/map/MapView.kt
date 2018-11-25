@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.FrameLayout
 import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.MapProvider
-import com.hedgehog.gdzietabiedra.domain.Shop
+import com.github.asvid.biedra.domain.Shop
 import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.Single

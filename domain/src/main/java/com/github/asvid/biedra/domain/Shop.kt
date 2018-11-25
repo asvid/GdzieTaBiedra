@@ -1,6 +1,4 @@
-package com.hedgehog.gdzietabiedra.domain
-
-import com.github.asvid.biedra.domain.Position
+package com.github.asvid.biedra.domain
 
 data class Shop(
     val id: String,
