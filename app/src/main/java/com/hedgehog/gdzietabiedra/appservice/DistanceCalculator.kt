@@ -9,12 +9,12 @@ import com.github.asvid.biedra.domain.Position
 class DistanceCalculator {
 
   /**
-   * calculates distance in straight line between 2 [Position]s
+   * Calculates distance in meters in straight line between 2 [Position]s
    *
    * @param pointA first position
    * @param pointB second position
    *
-   * @return [Double] distance in straight line between 2 [Position]s
+   * @return [Double] distance in straight line between 2 [Position]s in meters.
    *
    * @sample [com.hedgehog.gdzietabiedra.appservice.DistanceCalculatorSamples.calculateDistance]
    *

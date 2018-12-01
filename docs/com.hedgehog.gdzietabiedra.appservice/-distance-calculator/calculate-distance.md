@@ -4,13 +4,13 @@
 
 `fun calculateDistance(pointA: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`, pointB: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`): `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/DistanceCalculator.kt#L22)
 
-calculates distance in straight line between 2 [Position](../../com.github.asvid.biedra.domain/-position/index.md)s
+Calculates distance in meters in straight line between 2 [Position](../../com.github.asvid.biedra.domain/-position/index.md)s
 
 ``` kotlin
 val positionA = Position(52.6546, 58.3541)
 val positionB = Position(58.46, 57.35)
 
-val distance = DistanceCalculator().calculateDistance(positionA, positionB)
+val distanceInMeters = DistanceCalculator().calculateDistance(positionA, positionB)
 ```
 
 ### Parameters
@@ -20,5 +20,5 @@ val distance = DistanceCalculator().calculateDistance(positionA, positionB)
 `pointB` - second position
 
 **Return**
-[Double](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html) distance in straight line between 2 [Position](../../com.github.asvid.biedra.domain/-position/index.md)s
+[Double](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html) distance in straight line between 2 [Position](../../com.github.asvid.biedra.domain/-position/index.md)s in meters.
 

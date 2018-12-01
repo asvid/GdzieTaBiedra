@@ -16,4 +16,4 @@
 
 | Name | Summary |
 |---|---|
-| [calculateDistance](calculate-distance.md) | `fun calculateDistance(pointA: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`, pointB: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`): `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)<br>calculates distance in straight line between 2 [Position](../../com.github.asvid.biedra.domain/-position/index.md)s |
+| [calculateDistance](calculate-distance.md) | `fun calculateDistance(pointA: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`, pointB: `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`): `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)<br>Calculates distance in meters in straight line between 2 [Position](../../com.github.asvid.biedra.domain/-position/index.md)s |

@@ -11,6 +11,6 @@ class DistanceCalculatorSamples {
     val positionA = Position(52.6546, 58.3541)
     val positionB = Position(58.46, 57.35)
 
-    val distance = DistanceCalculator().calculateDistance(positionA, positionB)
+    val distanceInMeters = DistanceCalculator().calculateDistance(positionA, positionB)
   }
 }
