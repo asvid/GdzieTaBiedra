@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.createScaledBitmap
 import android.graphics.BitmapFactory
 import com.github.asvid.biedra.domain.Position
+import com.github.asvid.biedra.domain.Shop
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener
@@ -13,7 +14,6 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.*
-import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.utils.toLatLng
 import com.hedgehog.gdzietabiedra.utils.toPosition
 import io.reactivex.Completable
@@ -77,7 +77,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
     val markerOptions = MarkerOptions()
         .position(shopMarker.position.toLatLng())
         .title(shopMarker.shop.address.toString())
-        .snippet(shopMarker.shop.openHours)
+        .snippet(shopMarker.shop.openHours.weekDay.toString())
         .icon(markerIcon)
     val marker = map.addMarker(markerOptions)
     if (showInfo) marker.showInfoWindow()
