@@ -10,6 +10,8 @@ android {
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation External.kotlin
+  //  Joda Time
+  implementation External.jodaTime
 
   //  Testing
   testImplementation TestDeps.junit

@@ -4,12 +4,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class OpenHours(
-    val weekDay: String,
-    val saturday: String,
-    val sunday: String
+    val weekDay: TimeRange,
+    val saturday: TimeRange,
+    val sunday: TimeRange
 )
 
-fun position(block: OpenHoursBuilder.() -> Unit): OpenHours = OpenHoursBuilder().apply(block).build()
+fun openHours(block: OpenHoursBuilder.() -> Unit): OpenHours = OpenHoursBuilder().apply(block).build()
 
 @ShopDsl
 class OpenHoursBuilder {
@@ -28,7 +28,6 @@ fun String.toOpenHours(): Pair<Date, Date> {
 
   return Pair(startDate, endDate)
 }
-
 
 fun String.toDate(format: String): Date {
   val formatter = SimpleDateFormat(format)

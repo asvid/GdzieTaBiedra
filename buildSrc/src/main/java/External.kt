@@ -26,6 +26,7 @@ object External {
   const val firebaseCore = "com.google.firebase:firebase-core:16.0.4"
   const val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.9.5"
 
+  const val jodaTime = "net.danlew:android.joda:2.10.1"
 }
 
 object Realm {

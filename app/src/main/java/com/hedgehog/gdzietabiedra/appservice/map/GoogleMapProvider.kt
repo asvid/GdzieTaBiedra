@@ -76,7 +76,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
   override fun drawMarker(shopMarker: ShopMarker, showInfo: Boolean) {
     val markerOptions = MarkerOptions()
         .position(shopMarker.position.toLatLng())
-        .title(shopMarker.shop.address)
+        .title(shopMarker.shop.address.toString())
         .snippet(shopMarker.shop.openHours)
         .icon(markerIcon)
     val marker = map.addMarker(markerOptions)
