@@ -6,6 +6,7 @@ import android.graphics.Bitmap.createScaledBitmap
 import android.graphics.BitmapFactory
 import com.github.asvid.biedra.domain.Position
 import com.github.asvid.biedra.domain.Shop
+import com.github.asvid.biedra.domain.SundayShopping
 import com.github.asvid.biedra.domain.getForToday
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -75,10 +76,15 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
   }
 
   override fun drawMarker(shopMarker: ShopMarker, showInfo: Boolean) {
+    val openingHoursText: String =
+        if (SundayShopping.isShoppingAllowed())
+          shopMarker.shop.openHours.getForToday().toString()
+        else context.resources.getString(R.string.shop_closed)
+
     val markerOptions = MarkerOptions()
         .position(shopMarker.position.toLatLng())
         .title(shopMarker.shop.address.toString())
-        .snippet(shopMarker.shop.openHours.getForToday().toString())
+        .snippet(openingHoursText)
         .icon(markerIcon)
     val marker = map.addMarker(markerOptions)
     if (showInfo) marker.showInfoWindow()
