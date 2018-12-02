@@ -140,7 +140,11 @@ class LocationWatchdog(val context: Context) {
    * */
   fun unregister() {
     Timber.d("LocationWatchdog unregister")
-    context.unregisterReceiver(gpsReceiver)
+    try {
+      context.unregisterReceiver(gpsReceiver)
+    } catch (e: RuntimeException) {
+      Timber.e(e, "error while unregistering LocationWatchdog")
+    }
     compositeDisposable.dispose()
   }
 

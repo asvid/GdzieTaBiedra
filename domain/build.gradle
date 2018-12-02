@@ -10,6 +10,8 @@ android {
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation External.kotlin
+  //  Logging
+  implementation External.timber
   //  Joda Time
   implementation External.jodaTime
 
@@ -17,5 +19,5 @@ dependencies {
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso
-  testCompile 'joda-time:joda-time:2.9.3'
+  testCompile TestDeps.jodaTime
 }

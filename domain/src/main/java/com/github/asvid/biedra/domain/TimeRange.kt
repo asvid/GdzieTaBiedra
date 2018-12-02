@@ -28,7 +28,7 @@ class TimeRange(val start: LocalTime, val end: LocalTime) {
    * @param startDate start date of range
    * @param endDate end date of range
    * */
-  constructor(startDate: Date, endDate: Date) : this(LocalTime(startDate), LocalTime(endDate))
+  constructor(startDate: Date, endDate: Date) : this(LocalTime.fromDateFields(startDate), LocalTime.fromDateFields(endDate))
 
   private val duration: Duration
     get() {
@@ -56,7 +56,7 @@ class TimeRange(val start: LocalTime, val end: LocalTime) {
   fun toMinutes() = duration.toStandardMinutes().minutes
 
   /**
-   * @return [String] representation of range in format: <start> - <end> where time is in <hh:mm>
+   * @return [String] representation of range in 24h format without seconds: <start> - <end>
    * */
-  override fun toString() = "${start.toString("hh:mm")} - ${end.toString("hh:mm")}"
+  override fun toString() = "${start.toString("H:mm")} - ${end.toString("H:mm")}"
 }

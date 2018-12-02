@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import com.github.asvid.biedra.domain.Shop
+import com.github.asvid.biedra.domain.SundayShopping
+import com.github.asvid.biedra.domain.getForToday
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.utils.round
 import io.reactivex.subjects.PublishSubject
@@ -62,9 +64,15 @@ class ShopListItemVH(val view: View) : ViewHolder(view) {
 
   fun setViewHolder(item: Shop,
                     itemMoreClicked: PublishSubject<Shop>) {
+
+    val openingHoursText: String =
+        if (SundayShopping.isShoppingAllowed())
+          item.openHours.getForToday().toString()
+        else view.resources.getString(R.string.shop_closed)
+
     view.findViewById<TextView>(R.id.shop_address).text = item.address.toString()
     view.findViewById<TextView>(R.id.shop_distance).text = generateDistanceText(item.distance)
-    view.findViewById<TextView>(R.id.shop_open_hours).text = item.openHours.weekDay.toString()
+    view.findViewById<TextView>(R.id.shop_open_hours).text = openingHoursText
     view.findViewById<ImageButton>(R.id.more_options_button).setOnClickListener {
       itemMoreClicked.onNext(item)
     }

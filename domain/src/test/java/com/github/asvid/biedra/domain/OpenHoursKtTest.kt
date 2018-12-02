@@ -8,7 +8,7 @@ class OpenHoursKtTest {
   @Test
   fun `strings should be transformed into pair of dates correctly`() {
 
-// Given some string hours ranges
+// Given some string hourOfDay ranges
     val openingHours1 = "06.30 - 21.00"
     val openingHours2 = "06.30 - 22.00"
     val openingHours3 = "08.00 - 20.00"
@@ -19,18 +19,18 @@ class OpenHoursKtTest {
     val openPair3 = openingHours3.toOpenHours()
 
 //    Dates should be correct
-    Assert.assertEquals(6, openPair1.first.hours)
-    Assert.assertEquals(30, openPair1.first.minutes)
-    Assert.assertEquals(6, openPair2.first.hours)
-    Assert.assertEquals(30, openPair2.first.minutes)
-    Assert.assertEquals(8, openPair3.first.hours)
-    Assert.assertEquals(0, openPair3.first.minutes)
+    Assert.assertEquals(6, openPair1.start.hourOfDay)
+    Assert.assertEquals(30, openPair1.start.minuteOfHour)
+    Assert.assertEquals(6, openPair2.start.hourOfDay)
+    Assert.assertEquals(30, openPair2.start.minuteOfHour)
+    Assert.assertEquals(8, openPair3.start.hourOfDay)
+    Assert.assertEquals(0, openPair3.start.minuteOfHour)
 
-    Assert.assertEquals(21, openPair1.second.hours)
-    Assert.assertEquals(0, openPair1.second.minutes)
-    Assert.assertEquals(22, openPair2.second.hours)
-    Assert.assertEquals(0, openPair2.second.minutes)
-    Assert.assertEquals(20, openPair3.second.hours)
-    Assert.assertEquals(0, openPair3.second.minutes)
+    Assert.assertEquals(21, openPair1.end.hourOfDay)
+    Assert.assertEquals(0, openPair1.end.minuteOfHour)
+    Assert.assertEquals(22, openPair2.end.hourOfDay)
+    Assert.assertEquals(0, openPair2.end.minuteOfHour)
+    Assert.assertEquals(20, openPair3.end.hourOfDay)
+    Assert.assertEquals(0, openPair3.end.minuteOfHour)
   }
 }
