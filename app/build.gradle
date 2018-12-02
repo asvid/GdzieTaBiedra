@@ -31,7 +31,7 @@ android {
     targetSdkVersion Build.targetSdkVersion
     compileSdkVersion Build.compileSdkVersion
     versionCode buildVersionCode
-    versionName "2.0"
+    versionName "2.1"
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -58,8 +58,8 @@ android {
     dev {
       dimension "stage"
       versionNameSuffix "-dev" // e.g 1.0-dev
-      //            applicationIdSuffix '.dev'
-      resConfigs("en", "xxhdpi")
+//      applicationIdSuffix '.dev'
+//      resConfigs("de", "xxhdpi")
     }
     prod {
       dimension "stage"

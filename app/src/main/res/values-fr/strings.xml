@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">"Où est Biedronka"</string>
+    <string name="more_actions">"plus d'actions"</string>
+    <string name="notifications_title">"Les notifications"</string>
+    <string name="range">"intervalle"</string>
+    <string name="when_shop_is_in_area">"quand le magasin est dans la zone"</string>
+    <string name="navigate_to_shop">"naviguer au magasin"</string>
+    <string name="address">"Adresse:"</string>
+    <string name="opening_hours">"Heures d'ouverture:"</string>
+    <string name="distance">"Distance:"</string>
+    <string name="list">"liste"</string>
+    <string name="map">"Carte"</string>
+    <string name="settings">"Réglages"</string>
+    <string name="grant_permissions">"Accorder des autorisations"</string>
+    <string name="email_me">"Envoyez moi un email"</string>
+    <string name="share_some_stars">"Partager des étoiles"</string>
+    <string name="settings_testimony">"Ce n'est pas une application officielle de Biedronka ™, je n'ai aucun lien avec l'entreprise. \nCela est fait comme mon projet d’animal de passe-temps favori, un bac à sable numérique où je peux jouer avec de nouvelles bibliothèques et autres choses pendant mon temps libre. \n \nPensez-y lorsque vous donnez cette application ou laissez un commentaire :)
+  "</string>
+    <string name="turn_on_location">"Activer l'emplacement"</string>
+    <string name="shop_closed">"La boutique est fermée aujourd'hui"</string>
+</resources>

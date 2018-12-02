@@ -19,5 +19,5 @@ dependencies {
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso
-  testCompile TestDeps.jodaTime
+  testImplementation TestDeps.jodaTime
 }
