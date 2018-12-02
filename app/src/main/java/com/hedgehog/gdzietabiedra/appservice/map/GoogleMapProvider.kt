@@ -6,6 +6,7 @@ import android.graphics.Bitmap.createScaledBitmap
 import android.graphics.BitmapFactory
 import com.github.asvid.biedra.domain.Position
 import com.github.asvid.biedra.domain.Shop
+import com.github.asvid.biedra.domain.getForToday
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener
@@ -77,7 +78,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
     val markerOptions = MarkerOptions()
         .position(shopMarker.position.toLatLng())
         .title(shopMarker.shop.address.toString())
-        .snippet(shopMarker.shop.openHours.weekDay.toString())
+        .snippet(shopMarker.shop.openHours.getForToday().toString())
         .icon(markerIcon)
     val marker = map.addMarker(markerOptions)
     if (showInfo) marker.showInfoWindow()

@@ -1,5 +1,8 @@
 package com.github.asvid.biedra.domain
 
+import org.joda.time.DateTimeConstants
+import org.joda.time.LocalDate
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,6 +51,8 @@ fun String.toOpenHours(): TimeRange {
   val startDate = splitted[0].toDate("hh.mm")
   val endDate = splitted[1].toDate("hh.mm")
 
+  Timber.d("string to TimeRange: $this ($startDate : $endDate)-> ${TimeRange(startDate, endDate)}")
+
   return TimeRange(startDate, endDate)
 }
 
@@ -62,3 +67,10 @@ fun String.toDate(format: String): Date {
   val formatter = SimpleDateFormat(format)
   return formatter.parse(this)
 }
+
+fun OpenHours.getForToday(): TimeRange =
+    when (LocalDate().dayOfWeek) {
+      DateTimeConstants.SUNDAY -> this.sunday ?: this.weekDay
+      DateTimeConstants.SATURDAY -> this.saturday ?: this.weekDay
+      else -> this.weekDay
+    }
