@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.domain.Shop
 import com.hedgehog.gdzietabiedra.utils.round
 import io.reactivex.subjects.PublishSubject
-import java.util.Collections
+import java.util.*
 import kotlin.math.roundToInt
 
 class ShopListAdapter : RecyclerView.Adapter<ShopListItemVH>() {
@@ -61,10 +61,10 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListItemVH>() {
 class ShopListItemVH(val view: View) : ViewHolder(view) {
 
   fun setViewHolder(item: Shop,
-      itemMoreClicked: PublishSubject<Shop>) {
-    view.findViewById<TextView>(R.id.shop_address).text = item.address
+                    itemMoreClicked: PublishSubject<Shop>) {
+    view.findViewById<TextView>(R.id.shop_address).text = item.address.toString()
     view.findViewById<TextView>(R.id.shop_distance).text = generateDistanceText(item.distance)
-    view.findViewById<TextView>(R.id.shop_open_hours).text = item.openHours
+    view.findViewById<TextView>(R.id.shop_open_hours).text = item.openHours.weekDay.toString()
     view.findViewById<ImageButton>(R.id.more_options_button).setOnClickListener {
       itemMoreClicked.onNext(item)
     }

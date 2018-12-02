@@ -2,7 +2,7 @@ package com.hedgehog.gdzietabiedra.appservice.map
 
 import com.github.asvid.biedra.domain.Position
 import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.MEDIUM
-import com.hedgehog.gdzietabiedra.domain.Shop
+import com.github.asvid.biedra.domain.Shop
 import io.reactivex.Completable
 import io.reactivex.Observable
 

@@ -1,7 +1,7 @@
 package com.hedgehog.gdzietabiedra.appservice.map
 
 import com.github.asvid.biedra.domain.Position
-import com.hedgehog.gdzietabiedra.domain.Shop
+import com.github.asvid.biedra.domain.Shop
 
 /**
  * Map marker for [Shop]

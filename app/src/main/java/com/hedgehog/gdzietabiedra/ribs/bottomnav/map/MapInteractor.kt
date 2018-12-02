@@ -4,7 +4,7 @@ import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.appservice.map.MapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.ShopMarker
-import com.hedgehog.gdzietabiedra.domain.Shop
+import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.map.MapEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
 import com.hedgehog.gdzietabiedra.utils.analytics.EventType

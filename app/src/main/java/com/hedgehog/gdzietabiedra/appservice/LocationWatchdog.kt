@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.location.LocationManager
 import com.github.asvid.biedra.domain.Position
+import com.github.asvid.biedra.domain.position
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import io.reactivex.Observable
@@ -16,7 +17,10 @@ import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
-private val WARSAW = Position(52.229990, 21.011572)
+private val WARSAW = position {
+  lat = 52.229990
+  lng = 21.011572
+}
 
 class LocationWatchdog(val context: Context) {
 

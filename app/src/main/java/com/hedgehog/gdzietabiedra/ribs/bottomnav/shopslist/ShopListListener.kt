@@ -1,6 +1,6 @@
 package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist
 
-import com.hedgehog.gdzietabiedra.domain.Shop
+import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 
 interface ShopListListener {

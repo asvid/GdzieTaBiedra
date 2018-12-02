@@ -10,4 +10,5 @@ object Versions {
   const val retrofit = "2.4.0"
   const val leakCanary = "1.5.4"
   const val googlePlayServices = "16.0.0"
+  const val jodaTime = "2.10.1"
 }

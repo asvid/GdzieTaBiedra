@@ -124,6 +124,8 @@ dependencies {
   //  Leak detection
   debugImplementation External.leakcanaryDebug
   releaseImplementation External.leakcanaryRelease
+  //  Joda Time
+  implementation External.jodaTime
   //  Testing
   testImplementation Uber.ribTestUtils
   testImplementation TestDeps.junit
