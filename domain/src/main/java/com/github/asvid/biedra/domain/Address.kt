@@ -6,7 +6,6 @@ data class Address(
     val streetNumber: String,
     val postalCode: String
 
-
 ) {
   override fun toString(): String {
     return "$streetName $streetNumber, $postalCode $cityName"

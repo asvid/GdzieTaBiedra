@@ -5,7 +5,7 @@ import org.joda.time.LocalTime
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-data class TimeRange(val start: LocalTime, val end: LocalTime) {
+class TimeRange(val start: LocalTime, val end: LocalTime) {
 
   constructor(start: LocalTime, length: Duration) : this(start, start.plus(length.toPeriod()))
 
@@ -21,17 +21,9 @@ data class TimeRange(val start: LocalTime, val end: LocalTime) {
 
   fun withinRange(time: LocalTime) = (time.isAfter(start) || time.isEqual(start)) && (time.isBefore(end) || time.isEqual(end))
 
-  fun endsNextDay(): Boolean {
-    return start.isAfter(end)
-  }
+  fun toHours() = duration.toStandardHours().hours
 
-  fun toHours(): Int {
-    return duration.toStandardHours().hours
-  }
-
-  fun toMinutes(): Int {
-    return duration.toStandardMinutes().minutes
-  }
+  fun toMinutes() = duration.toStandardMinutes().minutes
 
   override fun toString() = "${start.toString("hh:mm")} - ${end.toString("hh:mm")}"
 }
