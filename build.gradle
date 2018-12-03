@@ -38,6 +38,11 @@ allprojects {
       url 'https://maven.google.com/'
     }
   }
+  afterEvaluate {
+    tasks.withType(JavaCompile.class) {
+      options.compilerArgs << "-Xmaxerrs" << "500"
+    }
+  }
 }
 
 task clean(type: Delete) {
@@ -88,8 +93,8 @@ subprojects {
       }
     }
     compileOptions {
-      sourceCompatibility 1.8
-      targetCompatibility 1.8
+      sourceCompatibility JavaVersion.VERSION_1_8
+      targetCompatibility JavaVersion.VERSION_1_8
     }
   }
 }

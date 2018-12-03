@@ -36,3 +36,5 @@ Gemfile
 Gemfile\.lock
 
 keystore\.properties
+
+fastlane-api\.json
