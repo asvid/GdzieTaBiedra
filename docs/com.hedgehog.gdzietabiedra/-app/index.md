@@ -2,7 +2,7 @@
 
 # App
 
-`class App : `[`Application`](https://developer.android.com/reference/android/app/Application.html)`, HasActivityInjector, HasServiceInjector` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/App.kt#L23)
+`class App : `[`Application`](https://developer.android.com/reference/android/app/Application.html)`, HasActivityInjector, HasServiceInjector` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/App.kt#L24)
 
 Application class, no rocket science here
 

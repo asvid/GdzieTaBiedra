@@ -22,7 +22,6 @@
 | [com.hedgehog.gdzietabiedra.di](com.hedgehog.gdzietabiedra.di/index.md) |  |
 | [com.hedgehog.gdzietabiedra.di.components](com.hedgehog.gdzietabiedra.di.components/index.md) |  |
 | [com.hedgehog.gdzietabiedra.di.modules](com.hedgehog.gdzietabiedra.di.modules/index.md) |  |
-| [com.hedgehog.gdzietabiedra.domain](com.hedgehog.gdzietabiedra.domain/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs](com.hedgehog.gdzietabiedra.ribs/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav](com.hedgehog.gdzietabiedra.ribs.bottomnav/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.map](com.hedgehog.gdzietabiedra.ribs.bottomnav.map/index.md) |  |

@@ -2,4 +2,4 @@
 
 # &lt;init&gt;
 
-`ShopSelected(shop: `[`Shop`](../../../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)`)`
+`ShopSelected(shop: `[`Shop`](../../../../com.github.asvid.biedra.domain/-shop/index.md)`)`

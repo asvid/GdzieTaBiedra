@@ -10,4 +10,4 @@
 | [GoogleMapProvider](-google-map-provider/index.md) | `class GoogleMapProvider : `[`MapProvider`](-map-provider/index.md)<br>Map provider build around [GoogleMap](#) |
 | [MapProvider](-map-provider/index.md) | `interface MapProvider`<br>Interface that hides implementation of concrete maps provider, allows easy switch from Google Maps to OpenMaps etc. |
 | [MapZoom](-map-zoom/index.md) | `enum class MapZoom` |
-| [ShopMarker](-shop-marker/index.md) | `data class ShopMarker`<br>Map marker for [Shop](../com.hedgehog.gdzietabiedra.domain/-shop/index.md) |
+| [ShopMarker](-shop-marker/index.md) | `data class ShopMarker`<br>Map marker for [Shop](../com.github.asvid.biedra.domain/-shop/index.md) |

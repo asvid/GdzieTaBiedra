@@ -2,7 +2,7 @@
 
 # GoogleMapProvider
 
-`class GoogleMapProvider : `[`MapProvider`](../-map-provider/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/map/GoogleMapProvider.kt#L32)
+`class GoogleMapProvider : `[`MapProvider`](../-map-provider/index.md) [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/map/GoogleMapProvider.kt#L34)
 
 Map provider build around [GoogleMap](#)
 
@@ -17,7 +17,7 @@ Map provider build around [GoogleMap](#)
 | [mapClicked](map-clicked.md) | `fun mapClicked(): `[`Observable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html)`<`[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`>` |
 | [mapMoved](map-moved.md) | `fun mapMoved(): `[`Observable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html)`<`[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`>` |
 | [readMapPosition](read-map-position.md) | `fun readMapPosition(): `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md) |
-| [selectShop](select-shop.md) | `fun selectShop(shop: `[`Shop`](../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)`): `[`Completable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Completable.html) |
+| [selectShop](select-shop.md) | `fun selectShop(shop: `[`Shop`](../../com.github.asvid.biedra.domain/-shop/index.md)`): `[`Completable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Completable.html) |
 | [shopMarkerClicked](shop-marker-clicked.md) | `fun shopMarkerClicked(): `[`Observable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html)`<`[`ShopMarker`](../-shop-marker/index.md)`>` |
 
 ### Companion Object Functions

@@ -2,7 +2,7 @@
 
 # LocationWatchdog
 
-`class LocationWatchdog` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/LocationWatchdog.kt#L21)
+`class LocationWatchdog` [(source)](https://github.com/asvid/GdzieTaBiedra/tree/master/app/src/main/java/com/hedgehog/gdzietabiedra/appservice/LocationWatchdog.kt#L25)
 
 ### Constructors
 

@@ -17,7 +17,7 @@ Interface that hides implementation of concrete maps provider, allows easy switc
 | [mapClicked](map-clicked.md) | `abstract fun mapClicked(): `[`Observable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html)`<`[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`>` |
 | [mapMoved](map-moved.md) | `abstract fun mapMoved(): `[`Observable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html)`<`[`Position`](../../com.github.asvid.biedra.domain/-position/index.md)`>` |
 | [readMapPosition](read-map-position.md) | `abstract fun readMapPosition(): `[`Position`](../../com.github.asvid.biedra.domain/-position/index.md) |
-| [selectShop](select-shop.md) | `abstract fun selectShop(shop: `[`Shop`](../../com.hedgehog.gdzietabiedra.domain/-shop/index.md)`): `[`Completable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Completable.html) |
+| [selectShop](select-shop.md) | `abstract fun selectShop(shop: `[`Shop`](../../com.github.asvid.biedra.domain/-shop/index.md)`): `[`Completable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Completable.html) |
 | [shopMarkerClicked](shop-marker-clicked.md) | `abstract fun shopMarkerClicked(): `[`Observable`](http://reactivex.io/RxJava/javadoc/io/reactivex/Observable.html)`<`[`ShopMarker`](../-shop-marker/index.md)`>` |
 
 ### Inheritors
