@@ -16,3 +16,6 @@ engines:
    enabled: true
    exclude_paths:
      - config/engines.yml
+
+exclude_paths:
+ - '**/test/**'

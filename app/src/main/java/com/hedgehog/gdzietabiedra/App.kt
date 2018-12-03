@@ -13,6 +13,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.HasServiceInjector
 import io.fabric.sdk.android.Fabric
+import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 import javax.inject.Inject
@@ -57,6 +58,11 @@ class App : Application(), HasActivityInjector, HasServiceInjector {
     initFabric()
     initLeakCanary()
     initTimber()
+    initJoda()
+  }
+
+  private fun initJoda() {
+    JodaTimeAndroid.init(this)
   }
 
   private fun initTimber() {

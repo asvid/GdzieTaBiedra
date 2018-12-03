@@ -2,7 +2,7 @@ package com.hedgehog.gdzietabiedra.data.repository.shops
 
 import com.github.asvid.biedra.domain.Position
 import com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem
-import com.hedgehog.gdzietabiedra.domain.Shop
+import com.github.asvid.biedra.domain.Shop
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.realm.Case

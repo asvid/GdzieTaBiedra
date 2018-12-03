@@ -5,5 +5,6 @@ object TestDeps {
   const val compileTesting = "com.google.testing.compile:compile-testing:0.11"
   const val runner = "com.android.support.test:runner:1.0.2"
   const val espresso = "com.android.support.test.espresso:espresso-core:3.0.2"
+  const val jodaTime = "joda-time:joda-time:${Versions.jodaTime}"
   const val mockServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
 }

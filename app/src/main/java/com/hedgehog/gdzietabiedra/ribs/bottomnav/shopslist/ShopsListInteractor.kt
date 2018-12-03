@@ -3,7 +3,7 @@ package com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist
 import com.github.asvid.biedra.domain.Position
 import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
 import com.hedgehog.gdzietabiedra.appservice.ShopService
-import com.hedgehog.gdzietabiedra.domain.Shop
+import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
 import com.hedgehog.gdzietabiedra.utils.analytics.EventType
