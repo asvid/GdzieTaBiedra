@@ -131,6 +131,8 @@ dependencies {
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso
+
+  implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

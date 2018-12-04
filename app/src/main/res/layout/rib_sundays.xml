@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.hedgehog.gdzietabiedra.ribs.bottomnav.sundays.SundaysView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/month_left_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="?android:selectableItemBackground"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp" />
+
+        <TextView
+            android:id="@+id/month_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/primaryTextColor" />
+
+        <ImageButton
+            android:id="@+id/month_right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="?android:selectableItemBackground"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/shopping_sundays_subtitle"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="@color/primaryTextColor" />
+
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        app:compactCalendarBackgroundColor="#ffe95451"
+        app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="#ffe95451"
+        app:compactCalendarEventIndicatorStyle="fill_large_indicator"
+        app:compactCalendarTextColor="#fff"
+        app:compactCalendarTextSize="24sp" />
+
+</com.hedgehog.gdzietabiedra.ribs.bottomnav.sundays.SundaysView>

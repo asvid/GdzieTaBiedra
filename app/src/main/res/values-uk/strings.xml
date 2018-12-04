@@ -19,4 +19,6 @@
   "</string>
     <string name="turn_on_location">"Включить местоположение"</string>
     <string name="shop_closed">"Сегодня магазин закрыт"</string>
+    <string name="shopping_sundays_subtitle">Дни, позначені зеленим, є комерційними недільними днями.</string>
+    <string name="sundays">Неділі</string>
 </resources>

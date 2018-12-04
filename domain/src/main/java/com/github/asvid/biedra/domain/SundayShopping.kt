@@ -4,7 +4,7 @@ import org.joda.time.DateTimeConstants
 import org.joda.time.LocalDate
 
 object SundayShopping {
-  private val shoppingSundays = listOf(
+  val shoppingSundays = listOf(
       LocalDate(2018, 12, 2),
       LocalDate(2018, 12, 16),
       LocalDate(2018, 12, 23),

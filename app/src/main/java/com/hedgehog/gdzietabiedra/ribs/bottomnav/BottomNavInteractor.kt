@@ -33,7 +33,7 @@ class BottomNavInteractor : BaseInteractor<BottomNavInteractor.BottomNavPresente
             MenuItem.LIST -> listener.shopsListSelected()
             MenuItem.MAP -> listener.mapSelected()
             MenuItem.SETTINGS -> listener.settingsSelected()
-
+            MenuItem.SUNDAYS -> listener.sundaysSelected()
           }
         }.addToDisposables()
 
@@ -49,5 +49,6 @@ class BottomNavInteractor : BaseInteractor<BottomNavInteractor.BottomNavPresente
     fun shopsListSelected()
     fun mapSelected()
     fun settingsSelected()
+    fun sundaysSelected()
   }
 }

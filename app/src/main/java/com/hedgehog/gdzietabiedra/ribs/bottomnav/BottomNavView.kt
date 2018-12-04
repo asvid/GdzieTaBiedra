@@ -30,6 +30,7 @@ class BottomNavView @JvmOverloads constructor(
         R.id.navigation_list -> menuRelay.accept(MenuItem.LIST)
         R.id.navigation_map -> menuRelay.accept(MenuItem.MAP)
         R.id.navigation_settings -> menuRelay.accept(MenuItem.SETTINGS)
+        R.id.navigation_sundays -> menuRelay.accept(MenuItem.SUNDAYS)
       }
       true
     }
@@ -40,6 +41,7 @@ class BottomNavView @JvmOverloads constructor(
       MenuItem.LIST -> R.id.navigation_list
       MenuItem.MAP -> R.id.navigation_map
       MenuItem.SETTINGS -> R.id.navigation_settings
+      MenuItem.SUNDAYS -> R.id.navigation_sundays
     }
   }
 

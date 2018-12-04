@@ -14,12 +14,12 @@ import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener.ShopListEvent.ShopSelected
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.sundays.SundaysBuilder
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashEvent.AllPermissionsGranted
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashListener
 import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
-import com.hedgehog.gdzietabiedra.utils.analytics.FirebaseAnalytics
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import com.karumi.dexter.DexterBuilder
@@ -99,7 +99,9 @@ class RootBuilder(
             BottomNavBuilder(component),
             ShopsListBuilder(component), MapBuilder(component),
             SettingsBuilder(component),
-            SplashBuilder(component))
+            SundaysBuilder(component),
+            SplashBuilder(component)
+        )
       }
 
       @RootScope
@@ -156,6 +158,7 @@ class RootBuilder(
       ShopsListBuilder.ParentComponent,
       MapBuilder.ParentComponent,
       SettingsBuilder.ParentComponent,
+      SundaysBuilder.ParentComponent,
       SplashBuilder.ParentComponent {
 
     @dagger.Component.Builder

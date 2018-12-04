@@ -19,4 +19,6 @@
   "</string>
     <string name="turn_on_location">"Standort einschalten"</string>
     <string name="shop_closed">"Shop ist heute geschlossen"</string>
+    <string name="shopping_sundays_subtitle">Die grün markierten Tage sind kommerzielle Sonntage.</string>
+    <string name="sundays">Sonntags</string>
 </resources>
