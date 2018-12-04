@@ -7,12 +7,13 @@ import com.github.asvid.biedra.domain.openHours
 import com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem
 
 internal fun ShopEntity.toDomainModel(): Shop {
+  val entity = this
   return Shop(
       this.id,
       address {
         cityName = city
         streetName = street
-        streetNumber = streetNumber
+        streetNumber = entity.streetNumber ?: ""
       },
       this.distance,
       Position(this.latitude, this.longitude),

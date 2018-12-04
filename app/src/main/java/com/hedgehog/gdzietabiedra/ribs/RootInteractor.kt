@@ -63,10 +63,18 @@ class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>(
   interface RootPresenter
 
   inner class NavigationListener : BottomNavInteractor.Listener {
+    override fun sundaysSelected() {
+      router.detachMap()
+      router.detachSettings()
+      router.detachShopslist()
+
+      router.attachSundays()
+    }
 
     override fun shopsListSelected() {
       router.detachMap()
       router.detachSettings()
+      router.detachSundays()
 
       router.attachShopslist()
     }
@@ -74,6 +82,7 @@ class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>(
     override fun mapSelected() {
       router.detachShopslist()
       router.detachSettings()
+      router.detachSundays()
 
       router.attachMap()
     }
@@ -81,6 +90,7 @@ class RootInteractor : BaseInteractor<RootInteractor.RootPresenter, RootRouter>(
     override fun settingsSelected() {
       router.detachMap()
       router.detachShopslist()
+      router.detachSundays()
 
       router.attachSettings()
     }

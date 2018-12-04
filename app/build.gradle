@@ -31,7 +31,7 @@ android {
     targetSdkVersion Build.targetSdkVersion
     compileSdkVersion Build.compileSdkVersion
     versionCode buildVersionCode
-    versionName "2.1.0"
+    versionName "2.1.1"
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -131,6 +131,8 @@ dependencies {
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso
+
+  implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

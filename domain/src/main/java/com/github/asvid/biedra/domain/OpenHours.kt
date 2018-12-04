@@ -3,6 +3,7 @@ package com.github.asvid.biedra.domain
 import org.joda.time.DateTimeConstants
 import org.joda.time.LocalDate
 import timber.log.Timber
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,7 +38,7 @@ class OpenHoursBuilder {
   var saturday: String? = null
   var sunday: String? = null
 
-  fun build(): OpenHours = OpenHours(weekDay.toOpenHours(), saturday?.toOpenHours(), sunday?.toOpenHours())
+  fun build(): OpenHours = OpenHours(weekDay.toOpenHours()!!, saturday?.toOpenHours(), sunday?.toOpenHours())
 }
 
 /**
@@ -45,9 +46,15 @@ class OpenHoursBuilder {
  *
  * @return [TimeRange] created from [String] range
  * */
-fun String.toOpenHours(): TimeRange {
+fun String.toOpenHours(): TimeRange? {
 
-  val splitted = this.split(" - ".toRegex())
+  Timber.d("string to openHours: $this")
+
+  val splitted = this.split("-".toRegex())
+
+  if (splitted.size == 1) {
+    return null
+  }
   val startDate = splitted[0].toDate("hh.mm")
   val endDate = splitted[1].toDate("hh.mm")
 
@@ -64,8 +71,13 @@ fun String.toOpenHours(): TimeRange {
  * @return [Date] from parsed [String] with provided [format]
  * */
 fun String.toDate(format: String): Date {
-  val formatter = SimpleDateFormat(format)
-  return formatter.parse(this)
+  try {
+    val formatter = SimpleDateFormat(format)
+    return formatter.parse(this)
+  } catch (e: ParseException) {
+    Timber.e(e)
+  }
+  return Date()
 }
 
 fun OpenHours.getForToday(): TimeRange =

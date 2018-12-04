@@ -11,6 +11,8 @@ import com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsBuilder
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.settings.SettingsRouter
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder
 import com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListRouter
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.sundays.SundaysBuilder
+import com.hedgehog.gdzietabiedra.ribs.bottomnav.sundays.SundaysRouter
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder
 import com.hedgehog.gdzietabiedra.ribs.splash.SplashRouter
 import com.uber.rib.core.ViewRouter
@@ -29,6 +31,7 @@ class RootRouter(
     private val shoplistBuilder: ShopsListBuilder,
     private val mapBuilder: MapBuilder,
     private val settingsBuilder: SettingsBuilder,
+    private val sundaysBuilder: SundaysBuilder,
     private val splashBuilder: SplashBuilder
 ) : ViewRouter<RootView, RootInteractor, RootBuilder.Component>(view, interactor, component) {
 
@@ -37,6 +40,7 @@ class RootRouter(
   private var mapRouter: MapRouter? = null
   private var settingsRouter: SettingsRouter? = null
   private var splashRouter: SplashRouter? = null
+  private var sundaysRouter: SundaysRouter? = null
 
   fun attachBottomNav() {
     Timber.d("attach bottom nav")
@@ -105,6 +109,21 @@ class RootRouter(
     }
   }
 
+  fun attachSundays() {
+    Timber.d("attach sundays")
+    sundaysRouter = sundaysBuilder.build(view.viewContent())
+    attachChild(sundaysRouter)
+    view.viewContent().addView(sundaysRouter?.view)
+  }
+
+  fun detachSundays() {
+    if (sundaysRouter != null) {
+      detachChild(sundaysRouter)
+      view.viewContent().removeView(sundaysRouter?.view)
+      sundaysRouter = null
+    }
+  }
+
   fun attachSplashScreen() {
     splashRouter = splashBuilder.build(view.viewContent())
     attachChild(splashRouter)
@@ -118,5 +137,4 @@ class RootRouter(
       splashRouter = null
     }
   }
-
 }
