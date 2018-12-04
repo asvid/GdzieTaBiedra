@@ -23,4 +23,5 @@
   </string>
     <string name="turn_on_location">Turn on Location</string>
     <string name="shop_closed">Shop is closed today</string>
+    <string name="shopping_sundays_subtitle">The days marked in green are commercial Sundays.</string>
 </resources>

@@ -22,4 +22,6 @@
   </string>
   <string name="turn_on_location">Włącz lokalizację</string>
     <string name="shop_closed">Sklep dziś zamknięty</string>
+    <string name="shopping_sundays_subtitle">Zaznaczone na zielono dni to niedziele handlowe.</string>
+  <string name="sundays">Niedziele</string>
 </resources>

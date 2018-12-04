@@ -19,4 +19,6 @@
   "</string>
     <string name="turn_on_location">"Activer l'emplacement"</string>
     <string name="shop_closed">"La boutique est fermée aujourd'hui"</string>
+    <string name="shopping_sundays_subtitle">Les jours marqués en vert sont des dimanches commerciaux.</string>
+    <string name="sundays">les dimanches</string>
 </resources>
