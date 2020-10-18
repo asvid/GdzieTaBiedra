@@ -1,9 +1,4 @@
 object External {
-  const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-  const val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
-  const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
-  const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-
   const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 
   const val rxjava2 = "io.reactivex.rxjava2:rxjava:${Versions.rx}"
@@ -27,6 +22,9 @@ object External {
   const val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.9.5"
 
   const val jodaTime = "net.danlew:android.joda:${Versions.jodaTime}"
+
+  const val koin = "org.koin:koin-android:${Versions.koin}"
+  const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
 }
 
 object Realm {

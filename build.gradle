@@ -16,18 +16,20 @@ buildscript {
     }
     classpath ProjectDeps.googleServices
     classpath Realm.plugin
-    classpath ProjectDeps.dexcount
-    classpath ProjectDeps.apkSize
-    classpath ProjectDeps.coveralls
-    classpath ProjectDeps.jacoco
     classpath ProjectDeps.crashlytics
     classpath ProjectDeps.dokka
+
+    classpath 'com.uber:okbuck:0.47.0'
   }
 }
+
 
 plugins {
   id "org.sonarqube" version "2.6"
 }
+
+apply plugin: 'com.uber.okbuck'
+
 
 allprojects {
   repositories {
@@ -73,7 +75,7 @@ subprojects {
       versionCode 1
       versionName "2.0"
 
-      testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+      testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
       abortOnError false

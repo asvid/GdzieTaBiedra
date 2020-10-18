@@ -10,9 +10,8 @@ import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.RealmList
 import timber.log.Timber
-import javax.inject.Inject
 
-class ShopsRepository @Inject constructor(private val realmConfiguration: RealmConfiguration) {
+class ShopsRepository constructor(private val realmConfiguration: RealmConfiguration) {
 
   fun fetchAll(): Flowable<Shop> {
     return Realm.getInstance(realmConfiguration)

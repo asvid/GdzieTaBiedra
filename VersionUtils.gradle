@@ -3,7 +3,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'joda-time:joda-time:2.10'
+    classpath 'joda-time:joda-time:2.10.6'
   }
 }
 

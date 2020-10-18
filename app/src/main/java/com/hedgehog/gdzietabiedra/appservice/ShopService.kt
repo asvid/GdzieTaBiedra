@@ -7,13 +7,12 @@ import io.reactivex.Flowable
 import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.toFlowable
 import timber.log.Timber
-import javax.inject.Inject
 
 /**
  * Only class that provides access to [Shop]s
  * For the moment it's used only to return [Shop]s from [ShopsRepository], but in future it might be used to manipulate data
  * */
-class ShopService @Inject constructor(
+class ShopService constructor(
     private val shopsRepository: ShopsRepository,
     private val distanceCalculator: DistanceCalculator
 ) {

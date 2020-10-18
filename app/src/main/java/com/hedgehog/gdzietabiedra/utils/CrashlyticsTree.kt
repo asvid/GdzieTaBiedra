@@ -1,7 +1,7 @@
 package com.hedgehog.gdzietabiedra.utils
 
-import android.support.annotation.Nullable
 import android.util.Log
+import androidx.annotation.Nullable
 import com.crashlytics.android.Crashlytics
 import timber.log.Timber
 
