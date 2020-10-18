@@ -5,21 +5,7 @@ apply from: '../VersionUtils.gradle'
 
 def buildVersionCode = project.hasProperty("devBuild") ? 100 : minutesVersionCode
 
-def keystorePropertiesFile = rootProject.file("keystore.properties")
-def keystoreProperties = new Properties()
-if (file(keystorePropertiesFile).exists()) {
-  keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
-
 android {
-  signingConfigs {
-    config {
-      keyAlias keystoreProperties['keyAlias']
-      keyPassword keystoreProperties['keyPassword']
-      storeFile file(keystoreProperties['storeFile'] ?: "/")
-      storePassword keystoreProperties['storePassword']
-    }
-  }
   defaultConfig {
     applicationId Build.appId
     buildToolsVersion Build.buildToolsVersion
@@ -59,7 +45,6 @@ android {
     }
     prod {
       dimension "stage"
-      signingConfig signingConfigs.config
     }
   }
   variantFilter { variant ->
