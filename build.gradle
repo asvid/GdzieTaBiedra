@@ -6,9 +6,6 @@ buildscript {
     google()
     jcenter()
     mavenCentral()
-    maven {
-      url 'https://maven.fabric.io/public'
-    }
   }
   dependencies {
     classpath ProjectDeps.gradlePlugin
@@ -18,8 +15,8 @@ buildscript {
       exclude group: 'com.google.guava', module: 'guava-jdk5'
     }
     classpath ProjectDeps.googleServices
-    classpath Realm.plugin
     classpath ProjectDeps.crashlytics
+    classpath Realm.plugin
     classpath ProjectDeps.dokka
 
     classpath 'com.uber:okbuck:0.47.0'

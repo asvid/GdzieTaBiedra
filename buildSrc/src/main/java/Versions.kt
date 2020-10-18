@@ -1,7 +1,4 @@
 object Versions {
-  const val dagger = "2.19"
-  const val support = "28.0.0"
-  const val robolectric = "3.4.2"
   const val kotlin = "1.4.10"
   const val timber = "4.7.1"
   const val rx = "2.1.9"

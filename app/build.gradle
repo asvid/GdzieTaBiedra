@@ -1,9 +1,5 @@
 apply plugin: 'realm-android'
-apply plugin: 'io.fabric'
-
-apply from: '../VersionUtils.gradle'
-
-def buildVersionCode = project.hasProperty("devBuild") ? 100 : minutesVersionCode
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
   defaultConfig {
@@ -12,7 +8,7 @@ android {
     minSdkVersion Build.minSdkVersion
     targetSdkVersion Build.targetSdkVersion
     compileSdkVersion Build.compileSdkVersion
-    versionCode buildVersionCode
+    versionCode 100
     versionName "3.0.0"
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -31,7 +27,10 @@ android {
       debuggable true
       multiDexEnabled true
       minifyEnabled false
-      ext.enableCrashlytics = false
+      firebaseCrashlytics {
+        mappingFileUploadEnabled false
+      }
+
       ext.alwaysUpdateBuildId = false
     }
   }
@@ -107,7 +106,6 @@ dependencies {
   //  Joda Time
   implementation External.jodaTime
   //  Testing
-  testImplementation Uber.ribTestUtils
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso
@@ -116,5 +114,4 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
-
 apply from: '../DokkaConfig.gradle'

@@ -19,7 +19,7 @@ object External {
   const val dexter = "com.karumi:dexter:5.0.0"
 
   const val firebaseCore = "com.google.firebase:firebase-core:16.0.4"
-  const val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.9.5"
+  const val crashlytics =  "com.google.firebase:firebase-crashlytics:17.2.2"
 
   const val jodaTime = "net.danlew:android.joda:${Versions.jodaTime}"
 
@@ -30,12 +30,6 @@ object External {
 object Realm {
   const val plugin = "io.realm:realm-gradle-plugin:${Versions.realm}"
   const val nameHelper = "dk.ilios:realmfieldnameshelper:1.1.1"
-}
-
-object Uber {
-  const val ribCompilerTest = "com.uber.rib:rib-compiler-test:0.9.1"
-  const val ribs = "com.uber.rib:rib-android:0.9.1"
-  const val ribTestUtils = "com.uber.rib:rib-test-utils:0.9.1"
 }
 
 object Firebase {

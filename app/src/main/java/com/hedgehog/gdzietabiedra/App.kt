@@ -1,11 +1,10 @@
 package com.hedgehog.gdzietabiedra
 
 import android.app.Application
-import com.crashlytics.android.Crashlytics
-import com.crashlytics.android.core.CrashlyticsCore
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.crashlytics.internal.common.CrashlyticsCore
 import com.hedgehog.gdzietabiedra.utils.CrashlyticsTree
 import com.squareup.leakcanary.LeakCanary
-import io.fabric.sdk.android.Fabric
 import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 import timber.log.Timber.DebugTree
@@ -23,7 +22,6 @@ class App : Application() {
   override fun onCreate() {
     super.onCreate()
 
-    initFabric()
     initLeakCanary()
     initTimber()
     initJoda()
@@ -35,14 +33,6 @@ class App : Application() {
 
   private fun initTimber() {
     Timber.plant(DebugTree(), CrashlyticsTree())
-  }
-
-  private fun initFabric() {
-    val crashlyticsKit = Crashlytics.Builder()
-        .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
-        .build()
-
-    Fabric.with(this, crashlyticsKit)
   }
 
   private fun initLeakCanary() {
