@@ -27,7 +27,7 @@ android {
     targetSdkVersion Build.targetSdkVersion
     compileSdkVersion Build.compileSdkVersion
     versionCode buildVersionCode
-    versionName "2.1.1"
+    versionName "3.0.0"
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -72,6 +72,9 @@ android {
       variant.setIgnore(true)
     }
   }
+  kotlinOptions {
+    jvmTarget = '1.8'
+  }
 }
 
 dependencies {
@@ -79,13 +82,6 @@ dependencies {
   implementation project(path: ':domain')
 
   implementation External.kotlin
-  //  Support
-  implementation Support.appcompat
-  implementation Support.constraint
-  implementation Support.recyclerView
-  implementation Support.design
-  implementation Support.constraint
-  implementation Support.cardView
   //  Logging
   implementation External.timber
   //  RX
@@ -94,6 +90,17 @@ dependencies {
   implementation External.rxkotlin
   //  DI
   implementation External.koin
+  implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+  implementation 'androidx.recyclerview:recyclerview:1.1.0'
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation 'androidx.appcompat:appcompat:1.2.0'
+  implementation 'com.google.android.material:material:1.2.1'
+  implementation 'androidx.navigation:navigation-fragment:2.3.1'
+  implementation 'androidx.navigation:navigation-ui:2.3.1'
+  implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+  implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+  implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+  implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
   //  Realm
   kapt Realm.nameHelper
   //  Maps
