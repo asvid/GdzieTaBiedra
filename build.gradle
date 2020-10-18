@@ -21,6 +21,7 @@ buildscript {
 
     classpath 'com.uber:okbuck:0.47.0'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
   }
 }
 
@@ -63,6 +64,7 @@ subprojects {
   apply plugin: 'kotlin-android'
   apply plugin: 'kotlin-android-extensions'
   apply plugin: 'kotlin-kapt'
+  apply plugin: 'kotlinx-serialization'
 
   android {
     compileSdkVersion Build.compileSdkVersion

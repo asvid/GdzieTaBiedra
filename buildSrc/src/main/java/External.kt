@@ -19,17 +19,31 @@ object External {
   const val dexter = "com.karumi:dexter:5.0.0"
 
   const val firebaseCore = "com.google.firebase:firebase-core:16.0.4"
-  const val crashlytics =  "com.google.firebase:firebase-crashlytics:17.2.2"
+  const val crashlytics = "com.google.firebase:firebase-crashlytics:17.2.2"
 
   const val jodaTime = "net.danlew:android.joda:${Versions.jodaTime}"
 
   const val koin = "org.koin:koin-android:${Versions.koin}"
   const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+
+  const val ktorAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
+  const val ktorOkHttp = "io.ktor:ktor-client-okhttp:${Versions.ktor}"
+  const val kotlinxSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinSerialization}"
+  const val ktorSerialization = "io.ktor:ktor-client-serialization-jvm:${Versions.ktor}"
+  const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
+  const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 }
 
 object Realm {
   const val plugin = "io.realm:realm-gradle-plugin:${Versions.realm}"
   const val nameHelper = "dk.ilios:realmfieldnameshelper:1.1.1"
+}
+
+object Room{
+  const val runtime = "androidx.room:room-runtime:${Versions.roomDB}"
+  const val compiler = "androidx.room:room-compiler:${Versions.roomDB}"
+  const val ktx = "androidx.room:room-ktx:${Versions.roomDB}"
+  const val testing = "androidx.room:room-testing:${Versions.roomDB}"
 }
 
 object Firebase {

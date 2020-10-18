@@ -85,25 +85,25 @@ dependencies {
   implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
   implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
   implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
-  //  Realm
+
+  implementation Room.runtime
+  kapt Room.compiler
+  implementation Room.ktx
+  testImplementation Room.testing
+
   kapt Realm.nameHelper
-  //  Maps
   implementation Google.maps
   implementation Google.location
-  //  Permissions
   implementation External.dexter
-  //  Retrofit
-  implementation External.retrofit
-  implementation External.moshiConverter
-  implementation External.retrofitRxAdapter
-  implementation External.okhttpLoggingInterceptor
-  //  Crash reporting and analytics
+  implementation External.ktorAndroid
+  implementation External.ktorOkHttp
+  implementation External.ktorSerialization
+  implementation External.okHttp
+  implementation External.coroutines
   implementation External.firebaseCore
   implementation External.crashlytics
-  //  Leak detection
   debugImplementation External.leakcanaryDebug
   releaseImplementation External.leakcanaryRelease
-  //  Joda Time
   implementation External.jodaTime
   //  Testing
   testImplementation TestDeps.junit
