@@ -16,7 +16,7 @@ class BiedraKtorService {
     }
   }
 
-  suspend fun getShops(lat: Float, lng: Float): ShopsResponse =
+  suspend fun getShops(lat: Double, lng: Double): ShopsResponse =
       client.get("$BASE_URL/shop?lat=$lat&lon=$lng")
 
   companion object {

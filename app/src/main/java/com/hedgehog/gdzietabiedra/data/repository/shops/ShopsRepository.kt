@@ -20,6 +20,13 @@ class ShopsRepository constructor(private val realmConfiguration: RealmConfigura
           it.toDomainModel()
         }
   }
+  fun fetchAllRaw(): Flowable<ShopEntity> {
+    return Realm.getInstance(realmConfiguration)
+        .where(ShopEntity::class.java)
+        .findAll()
+        .asFlowable()
+        .flatMapIterable { it -> it }
+  }
 
   fun fetchById(id: String): Single<Shop> {
     return Single.create<Shop> {

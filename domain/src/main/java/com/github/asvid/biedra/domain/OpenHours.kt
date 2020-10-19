@@ -15,7 +15,7 @@ import java.util.*
  * @property sunday opening hours
  * */
 data class OpenHours(
-    val weekDay: TimeRange,
+    val weekDay: TimeRange?,
     val saturday: TimeRange?,
     val sunday: TimeRange?
 )
@@ -34,11 +34,11 @@ fun openHours(block: OpenHoursBuilder.() -> Unit): OpenHours = OpenHoursBuilder(
  * */
 @ShopDsl
 class OpenHoursBuilder {
-  var weekDay: String = ""
+  var weekDay: String? = null
   var saturday: String? = null
   var sunday: String? = null
 
-  fun build(): OpenHours = OpenHours(weekDay.toOpenHours()!!, saturday?.toOpenHours(), sunday?.toOpenHours())
+  fun build(): OpenHours = OpenHours(weekDay?.toOpenHours(), saturday?.toOpenHours(), sunday?.toOpenHours())
 }
 
 /**
@@ -52,11 +52,23 @@ fun String.toOpenHours(): TimeRange? {
 
   val splitted = this.split("-".toRegex())
 
-  if (splitted.size == 1) {
+  if(splitted.size !=2){
+    Timber.e("Wrong opening hours format: $this")
     return null
   }
-  val startDate = splitted[0].toDate("hh.mm")
-  val endDate = splitted[1].toDate("hh.mm")
+  var startDate = splitted[0].toDate("hh.mm")
+  var endDate = splitted[1].toDate("hh.mm")
+
+  if(startDate == null){
+    startDate = splitted[0].toDate("hh:mm")
+  }
+  if(endDate == null){
+    endDate = splitted[1].toDate("hh:mm")
+  }
+  if(startDate == null || endDate == null){
+    Timber.e("couldn't parse start or end dates of: $this")
+    return null
+  }
 
   Timber.d("string to TimeRange: $this ($startDate : $endDate)-> ${TimeRange(startDate, endDate)}")
 
@@ -70,17 +82,17 @@ fun String.toOpenHours(): TimeRange? {
  *
  * @return [Date] from parsed [String] with provided [format]
  * */
-fun String.toDate(format: String): Date {
-  try {
+fun String.toDate(format: String): Date? {
+  return try {
     val formatter = SimpleDateFormat(format)
-    return formatter.parse(this)
+    formatter.parse(this.trim().removePrefix("0"))
   } catch (e: ParseException) {
     Timber.e(e)
+    null
   }
-  return Date()
 }
 
-fun OpenHours.getForToday(): TimeRange =
+fun OpenHours.getForToday(): TimeRange? =
     when (LocalDate().dayOfWeek) {
       DateTimeConstants.SUNDAY -> this.sunday ?: this.weekDay
       DateTimeConstants.SATURDAY -> this.saturday ?: this.weekDay

@@ -8,12 +8,12 @@ data class ShopRoomEntity(
     @PrimaryKey
     var id: String = "",
     var shopNumber: Int? = null,
-    var city: String,
-    var street: String = "",
+    var city: String?  = null,
+    var street: String? = null,
     var streetNumber: String? = null,
-    var latitude: Double = 0.0,
-    var longitude: Double = 0.0,
-    var hours: String,
+    var latitude: Double? = null,
+    var longitude: Double? = null,
+    var hours: String? = null,
     var hoursFriday: String? = null,
     var hoursSaturday: String? = null,
     var hoursSunday: String? = null,
@@ -26,5 +26,8 @@ data class ShopRoomEntity(
     var isEuro: Boolean = false,
     var isNew: Boolean = false,
     var special: Int? = null,
-    var sublease: String? = null
+    var sublease: String? = null,
+    val name: String? = null,
+    val citySlug: String? = null,
+    val provinceId: String? = null
 )

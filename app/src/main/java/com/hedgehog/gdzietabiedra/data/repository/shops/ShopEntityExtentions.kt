@@ -4,7 +4,8 @@ import com.github.asvid.biedra.domain.Position
 import com.github.asvid.biedra.domain.Shop
 import com.github.asvid.biedra.domain.address
 import com.github.asvid.biedra.domain.openHours
-import com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem
+import com.hedgehog.gdzietabiedra.api.response.shopKtor.ShopsResponseItem
+import com.hedgehog.gdzietabiedra.data.room.ShopRoomEntity
 
 internal fun ShopEntity.toDomainModel(): Shop {
   val entity = this
@@ -24,33 +25,31 @@ internal fun ShopEntity.toDomainModel(): Shop {
       })
 }
 
-internal fun Collection<ShopsItem>.toRealmEntity(): Collection<ShopEntity> {
-  return this.map { it.toRealmEntity() }
-}
-
-internal fun ShopsItem.toRealmEntity(): ShopEntity {
-  val output = ShopEntity()
-  output.id = this.id!!
-  output.city = this.city!!
-  output.street = this.street ?: ""
-  output.streetNumber = this.streetNumber.toString()
-  output.shopNumber = this.shopNumber?.toInt()
-  output.latitude = this.latitude?.toDouble() ?: 0.0
-  output.longitude = this.longitude?.toDouble() ?: 0.0
-  output.hours = this.hours ?: ""
-  output.hoursFriday = this.hoursFriday
-  output.hoursSaturday = this.hoursSaturday
-  output.hoursSunday = this.hoursSunday
-  output.distance = this.distance?.toDouble()
-
-  output.atm = this.atm == "1"
-  output.bakery = this.bakery == "1"
-  output.relax = this.relax == "1"
-  output.cardPayment = this.cardPayment == "1"
-  output.isTaxFree = this.isTaxFree == "1"
-  output.isEuro = this.isEuro == "1"
-  output.isNew = this.jsonMemberNew == "1"
-  output.special = this.special?.toInt()
-  output.sublease = this.sublease
-  return output
+fun ShopsResponseItem.toRoomEntity(): ShopRoomEntity {
+  return ShopRoomEntity(
+      id = this.id?:"",
+      shopNumber = this.shop_number?.toInt(),
+      city = this.city,
+      street = this.street,
+      streetNumber = this.street_number,
+      latitude = this.latitude?.toDouble(),
+      longitude = this.longitude?.toDouble(),
+      hours = this.hours,
+      hoursFriday = this.hours_friday,
+      hoursSaturday = this.hours_saturday,
+      hoursSunday = this.hours_sunday,
+      distance = this.distance?.toDouble(),
+      bakery = this.bakery == "1",
+      relax = this.relax == "1",
+      atm = this.atm == "1",
+      cardPayment = this.card_payment == "1",
+      isTaxFree = this.is_tax_free == "1",
+      isEuro = this.is_euro == "1",
+      isNew = this.new == "1",
+      special = this.special?.toInt(),
+      sublease = this.sublease,
+      name = this.name,
+      citySlug = this.city_slug,
+      provinceId = this.shop_province_teryt,
+  )
 }
