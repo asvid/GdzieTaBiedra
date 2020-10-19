@@ -22,7 +22,7 @@ private val WARSAW = position {
   lng = 21.011572
 }
 
-class LocationWatchdog(val context: Context) {
+class LocationWatchdog(private val context: Context) {
 
   private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
       context)

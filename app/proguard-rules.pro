@@ -24,17 +24,6 @@
 -keep class com.crashlytics.** { *; }
 -dontwarn com.crashlytics.**
 
-# Realm
--keep class io.realm.annotations.RealmModule
--keep @io.realm.annotations.RealmModule class *
--keep class io.realm.internal.Keep
--keep @io.realm.internal.Keep class *
--dontwarn javax.**
--dontwarn io.realm.**
-
-# Dagger2
--dontwarn com.google.errorprone.annotations.**
-
 # Timber
 -dontwarn org.jetbrains.annotations.**
 

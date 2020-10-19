@@ -1,4 +1,4 @@
-package com.hedgehog.gdzietabiedra.data.room
+package com.hedgehog.gdzietabiedra.data.repository.shops
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

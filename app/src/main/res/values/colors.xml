@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-  <color name="colorPrimary">#ffeb3b</color>
-  <color name="colorPrimaryLight">#ffff72</color>
-  <color name="colorPrimaryDark">#cc9d00</color>
-  <color name="colorAccent">#e53935</color>
-  <color name="colorAccentLight">#ff6f60</color>
-  <color name="colorAccentDark">#ab000d</color>
-  <color name="primaryTextColor">#202020</color>
-  <color name="secondaryTextColor">#525252</color>
+  <color name="primaryColor">#f44336</color>
+  <color name="primaryLightColor">#ff7961</color>
+  <color name="primaryDarkColor">#ba000d</color>
+  <color name="secondaryColor">#757575</color>
+  <color name="secondaryLightColor">#a4a4a4</color>
+  <color name="secondaryDarkColor">#494949</color>
+  <color name="primaryTextColor">#000000</color>
+  <color name="secondaryTextColor">#ffffff</color>
   <color name="bottomNavItem">#c0c0c0</color>
 </resources>

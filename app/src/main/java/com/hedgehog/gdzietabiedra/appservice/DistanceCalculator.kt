@@ -19,7 +19,7 @@ class DistanceCalculator {
    * @sample [com.hedgehog.gdzietabiedra.appservice.DistanceCalculatorSamples.calculateDistance]
    *
    * */
-  fun calculateDistance(pointA: Position, pointB: Position): Double {
+  suspend fun calculateDistance(pointA: Position, pointB: Position): Double {
     val pk = (180f / Math.PI).toFloat()
 
     val a1 = pointA.lat / pk

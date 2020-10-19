@@ -1,4 +1,3 @@
-apply plugin: 'realm-android'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
@@ -91,7 +90,6 @@ dependencies {
   implementation Room.ktx
   testImplementation Room.testing
 
-  kapt Realm.nameHelper
   implementation Google.maps
   implementation Google.location
   implementation External.dexter

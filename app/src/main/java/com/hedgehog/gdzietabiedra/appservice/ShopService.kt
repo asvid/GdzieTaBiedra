@@ -1,11 +1,8 @@
 package com.hedgehog.gdzietabiedra.appservice
 
 import com.github.asvid.biedra.domain.Position
-import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import com.github.asvid.biedra.domain.Shop
-import io.reactivex.Flowable
-import io.reactivex.functions.Consumer
-import io.reactivex.rxkotlin.toFlowable
+import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import timber.log.Timber
 
 /**
@@ -21,33 +18,39 @@ class ShopService constructor(
    * @param address - user query for city or street where [Shop] might be
    * @param location - user location to calculate distance to returned [Shop]
    *
-   * @return [Flowable] of [Shop]s that fit to query
+   * @return [List] of [Shop]s that fit to query
    * */
-  fun getShopsByAddress(address: String, location: Position?): Flowable<Shop> {
+  suspend fun getShopsByAddress(address: String, location: Position?): List<Shop> {
     Timber.d("looking for shops with address like: $address")
     return shopsRepository.fetchByAddress(address, 50)
-        .doOnNext(calculateDistance(location))
+        .apply {
+          this.forEach {
+            it.calculateDistance(location)
+          }
+        }
   }
 
   /**
    * @param location - user location to narrow DB query
    * @param range - range in which shops around [location] will be returned
    *
-   * @return [Flowable] of [Shop]s that are in [range] of [location]
+   * @return [List] of [Shop]s that are in [range] of [location]
    * */
-  fun getShopsInRange(location: Position?, range: Double): Flowable<Shop> {
-    return if (location == null) listOf<Shop>().toFlowable()
+  suspend fun getShopsInRange(location: Position?, range: Double): List<Shop> {
+    return if (location == null) listOf()
     else shopsRepository.fetchByLocationAndRange(location, range, 50)
-        .doOnNext(calculateDistance(location))
+        .apply {
+          this.forEach {
+            it.calculateDistance(location)
+          }
+        }
   }
 
-  private fun calculateDistance(location: Position?): Consumer<Shop> {
-    return Consumer { shop ->
-      if (location == null) {
-        shop.distance = null
-      } else {
-        shop.distance = distanceCalculator.calculateDistance(location, shop.location)
-      }
+  private suspend fun Shop.calculateDistance(location: Position?) {
+    if (location == null) {
+      this.distance = null
+    } else {
+      this.distance = distanceCalculator.calculateDistance(location, this.location)
     }
   }
 }
