@@ -9,3 +9,6 @@ App that displays "Biedronka" network shops on map and list based on users locat
 - Uber RIBs Architecture
 - Dokka
 - Fastlane
+- OkHttp/Retrofit/Moshi
+- Timber
+- Google Maps and Location Service
