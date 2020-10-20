@@ -1,5 +1,6 @@
 # GdzieTaBiedra
-App that displays "Biedronka" network shops on map and list based on users locaton
+App that displays "Biedronka" network shops on map and list based on users locaton.
+This branch is a re-write from original app using new tech stack.
 
 # Techstack
 - Dagger
