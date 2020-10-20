@@ -22,7 +22,7 @@ class ShopService constructor(
    * */
   suspend fun getShopsByAddress(address: String, location: Position?): List<Shop> {
     Timber.d("looking for shops with address like: $address")
-    return shopsRepository.fetchByAddress(address, 50)
+    return shopsRepository.fetchByAddress(address)
         .apply {
           this.forEach {
             it.calculateDistance(location)
@@ -38,7 +38,7 @@ class ShopService constructor(
    * */
   suspend fun getShopsInRange(location: Position?, range: Double): List<Shop> {
     return if (location == null) listOf()
-    else shopsRepository.fetchByLocationAndRange(location, range, 50)
+    else shopsRepository.fetchByLocationAndRange(location, range)
         .apply {
           this.forEach {
             it.calculateDistance(location)

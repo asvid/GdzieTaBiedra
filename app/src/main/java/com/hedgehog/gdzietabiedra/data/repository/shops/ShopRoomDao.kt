@@ -23,6 +23,12 @@ interface ShopRoomDao {
   @Query("SELECT * FROM shoproomentity WHERE id=:id")
   suspend fun getById(id: String): ShopRoomEntity
 
-  @Query("SELECT * FROM shoproomentity WHERE latitude BETWEEN :minLat AND :maxLat AND longitude BETWEEN :minLng AND :maxLng")
-  suspend fun fetchInRange(minLat: Double, maxLat: Double, minLng: Double, maxLng: Double): List<ShopRoomEntity>
+  @Query(
+      "SELECT * FROM shoproomentity WHERE latitude BETWEEN :minLat AND :maxLat AND longitude BETWEEN :minLng AND :maxLng")
+  suspend fun fetchInRange(minLat: Double, maxLat: Double, minLng: Double,
+      maxLng: Double): List<ShopRoomEntity>
+
+  @Query(
+      "SELECT * FROM shoproomentity WHERE street LIKE '%'||:address||'%' OR city LIKE '%'||:address||'%' ")
+  suspend fun fetchForAddress(address: String): List<ShopRoomEntity>
 }

@@ -3,6 +3,7 @@ package com.hedgehog.gdzietabiedra.appservice
 import com.github.asvid.biedra.domain.Position
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
+import kotlin.math.abs
 
 class DistanceCalculatorTest {
 
@@ -14,9 +15,8 @@ class DistanceCalculatorTest {
     val pointB = Position(52.565976, 15.951845)
     val distanceAB = 3980.0
 
-    System.out.println("distance: ${distanceCalculator.calculateDistance(pointA, pointB)}")
+    println("distance: ${distanceCalculator.calculateDistance(pointA, pointB)}")
 
-    assert(
-        Math.abs(distanceCalculator.calculateDistance(pointA, pointB) - distanceAB) < 20)
+    assert(abs(distanceCalculator.calculateDistance(pointA, pointB) - distanceAB) < 20)
   }
 }

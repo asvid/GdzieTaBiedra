@@ -5,7 +5,7 @@ import org.joda.time.LocalDate
 import timber.log.Timber
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 /**
  * [Shop] open hours, contains [TimeRange] for weekdays, saturday and sunday
@@ -23,7 +23,8 @@ data class OpenHours(
 /**
  * DLS method for [OpenHours]
  * */
-fun openHours(block: OpenHoursBuilder.() -> Unit): OpenHours = OpenHoursBuilder().apply(block).build()
+fun openHours(block: OpenHoursBuilder.() -> Unit): OpenHours = OpenHoursBuilder().apply(
+    block).build()
 
 /**
  * DSL builder for [OpenHours]
@@ -38,7 +39,8 @@ class OpenHoursBuilder {
   var saturday: String? = null
   var sunday: String? = null
 
-  fun build(): OpenHours = OpenHours(weekDay?.toOpenHours(), saturday?.toOpenHours(), sunday?.toOpenHours())
+  fun build(): OpenHours = OpenHours(weekDay?.toOpenHours(), saturday?.toOpenHours(),
+      sunday?.toOpenHours())
 }
 
 /**
@@ -48,29 +50,25 @@ class OpenHoursBuilder {
  * */
 fun String.toOpenHours(): TimeRange? {
 
-  Timber.d("string to openHours: $this")
-
   val splitted = this.split("-".toRegex())
 
-  if(splitted.size !=2){
+  if (splitted.size != 2) {
     Timber.e("Wrong opening hours format: $this")
     return null
   }
-  var startDate = splitted[0].toDate("hh.mm")
-  var endDate = splitted[1].toDate("hh.mm")
+  var startDate = splitted[0].toDate("hh:mm")
+  var endDate = splitted[1].toDate("hh:mm")
 
-  if(startDate == null){
-    startDate = splitted[0].toDate("hh:mm")
+  if (startDate == null) {
+    startDate = splitted[0].toDate("hh.mm")
   }
-  if(endDate == null){
-    endDate = splitted[1].toDate("hh:mm")
+  if (endDate == null) {
+    endDate = splitted[1].toDate("hh.mm")
   }
-  if(startDate == null || endDate == null){
-    Timber.e("couldn't parse start or end dates of: $this")
+  if (startDate == null || endDate == null) {
+    Timber.i("couldn't parse start or end dates of: $this")
     return null
   }
-
-  Timber.d("string to TimeRange: $this ($startDate : $endDate)-> ${TimeRange(startDate, endDate)}")
 
   return TimeRange(startDate, endDate)
 }
@@ -87,7 +85,7 @@ fun String.toDate(format: String): Date? {
     val formatter = SimpleDateFormat(format)
     formatter.parse(this.trim().removePrefix("0"))
   } catch (e: ParseException) {
-    Timber.e(e)
+    Timber.i("error parsing time: $this")
     null
   }
 }

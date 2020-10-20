@@ -73,6 +73,18 @@ dependencies {
   implementation External.rxkotlin
   //  DI
   implementation External.koin
+  // Koin AndroidX Scope features
+  implementation "org.koin:koin-androidx-scope:$Versions.koin"
+  // Koin AndroidX ViewModel features
+  implementation "org.koin:koin-androidx-viewmodel:$Versions.koin"
+  // Koin AndroidX Fragment features
+  implementation "org.koin:koin-androidx-fragment:$Versions.koin"
+  // Koin AndroidX WorkManager
+  implementation "org.koin:koin-androidx-workmanager:$Versions.koin"
+  // Koin AndroidX Jetpack Compose
+  implementation "org.koin:koin-androidx-compose:$Versions.koin"
+  testImplementation "org.koin:koin-test:${Versions.koin}"
+
   implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
   implementation 'androidx.recyclerview:recyclerview:1.1.0'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

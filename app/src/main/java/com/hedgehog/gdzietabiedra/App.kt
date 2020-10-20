@@ -1,11 +1,21 @@
 package com.hedgehog.gdzietabiedra
 
 import android.app.Application
-import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.google.firebase.crashlytics.internal.common.CrashlyticsCore
+import androidx.room.Room
+import com.hedgehog.gdzietabiedra.api.BiedraKtorService
+import com.hedgehog.gdzietabiedra.appservice.DistanceCalculator
+import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
+import com.hedgehog.gdzietabiedra.appservice.ShopService
+import com.hedgehog.gdzietabiedra.data.repository.shops.AppDatabase
+import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
+import com.hedgehog.gdzietabiedra.ui.list.ListViewModel
 import com.hedgehog.gdzietabiedra.utils.CrashlyticsTree
 import com.squareup.leakcanary.LeakCanary
 import net.danlew.android.joda.JodaTimeAndroid
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.context.startKoin
+import org.koin.dsl.module
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -25,6 +35,28 @@ class App : Application() {
     initLeakCanary()
     initTimber()
     initJoda()
+    initKoin()
+  }
+
+  private fun initKoin() {
+    startKoin {
+      androidContext(this@App)
+      modules(module {
+        single<AppDatabase> {
+          Room.databaseBuilder(
+              applicationContext,
+              AppDatabase::class.java, "biedra-shops.db"
+          ).createFromAsset("biedra-shops.db")
+              .build()        }
+        single { DistanceCalculator() }
+        single { ShopsRepository(get<AppDatabase>().shopRoomDao()) }
+        single { ShopService(get(), get()) }
+        single { BiedraKtorService() }
+        single { LocationWatchdog(get()) }
+
+        viewModel { ListViewModel(get(), get()) }
+      })
+    }
   }
 
   private fun initJoda() {

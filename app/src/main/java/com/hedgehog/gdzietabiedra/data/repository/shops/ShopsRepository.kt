@@ -16,17 +16,13 @@ class ShopsRepository constructor(private val shopDao: ShopRoomDao) {
     return shopDao.getById(id).toDomainModel()
   }
 
-  suspend fun fetchByAddress(
-      address: String,
-      count: Long): List<Shop> {
-    // TODO: create query to search by address
-    return listOf()
+  suspend fun fetchByAddress(address: String): List<Shop> {
+    return shopDao.fetchForAddress(address).map { it.toDomainModel() }
   }
 
   suspend fun fetchByLocationAndRange(
       location: Position,
-      range: Double,
-      count: Long
+      range: Double
   ): List<Shop> {
     val minLat = location.lat - range / 2
     val maxLat = location.lat + range / 2

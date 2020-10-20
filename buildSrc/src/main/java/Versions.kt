@@ -10,7 +10,7 @@ object Versions {
   const val leakCanary = "1.5.4"
   const val googlePlayServices = "16.0.0"
   const val jodaTime = "2.10.6"
-  const val koin = "2.1.6"
+  const val koin = "2.2.0-beta-2"
   const val coroutines = "1.3.9"
   const val roomDB = "2.2.5"
 
