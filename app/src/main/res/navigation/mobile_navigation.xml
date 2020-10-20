@@ -7,19 +7,19 @@
 
   <fragment
       android:id="@+id/navigation_list"
-      android:name="com.hedgehog.gdzietabiedra.ui.home.HomeFragment"
+      android:name="com.hedgehog.gdzietabiedra.ui.list.ListFragment"
       android:label="@string/title_list"
-      tools:layout="@layout/fragment_home" />
+      tools:layout="@layout/fragment_list" />
 
   <fragment
       android:id="@+id/navigation_map"
-      android:name="com.hedgehog.gdzietabiedra.ui.dashboard.DashboardFragment"
+      android:name="com.hedgehog.gdzietabiedra.ui.map.MapFragment"
       android:label="@string/title_map"
-      tools:layout="@layout/fragment_dashboard" />
+      tools:layout="@layout/fragment_map" />
 
   <fragment
       android:id="@+id/navigation_sundays"
-      android:name="com.hedgehog.gdzietabiedra.ui.notifications.NotificationsFragment"
+      android:name="com.hedgehog.gdzietabiedra.ui.sundays.SundaysFragment"
       android:label="@string/title_sundays"
-      tools:layout="@layout/fragment_notifications" />
+      tools:layout="@layout/fragment_sundays" />
 </navigation>
