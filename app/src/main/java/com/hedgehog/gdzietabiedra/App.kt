@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.hedgehog.gdzietabiedra.api.BiedraKtorService
 import com.hedgehog.gdzietabiedra.appservice.DistanceCalculator
 import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
+import com.hedgehog.gdzietabiedra.appservice.LocationWatchdogCoroutines
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.data.repository.shops.AppDatabase
 import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
@@ -25,7 +26,6 @@ import timber.log.Timber.DebugTree
 class App : Application() {
 
   /**
-   * [Fabric] initialisation
    * [LeakCanary] initialisation
    * [Timber] initialisation
    * */
@@ -53,6 +53,7 @@ class App : Application() {
         single { ShopService(get(), get()) }
         single { BiedraKtorService() }
         single { LocationWatchdog(get()) }
+        single { LocationWatchdogCoroutines(get()) }
 
         viewModel { ListViewModel(get(), get()) }
       })

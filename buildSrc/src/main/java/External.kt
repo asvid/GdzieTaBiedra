@@ -16,7 +16,7 @@ object External {
   const val retrofitRxAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
   const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
 
-  const val dexter = "com.karumi:dexter:5.0.0"
+  const val dexter = "com.karumi:dexter:6.2.1"
 
   const val firebaseCore = "com.google.firebase:firebase-core:16.0.4"
   const val crashlytics = "com.google.firebase:firebase-crashlytics:17.2.2"

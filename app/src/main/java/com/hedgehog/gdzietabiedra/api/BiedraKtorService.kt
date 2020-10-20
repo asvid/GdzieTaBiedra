@@ -18,8 +18,4 @@ class BiedraKtorService {
 
   suspend fun getShops(lat: Double, lng: Double): ShopsResponse =
       client.get("$BASE_URL/shop?lat=$lat&lon=$lng")
-
-  companion object {
-    var INSTANCE = BiedraKtorService()
-  }
 }

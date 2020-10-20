@@ -1,5 +1,6 @@
 package com.hedgehog.gdzietabiedra.appservice
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -22,6 +23,7 @@ private val WARSAW = position {
   lng = 21.011572
 }
 
+@SuppressLint("MissingPermission")
 class LocationWatchdog(private val context: Context) {
 
   private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
@@ -32,6 +34,8 @@ class LocationWatchdog(private val context: Context) {
   private var locationAvailable = BehaviorSubject.create<Boolean>()
 
   private val compositeDisposable = CompositeDisposable()
+
+  fun getLocation() = locationSubject.startWith(WARSAW)
 
   private fun checkLocationAvailable() {
     Timber.d("checking if location is available")
@@ -54,16 +58,6 @@ class LocationWatchdog(private val context: Context) {
           publishDefaultLocation()
         }
   }
-
-  /**
-   * [BehaviorSubject] that returns current [Position] of user - default is [WARSAW] when no other is known
-   * */
-  fun getLocation() = locationSubject.startWith(WARSAW)
-
-  /**
-   * [BehaviorSubject] that returns [Boolean] - true if location is enabled by user and false if it's not
-   * */
-  fun locationEnabledSubject() = locationEnabled
 
   private fun serviceUpdate() {
     val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
