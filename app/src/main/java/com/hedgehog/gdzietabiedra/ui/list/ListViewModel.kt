@@ -5,49 +5,43 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.appservice.Error
 import com.hedgehog.gdzietabiedra.appservice.LocationWatchdogCoroutines
 import com.hedgehog.gdzietabiedra.appservice.PermissionRequired
+import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.appservice.Success
-import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ListViewModel(
-    private val shopsRepository: ShopsRepository,
+    private val shopService: ShopService,
     private val locationWatchdogCoroutines: LocationWatchdogCoroutines,
 ) : ViewModel() {
 
+  // TODO: 24.10.2020 Do I need this here?
   private val _permissionRequest = MutableLiveData<String>()
-  private val _text = MutableLiveData<String>().apply {
-    value = "This is list Fragment"
-  }
-  val text: LiveData<String> = _text
   val permissionRequest: LiveData<String> = _permissionRequest
+
+  private val _shopList = MutableLiveData<List<Shop>>()
+  val shopList: LiveData<List<Shop>> = _shopList
 
   init {
   }
 
   fun loadData() {
-//    locationWatchdog.getLocation()
-//        .map {
-//          println("position: $it")
-//        }
-//        .subscribe()
-
-    checkPosition()
-
-//    viewModelScope.launch(Dispatchers.IO) {
-//      val shops = shopsRepository.fetchAll()
-//
-//      _text.postValue("we have ${shops.size} shops in DB")
-//    }
+//    checkPosition()
   }
 
   private fun checkPosition() {
-    viewModelScope.launch {
+    viewModelScope.launch(Dispatchers.IO) {
       when (val position = locationWatchdogCoroutines.getPosition()) {
-        is Success -> _text.postValue("position: $position")
-        is Error -> _text.postValue("oh no, location error...")
+        is Success -> {
+          viewModelScope.launch(Dispatchers.IO) {
+            _shopList.postValue(shopService.getShopsInRange(position.position, 50_000.0))
+          }
+        }
+        is Error -> println("no location available")
         PermissionRequired -> requestLocationPermission()
       }
     }
@@ -59,5 +53,23 @@ class ListViewModel(
 
   fun permissionGranted() {
     checkPosition()
+  }
+
+  fun shopSearchQueryChanged(query: String?) {
+    if (query.isNullOrEmpty()) return
+    viewModelScope.launch(Dispatchers.IO) {
+      _shopList.postValue(shopService.getShopsByAddress(query, null))
+    }
+  }
+
+  fun shopSearchQuerySubmited(query: String?) {
+    if (query.isNullOrEmpty()) return
+    viewModelScope.launch(Dispatchers.IO) {
+      _shopList.postValue(shopService.getShopsByAddress(query, null))
+    }
+  }
+
+  fun shopListItemClicked(it: Shop) {
+
   }
 }

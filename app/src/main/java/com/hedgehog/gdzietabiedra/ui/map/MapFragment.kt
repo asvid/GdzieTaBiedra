@@ -4,28 +4,37 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.R.layout
+import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
+import kotlinx.android.synthetic.main.fragment_map.map_view
+import org.koin.androidx.viewmodel.compat.ViewModelCompat
+import timber.log.Timber
 
 class MapFragment : Fragment() {
 
-  private lateinit var mapViewModel: MapViewModel
+  private val vm: MapViewModel by ViewModelCompat.viewModel(this, MapViewModel::class.java)
 
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View? {
-    mapViewModel =
-        ViewModelProvider(this).get(MapViewModel::class.java)
-    val root = inflater.inflate(R.layout.fragment_map, container, false)
-    val textView: TextView = root.findViewById(R.id.text_map)
-    mapViewModel.text.observe(viewLifecycleOwner, Observer {
-      textView.text = it
-    })
-    return root
+    return inflater.inflate(layout.fragment_map, container, false)
+  }
+
+  override fun onResume() {
+    setupMap()
+    super.onResume()
+  }
+
+  private fun setupMap() {
+    map_view.onCreate(null)
+    map_view.getMapAsync {
+      Timber.d("map is loaded")
+      val googleMapProvider = GoogleMapProvider.create(it, requireContext())
+      map_view.onResume()
+      vm.mapLoaded(googleMapProvider)
+    }
   }
 }

@@ -21,13 +21,15 @@ class ShopService constructor(
    * @return [List] of [Shop]s that fit to query
    * */
   suspend fun getShopsByAddress(address: String, location: Position?): List<Shop> {
-    Timber.d("looking for shops with address like: $address")
+    Timber.d("looking for shops with address like: $address around: $location")
     return shopsRepository.fetchByAddress(address)
         .apply {
           this.forEach {
             it.calculateDistance(location)
           }
         }
+        .sortedBy { it.distance }
+        .take(10)
   }
 
   /**
@@ -46,11 +48,11 @@ class ShopService constructor(
         }
   }
 
-  private suspend fun Shop.calculateDistance(location: Position?) {
-    if (location == null) {
-      this.distance = null
+  private suspend fun Shop.calculateDistance(observerLocation: Position?) {
+    if (observerLocation == null) {
+      distance = null
     } else {
-      this.distance = distanceCalculator.calculateDistance(location, this.location)
+      distance = distanceCalculator.calculateDistance(location, observerLocation)
     }
   }
 }

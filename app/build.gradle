@@ -83,6 +83,7 @@ dependencies {
   implementation "org.koin:koin-androidx-workmanager:$Versions.koin"
   // Koin AndroidX Jetpack Compose
   implementation "org.koin:koin-androidx-compose:$Versions.koin"
+  implementation 'androidx.cardview:cardview:1.0.0'
   testImplementation "org.koin:koin-test:${Versions.koin}"
 
   implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
