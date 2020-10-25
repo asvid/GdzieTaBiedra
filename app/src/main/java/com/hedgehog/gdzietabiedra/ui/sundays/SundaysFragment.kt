@@ -42,7 +42,9 @@ class SundaysFragment : Fragment() {
       }
 
       override fun onMonthScroll(firstDayOfNewMonth: Date?) {
-        month_title.text = dateFormatForMonth.format(firstDayOfNewMonth)
+        firstDayOfNewMonth?.let {
+          month_title.text = dateFormatForMonth.format(it)
+        }
       }
     })
     calendar_view.setUseThreeLetterAbbreviation(true)

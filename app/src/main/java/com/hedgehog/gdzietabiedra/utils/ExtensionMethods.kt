@@ -11,13 +11,13 @@ fun Int.toLocalNumberFormat(locale: Locale): String {
   return NumberFormat.getNumberInstance(locale).format(this)
 }
 
-fun String.toDate(format: String): Date {
-  val formatter = SimpleDateFormat(format)
+fun String.toDate(format: String): Date? {
+  val formatter = SimpleDateFormat(format, Locale("pl"))
   return formatter.parse(this)
 }
 
 fun Date.print(format: String): String {
-  val dateFormat = SimpleDateFormat(format)
+  val dateFormat = SimpleDateFormat(format, Locale("pl"))
   return dateFormat.format(this)
 }
 

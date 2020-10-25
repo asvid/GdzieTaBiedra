@@ -17,7 +17,7 @@ interface MapProvider {
 
   fun drawMarker(point: ShopMarker, showInfo: Boolean)
 
-  fun readMapPosition(): Position
+  fun getMapCenterPosition(): Position
 
   fun shopMarkerClicked(): Flow<ShopMarker>
 
@@ -27,7 +27,7 @@ interface MapProvider {
 
   fun mapClicked(): Flow<LatLng>
 
-  fun mapMoved(): Flow<Position>
+  fun userMovedMap(): Flow<Position>
 
   fun selectShop(shop: Shop)
 }

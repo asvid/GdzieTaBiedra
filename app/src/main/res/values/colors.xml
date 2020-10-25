@@ -7,6 +7,6 @@
   <color name="secondaryLightColor">#a4a4a4</color>
   <color name="secondaryDarkColor">#494949</color>
   <color name="primaryTextColor">#000000</color>
-  <color name="secondaryTextColor">#ffffff</color>
+  <color name="secondaryTextColor">#555555</color>
   <color name="bottomNavItem">#c0c0c0</color>
 </resources>

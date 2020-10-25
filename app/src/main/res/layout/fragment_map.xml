@@ -19,7 +19,7 @@
       android:layout_height="0dp"
       android:drawableStart="@android:drawable/ic_menu_directions"
       android:text="@string/navigate_to_shop"
-      android:visibility="visible"
+      android:visibility="gone"
       tool:layout_constraintBottom_toBottomOf="parent"
       tool:layout_constraintEnd_toEndOf="parent"
       tool:layout_constraintStart_toStartOf="parent"

@@ -29,10 +29,10 @@ class ListFragment : Fragment() {
   ): View? {
     val root = inflater.inflate(R.layout.fragment_list, container, false)
     vm.loadData()
-    vm.permissionRequest.observeForever {
+    vm.permissionRequest.observe(viewLifecycleOwner) {
       requestLocationPermission(it)
     }
-    vm.shopList.observeForever{
+    vm.shopList.observe(viewLifecycleOwner) {
       shopsAdapter.updateData(it)
     }
     return root

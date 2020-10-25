@@ -10,7 +10,7 @@ import com.github.asvid.biedra.domain.SundayShopping
 import com.github.asvid.biedra.domain.getForToday
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener
+import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -22,7 +22,9 @@ import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.MEDIUM
 import com.hedgehog.gdzietabiedra.utils.toLatLng
 import com.hedgehog.gdzietabiedra.utils.toPosition
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.callbackFlow
@@ -36,6 +38,7 @@ private const val MAP_MARKER_SIZE = 300
  * Map provider build around [GoogleMap]
  * */
 
+@FlowPreview
 @ExperimentalCoroutinesApi
 class GoogleMapProvider private constructor(private val context: Context) : MapProvider {
 
@@ -82,6 +85,8 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
   }
 
   override fun drawMarker(point: ShopMarker, showInfo: Boolean) {
+    if (mapMarkers.values.contains(point)) return
+
     val openingHoursText: String =
         if (SundayShopping.isShoppingAllowed())
           point.shop.openHours.getForToday().toString()
@@ -97,13 +102,31 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
     mapMarkers[marker] = point
   }
 
-  override fun readMapPosition(): Position {
+  override fun getMapCenterPosition(): Position {
     return map.cameraPosition.target.toPosition()
   }
 
   override fun shopMarkerClicked(): Flow<ShopMarker> = markerChannel.asFlow()
 
   override fun mapClicked(): Flow<LatLng> = mapClickChannel.asFlow()
+
+  override fun userMovedMap(): Flow<Position> = callbackFlow {
+    map.setOnCameraMoveStartedListener { reason ->
+      if (reason == REASON_GESTURE) {
+        map.setOnCameraIdleListener {
+          this.offer(getMapCenterPosition())
+          mapMarkers.keys.forEach { marker ->
+            marker.hideInfoWindow()
+            val bounds = map.projection.visibleRegion.latLngBounds
+            if (!bounds.contains(marker.position)) marker.remove()
+          }
+        }
+      } else {
+        map.setOnCameraIdleListener(null)
+      }
+    }
+    awaitClose { map.setOnCameraMoveStartedListener(null) }
+  }
 
   override fun clearMap() {
     mapMarkers.clear()
@@ -120,22 +143,6 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
         CameraUpdateFactory
             .newLatLngZoom(position.toLatLng(), googleMapZoom), 100, null
     )
-  }
-
-  @ExperimentalCoroutinesApi
-  override fun mapMoved(): Flow<Position> = callbackFlow {
-    map.setOnCameraMoveStartedListener { reason ->
-      when (reason) {
-        OnCameraMoveStartedListener.REASON_GESTURE -> {
-          map.setOnCameraIdleListener {
-            this.offer(readMapPosition())
-          }
-        }
-        else -> {
-          map.setOnCameraIdleListener(null)
-        }
-      }
-    }
   }
 
   override fun selectShop(shop: Shop) {
