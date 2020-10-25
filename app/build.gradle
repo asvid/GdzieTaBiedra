@@ -67,10 +67,6 @@ dependencies {
   implementation External.kotlin
   //  Logging
   implementation External.timber
-  //  RX
-  implementation External.rxjava2
-  implementation External.rxbinding
-  implementation External.rxkotlin
   //  DI
   implementation External.koin
   // Koin AndroidX Scope features

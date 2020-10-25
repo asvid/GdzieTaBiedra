@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import com.hedgehog.gdzietabiedra.R.layout
 import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
 import kotlinx.android.synthetic.main.fragment_map.map_view
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.compat.ViewModelCompat
 import timber.log.Timber
 
+@ExperimentalCoroutinesApi
 class MapFragment : Fragment() {
 
   private val vm: MapViewModel by ViewModelCompat.viewModel(this, MapViewModel::class.java)

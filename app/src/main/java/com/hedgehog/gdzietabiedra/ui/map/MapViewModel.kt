@@ -11,8 +11,11 @@ import com.hedgehog.gdzietabiedra.appservice.Success
 import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.MapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.ShopMarker
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class MapViewModel(
     private val shopService: ShopService,
     private val locationWatchdogCoroutines: LocationWatchdogCoroutines,
@@ -32,7 +35,11 @@ class MapViewModel(
       }
     }
 
-    mapProvider.shopMarkerClicked()
+    viewModelScope.launch {
+      mapProvider.shopMarkerClicked().collect { marker ->
+        println("marker clicked: $marker")
+      }
+    }
   }
 
   private suspend fun populateWithMarkers(position: Position) {

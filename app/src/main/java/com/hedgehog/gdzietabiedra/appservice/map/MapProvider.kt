@@ -1,14 +1,16 @@
 package com.hedgehog.gdzietabiedra.appservice.map
 
 import com.github.asvid.biedra.domain.Position
-import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.MEDIUM
 import com.github.asvid.biedra.domain.Shop
-import io.reactivex.Completable
-import io.reactivex.Observable
+import com.google.android.gms.maps.model.LatLng
+import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.MEDIUM
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Interface that hides implementation of concrete maps provider, allows easy switch from Google Maps to OpenMaps etc.
  * */
+@ExperimentalCoroutinesApi
 interface MapProvider {
 
   fun drawMarkers(points: Collection<ShopMarker>)
@@ -17,17 +19,17 @@ interface MapProvider {
 
   fun readMapPosition(): Position
 
-  fun shopMarkerClicked(): Observable<ShopMarker>
+  fun shopMarkerClicked(): Flow<ShopMarker>
 
   fun clearMap()
 
   fun goToPosition(position: Position, mapZoom: MapZoom = MEDIUM)
 
-  fun mapClicked(): Observable<Any>
+  fun mapClicked(): Flow<LatLng>
 
-  fun mapMoved(): Observable<Position>
+  fun mapMoved(): Flow<Position>
 
-  fun selectShop(shop: Shop): Completable
+  fun selectShop(shop: Shop)
 }
 
 enum class MapZoom {

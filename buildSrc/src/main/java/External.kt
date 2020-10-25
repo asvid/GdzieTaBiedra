@@ -1,11 +1,6 @@
 object External {
   const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 
-  const val rxjava2 = "io.reactivex.rxjava2:rxjava:${Versions.rx}"
-  const val rxbinding = "com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha1"
-  const val rxbindingCore = "com.jakewharton.rxbinding3:rxbinding-core:3.0.0-alpha1"
-  const val rxkotlin = "io.reactivex.rxjava2:rxkotlin:2.3.0"
-
   const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
   const val leakcanaryDebug = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"

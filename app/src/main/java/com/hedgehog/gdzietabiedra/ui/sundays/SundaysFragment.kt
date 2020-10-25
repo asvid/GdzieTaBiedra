@@ -46,7 +46,7 @@ class SundaysFragment : Fragment() {
       }
     })
     calendar_view.setUseThreeLetterAbbreviation(true)
-    SundayShopping.shoppingSundays.forEach {
+    SundayShopping.businessDays.forEach {
       calendar_view.addEvent(Event(Color.GREEN, it.toDate().time))
     }
 

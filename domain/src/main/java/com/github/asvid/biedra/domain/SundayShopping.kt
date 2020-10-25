@@ -4,7 +4,7 @@ import org.joda.time.DateTimeConstants
 import org.joda.time.LocalDate
 
 object SundayShopping {
-  val shoppingSundays = listOf(
+  val businessDays = listOf(
       LocalDate(2018, 12, 2),
       LocalDate(2018, 12, 16),
       LocalDate(2018, 12, 23),
@@ -30,11 +30,18 @@ object SundayShopping {
       LocalDate(2020, 6, 28),
       LocalDate(2020, 8, 30),
       LocalDate(2020, 12, 13),
-      LocalDate(2020, 12, 20)
+      LocalDate(2020, 12, 20),
+      LocalDate(2021, 1, 31),
+      LocalDate(2021, 3, 28),
+      LocalDate(2021, 4, 25),
+      LocalDate(2021, 6, 27),
+      LocalDate(2021, 8, 29),
+      LocalDate(2021, 12, 12),
+      LocalDate(2021, 12, 19),
   )
 
   fun isShoppingAllowed(date: LocalDate = LocalDate()): Boolean {
     return if (date.dayOfWeek != DateTimeConstants.SUNDAY) true
-    else shoppingSundays.contains(date)
+    else businessDays.contains(date)
   }
 }

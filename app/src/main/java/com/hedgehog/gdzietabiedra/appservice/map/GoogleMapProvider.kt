@@ -12,16 +12,20 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.*
+import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.CLOSE
+import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.FAR
+import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.MEDIUM
 import com.hedgehog.gdzietabiedra.utils.toLatLng
 import com.hedgehog.gdzietabiedra.utils.toPosition
-import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
-import timber.log.Timber
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.callbackFlow
 
 private const val MEDIUM_MAP_ZOOM = 13f
 private const val CLOSE_MAP_ZOOM = 15f
@@ -31,12 +35,14 @@ private const val MAP_MARKER_SIZE = 300
 /**
  * Map provider build around [GoogleMap]
  * */
+
+@ExperimentalCoroutinesApi
 class GoogleMapProvider private constructor(private val context: Context) : MapProvider {
 
   private lateinit var map: GoogleMap
   private val mapMarkers = hashMapOf<Marker, ShopMarker>()
-  private val markerSubject: PublishSubject<ShopMarker> = PublishSubject.create()
-  private val mapClickSubject: PublishSubject<Any> = PublishSubject.create()
+  private val markerChannel = BroadcastChannel<ShopMarker>(1)
+  private val mapClickChannel = BroadcastChannel<LatLng>(1)
   private val markerIcon = BitmapDescriptorFactory.fromBitmap(
       resizeMapIcons(R.mipmap.bierdra_map_marker, MAP_MARKER_SIZE, MAP_MARKER_SIZE))
 
@@ -54,13 +60,13 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
     this.map.setInfoWindowAdapter(BiedraInfoAdapter(context))
     this.map.setOnMarkerClickListener { marker ->
       mapMarkers[marker]?.let {
-        markerSubject.onNext(it)
+        markerChannel.offer(it)
         marker.showInfoWindow()
       }
       true
     }
     this.map.setOnMapClickListener {
-      mapClickSubject.onNext(Any())
+      mapClickChannel.offer(it)
     }
   }
 
@@ -75,29 +81,29 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
     return createScaledBitmap(imageBitmap, width, height, false)
   }
 
-  override fun drawMarker(shopMarker: ShopMarker, showInfo: Boolean) {
+  override fun drawMarker(point: ShopMarker, showInfo: Boolean) {
     val openingHoursText: String =
         if (SundayShopping.isShoppingAllowed())
-          shopMarker.shop.openHours.getForToday().toString()
+          point.shop.openHours.getForToday().toString()
         else context.resources.getString(R.string.shop_closed)
 
     val markerOptions = MarkerOptions()
-        .position(shopMarker.position.toLatLng())
-        .title(shopMarker.shop.address.toString())
+        .position(point.position.toLatLng())
+        .title(point.shop.address.toString())
         .snippet(openingHoursText)
         .icon(markerIcon)
     val marker = map.addMarker(markerOptions)
     if (showInfo) marker.showInfoWindow()
-    mapMarkers[marker] = shopMarker
+    mapMarkers[marker] = point
   }
 
   override fun readMapPosition(): Position {
     return map.cameraPosition.target.toPosition()
   }
 
-  override fun shopMarkerClicked(): Observable<ShopMarker> = markerSubject
+  override fun shopMarkerClicked(): Flow<ShopMarker> = markerChannel.asFlow()
 
-  override fun mapClicked(): Observable<Any> = mapClickSubject
+  override fun mapClicked(): Flow<LatLng> = mapClickChannel.asFlow()
 
   override fun clearMap() {
     mapMarkers.clear()
@@ -116,32 +122,27 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
     )
   }
 
-  override fun mapMoved(): Observable<Position> {
-    return Observable
-        .fromPublisher<Boolean> {
-          map.setOnCameraMoveStartedListener { reason ->
-            when (reason) {
-              OnCameraMoveStartedListener.REASON_GESTURE -> it.onNext(true)
-              else -> it.onNext(false)
-            }
+  @ExperimentalCoroutinesApi
+  override fun mapMoved(): Flow<Position> = callbackFlow {
+    map.setOnCameraMoveStartedListener { reason ->
+      when (reason) {
+        OnCameraMoveStartedListener.REASON_GESTURE -> {
+          map.setOnCameraIdleListener {
+            this.offer(readMapPosition())
           }
         }
-        .flatMap { userInput ->
-          Timber.d("user input: $userInput")
-          Observable.fromPublisher<Position> { position ->
-            this.map.setOnCameraIdleListener {
-              if (userInput)
-                position.onNext(readMapPosition())
-            }
-          }
+        else -> {
+          map.setOnCameraIdleListener(null)
         }
+      }
+    }
   }
 
-  override fun selectShop(shop: Shop): Completable = Completable.fromAction {
+  override fun selectShop(shop: Shop) {
     map.clear()
     val shopMarker = ShopMarker.create(shop)
     drawMarker(shopMarker, true)
     goToPosition(shop.location, CLOSE)
-    markerSubject.onNext(shopMarker)
+    markerChannel.offer(shopMarker)
   }
 }
