@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Where is Biedronka</string>
-  <string name="more_actions">more actions</string>
-  <string name="notifications_title">Notifications</string>
-  <string name="range">range</string>
-  <string name="when_shop_is_in_area">when shop is in area</string>
-  <string name="navigate_to_shop">navigate to shop</string>
-  <string name="address">Address:</string>
-  <string name="opening_hours">Opening hours:</string>
-  <string name="distance">Distance:</string>
-  <string name="list">List</string>
-  <string name="map">Map</string>
-  <string name="sundays">Sundays</string>
-  <string name="settings">Settings</string>
-  <string name="grant_permissions">Grant permissions</string>
-  <string name="email_me">Email me</string>
-  <string name="share_some_stars">Share some stars</string>
-  <string name="settings_testimony">This is not an official Biedronka&#8482; app, I have no connection with the company.
+    <string name="app_name">Where is Biedronka</string>
+    <string name="more_actions">more actions</string>
+    <string name="notifications_title">Notifications</string>
+    <string name="range">range</string>
+    <string name="when_shop_is_in_area">when shop is in area</string>
+    <string name="navigate_to_shop">navigate to shop</string>
+    <string name="address">Address:</string>
+    <string name="opening_hours">Opening hours:</string>
+    <string name="distance">Distance:</string>
+    <string name="list">List</string>
+    <string name="map">Map</string>
+    <string name="sundays">Sundays</string>
+    <string name="settings">Settings</string>
+    <string name="grant_permissions">Grant permissions</string>
+    <string name="email_me">Email me</string>
+    <string name="share_some_stars">Share some stars</string>
+    <string name="settings_testimony">This is not an official Biedronka&#8482; app, I have no connection with the company.
 \nThis is made as my hobby pet project, digital sandbox where I can play with new libraries and stuff in my free time.
 \n
 \nPlease consider this when giving this app mark or leaving a comment :)
   </string>
-  <string name="turn_on_location">Turn on Location</string>
-  <string name="shop_closed">Shop is closed today</string>
-  <string name="shopping_sundays_subtitle">The days marked in green are commercial Sundays.</string>
-  <string name="title_activity_main2">MainActivity</string>
-  <string name="title_list">List</string>
-  <string name="title_map">Map</string>
-  <string name="title_sundays">Sundays</string>
+    <string name="turn_on_location">Turn on Location</string>
+    <string name="shop_closed">Shop is closed today</string>
+    <string name="shopping_sundays_subtitle">The days marked in green are commercial Sundays.</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="title_list">List</string>
+    <string name="title_map">Map</string>
+    <string name="title_sundays">Sundays</string>
 </resources>

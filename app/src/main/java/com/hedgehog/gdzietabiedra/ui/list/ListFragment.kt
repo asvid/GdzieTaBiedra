@@ -12,74 +12,73 @@ import com.hedgehog.gdzietabiedra.R
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener.Builder
 import com.karumi.dexter.listener.single.PermissionListener
-import kotlinx.android.synthetic.main.fragment_list.shop_list_view
-import kotlinx.android.synthetic.main.fragment_list.shop_search_view
+import kotlinx.android.synthetic.main.fragment_list.*
 import org.koin.androidx.viewmodel.compat.ViewModelCompat.viewModel
 
 class ListFragment : Fragment() {
 
-  private val vm: ListViewModel by viewModel(this, ListViewModel::class.java)
+    private val vm: ListViewModel by viewModel(this, ListViewModel::class.java)
 
-  lateinit var shopsAdapter: ShopListAdapter
+    lateinit var shopsAdapter: ShopListAdapter
 
-  override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
-  ): View? {
-    val root = inflater.inflate(R.layout.fragment_list, container, false)
-    vm.loadData()
-    vm.permissionRequest.observe(viewLifecycleOwner) {
-      requestLocationPermission(it)
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        val root = inflater.inflate(R.layout.fragment_list, container, false)
+        vm.loadData()
+        vm.permissionRequest.observe(viewLifecycleOwner) {
+            requestLocationPermission(it)
+        }
+        vm.shopList.observe(viewLifecycleOwner) {
+            shopsAdapter.updateData(it)
+        }
+        return root
     }
-    vm.shopList.observe(viewLifecycleOwner) {
-      shopsAdapter.updateData(it)
+
+    override fun onResume() {
+        setupShopSearch()
+        setupShopList()
+        super.onResume()
     }
-    return root
-  }
 
-  override fun onResume() {
-    setupShopSearch()
-    setupShopList()
-    super.onResume()
-  }
-
-  private fun setupShopList() {
-    val linearLayoutManager = LinearLayoutManager(context)
-    shopsAdapter = ShopListAdapter {
-      vm.shopListItemClicked(it)
+    private fun setupShopList() {
+        val linearLayoutManager = LinearLayoutManager(context)
+        shopsAdapter = ShopListAdapter {
+            vm.shopListItemClicked(it)
+        }
+        shop_list_view.adapter = shopsAdapter
+        shop_list_view.layoutManager = linearLayoutManager
+        shop_list_view.addItemDecoration(MarginItemDecoration(
+                resources.getDimension(R.dimen.default_padding).toInt()))
     }
-    shop_list_view.adapter = shopsAdapter
-    shop_list_view.layoutManager = linearLayoutManager
-    shop_list_view.addItemDecoration(MarginItemDecoration(
-        resources.getDimension(R.dimen.default_padding).toInt()))
-  }
 
-  private fun setupShopSearch() {
-    shop_search_view.setOnQueryTextListener(object : OnQueryTextListener {
-      override fun onQueryTextSubmit(query: String?): Boolean {
-        vm.shopSearchQuerySubmited(query)
-        return true
-      }
+    private fun setupShopSearch() {
+        shop_search_view.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                vm.shopSearchQuerySubmited(query)
+                return true
+            }
 
-      override fun onQueryTextChange(newText: String?): Boolean {
-        vm.shopSearchQueryChanged(newText)
-        return true
-      }
-    })
-  }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                vm.shopSearchQueryChanged(newText)
+                return true
+            }
+        })
+    }
 
-  private fun requestLocationPermission(permission: String) {
-    val dialogPermissionListener: PermissionListener = Builder
-        .withContext(context)
-        .withTitle("Location")
-        .withMessage("To calculate distance to nearest shop app needs to know where you are.")
-        .withButtonText(string.ok)
-        .withIcon(R.mipmap.ic_launcher)
-        .build()
+    private fun requestLocationPermission(permission: String) {
+        val dialogPermissionListener: PermissionListener = Builder
+                .withContext(context)
+                .withTitle("Location")
+                .withMessage("To calculate distance to nearest shop app needs to know where you are.")
+                .withButtonText(string.ok)
+                .withIcon(R.mipmap.ic_launcher)
+                .build()
 
-    Dexter.withContext(context)
-        .withPermission(permission)
-        .withListener(dialogPermissionListener).check()
-  }
+        Dexter.withContext(context)
+                .withPermission(permission)
+                .withListener(dialogPermissionListener).check()
+    }
 }

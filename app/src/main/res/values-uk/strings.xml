@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">"Де знаходиться Бідронка"</string>
-  <string name="more_actions">"більше дій"</string>
-  <string name="notifications_title">"Сповіщення"</string>
-  <string name="range">"діапазон"</string>
-  <string name="when_shop_is_in_area">"коли магазин знаходиться в районі"</string>
-  <string name="navigate_to_shop">"перейти до магазину"</string>
-  <string name="address">"Адреса:"</string>
-  <string name="opening_hours">"Години роботи:"</string>
-  <string name="distance">"Відстань:"</string>
-  <string name="list">"Перелік"</string>
-  <string name="map">"Карта"</string>
-  <string name="sundays">"Неділі"</string>
-  <string name="settings">"Налаштування"</string>
-  <string name="grant_permissions">"Надання дозволів"</string>
-  <string name="email_me">"Напиши мені електронного листа"</string>
-  <string name="share_some_stars">"Поділіться деякими зірками"</string>
-  <string name="settings_testimony">"Це не офіційна програма Biedronka ™, я не має зв'язку з компанією. \ nЦе зроблено як моя тварина-проект, цифрова пісочниця, де я можу грати з новими бібліотеками та іншими матеріалами у вільний час. \ n \ nБудь ласка, враховуйте це при наданні цієї позначки програми або залиште коментар :)
+    <string name="app_name">"Де знаходиться Бідронка"</string>
+    <string name="more_actions">"більше дій"</string>
+    <string name="notifications_title">"Сповіщення"</string>
+    <string name="range">"діапазон"</string>
+    <string name="when_shop_is_in_area">"коли магазин знаходиться в районі"</string>
+    <string name="navigate_to_shop">"перейти до магазину"</string>
+    <string name="address">"Адреса:"</string>
+    <string name="opening_hours">"Години роботи:"</string>
+    <string name="distance">"Відстань:"</string>
+    <string name="list">"Перелік"</string>
+    <string name="map">"Карта"</string>
+    <string name="sundays">"Неділі"</string>
+    <string name="settings">"Налаштування"</string>
+    <string name="grant_permissions">"Надання дозволів"</string>
+    <string name="email_me">"Напиши мені електронного листа"</string>
+    <string name="share_some_stars">"Поділіться деякими зірками"</string>
+    <string name="settings_testimony">"Це не офіційна програма Biedronka ™, я не має зв'язку з компанією. \ nЦе зроблено як моя тварина-проект, цифрова пісочниця, де я можу грати з новими бібліотеками та іншими матеріалами у вільний час. \ n \ nБудь ласка, враховуйте це при наданні цієї позначки програми або залиште коментар :)
   "</string>
-  <string name="turn_on_location">"Увімкніть місцезнаходження"</string>
-  <string name="shop_closed">"Магазин закрито сьогодні"</string>
-  <string name="shopping_sundays_subtitle">"Дни, позначені зеленим, є комерційними недільними днями."</string>
+    <string name="turn_on_location">"Увімкніть місцезнаходження"</string>
+    <string name="shop_closed">"Магазин закрито сьогодні"</string>
+    <string name="shopping_sundays_subtitle">"Дни, позначені зеленим, є комерційними недільними днями."</string>
 </resources>

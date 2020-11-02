@@ -5,13 +5,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ShopsResponse(
 
-    val result: Int? = null,
+        val result: Int? = null,
 
-    val cdn_base: String? = null,
+        val cdn_base: String? = null,
 
-    val shops: List<ShopsResponseItem>? = null,
+        val shops: List<ShopsResponseItem>? = null,
 
-    val error: String? = null,
+        val error: String? = null,
 
-    val timestamp: Int? = null
+        val timestamp: Int? = null
 )

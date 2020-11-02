@@ -9,15 +9,15 @@ android {
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
-  implementation External.kotlin
+  implementation Libs.kotlin
   //  Logging
-  implementation External.timber
+  implementation Libs.timber
   //  Joda Time
-  implementation External.jodaTime
+  implementation Libs.jodaTime
 
   //  Testing
   testImplementation TestDeps.junit
   androidTestImplementation TestDeps.runner
   androidTestImplementation TestDeps.espresso
-  testImplementation TestDeps.jodaTime
+  testImplementation Libs.jodaTime
 }

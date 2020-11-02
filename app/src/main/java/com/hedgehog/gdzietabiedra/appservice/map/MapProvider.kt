@@ -13,25 +13,25 @@ import kotlinx.coroutines.flow.Flow
 @ExperimentalCoroutinesApi
 interface MapProvider {
 
-  fun drawMarkers(points: Collection<ShopMarker>)
+    fun drawMarkers(points: Collection<ShopMarker>)
 
-  fun drawMarker(point: ShopMarker, showInfo: Boolean)
+    fun drawMarker(point: ShopMarker, showInfo: Boolean)
 
-  fun getMapCenterPosition(): Position
+    fun getMapCenterPosition(): Position
 
-  fun shopMarkerClicked(): Flow<ShopMarker>
+    fun shopMarkerClicked(): Flow<ShopMarker>
 
-  fun clearMap()
+    fun clearMap()
 
-  fun goToPosition(position: Position, mapZoom: MapZoom = MEDIUM)
+    fun goToPosition(position: Position, mapZoom: MapZoom = MEDIUM)
 
-  fun mapClicked(): Flow<LatLng>
+    fun mapClicked(): Flow<LatLng>
 
-  fun userMovedMap(): Flow<Position>
+    fun userMovedMap(): Flow<Position>
 
-  fun selectShop(shop: Shop)
+    fun selectShop(shop: Shop)
 }
 
 enum class MapZoom {
-  CLOSE, MEDIUM, FAR
+    CLOSE, MEDIUM, FAR
 }
