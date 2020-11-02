@@ -67,9 +67,9 @@ subprojects {
       minSdkVersion Build.minSdkVersion
       targetSdkVersion Build.targetSdkVersion
       compileSdkVersion Build.compileSdkVersion
-      versionCode 1
-      versionName "2.0"
-
+      versionCode 100
+      versionName "3.0.0"
+      vectorDrawables.useSupportLibrary = true
       testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
@@ -96,6 +96,10 @@ subprojects {
     packagingOptions {
       exclude 'META-INF/proguard/androidx-annotations.pro'
     }
+  }
+
+  dependencies{
+    implementation Libs.kotlin
   }
 }
 

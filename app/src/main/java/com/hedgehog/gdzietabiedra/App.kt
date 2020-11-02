@@ -12,7 +12,6 @@ import com.hedgehog.gdzietabiedra.ui.list.ListViewModel
 import com.hedgehog.gdzietabiedra.ui.map.MapViewModel
 import com.hedgehog.gdzietabiedra.ui.sundays.SundaysViewModel
 import com.hedgehog.gdzietabiedra.utils.CrashlyticsTree
-import leakcanary.LeakCanary
 import net.danlew.android.joda.JodaTimeAndroid
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
