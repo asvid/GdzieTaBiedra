@@ -9,8 +9,8 @@
     <string name="address">"Adresse:"</string>
     <string name="opening_hours">"Heures d'ouverture:"</string>
     <string name="distance">"Distance:"</string>
-    <string name="list">"liste"</string>
-    <string name="map">"Carte"</string>
+    <string name="title_list">"liste"</string>
+    <string name="title_map">"Carte"</string>
     <string name="settings">"Réglages"</string>
     <string name="grant_permissions">"Accorder des autorisations"</string>
     <string name="email_me">"Envoyez moi un email"</string>
@@ -20,5 +20,5 @@
     <string name="turn_on_location">"Activer l'emplacement"</string>
     <string name="shop_closed">"La boutique est fermée aujourd'hui"</string>
     <string name="shopping_sundays_subtitle">Les jours marqués en vert sont des dimanches commerciaux.</string>
-    <string name="sundays">les dimanches</string>
+    <string name="title_sundays">les dimanches</string>
 </resources>

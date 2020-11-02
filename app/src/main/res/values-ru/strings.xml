@@ -9,8 +9,8 @@
     <string name="address">"Адрес:"</string>
     <string name="opening_hours">"Часы работы:"</string>
     <string name="distance">"Расстояние:"</string>
-    <string name="list">"Список"</string>
-    <string name="map">"карта"</string>
+    <string name="title_list">"Список"</string>
+    <string name="title_map">"карта"</string>
     <string name="settings">"настройки"</string>
     <string name="grant_permissions">"Разрешения на грант"</string>
     <string name="email_me">"Напишите мне"</string>
@@ -20,5 +20,5 @@
     <string name="turn_on_location">"Включить местоположение"</string>
     <string name="shop_closed">"Сегодня магазин закрыт"</string>
     <string name="shopping_sundays_subtitle">Дни, отмеченные зеленым, являются коммерческими воскресеньями.</string>
-    <string name="sundays">по воскресеньям</string>
+    <string name="title_sundays">по воскресеньям</string>
 </resources>

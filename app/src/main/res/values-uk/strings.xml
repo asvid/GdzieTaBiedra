@@ -9,9 +9,9 @@
     <string name="address">"Адреса:"</string>
     <string name="opening_hours">"Години роботи:"</string>
     <string name="distance">"Відстань:"</string>
-    <string name="list">"Перелік"</string>
-    <string name="map">"Карта"</string>
-    <string name="sundays">"Неділі"</string>
+    <string name="title_list">"Перелік"</string>
+    <string name="title_map">"Карта"</string>
+    <string name="title_sundays">"Неділі"</string>
     <string name="settings">"Налаштування"</string>
     <string name="grant_permissions">"Надання дозволів"</string>
     <string name="email_me">"Напиши мені електронного листа"</string>

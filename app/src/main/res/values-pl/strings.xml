@@ -9,8 +9,8 @@
     <string name="address">Adres:</string>
     <string name="opening_hours">Godziny otwarcia:</string>
     <string name="distance">Odległość:</string>
-    <string name="list">Lista</string>
-    <string name="map">Mapa</string>
+    <string name="title_list">Lista</string>
+    <string name="title_map">Mapa</string>
     <string name="settings">Ustawienia</string>
     <string name="grant_permissions">Udziel uprawnień</string>
     <string name="email_me">Napisz do mnie</string>
@@ -23,5 +23,5 @@
     <string name="turn_on_location">Włącz lokalizację</string>
     <string name="shop_closed">Sklep dziś zamknięty</string>
     <string name="shopping_sundays_subtitle">Zaznaczone na zielono dni to niedziele handlowe.</string>
-    <string name="sundays">Niedziele</string>
+    <string name="title_sundays">Niedziele</string>
 </resources>
