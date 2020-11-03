@@ -8,7 +8,6 @@ object Versions {
   const val googlePlayServices = "16.0.0"
   const val jodaTime = "2.10.6"
   const val timber = "4.7.1"
-  const val leakCanary = "2.5"
   const val firebaseBom = "26.0.0"
 }
 
@@ -17,7 +16,6 @@ object Libs {
   const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
   const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
-  const val leakcanaryDebug = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
   const val dexter = "com.karumi:dexter:6.2.1"
 
   const val jodaTime = "net.danlew:android.joda:${Versions.jodaTime}"

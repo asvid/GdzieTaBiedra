@@ -94,8 +94,6 @@ dependencies {
     implementation platform(Firebase.bom)
     implementation Firebase.crashlytics
     implementation Firebase.analytics
-
-    debugImplementation Libs.leakcanaryDebug
 }
 
 dependencies {
