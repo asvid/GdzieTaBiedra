@@ -58,7 +58,6 @@ subprojects {
             minSdkVersion Build.minSdkVersion
             targetSdkVersion Build.targetSdkVersion
             compileSdkVersion Build.compileSdkVersion
-            versionName "3.0.0"
             vectorDrawables.useSupportLibrary = true
             testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         }
