@@ -1,4 +1,4 @@
-apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: "com.google.firebase.crashlytics"
 
 android {
     defaultConfig {
@@ -10,7 +10,7 @@ android {
             minifyEnabled true
             shrinkResources true
             multiDexEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
         debug {
             manifestPlaceholders = [appName: "Biedra - Debug"]
@@ -29,7 +29,7 @@ android {
         dev {
             dimension "stage"
             versionNameSuffix "-dev" // e.g 1.0-dev
-            //      applicationIdSuffix '.dev'
+            //      applicationIdSuffix ".dev"
             //      resConfigs("de", "xxhdpi")
         }
         prod {
@@ -37,72 +37,71 @@ android {
         }
     }
     variantFilter { variant ->
-        // 'dev' flavor is only available for debug build
-        if (variant.buildType.name != 'debug' && variant.getFlavors().get(0).name == "dev") {
+        // "dev" flavor is only available for debug build
+        if (variant.buildType.name != "debug" && variant.getFlavors().get(0).name == "dev") {
             variant.setIgnore(true)
         }
-        // 'prod' flavor is only available for release build
-        if (!(variant.buildType.name == 'release') && variant.getFlavors().get(0).name == "prod") {
+        // "prod" flavor is only available for release build
+        if (!(variant.buildType.name == "release") && variant.getFlavors().get(0).name == "prod") {
             variant.setIgnore(true)
         }
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "1.8"
     }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(path: ':domain')
+    implementation(project(path: ":domain"))
 
-    implementation Libs.coroutines
+    implementation(Libs.coroutines)
 
-    implementation Koin.android
-    implementation Koin.scope
-    implementation Koin.viewmodel
-    implementation Koin.fragment
+    implementation(Koin.android)
+    implementation(Koin.scope)
+    implementation(Koin.viewmodel)
+    implementation(Koin.fragment)
 
-    implementation Android.cardView
-    implementation Android.constraintLayout
-    implementation Android.recyclerView
-    implementation Android.appCompat
-    implementation Android.material
-    implementation Android.navigationFragment
-    implementation Android.navigationFragmentKtx
-    implementation Android.navigationUi
-    implementation Android.navigationUiKtx
-    implementation Android.livedataKtx
-    implementation Android.viewmodelKtx
+    implementation(Android.cardView)
+    implementation(Android.constraintLayout)
+    implementation(Android.recyclerView)
+    implementation(Android.appCompat)
+    implementation(Android.material)
+    implementation(Android.navigationFragment)
+    implementation(Android.navigationFragmentKtx)
+    implementation(Android.navigationUi)
+    implementation(Android.navigationUiKtx)
+    implementation(Android.livedataKtx)
+    implementation(Android.viewmodelKtx)
 
-    implementation Libs.calendarView
+    implementation(Libs.calendarView)
 
-    implementation Room.runtime
-    kapt Room.compiler
-    implementation Room.ktx
+    implementation(Room.runtime)
+    kapt(Room.compiler)
+    implementation(Room.ktx)
 
-    implementation Google.maps
-    implementation Google.location
+    implementation(Google.maps)
+    implementation(Google.location)
 
-    implementation Ktor.clientAndroid
-    implementation Ktor.clientOkHttp
-    implementation Ktor.ktorSerialization
+    implementation(Ktor.clientAndroid)
+    implementation(Ktor.clientOkHttp)
+    implementation(Ktor.ktorSerialization)
 
-    implementation Libs.jodaTime
-    implementation Libs.dexter
-    implementation Libs.timber
+    implementation(Libs.jodaTime)
+    implementation(Libs.dexter)
+    implementation(Libs.timber)
 
-    implementation platform(Firebase.bom)
-    implementation Firebase.crashlytics
-    implementation Firebase.analytics
+    implementation(platform(Firebase.bom))
+    implementation(Firebase.crashlytics)
+    implementation(Firebase.analytics)
 }
 
 dependencies {
-    testImplementation TestDeps.junit
-    androidTestImplementation TestDeps.runner
-    androidTestImplementation TestDeps.espresso
-    testImplementation Koin.test
-    testImplementation Room.testing
+    testImplementation(TestDeps.junit)
+    androidTestImplementation(TestDeps.runner)
+    androidTestImplementation(TestDeps.espresso)
+    testImplementation(Koin.test)
+    testImplementation(Room.testing)
 }
 
-apply plugin: 'com.google.gms.google-services'
-apply from: '../DokkaConfig.gradle'
+apply plugin: "com.google.gms.google-services"
+apply from: "../DokkaConfig.gradle"
