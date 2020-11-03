@@ -12,11 +12,9 @@ android {
     }
     buildTypes {
         getByName("release") {
-
             isDebuggable = false
             isZipAlignEnabled = true
             isMinifyEnabled = true
-
             proguardFile(getDefaultProguardFile("proguard-android.txt"))
             proguardFile(file("proguard-rules.pro"))
             rootProject.file("proguard")
@@ -26,7 +24,6 @@ android {
                                 .toTypedArray()
                         )
                     }
-
             manifestPlaceholders["appName"] = "@string/app_name"
         }
         getByName("debug") {
@@ -37,6 +34,9 @@ android {
             firebaseCrashlytics {
                 mappingFileUploadEnabled = false
             }
+            splits.abi.isEnable = false
+            splits.density.isEnable = false
+            aaptOptions.cruncherEnabled = false
         }
     }
 
