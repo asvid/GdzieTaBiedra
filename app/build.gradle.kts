@@ -9,8 +9,8 @@ android {
     defaultConfig {
         applicationId = Build.appId
         manifestPlaceholders["appName"] = "@string/app_name"
-        versionCode(Build.versionCode)
-        versionName(Build.versionName)
+        versionCode = Build.versionCode
+        versionName = Build.versionName
     }
     buildTypes {
         getByName("release") {
