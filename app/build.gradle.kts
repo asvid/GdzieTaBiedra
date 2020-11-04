@@ -1,4 +1,9 @@
 plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-android-extensions")
+    id("kotlin-kapt")
+    id("kotlinx-serialization")
     id("com.google.firebase.crashlytics")
     id("com.google.gms.google-services")
 }
@@ -11,12 +16,16 @@ android {
         manifestPlaceholders["appName"] = "@string/app_name"
         versionCode = Build.versionCode
         versionName = Build.versionName
+        buildToolsVersion = Build.buildToolsVersion
+        minSdkVersion(Build.minSdkVersion)
+        targetSdkVersion(Build.targetSdkVersion)
+        compileSdkVersion(Build.compileSdkVersion)
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         getByName("release") {
             isDebuggable = false
             isZipAlignEnabled = true
-            isMinifyEnabled = true
             proguardFile(getDefaultProguardFile("proguard-android.txt"))
             proguardFile(file("proguard-rules.pro"))
             rootProject.file("proguard")
@@ -32,7 +41,6 @@ android {
             manifestPlaceholders["appName"] = "Biedra - Debug"
             debuggable(true)
             multiDexEnabled = true
-            minifyEnabled(false)
             firebaseCrashlytics {
                 mappingFileUploadEnabled = false
             }
@@ -44,6 +52,21 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    lintOptions {
+        isAbortOnError = false
+    }
+    dexOptions {
+        preDexLibraries = true
+    }
+    testOptions {
+        animationsDisabled = true
+        unitTests {
+            isReturnDefaultValues = true
+        }
+    }
+    packagingOptions {
+        exclude("META-INF/proguard/androidx-annotations.pro")
     }
 
     flavorDimensions("type")
@@ -71,6 +94,7 @@ android {
 dependencies {
     implementation(project(":domain"))
 
+    implementation(Libs.kotlin)
     implementation(Libs.coroutines)
 
     implementation(Koin.android)

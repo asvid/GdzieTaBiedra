@@ -32,57 +32,7 @@ allprojects {
             options.compilerArgs << "-Xmaxerrs" << "500"
         }
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-subprojects {
-
-    if (it.name == "app") {
-        apply plugin: "com.android.application"
-    } else {
-        apply plugin: "com.android.library"
-    }
-
-    apply plugin: "kotlin-android"
-    apply plugin: "kotlin-android-extensions"
-    apply plugin: "kotlin-kapt"
-    apply plugin: "kotlinx-serialization"
-
-    android {
-        compileSdkVersion Build.compileSdkVersion
-        defaultConfig {
-            buildToolsVersion Build.buildToolsVersion
-            minSdkVersion Build.minSdkVersion
-            targetSdkVersion Build.targetSdkVersion
-            compileSdkVersion Build.compileSdkVersion
-            vectorDrawables.useSupportLibrary = true
-            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        }
-        lintOptions {
-            abortOnError false
-        }
-        dexOptions {
-            preDexLibraries = true
-        }
-        testOptions {
-            animationsDisabled = true
-            unitTests {
-                returnDefaultValues = true
-            }
-        }
-        compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
-        packagingOptions {
-            exclude "META-INF/proguard/androidx-annotations.pro"
-        }
-    }
 
     dependencies {
-        implementation(Libs.kotlin)
     }
 }
