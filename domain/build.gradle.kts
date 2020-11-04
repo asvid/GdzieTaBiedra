@@ -1,9 +1,6 @@
 plugins {
-    id("com.android.library")
-}
-
-android {
-    compileSdkVersion(Build.compileSdkVersion)
+    id("java-library")
+    id("kotlin")
 }
 
 dependencies {
