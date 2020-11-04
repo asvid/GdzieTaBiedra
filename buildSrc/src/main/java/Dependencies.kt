@@ -12,7 +12,7 @@ object Versions {
 }
 
 object Libs {
-  const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+  const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
   const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
   const val timber = "com.jakewharton.timber:timber:${Versions.timber}"

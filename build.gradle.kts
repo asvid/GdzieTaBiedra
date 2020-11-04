@@ -1,4 +1,5 @@
 buildscript {
+    val kotlin_version by extra("1.4.10")
     repositories {
         google()
         jcenter()
@@ -10,7 +11,7 @@ buildscript {
         classpath(ProjectDeps.kotlinSerialization)
         classpath(ProjectDeps.kotlinExtensions)
         classpath(ProjectDeps.firebasePlugin) {
-            exclude group: "com.google.guava", module: "guava-jdk5"
+            exclude(group = "com.google.guava", module = "guava-jdk5")
         }
         classpath(ProjectDeps.googleServices)
         classpath(ProjectDeps.crashlytics)
@@ -23,16 +24,5 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
-        maven {
-            url "https://maven.google.com/"
-        }
-    }
-    afterEvaluate {
-        tasks.withType(JavaCompile.class) {
-            options.compilerArgs << "-Xmaxerrs" << "500"
-        }
-    }
-
-    dependencies {
     }
 }
