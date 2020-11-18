@@ -18,21 +18,23 @@ private val WARSAW = position {
 }
 
 @SuppressLint("MissingPermission")
-class LocationWatchdogCoroutines(private val context: Context) {
+class LocationService(private val context: Context) {
 
-    private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
-            context)
+    private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 
     suspend fun getPosition(): LocationResult = suspendCoroutine {
-        it.resume(Success(WARSAW))
-//    if (!isPermissionGranted()) {
-//      it.resume(PermissionRequired)
-//    }
-//    fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-//      run {
-//        it.resume(Success(Position(location.latitude, location.longitude)))
-//      }
-//    }
+        if (!isPermissionGranted()) {
+            it.resume(PermissionRequired)
+        }
+        if (isLocationServiceAvailable()) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                run {
+                    it.resume(Success(Position(location.latitude, location.longitude)))
+                }
+            }
+        } else {
+            it.resume(LocationNotAvailable)
+        }
     }
 
     private fun isLocationServiceAvailable(): Boolean {
@@ -46,13 +48,8 @@ class LocationWatchdogCoroutines(private val context: Context) {
 
     private fun isPermissionGranted(): Boolean {
         return when (PackageManager.PERMISSION_GRANTED) {
-            context.checkSelfPermission(
-                    Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                true
-            }
-            else -> {
-                false
-            }
+            context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) -> true
+            else -> false
         }
     }
 }
@@ -61,3 +58,4 @@ sealed class LocationResult
 data class Success(val position: Position) : LocationResult()
 data class Error(val message: String) : LocationResult()
 object PermissionRequired : LocationResult()
+object LocationNotAvailable : LocationResult()

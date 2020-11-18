@@ -1,6 +1,7 @@
 package com.hedgehog.gdzietabiedra.ui.list
 
-import android.R.string
+import android.Manifest
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,13 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.hedgehog.gdzietabiedra.R
 import com.karumi.dexter.Dexter
-import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener.Builder
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.fragment_list.*
 import org.koin.androidx.viewmodel.compat.ViewModelCompat.viewModel
@@ -29,7 +34,13 @@ class ListFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_list, container, false)
         vm.loadData()
         vm.permissionRequest.observe(viewLifecycleOwner) {
-            requestLocationPermission(it)
+            when (it) {
+                RequestLocationPermission -> requestLocationPermission()
+                LocationPermissionDenied -> displayLocationPermissionSnackbar()
+                LocationPermissionRevoked -> TODO()
+                NoAvailableLocation -> Snackbar.make(
+                        root, "no location available", Snackbar.LENGTH_SHORT).show()
+            }
         }
         vm.shopList.observe(viewLifecycleOwner) {
             shopsAdapter.updateData(it)
@@ -68,17 +79,30 @@ class ListFragment : Fragment() {
         })
     }
 
-    private fun requestLocationPermission(permission: String) {
-        val dialogPermissionListener: PermissionListener = Builder
-                .withContext(context)
-                .withTitle("Location")
-                .withMessage("To calculate distance to nearest shop app needs to know where you are.")
-                .withButtonText(string.ok)
-                .withIcon(R.mipmap.ic_launcher)
-                .build()
-
+    private fun requestLocationPermission() {
         Dexter.withContext(context)
-                .withPermission(permission)
-                .withListener(dialogPermissionListener).check()
+                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(object : PermissionListener {
+                    override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+                        vm.locationPermissionGranted()
+                    }
+
+                    override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
+                        vm.locationPermissionDenied()
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(p0: PermissionRequest?, p1: PermissionToken?) {
+                        vm.locationPermissionRationaleShouldBeShown()
+                    }
+                }).check()
+    }
+
+    private fun displayLocationPermissionSnackbar() {
+        Snackbar.make(shop_list_view, "App works better with location permissions granted", Snackbar.LENGTH_LONG)
+                .setAction("Allow") {
+                    requestLocationPermission()
+                }
+                .setActionTextColor(Color.YELLOW)
+                .show()
     }
 }

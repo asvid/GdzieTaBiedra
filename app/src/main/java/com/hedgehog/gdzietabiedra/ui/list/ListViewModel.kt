@@ -1,6 +1,5 @@
 package com.hedgehog.gdzietabiedra.ui.list
 
-import android.Manifest
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,12 +11,11 @@ import kotlinx.coroutines.launch
 
 class ListViewModel(
         private val shopService: ShopService,
-        private val locationWatchdogCoroutines: LocationWatchdogCoroutines,
+        private val locationService: LocationService,
 ) : ViewModel() {
 
-    // TODO: 24.10.2020 Do I need this here?
-    private val _permissionRequest = MutableLiveData<String>()
-    val permissionRequest: LiveData<String> = _permissionRequest
+    private val _permissionRequest = MutableLiveData<LocationRequestPermissionResult>()
+    val permissionRequest: LiveData<LocationRequestPermissionResult> = _permissionRequest
 
     private val _shopList = MutableLiveData<List<Shop>>()
     val shopList: LiveData<List<Shop>> = _shopList
@@ -26,28 +24,33 @@ class ListViewModel(
     }
 
     fun loadData() {
-//    checkPosition()
+        checkPosition()
     }
 
     private fun checkPosition() {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val position = locationWatchdogCoroutines.getPosition()) {
+            when (val position = locationService.getPosition()) {
                 is Success -> {
                     viewModelScope.launch(Dispatchers.IO) {
-                        _shopList.postValue(shopService.getShopsInRange(position.position, 50_000.0))
+                        _shopList.postValue(shopService.getShopsInRange(position.position, 50.0))
                     }
                 }
                 is Error -> println("no location available")
-                PermissionRequired -> requestLocationPermission()
+                is PermissionRequired -> requestLocationPermission()
+                is LocationNotAvailable -> locationNotAvailable()
             }
         }
     }
 
-    private fun requestLocationPermission() {
-        _permissionRequest.postValue(Manifest.permission.ACCESS_FINE_LOCATION)
+    private fun locationNotAvailable() {
+        _permissionRequest.postValue(NoAvailableLocation)
     }
 
-    fun permissionGranted() {
+    private fun requestLocationPermission() {
+        _permissionRequest.postValue(RequestLocationPermission)
+    }
+
+    fun locationPermissionGranted() {
         checkPosition()
     }
 
@@ -68,4 +71,19 @@ class ListViewModel(
     fun shopListItemClicked(it: Shop) {
 
     }
+
+    fun locationPermissionDenied() {
+        _permissionRequest.postValue(LocationPermissionDenied)
+    }
+
+    fun locationPermissionRationaleShouldBeShown() {
+        // TODO: 18.11.2020 what does it mean?
+//        _permissionRequest.postValue(LocationRequestPermissionResult.LocationPermissionDenied)
+    }
 }
+
+sealed class LocationRequestPermissionResult
+object RequestLocationPermission : LocationRequestPermissionResult()
+object LocationPermissionDenied : LocationRequestPermissionResult()
+object LocationPermissionRevoked : LocationRequestPermissionResult()
+object NoAvailableLocation : LocationRequestPermissionResult()

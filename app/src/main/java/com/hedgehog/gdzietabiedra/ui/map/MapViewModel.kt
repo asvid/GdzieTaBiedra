@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 @ExperimentalCoroutinesApi
 class MapViewModel(
         private val shopService: ShopService,
-        private val locationWatchdogCoroutines: LocationWatchdogCoroutines,
+        private val locationService: LocationService,
 ) : ViewModel() {
 
     lateinit var mapProvider: MapProvider
@@ -35,7 +35,7 @@ class MapViewModel(
         _showNavButton.postValue(false)
 
         viewModelScope.launch {
-            when (val position = locationWatchdogCoroutines.getPosition()) {
+            when (val position = locationService.getPosition()) {
                 is Success -> goToPosition(position.position)
                 is Error -> TODO()
                 PermissionRequired -> TODO()

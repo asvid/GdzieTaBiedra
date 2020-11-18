@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.hedgehog.gdzietabiedra.api.BiedraKtorService
 import com.hedgehog.gdzietabiedra.appservice.DistanceCalculator
-import com.hedgehog.gdzietabiedra.appservice.LocationWatchdogCoroutines
+import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.data.repository.shops.AppDatabase
 import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
@@ -51,7 +51,7 @@ class App : Application() {
         single { DistanceCalculator() }
         single { ShopService(ShopsRepository(get<AppDatabase>().shopRoomDao()), get()) }
         single { BiedraKtorService() }
-        single { LocationWatchdogCoroutines(get()) }
+        single { LocationService(get()) }
 
         viewModel { ListViewModel(get(), get()) }
         viewModel { MapViewModel(get(), get()) }
