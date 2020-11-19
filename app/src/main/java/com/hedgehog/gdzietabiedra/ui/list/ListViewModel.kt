@@ -32,7 +32,7 @@ class ListViewModel(
             when (val position = locationService.getPosition()) {
                 is Success -> {
                     viewModelScope.launch(Dispatchers.IO) {
-                        _shopList.postValue(shopService.getShopsInRange(position.position, 50.0))
+                        _shopList.postValue(shopService.getShopsInRange(position.location, 50.0))
                     }
                 }
                 is Error -> println("no location available")

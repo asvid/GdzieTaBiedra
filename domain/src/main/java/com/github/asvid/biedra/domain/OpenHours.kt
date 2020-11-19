@@ -2,8 +2,7 @@ package com.github.asvid.biedra.domain
 
 import org.joda.time.DateTimeConstants
 import org.joda.time.LocalDate
-import java.text.ParseException
-import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.*
 
 /**
@@ -55,21 +54,14 @@ fun String.toOpenHours(): TimeRange? {
         println("Wrong opening hours format: $this")
         return null
     }
-    var startDate = splitted[0].toDate("hh:mm")
-    var endDate = splitted[1].toDate("hh:mm")
-
-    if (startDate == null) {
-        startDate = splitted[0].toDate("hh.mm")
-    }
-    if (endDate == null) {
-        endDate = splitted[1].toDate("hh.mm")
-    }
-    if (startDate == null || endDate == null) {
+    val startTime = splitted[0].toTime()
+    val endTime = splitted[1].toTime()
+    if (startTime == null || endTime == null) {
         println("couldn't parse start or end dates of: $this")
         return null
     }
 
-    return TimeRange(startDate, endDate)
+    return TimeRange(startTime, endTime)
 }
 
 /**
@@ -79,14 +71,12 @@ fun String.toOpenHours(): TimeRange? {
  *
  * @return [Date] from parsed [String] with provided [format]
  * */
-fun String.toDate(format: String): Date? {
-    return try {
-        val formatter = SimpleDateFormat(format)
-        formatter.parse(this.trim().removePrefix("0"))
-    } catch (e: ParseException) {
-        println("error parsing time: $this")
-        null
-    }
+fun String.toTime(): LocalTime? {
+    val splited = this.split(":", ".")
+    if (splited.size != 2) return null;
+    val hour = splited[0].trim().toInt()
+    val minute = splited[1].trim().toInt()
+    return LocalTime.of(hour, minute)
 }
 
 fun OpenHours.getForToday(): TimeRange? =

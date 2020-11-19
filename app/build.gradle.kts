@@ -127,7 +127,6 @@ dependencies {
     implementation(Ktor.clientOkHttp)
     implementation(Ktor.ktorSerialization)
 
-    implementation(Libs.jodaTime)
     implementation(Libs.dexter)
     implementation(Libs.timber)
 
