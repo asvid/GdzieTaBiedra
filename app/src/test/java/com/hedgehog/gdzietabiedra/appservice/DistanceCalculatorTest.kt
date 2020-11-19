@@ -1,6 +1,6 @@
 package com.hedgehog.gdzietabiedra.appservice
 
-import com.github.asvid.biedra.domain.Location
+import com.github.asvid.biedra.domain.Position
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import kotlin.math.abs
@@ -11,8 +11,8 @@ class DistanceCalculatorTest {
 
     @Test
     fun `calculated distance should be more-less correct`() = runBlocking {
-        val pointA = Location(52.593465, 15.914055)
-        val pointB = Location(52.565976, 15.951845)
+        val pointA = Position(52.593465, 15.914055)
+        val pointB = Position(52.565976, 15.951845)
         val distanceAB = 3980.0
 
         println("distance: ${distanceCalculator.calculateDistance(pointA, pointB)}")

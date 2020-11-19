@@ -12,6 +12,7 @@ import com.hedgehog.gdzietabiedra.ui.list.ListViewModel
 import com.hedgehog.gdzietabiedra.ui.map.MapViewModel
 import com.hedgehog.gdzietabiedra.ui.sundays.SundaysViewModel
 import com.hedgehog.gdzietabiedra.utils.CrashlyticsTree
+import net.danlew.android.joda.JodaTimeAndroid
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
@@ -32,6 +33,7 @@ class App : Application() {
     super.onCreate()
 
     initTimber()
+    initJoda()
     initKoin()
   }
 
@@ -56,6 +58,10 @@ class App : Application() {
         viewModel { SundaysViewModel() }
       })
     }
+  }
+
+  private fun initJoda() {
+    JodaTimeAndroid.init(this)
   }
 
   private fun initTimber() {

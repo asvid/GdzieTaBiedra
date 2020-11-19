@@ -5,7 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
-import com.github.asvid.biedra.domain.Location
+import com.github.asvid.biedra.domain.Position
 import com.github.asvid.biedra.domain.position
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -29,7 +29,7 @@ class LocationService(private val context: Context) {
         if (isLocationServiceAvailable()) {
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 run {
-                    it.resume(Success(Location(location.latitude, location.longitude)))
+                    it.resume(Success(Position(location.latitude, location.longitude)))
                 }
             }
         } else {
@@ -55,7 +55,7 @@ class LocationService(private val context: Context) {
 }
 
 sealed class LocationResult
-data class Success(val location: Location) : LocationResult()
+data class Success(val position: Position) : LocationResult()
 data class Error(val message: String) : LocationResult()
 object PermissionRequired : LocationResult()
 object LocationNotAvailable : LocationResult()

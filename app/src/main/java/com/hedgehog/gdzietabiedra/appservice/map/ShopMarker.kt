@@ -1,16 +1,16 @@
 package com.hedgehog.gdzietabiedra.appservice.map
 
-import com.github.asvid.biedra.domain.Location
+import com.github.asvid.biedra.domain.Position
 import com.github.asvid.biedra.domain.Shop
 
 /**
  * Map marker for [Shop]
  *
- * @property location - position of shop
+ * @property position - position of shop
  * @property shop - shop connected with map marker
  * */
 data class ShopMarker private constructor(
-        val location: Location,
+        val position: Position,
         val shop: Shop
 ) {
     companion object {
