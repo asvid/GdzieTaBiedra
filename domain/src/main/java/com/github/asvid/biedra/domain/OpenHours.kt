@@ -1,7 +1,7 @@
 package com.github.asvid.biedra.domain
 
-import org.joda.time.DateTimeConstants
-import org.joda.time.LocalDate
+import java.time.DayOfWeek
+import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
 
@@ -80,8 +80,8 @@ fun String.toTime(): LocalTime? {
 }
 
 fun OpenHours.getForToday(): TimeRange? =
-        when (LocalDate().dayOfWeek) {
-            DateTimeConstants.SUNDAY -> this.sunday ?: this.weekDay
-            DateTimeConstants.SATURDAY -> this.saturday ?: this.weekDay
+        when (LocalDate.now().dayOfWeek) {
+            DayOfWeek.SUNDAY -> this.sunday ?: this.weekDay
+            DayOfWeek.SATURDAY -> this.saturday ?: this.weekDay
             else -> this.weekDay
         }
