@@ -1,6 +1,6 @@
 package com.hedgehog.gdzietabiedra.utils
 
-import com.github.asvid.biedra.domain.Position
+import com.github.asvid.biedra.domain.Location
 import com.google.android.gms.maps.model.LatLng
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -26,6 +26,6 @@ fun Double.round(decimals: Int): Double {
     return Math.round(this * multiplier) / multiplier
 }
 
-fun Position.toLatLng(): LatLng = LatLng(this.lat, this.lng)
+fun Location.toLatLng(): LatLng = LatLng(this.lat, this.lng)
 
-fun LatLng.toPosition(): Position = Position(this.latitude, this.longitude)
+fun LatLng.toPosition(): Location = Location(this.latitude, this.longitude)

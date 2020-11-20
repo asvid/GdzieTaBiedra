@@ -1,27 +1,27 @@
 package com.hedgehog.gdzietabiedra.appservice
 
-import com.github.asvid.biedra.domain.Position
+import com.github.asvid.biedra.domain.Location
 import kotlin.math.acos
 import kotlin.math.cos
 import kotlin.math.sin
 
 /**
- *  [DistanceCalculator] contains methods to calculate distance between [Position]s
+ *  [DistanceCalculator] contains methods to calculate distance between [Location]s
  *
  * */
 class DistanceCalculator {
 
     /**
-     * Calculates distance in meters in straight line between 2 [Position]s
+     * Calculates distance in meters in straight line between 2 [Location]s
      *
      * @param pointA first position
      * @param pointB second position
      *
-     * @return [Double] distance in straight line between 2 [Position]s in meters.
+     * @return [Double] distance in straight line between 2 [Location]s in meters.
      *
      * */
 
-    fun calculateDistance(pointA: Position, pointB: Position): Double {
+    fun calculateDistance(pointA: Location, pointB: Location): Double {
         val pk = (180f / Math.PI).toFloat()
 
         val a1 = pointA.lat / pk

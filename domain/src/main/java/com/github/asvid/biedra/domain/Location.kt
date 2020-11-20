@@ -6,18 +6,18 @@ package com.github.asvid.biedra.domain
  * @property lat latitude
  * @property lng longitude
  * */
-data class Position(
+data class Location(
     val lat: Double,
     val lng: Double
 )
 
 /**
- * DLS method for [Position]
+ * DLS method for [Location]
  * */
-fun position(block: PositionBuilder.() -> Unit): Position = PositionBuilder().apply(block).build()
+fun location(block: PositionBuilder.() -> Unit): Location = PositionBuilder().apply(block).build()
 
 /**
- * DLS builder for [Position]
+ * DLS builder for [Location]
  *
  * @property lat
  * @property lng
@@ -27,5 +27,5 @@ class PositionBuilder {
   var lat: Double = 0.0
   var lng: Double = 0.0
 
-  fun build(): Position = Position(lat, lng)
+  fun build(): Location = Location(lat, lng)
 }

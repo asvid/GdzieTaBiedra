@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Bitmap.createScaledBitmap
 import android.graphics.BitmapFactory
-import com.github.asvid.biedra.domain.Position
+import com.github.asvid.biedra.domain.Location
 import com.github.asvid.biedra.domain.Shop
 import com.github.asvid.biedra.domain.SundayShopping
 import com.github.asvid.biedra.domain.getForToday
@@ -91,7 +91,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
                 else context.resources.getString(R.string.shop_closed)
 
         val markerOptions = MarkerOptions()
-                .position(point.position.toLatLng())
+                .position(point.location.toLatLng())
                 .title(point.shop.address.toString())
                 .snippet(openingHoursText)
                 .icon(markerIcon)
@@ -100,7 +100,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
         mapMarkers[marker] = point
     }
 
-    override fun getMapCenterPosition(): Position {
+    override fun getMapCenterPosition(): Location {
         return map.cameraPosition.target.toPosition()
     }
 
@@ -108,7 +108,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
 
     override fun mapClicked(): Flow<LatLng> = mapClickChannel.asFlow()
 
-    override fun userMovedMap(): Flow<Position> = callbackFlow {
+    override fun userMovedMap(): Flow<Location> = callbackFlow {
         map.setOnCameraMoveStartedListener { reason ->
             if (reason == REASON_GESTURE) {
                 map.setOnCameraIdleListener {
@@ -131,7 +131,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
         map.clear()
     }
 
-    override fun goToPosition(position: Position, mapZoom: MapZoom) {
+    override fun goToPosition(location: Location, mapZoom: MapZoom) {
         val googleMapZoom = when (mapZoom) {
             CLOSE -> CLOSE_MAP_ZOOM
             MEDIUM -> MEDIUM_MAP_ZOOM
@@ -139,7 +139,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
         }
         map.animateCamera(
                 CameraUpdateFactory
-                        .newLatLngZoom(position.toLatLng(), googleMapZoom), 100, null
+                        .newLatLngZoom(location.toLatLng(), googleMapZoom), 100, null
         )
     }
 

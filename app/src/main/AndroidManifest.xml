@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.hedgehog.gdzietabiedra">
+    package="com.hedgehog.gdzietabiedra">
 
     <application
-            android:name=".App"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="${appName}"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            android:usesCleartextTraffic="true">
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="${appName}"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
         <activity
-                android:name=".MainActivity"
-                android:screenOrientation="portrait">
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,28 +23,27 @@
         </activity>
 
         <meta-data
-                android:name="com.google.android.maps.v2.API_KEY"
-                android:value="AIzaSyBi2uz6CXfGQZ0bHryk2YjWoA9qgjKR01k" />
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBi2uz6CXfGQZ0bHryk2YjWoA9qgjKR01k" />
         <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version" />
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <uses-library
-                android:name="org.apache.http.legacy"
-                android:required="false" />
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
     <permission
-            android:name="com.hedgehog.gdzietabiedra.permission.MAPS_RECEIVE"
-            android:protectionLevel="signature" />
+        android:name="com.hedgehog.gdzietabiedra.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
     <uses-feature
-            android:glEsVersion="0x00020000"
-            android:required="true" />
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

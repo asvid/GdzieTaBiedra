@@ -1,6 +1,6 @@
 package com.hedgehog.gdzietabiedra.data.repository.shops
 
-import com.github.asvid.biedra.domain.Position
+import com.github.asvid.biedra.domain.Location
 import com.github.asvid.biedra.domain.Shop
 
 class ShopsRepository constructor(private val shopDao: ShopRoomDao) {
@@ -22,7 +22,7 @@ class ShopsRepository constructor(private val shopDao: ShopRoomDao) {
     }
 
     suspend fun fetchByLocationAndRange(
-            location: Position,
+            location: Location,
             range: Double
     ): List<Shop> {
         val minLat = location.lat - range / 2

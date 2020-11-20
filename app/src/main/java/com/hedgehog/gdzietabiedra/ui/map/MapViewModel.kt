@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.asvid.biedra.domain.Position
+import com.github.asvid.biedra.domain.Location
 import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.appservice.*
 import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
@@ -35,8 +35,8 @@ class MapViewModel(
         _showNavButton.postValue(false)
 
         viewModelScope.launch {
-            when (val position = locationService.getPosition()) {
-                is Success -> goToPosition(position.position)
+            when (val position = locationService.getLocation()) {
+                is Success -> goToPosition(position.location)
                 is Error -> TODO()
                 PermissionRequired -> TODO()
             }
@@ -57,13 +57,13 @@ class MapViewModel(
         }
     }
 
-    private suspend fun goToPosition(position: Position) {
-        mapProvider.goToPosition(position)
-        populateWithMarkers(position)
+    private suspend fun goToPosition(location: Location) {
+        mapProvider.goToPosition(location)
+        populateWithMarkers(location)
     }
 
-    private suspend fun populateWithMarkers(position: Position) {
-        shopService.getShopsInRange(position, 0.1)
+    private suspend fun populateWithMarkers(location: Location) {
+        shopService.getShopsInRange(location, 0.1)
                 .forEach {
                     mapProvider.drawMarker(ShopMarker.create(it), false)
                 }

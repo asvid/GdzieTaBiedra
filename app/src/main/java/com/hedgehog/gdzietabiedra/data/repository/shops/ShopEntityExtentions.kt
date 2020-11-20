@@ -3,7 +3,7 @@ package com.hedgehog.gdzietabiedra.data.repository.shops
 import com.github.asvid.biedra.domain.Shop
 import com.github.asvid.biedra.domain.address
 import com.github.asvid.biedra.domain.openHours
-import com.github.asvid.biedra.domain.position
+import com.github.asvid.biedra.domain.location
 
 internal fun ShopRoomEntity.toDomainModel(): Shop {
     val entity = this
@@ -15,7 +15,7 @@ internal fun ShopRoomEntity.toDomainModel(): Shop {
                 streetNumber = entity.streetNumber.orEmpty()
             },
             this.distance,
-            position {
+            location {
                 lat = entity.latitude ?: 0.0
                 lng = entity.longitude ?: 0.0
             },

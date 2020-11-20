@@ -1,6 +1,6 @@
 package com.hedgehog.gdzietabiedra.appservice.map
 
-import com.github.asvid.biedra.domain.Position
+import com.github.asvid.biedra.domain.Location
 import com.github.asvid.biedra.domain.Shop
 import com.google.android.gms.maps.model.LatLng
 import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.MEDIUM
@@ -17,17 +17,17 @@ interface MapProvider {
 
     fun drawMarker(point: ShopMarker, showInfo: Boolean)
 
-    fun getMapCenterPosition(): Position
+    fun getMapCenterPosition(): Location
 
     fun shopMarkerClicked(): Flow<ShopMarker>
 
     fun clearMap()
 
-    fun goToPosition(position: Position, mapZoom: MapZoom = MEDIUM)
+    fun goToPosition(location: Location, mapZoom: MapZoom = MEDIUM)
 
     fun mapClicked(): Flow<LatLng>
 
-    fun userMovedMap(): Flow<Position>
+    fun userMovedMap(): Flow<Location>
 
     fun selectShop(shop: Shop)
 }

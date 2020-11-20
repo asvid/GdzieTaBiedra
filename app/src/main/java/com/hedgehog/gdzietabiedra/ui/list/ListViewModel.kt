@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.appservice.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class ListViewModel(
@@ -14,57 +16,61 @@ class ListViewModel(
         private val locationService: LocationService,
 ) : ViewModel() {
 
-    private val _permissionRequest = MutableLiveData<LocationRequestPermissionResult>()
-    val permissionRequest: LiveData<LocationRequestPermissionResult> = _permissionRequest
+    private var searchJob: Job? = null
+    private val _viewState = MutableLiveData<ListViewState>()
+    val viewState: LiveData<ListViewState> = _viewState
 
     private val _shopList = MutableLiveData<List<Shop>>()
     val shopList: LiveData<List<Shop>> = _shopList
 
-    init {
-    }
-
     fun loadData() {
-        checkPosition()
+        _viewState.postValue(LoadingShops)
+        loadShopsForUserLocation()
     }
 
-    private fun checkPosition() {
+    private fun loadShopsForUserLocation() {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val position = locationService.getPosition()) {
-                is Success -> {
-                    viewModelScope.launch(Dispatchers.IO) {
-                        _shopList.postValue(shopService.getShopsInRange(position.position, 50.0))
-                    }
-                }
-                is Error -> println("no location available")
+            when (val location = locationService.getLocation()) {
+                is Success -> loadShopsForLocation(location)
+                is Error -> locationNotAvailable()
                 is PermissionRequired -> requestLocationPermission()
                 is LocationNotAvailable -> locationNotAvailable()
             }
         }
     }
 
-    private fun locationNotAvailable() {
-        _permissionRequest.postValue(NoAvailableLocation)
-    }
-
-    private fun requestLocationPermission() {
-        _permissionRequest.postValue(RequestLocationPermission)
-    }
-
-    fun locationPermissionGranted() {
-        checkPosition()
-    }
-
-    fun shopSearchQueryChanged(query: String?) {
-        if (query.isNullOrEmpty()) return
+    private fun loadShopsForLocation(location: Success) {
         viewModelScope.launch(Dispatchers.IO) {
-            _shopList.postValue(shopService.getShopsByAddress(query, null))
+            val shopsInRange = shopService.getShopsInRange(location.location, 50.0)
+            _shopList.postValue(shopsInRange)
+            _viewState.postValue(ShopsLoaded)
         }
     }
 
-    fun shopSearchQuerySubmited(query: String?) {
-        if (query.isNullOrEmpty()) return
-        viewModelScope.launch(Dispatchers.IO) {
-            _shopList.postValue(shopService.getShopsByAddress(query, null))
+    private fun locationNotAvailable() {
+        _viewState.postValue(NoAvailableLocation)
+    }
+
+    private fun requestLocationPermission() {
+        _viewState.postValue(RequestLocationPermission)
+    }
+
+    fun locationPermissionGranted() {
+        loadShopsForUserLocation()
+    }
+
+    fun shopSearchByQuery(query: String?) {
+        if (query.isNullOrEmpty()) {
+            _viewState.postValue(NoShopsAvailable)
+            return
+        }
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch(Dispatchers.IO) {
+            val shops = shopService.getShopsByAddress(query, null)
+            if (this.isActive) {
+                _shopList.postValue(shops)
+                _viewState.postValue(ShopsLoaded)
+            }
         }
     }
 
@@ -73,11 +79,15 @@ class ListViewModel(
     }
 
     fun locationPermissionDenied() {
-        _permissionRequest.postValue(LocationPermissionDenied)
+        _viewState.postValue(LocationPermissionDenied)
     }
 }
 
-sealed class LocationRequestPermissionResult
-object RequestLocationPermission : LocationRequestPermissionResult()
-object LocationPermissionDenied : LocationRequestPermissionResult()
-object NoAvailableLocation : LocationRequestPermissionResult()
+sealed class ListViewState
+object RequestLocationPermission : ListViewState()
+object LocationPermissionDenied : ListViewState()
+object NoAvailableLocation : ListViewState()
+object LoadingShops : ListViewState()
+object ShopsLoaded : ListViewState()
+object NoShopsAvailable : ListViewState()
+object ErrorLoadingShops : ListViewState()

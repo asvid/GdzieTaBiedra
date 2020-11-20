@@ -1,6 +1,6 @@
 package com.hedgehog.gdzietabiedra.appservice
 
-import com.github.asvid.biedra.domain.Position
+import com.github.asvid.biedra.domain.Location
 import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
 import timber.log.Timber
@@ -20,7 +20,7 @@ class ShopService constructor(
      *
      * @return [List] of [Shop]s that fit to query
      * */
-    suspend fun getShopsByAddress(address: String, location: Position?): List<Shop> {
+    suspend fun getShopsByAddress(address: String, location: Location?): List<Shop> {
         Timber.d("looking for shops with address like: $address around: $location")
         return shopsRepository.fetchByAddress(address)
                 .apply {
@@ -38,7 +38,7 @@ class ShopService constructor(
      *
      * @return [List] of [Shop]s that are in [range] of [location]
      * */
-    suspend fun getShopsInRange(location: Position?, range: Double): List<Shop> {
+    suspend fun getShopsInRange(location: Location?, range: Double): List<Shop> {
         return if (location == null) listOf()
         else shopsRepository.fetchByLocationAndRange(location, range)
                 .apply {
@@ -48,7 +48,7 @@ class ShopService constructor(
                 }
     }
 
-    private suspend fun Shop.calculateDistance(observerLocation: Position?) {
+    private suspend fun Shop.calculateDistance(observerLocation: Location?) {
         if (observerLocation == null) {
             distance = null
         } else {

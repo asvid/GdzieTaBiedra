@@ -9,7 +9,7 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.appcompat.widget.SearchView.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -37,18 +37,53 @@ class ListFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_list, container, false)
         vm.loadData()
-        vm.permissionRequest.observe(viewLifecycleOwner) {
+        vm.viewState.observe(viewLifecycleOwner) {
             when (it) {
                 RequestLocationPermission -> requestLocationPermission()
-                LocationPermissionDenied -> displayLocationPermissionSnackbar()
-                NoAvailableLocation -> Snackbar.make(
-                        root, "no location available", Snackbar.LENGTH_SHORT).show()
+                LocationPermissionDenied -> {
+                    displayLocationPermissionSnackbar()
+                    displayNoShopsAvailable()
+                }
+                NoAvailableLocation -> displayNoLocationInfo()
+                LoadingShops -> displayLoading()
+                ShopsLoaded -> displayLoadedShops()
+                NoShopsAvailable -> displayNoShopsAvailable()
+                ErrorLoadingShops -> displayErrorLoadingShops()
             }
         }
         vm.shopList.observe(viewLifecycleOwner) {
             shopsAdapter.updateData(it)
         }
         return root
+    }
+
+    private fun displayErrorLoadingShops() {
+        displayText("Error while loading shops")
+    }
+
+    private fun displayNoShopsAvailable() {
+        displayText("No shops around, use search bar or map")
+        shopsAdapter.clearItems()
+    }
+
+    private fun displayLoadedShops() {
+        progress_view.visibility = GONE
+        empty_list_view.visibility = GONE
+    }
+
+    private fun displayLoading() {
+        progress_view.visibility = VISIBLE
+        empty_list_view.visibility = GONE
+    }
+
+    private fun displayNoLocationInfo() {
+        displayText("Please use search box")
+    }
+
+    private fun displayText(text: String) {
+        empty_list_view.text = text
+        empty_list_view.visibility = VISIBLE
+        progress_view.visibility = GONE
     }
 
     override fun onResume() {
@@ -71,12 +106,12 @@ class ListFragment : Fragment() {
     private fun setupShopSearch() {
         shop_search_view.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                vm.shopSearchQuerySubmited(query)
+                vm.shopSearchByQuery(query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                vm.shopSearchQueryChanged(newText)
+                vm.shopSearchByQuery(newText)
                 return true
             }
         })
