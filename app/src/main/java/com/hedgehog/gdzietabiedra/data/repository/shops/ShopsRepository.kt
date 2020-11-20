@@ -12,8 +12,8 @@ class ShopsRepository constructor(private val shopDao: ShopRoomDao) {
                 }
     }
 
-    suspend fun fetchById(id: String): Shop {
-        return shopDao.getById(id).toDomainModel()
+    suspend fun fetchById(id: String): Shop? {
+        return shopDao.getById(id)?.toDomainModel()
     }
 
     suspend fun fetchByAddress(address: String): List<Shop> {

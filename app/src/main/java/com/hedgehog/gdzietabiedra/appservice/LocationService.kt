@@ -12,40 +12,41 @@ import com.google.android.gms.location.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-private val WARSAW = location {
-    lat = 52.229990
-    lng = 21.011572
-}
-
 @SuppressLint("MissingPermission")
 class LocationService(private val context: Context) {
 
     private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 
-    suspend fun getLocation(): LocationServiceResult = suspendCoroutine {
+    suspend fun getLocation(): LocationServiceResult = suspendCoroutine { continuation ->
         if (!isPermissionGranted()) {
-            it.resume(PermissionRequired)
+            continuation.resume(PermissionRequired)
         }
         if (isLocationServiceAvailable()) {
             fusedLocationClient.lastLocation.addOnSuccessListener { foundLocation ->
                 if (foundLocation == null) {
-                    fusedLocationClient.requestLocationUpdates(getLocationRequest(), object : LocationCallback() {
-                        override fun onLocationResult(locationServiceResult: LocationResult?) {
-                            if (locationServiceResult != null && locationServiceResult.locations.isNotEmpty()) {
-                                val newLocation = locationServiceResult.locations[0]
-                                it.resume(Success(Location(newLocation.latitude, newLocation.longitude)))
-                            } else {
-                                it.resume(Error("location was not available"))
-                            }
-                        }
-                    }, Looper.myLooper())
+                    requestNewLocationAndContinue {
+                        continuation.resume(it)
+                    }
                 } else {
-                    it.resume(Success(Location(foundLocation.latitude, foundLocation.longitude)))
+                    continuation.resume(Success(Location(foundLocation.latitude, foundLocation.longitude)))
                 }
             }
         } else {
-            it.resume(LocationNotAvailable)
+            continuation.resume(LocationNotAvailable)
         }
+    }
+
+    private fun requestNewLocationAndContinue(continueFunction: (LocationServiceResult) -> Unit) {
+        fusedLocationClient.requestLocationUpdates(getLocationRequest(), object : LocationCallback() {
+            override fun onLocationResult(locationServiceResult: LocationResult?) {
+                if (locationServiceResult != null && locationServiceResult.locations.isNotEmpty()) {
+                    val newLocation = locationServiceResult.locations[0]
+                    continueFunction(Success(Location(newLocation.latitude, newLocation.longitude)))
+                } else {
+                    continueFunction(Error("location was not available"))
+                }
+            }
+        }, Looper.myLooper())
     }
 
     private fun getLocationRequest() = LocationRequest.create().apply {

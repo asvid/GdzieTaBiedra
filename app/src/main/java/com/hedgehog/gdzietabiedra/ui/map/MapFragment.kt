@@ -29,6 +29,8 @@ class MapFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         setupOpenNavigation()
+        val shopId = arguments?.getString("shopId")
+        vm.mapOpenedForShop(shopId)
         return inflater.inflate(layout.fragment_map, container, false)
     }
 

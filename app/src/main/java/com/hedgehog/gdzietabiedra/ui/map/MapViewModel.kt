@@ -23,6 +23,7 @@ class MapViewModel(
 ) : ViewModel() {
 
     lateinit var mapProvider: MapProvider
+    var initialySelectedShop: Shop? = null
 
     private val _showNavButton = MutableLiveData<Boolean>()
     val showNavButton: LiveData<Boolean> = _showNavButton
@@ -35,10 +36,16 @@ class MapViewModel(
         _showNavButton.postValue(false)
 
         viewModelScope.launch {
-            when (val position = locationService.getLocation()) {
-                is Success -> goToPosition(position.location)
-                is Error -> TODO()
-                PermissionRequired -> TODO()
+            if (initialySelectedShop == null) {
+                when (val position = locationService.getLocation()) {
+                    is Success -> moveMapToPosition(position.location)
+                    is Error -> TODO()
+                    PermissionRequired -> TODO()
+                }
+            } else {
+                initialySelectedShop?.let {
+                    moveMapToPosition(it.location)
+                }
             }
         }
 
@@ -49,15 +56,17 @@ class MapViewModel(
             }
         }
         viewModelScope.launch {
-            mapProvider.userMovedMap().collect { position ->
+            mapProvider.userMovedMap().collect { location ->
                 removeShopSelection()
-                populateWithMarkers(position)
+                populateWithMarkers(location)
                 _showNavButton.postValue(false)
             }
         }
     }
 
-    private suspend fun goToPosition(location: Location) {
+    private suspend fun moveMapToPosition(location: Location) {
+        mapProvider.clearMap()
+        removeShopSelection()
         mapProvider.goToPosition(location)
         populateWithMarkers(location)
     }
@@ -75,5 +84,15 @@ class MapViewModel(
 
     fun navigationButtonClicked() {
         _openNavigation.postValue(shopSelected)
+    }
+
+    fun mapOpenedForShop(shopId: String?) {
+        shopId?.let {
+            viewModelScope.launch {
+                shopService.getShopById(shopId)?.let {
+                    initialySelectedShop = it
+                }
+            }
+        }
     }
 }

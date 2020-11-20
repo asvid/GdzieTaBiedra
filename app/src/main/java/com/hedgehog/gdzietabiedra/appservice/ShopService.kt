@@ -48,11 +48,15 @@ class ShopService constructor(
                 }
     }
 
-    private suspend fun Shop.calculateDistance(observerLocation: Location?) {
-        if (observerLocation == null) {
-            distance = null
+    private fun Shop.calculateDistance(observerLocation: Location?) {
+        distance = if (observerLocation == null) {
+            null
         } else {
-            distance = distanceCalculator.calculateDistance(location, observerLocation)
+            distanceCalculator.calculateDistance(location, observerLocation)
         }
+    }
+
+    suspend fun getShopById(shopId: String): Shop? {
+        return shopsRepository.fetchById(shopId)
     }
 }

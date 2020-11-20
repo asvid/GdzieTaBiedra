@@ -17,7 +17,7 @@ interface ShopRoomDao {
     suspend fun insert(it: ShopRoomEntity)
 
     @Query("SELECT * FROM shoproomentity WHERE id=:id")
-    suspend fun getById(id: String): ShopRoomEntity
+    suspend fun getById(id: String): ShopRoomEntity?
 
     @Query(
             "SELECT * FROM shoproomentity WHERE latitude BETWEEN :minLat AND :maxLat AND longitude BETWEEN :minLng AND :maxLng")

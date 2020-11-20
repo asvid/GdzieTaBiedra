@@ -10,10 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.ui.map.MapFragment
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -95,12 +99,13 @@ class ListFragment : Fragment() {
     private fun setupShopList() {
         val linearLayoutManager = LinearLayoutManager(context)
         shopsAdapter = ShopListAdapter {
-            vm.shopListItemClicked(it)
+//          vm.shopListItemClicked(it)
+            val bundle = bundleOf("shopId" to it.id)
+            findNavController().navigate(R.id.action_navigation_list_to_navigation_map, bundle)
         }
         shop_list_view.adapter = shopsAdapter
         shop_list_view.layoutManager = linearLayoutManager
-        shop_list_view.addItemDecoration(MarginItemDecoration(
-                resources.getDimension(R.dimen.default_padding).toInt()))
+        shop_list_view.addItemDecoration(MarginItemDecoration(resources.getDimension(R.dimen.default_padding).toInt()))
     }
 
     private fun setupShopSearch() {
