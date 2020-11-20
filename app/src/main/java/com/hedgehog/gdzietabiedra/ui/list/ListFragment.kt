@@ -1,8 +1,11 @@
 package com.hedgehog.gdzietabiedra.ui.list
 
 import android.Manifest
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +22,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.fragment_list.*
 import org.koin.androidx.viewmodel.compat.ViewModelCompat.viewModel
+
 
 class ListFragment : Fragment() {
 
@@ -37,7 +41,6 @@ class ListFragment : Fragment() {
             when (it) {
                 RequestLocationPermission -> requestLocationPermission()
                 LocationPermissionDenied -> displayLocationPermissionSnackbar()
-                LocationPermissionRevoked -> TODO()
                 NoAvailableLocation -> Snackbar.make(
                         root, "no location available", Snackbar.LENGTH_SHORT).show()
             }
@@ -91,16 +94,20 @@ class ListFragment : Fragment() {
                         vm.locationPermissionDenied()
                     }
 
-                    override fun onPermissionRationaleShouldBeShown(p0: PermissionRequest?, p1: PermissionToken?) {
-                        vm.locationPermissionRationaleShouldBeShown()
+                    override fun onPermissionRationaleShouldBeShown(permRequest: PermissionRequest?, token: PermissionToken?) {
+                        token?.continuePermissionRequest()
                     }
-                }).check()
+                })
+                .check()
     }
 
     private fun displayLocationPermissionSnackbar() {
-        Snackbar.make(shop_list_view, "App works better with location permissions granted", Snackbar.LENGTH_LONG)
-                .setAction("Allow") {
-                    requestLocationPermission()
+        Snackbar.make(shop_list_view, R.string.location_permissions_info, Snackbar.LENGTH_LONG)
+                .setAction(R.string.settings) {
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                    val uri: Uri = Uri.fromParts("package", context?.packageName, null)
+                    intent.data = uri
+                    startActivity(intent)
                 }
                 .setActionTextColor(Color.YELLOW)
                 .show()

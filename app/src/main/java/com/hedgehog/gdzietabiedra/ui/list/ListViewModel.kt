@@ -75,15 +75,9 @@ class ListViewModel(
     fun locationPermissionDenied() {
         _permissionRequest.postValue(LocationPermissionDenied)
     }
-
-    fun locationPermissionRationaleShouldBeShown() {
-        // TODO: 18.11.2020 what does it mean?
-//        _permissionRequest.postValue(LocationRequestPermissionResult.LocationPermissionDenied)
-    }
 }
 
 sealed class LocationRequestPermissionResult
 object RequestLocationPermission : LocationRequestPermissionResult()
 object LocationPermissionDenied : LocationRequestPermissionResult()
-object LocationPermissionRevoked : LocationRequestPermissionResult()
 object NoAvailableLocation : LocationRequestPermissionResult()
