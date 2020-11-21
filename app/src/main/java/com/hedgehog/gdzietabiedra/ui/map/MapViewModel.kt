@@ -72,7 +72,7 @@ class MapViewModel(
     }
 
     private suspend fun populateWithMarkers(location: Location) {
-        shopService.getShopsInRange(location, 0.1)
+        shopService.getShopsInCloseArea(location)
                 .forEach {
                     mapProvider.drawMarker(ShopMarker.create(it), false)
                 }

@@ -41,7 +41,7 @@ class ListViewModel(
 
     private fun loadShopsForLocation(location: Success) {
         viewModelScope.launch(Dispatchers.IO) {
-            val shopsInRange = shopService.getShopsInRange(location.location, 50.0)
+            val shopsInRange = shopService.getShopsInCloseArea(location.location)
             _shopList.postValue(shopsInRange)
             _viewState.postValue(ShopsLoaded)
         }

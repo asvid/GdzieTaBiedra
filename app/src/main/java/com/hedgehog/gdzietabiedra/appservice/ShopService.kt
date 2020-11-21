@@ -48,6 +48,16 @@ class ShopService constructor(
                 }
     }
 
+    suspend fun getShopsInCloseArea(location: Location?): List<Shop> {
+        return if (location == null) listOf()
+        else shopsRepository.fetchByLocationAndRange(location, 0.1)
+                .apply {
+                    this.forEach {
+                        it.calculateDistance(location)
+                    }
+                }
+    }
+
     private fun Shop.calculateDistance(observerLocation: Location?) {
         distance = if (observerLocation == null) {
             null

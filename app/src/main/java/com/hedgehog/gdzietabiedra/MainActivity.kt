@@ -7,8 +7,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.hedgehog.gdzietabiedra.api.BiedraKtorService
-import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_list, R.id.navigation_map, R.id.navigation_sundays))
+                R.id.navigation_list, R.id.navigation_map, R.id.navigation_sundays, R.id.navigation_info))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

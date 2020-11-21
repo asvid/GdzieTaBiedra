@@ -70,6 +70,13 @@ class ListFragment : Fragment() {
         inflater.inflate(R.menu.list_view_menu, menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.info -> findNavController().navigate(R.id.action_navigation_list_to_navigation_info)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun displayErrorLoadingShops() {
         displayText("Error while loading shops")
     }

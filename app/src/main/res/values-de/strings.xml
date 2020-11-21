@@ -15,7 +15,7 @@
     <string name="grant_permissions">"Erteilen Sie Berechtigungen"</string>
     <string name="email_me">"Maile mir"</string>
     <string name="share_some_stars">"Teile ein paar Sterne"</string>
-    <string name="settings_testimony">"Dies ist keine offizielle Biedronka ™ App, ich habe keine Verbindung zum Unternehmen. \nDies ist mein Hobby-Haustierprojekt, eine digitale Sandbox, in der ich in meiner Freizeit mit neuen Bibliotheken und Sachen spielen kann. \n \nBitte beachten Sie dies, wenn Sie diese App bewerten oder einen Kommentar hinterlassen :)
+    <string name="info_text">"Dies ist keine offizielle Biedronka ™ App, ich habe keine Verbindung zum Unternehmen. \nDies ist mein Hobby-Haustierprojekt, eine digitale Sandbox, in der ich in meiner Freizeit mit neuen Bibliotheken und Sachen spielen kann. \n \nBitte beachten Sie dies, wenn Sie diese App bewerten oder einen Kommentar hinterlassen :)
   "</string>
     <string name="turn_on_location">"Standort einschalten"</string>
     <string name="shop_closed">"Shop ist heute geschlossen"</string>
