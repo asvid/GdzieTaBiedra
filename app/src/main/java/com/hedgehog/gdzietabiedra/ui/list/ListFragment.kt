@@ -6,18 +6,16 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView.*
+import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.ui.map.MapFragment
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -27,11 +25,9 @@ import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.fragment_list.*
 import org.koin.androidx.viewmodel.compat.ViewModelCompat.viewModel
 
-
 class ListFragment : Fragment() {
 
     private val vm: ListViewModel by viewModel(this, ListViewModel::class.java)
-
     lateinit var shopsAdapter: ShopListAdapter
 
     override fun onCreateView(
@@ -42,6 +38,7 @@ class ListFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_list, container, false)
         vm.loadData()
         vm.viewState.observe(viewLifecycleOwner) {
+            // TODO: 21/11/2020 move location permission handling to upper level?
             when (it) {
                 RequestLocationPermission -> requestLocationPermission()
                 LocationPermissionDenied -> {
@@ -58,7 +55,19 @@ class ListFragment : Fragment() {
         vm.shopList.observe(viewLifecycleOwner) {
             shopsAdapter.updateData(it)
         }
+        setHasOptionsMenu(true)
         return root
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val mSearchMenuItem: MenuItem = menu.findItem(R.id.search)
+        val searchView = mSearchMenuItem.actionView as SearchView
+        setupShopSearch(searchView)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_view_menu, menu)
     }
 
     private fun displayErrorLoadingShops() {
@@ -91,7 +100,6 @@ class ListFragment : Fragment() {
     }
 
     override fun onResume() {
-        setupShopSearch()
         setupShopList()
         super.onResume()
     }
@@ -108,8 +116,8 @@ class ListFragment : Fragment() {
         shop_list_view.addItemDecoration(MarginItemDecoration(resources.getDimension(R.dimen.default_padding).toInt()))
     }
 
-    private fun setupShopSearch() {
-        shop_search_view.setOnQueryTextListener(object : OnQueryTextListener {
+    private fun setupShopSearch(searchView: SearchView) {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 vm.shopSearchByQuery(query)
                 return true

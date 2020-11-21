@@ -5,12 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.GONE
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.github.asvid.biedra.domain.Shop
 import com.github.asvid.biedra.domain.SundayShopping
 import com.github.asvid.biedra.domain.getForToday
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.utils.round
+import kotlinx.android.synthetic.main.shop_list_item.view.*
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -67,9 +69,14 @@ class ShopListItemVH(val view: View) : ViewHolder(view) {
                     item.openHours.getForToday().toString()
                 else view.resources.getString(R.string.shop_closed)
 
-        view.findViewById<TextView>(R.id.shop_address).text = item.address.toString()
-        view.findViewById<TextView>(R.id.shop_distance).text = generateDistanceText(item.distance)
-        view.findViewById<TextView>(R.id.shop_open_hours).text = openingHoursText
+        view.shop_address.text = item.address.toString()
+        if (item.distance == null) {
+            view.distance_label.visibility = GONE
+            view.shop_distance.visibility = GONE
+        } else {
+            view.shop_distance.text = generateDistanceText(item.distance)
+        }
+        view.shop_open_hours.text = openingHoursText
     }
 
     private fun generateDistanceText(distance: Double?): CharSequence {
