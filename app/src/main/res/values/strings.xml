@@ -27,4 +27,7 @@
     <string name="location_permissions_info">App works better with location permissions granted</string>
     <string name="info">Info</string>
     <string name="search_for_shops">Search for shops</string>
+    <string name="error_loading_shops">Error while loading shops</string>
+    <string name="no_shops_found_use_search">No shops around, use search bar or map</string>
+    <string name="use_search">Please use search box</string>
 </resources>

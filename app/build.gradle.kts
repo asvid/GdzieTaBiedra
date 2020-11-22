@@ -113,6 +113,7 @@ dependencies {
     implementation(Android.navigationUiKtx)
     implementation(Android.livedataKtx)
     implementation(Android.viewmodelKtx)
+    implementation(Android.swipeRefreshLayout)
 
     implementation(Libs.calendarView)
 

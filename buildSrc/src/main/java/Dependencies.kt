@@ -54,6 +54,7 @@ object Android {
   const val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
   const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:2.3.1"
   const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:2.3.1"
+  const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }
 
 object Koin {

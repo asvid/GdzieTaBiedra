@@ -6,37 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".ui.list.ListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/shop_list_view"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/shop_list_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="8dp"
-        android:scrollbars="vertical"
-        tools:listitem="@layout/shop_list_item" />
+        tools:layout_editor_absoluteX="8dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/shop_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/shop_list_item" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <TextView
-        android:id="@+id/empty_list_view"
+        android:id="@+id/list_info_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/shop_list_view"
+        app:layout_constraintStart_toStartOf="@+id/shop_list_layout"
         app:layout_constraintTop_toTopOf="parent"
+        tools:text="some info text"
         tools:visibility="visible" />
 
-    <ProgressBar
-        android:id="@+id/progress_view"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/shop_list_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/shop_list_view"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

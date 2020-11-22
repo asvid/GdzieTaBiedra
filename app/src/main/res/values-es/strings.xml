@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">"Donde esta biedronka"</string>
+    <string name="app_name">Donde esta Biedronka</string>
     <string name="more_actions">"mas acciones"</string>
     <string name="notifications_title">"Notificaciones"</string>
     <string name="range">"distancia"</string>

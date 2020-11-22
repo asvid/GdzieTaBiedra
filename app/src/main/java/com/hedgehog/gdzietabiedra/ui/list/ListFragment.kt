@@ -11,7 +11,6 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.SearchView
 import androidx.core.os.bundleOf
-import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -98,32 +97,32 @@ class ListFragment : Fragment() {
     }
 
     private fun displayErrorLoadingShops() {
-        displayText("Error while loading shops")
+        displayText(R.string.error_loading_shops)
     }
 
     private fun displayNoShopsAvailable() {
-        displayText("No shops around, use search bar or map")
+        displayText(R.string.no_shops_found_use_search)
         shopsAdapter.clearItems()
     }
 
     private fun displayLoadedShops() {
-        progress_view.visibility = GONE
-        empty_list_view.visibility = GONE
+        list_info_text_view.visibility = GONE
+        shop_list_layout.isRefreshing = false
     }
 
     private fun displayLoading() {
-        progress_view.visibility = VISIBLE
-        empty_list_view.visibility = GONE
+        list_info_text_view.visibility = GONE
+        shop_list_layout.isRefreshing = true
     }
 
     private fun displayNoLocationInfo() {
-        displayText("Please use search box")
+        displayText(R.string.use_search)
     }
 
-    private fun displayText(text: String) {
-        empty_list_view.text = text
-        empty_list_view.visibility = VISIBLE
-        progress_view.visibility = GONE
+    private fun displayText(resId: Int) {
+        list_info_text_view.setText(resId)
+        list_info_text_view.visibility = VISIBLE
+        shop_list_layout.isRefreshing = false
     }
 
     override fun onStart() {
@@ -142,6 +141,10 @@ class ListFragment : Fragment() {
         shop_list_view.adapter = shopsAdapter
         shop_list_view.layoutManager = linearLayoutManager
         shop_list_view.addItemDecoration(MarginItemDecoration(resources.getDimension(R.dimen.default_padding).toInt()))
+
+        shop_list_layout.setOnRefreshListener {
+            vm.loadData()
+        }
     }
 
     private fun setupShopSearch(searchView: SearchView) {
