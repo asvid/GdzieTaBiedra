@@ -139,6 +139,7 @@ dependencies {
 
 dependencies {
     testImplementation(TestDeps.junit)
+    testImplementation(TestDeps.junitParams)
     androidTestImplementation(TestDeps.runner)
     androidTestImplementation(TestDeps.espresso)
     testImplementation(Koin.test)

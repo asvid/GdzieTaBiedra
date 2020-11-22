@@ -5,8 +5,8 @@ import com.github.asvid.biedra.domain.Shop
 
 class ShopsRepository constructor(private val shopDao: ShopRoomDao) {
 
-    suspend fun fetchAll(): List<Shop> {
-        return shopDao.getAll().take(10)
+    suspend fun fetchFirst(number: Int = 1): List<Shop> {
+        return shopDao.getAll().take(number)
                 .map {
                     it.toDomainModel()
                 }

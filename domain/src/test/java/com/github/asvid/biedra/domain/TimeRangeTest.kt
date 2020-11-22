@@ -1,7 +1,7 @@
 package com.github.asvid.biedra.domain
 
 import org.joda.time.LocalTime
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class TimeRangeTest {
 

@@ -34,7 +34,7 @@ class ShopService constructor(
 
     /**
      * @param location - user location to narrow DB query
-     * @param range - range in which shops around [location] will be returned
+     * @param range - range in lat/lng degrees in which shops around [location] will be returned. Typical value is about 0.1
      *
      * @return [List] of [Shop]s that are in [range] of [location]
      * */
