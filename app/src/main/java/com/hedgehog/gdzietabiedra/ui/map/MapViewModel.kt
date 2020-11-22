@@ -44,7 +44,7 @@ class MapViewModel(
                 }
             } else {
                 initialySelectedShop?.let {
-                    moveMapToPosition(it.location)
+                    mapProvider.selectShop(it)
                 }
             }
         }
