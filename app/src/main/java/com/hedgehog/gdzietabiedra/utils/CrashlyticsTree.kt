@@ -1,30 +1,17 @@
 package com.hedgehog.gdzietabiedra.utils
 
-import android.support.annotation.Nullable
 import android.util.Log
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
-
-private const val CRASHLYTICS_KEY_PRIORITY = "priority"
-private const val CRASHLYTICS_KEY_TAG = "tag"
-private const val CRASHLYTICS_KEY_MESSAGE = "message"
 
 class CrashlyticsTree : Timber.Tree() {
 
-  override fun log(
-      priority: Int, @Nullable tag: String?, @Nullable message: String, @Nullable t: Throwable?) {
-    if (priority == Log.VERBOSE || priority == Log.DEBUG || priority == Log.INFO) {
-      return
+    override fun log(priority: Int, tag: String?, message: String, throwable: Throwable?) {
+        if (priority == Log.ERROR || priority == Log.DEBUG) {
+            FirebaseCrashlytics.getInstance().log("${if (priority == 6) "E" else "D"}/$tag: $message")
+            if (throwable != null) {
+                FirebaseCrashlytics.getInstance().recordException(throwable)
+            }
+        } else return
     }
-
-    Crashlytics.setInt(CRASHLYTICS_KEY_PRIORITY, priority)
-    Crashlytics.setString(CRASHLYTICS_KEY_TAG, tag)
-    Crashlytics.setString(CRASHLYTICS_KEY_MESSAGE, message)
-
-    if (t == null) {
-      Crashlytics.logException(Exception(message))
-    } else {
-      Crashlytics.logException(t)
-    }
-  }
 }

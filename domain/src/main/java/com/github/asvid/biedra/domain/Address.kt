@@ -13,7 +13,6 @@ data class Address(
     val cityName: String,
     val streetNumber: String,
     val postalCode: String
-
 ) {
 
   /**

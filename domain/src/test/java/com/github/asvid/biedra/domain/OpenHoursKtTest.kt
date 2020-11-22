@@ -1,36 +1,42 @@
 package com.github.asvid.biedra.domain
 
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
+
 
 class OpenHoursKtTest {
 
-  @Test
-  fun `strings should be transformed into pair of dates correctly`() {
+    @ParameterizedTest
+    @CsvSource(
+            "06.30 - 21.00, 6, 30, 21, 0",
+            "06.30 - 22.00, 6, 30, 22, 0",
+            "08.00 - 20.00, 8, 0, 20, 0",
+            "08.00-20.00, 8, 0, 20, 0",
+            "08:00-20:00, 8, 0, 20, 0",
+            "08:00 - 20:00, 8, 0, 20, 0",
+    )
+    fun `strings should be transformed into pair of dates correctly`(
+            openingHoursString: String,
+            startHour: Int,
+            startMinutes: Int,
+            endHour: Int,
+            endMinutes: Int
+    ) {
+        val openingHours = openingHoursString.toOpenHours()!!
 
-// Given some string hourOfDay ranges
-    val openingHours1 = "06.30 - 21.00"
-    val openingHours2 = "06.30 - 22.00"
-    val openingHours3 = "08.00 - 20.00"
+        assertEquals(startHour, openingHours.start.hourOfDay)
+        assertEquals(startMinutes, openingHours.start.minuteOfHour)
+        assertEquals(endHour, openingHours.end.hourOfDay)
+        assertEquals(endMinutes, openingHours.end.minuteOfHour)
+    }
 
-//    When transforming them to Pair of Dates
-    val openPair1 = openingHours1.toOpenHours()
-    val openPair2 = openingHours2.toOpenHours()
-    val openPair3 = openingHours3.toOpenHours()
+    @Test
+    fun `incorrect string should return null when transformed to Open Hours`(){
+        val incorrectString = "zamkniete"
 
-//    Dates should be correct
-    Assert.assertEquals(6, openPair1.start.hourOfDay)
-    Assert.assertEquals(30, openPair1.start.minuteOfHour)
-    Assert.assertEquals(6, openPair2.start.hourOfDay)
-    Assert.assertEquals(30, openPair2.start.minuteOfHour)
-    Assert.assertEquals(8, openPair3.start.hourOfDay)
-    Assert.assertEquals(0, openPair3.start.minuteOfHour)
-
-    Assert.assertEquals(21, openPair1.end.hourOfDay)
-    Assert.assertEquals(0, openPair1.end.minuteOfHour)
-    Assert.assertEquals(22, openPair2.end.hourOfDay)
-    Assert.assertEquals(0, openPair2.end.minuteOfHour)
-    Assert.assertEquals(20, openPair3.end.hourOfDay)
-    Assert.assertEquals(0, openPair3.end.minuteOfHour)
-  }
+        assertNull(incorrectString.toOpenHours())
+    }
 }

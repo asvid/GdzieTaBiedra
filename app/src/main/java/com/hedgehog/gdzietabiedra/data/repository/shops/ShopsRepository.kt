@@ -1,96 +1,36 @@
 package com.hedgehog.gdzietabiedra.data.repository.shops
 
-import com.github.asvid.biedra.domain.Position
-import com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem
+import com.github.asvid.biedra.domain.Location
 import com.github.asvid.biedra.domain.Shop
-import io.reactivex.Flowable
-import io.reactivex.Single
-import io.realm.Case
-import io.realm.Realm
-import io.realm.RealmConfiguration
-import io.realm.RealmList
-import timber.log.Timber
-import javax.inject.Inject
 
-class ShopsRepository @Inject constructor(private val realmConfiguration: RealmConfiguration) {
+class ShopsRepository constructor(private val shopDao: ShopRoomDao) {
 
-  fun fetchAll(): Flowable<Shop> {
-    return Realm.getInstance(realmConfiguration)
-        .where(ShopEntity::class.java)
-        .findAll()
-        .asFlowable()
-        .flatMapIterable { it -> it }
-        .map {
-          it.toDomainModel()
-        }
-  }
-
-  fun fetchById(id: String): Single<Shop> {
-    return Single.create<Shop> {
-      val realm = Realm.getInstance(realmConfiguration)
-      it.onSuccess(realm.where(ShopEntity::class.java)
-          .equalTo(ShopEntityFields.ID, id)
-          .findFirstAsync().toDomainModel())
-      realm.close()
+    suspend fun fetchFirst(number: Int = 1): List<Shop> {
+        return shopDao.getAll().take(number)
+                .map {
+                    it.toDomainModel()
+                }
     }
-  }
 
-  fun fetchByAddress(
-      address: String,
-      count: Long): Flowable<Shop> {
-    return Realm.getInstance(realmConfiguration)
-        .asFlowable().map { realm ->
-          realm.where(ShopEntity::class.java)
-              .beginGroup()
-              .like(ShopEntityFields.STREET, "*$address*", Case.INSENSITIVE)
-              .or()
-              .like(ShopEntityFields.CITY, "*$address*", Case.INSENSITIVE)
-              .endGroup()
-              .findAll()
-        }
-        .flatMapIterable { it -> it }
-        .take(count)
-        .map {
-          it.toDomainModel()
-        }
-  }
-
-  fun fetchByLocationAndRange(
-      location: Position,
-      range: Double,
-      count: Long
-  ): Flowable<Shop> {
-    return Realm.getInstance(realmConfiguration)
-        .where(ShopEntity::class.java)
-        .between(ShopEntityFields.LATITUDE, location.lat - range / 2, location.lat + range / 2)
-        .between(ShopEntityFields.LONGITUDE, location.lng - range, location.lng + range)
-        .findAll()
-        .asFlowable()
-        .flatMapIterable { it -> it }
-        .take(count)
-        .map {
-          it.toDomainModel()
-        }
-
-  }
-
-  fun save(apiModel: ShopsItem) {
-    val realm = Realm.getInstance(realmConfiguration)
-    realm.executeTransaction {
-      val shopEntity = apiModel.toRealmEntity()
-      it.copyToRealmOrUpdate(shopEntity)
+    suspend fun fetchById(id: String): Shop? {
+        return shopDao.getById(id)?.toDomainModel()
     }
-    realm.close()
-  }
 
-  fun saveAll(apiModels: Collection<ShopsItem>) {
-    val realm = Realm.getInstance(realmConfiguration)
-    realm.executeTransaction {
-      val realmList = RealmList<ShopEntity>()
-      realmList.addAll(apiModels.toRealmEntity())
-      realm.insertOrUpdate(realmList)
+    suspend fun fetchByAddress(address: String): List<Shop> {
+        return shopDao.fetchForAddress(address)
+                .map { it.toDomainModel() }
     }
-    Timber.d("biedras saved: $apiModels")
-    realm.close()
-  }
+
+    suspend fun fetchByLocationAndRange(
+            location: Location,
+            range: Double
+    ): List<Shop> {
+        val minLat = location.lat - range / 2
+        val maxLat = location.lat + range / 2
+        val minLng = location.lng - range
+        val maxLng = location.lng + range
+
+        return shopDao.fetchInRange(minLat, maxLat, minLng, maxLng)
+                .map { it.toDomainModel() }
+    }
 }

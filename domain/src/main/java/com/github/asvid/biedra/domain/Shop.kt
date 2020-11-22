@@ -10,11 +10,11 @@ package com.github.asvid.biedra.domain
  * @property openHours opening hours for weekday, saturday and sunday
  * */
 data class Shop(
-    val id: String,
-    val address: Address,
-    var distance: Double?,
-    val location: Position,
-    val openHours: OpenHours
+        val id: String,
+        val address: Address,
+        var distance: Double?,
+        val location: Location,
+        val openHours: OpenHours
 )
 
 /**
@@ -41,7 +41,7 @@ class ShopBuilder {
   var distance: Double? = null
   lateinit var address: Address
   lateinit var openHours: OpenHours
-  lateinit var location: Position
+  lateinit var location: Location
 
   fun address(block: AddressBuilder.() -> Unit) = AddressBuilder().apply(block).build()
   fun openHours(block: OpenHoursBuilder.() -> Unit) = OpenHoursBuilder().apply(block).build()

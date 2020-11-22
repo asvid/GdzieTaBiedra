@@ -1,64 +1,65 @@
 package com.hedgehog.gdzietabiedra
 
-import android.app.Activity
 import android.app.Application
-import android.app.Service
-import com.crashlytics.android.Crashlytics
-import com.crashlytics.android.core.CrashlyticsCore
-import com.hedgehog.gdzietabiedra.di.components.DaggerAppComponent
+import androidx.room.Room
+import com.hedgehog.gdzietabiedra.api.BiedraKtorService
+import com.hedgehog.gdzietabiedra.appservice.DistanceCalculator
+import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.ShopService
+import com.hedgehog.gdzietabiedra.data.repository.shops.AppDatabase
+import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
+import com.hedgehog.gdzietabiedra.ui.info.InfoViewModel
+import com.hedgehog.gdzietabiedra.ui.list.ListViewModel
+import com.hedgehog.gdzietabiedra.ui.map.MapViewModel
+import com.hedgehog.gdzietabiedra.ui.sundays.SundaysViewModel
 import com.hedgehog.gdzietabiedra.utils.CrashlyticsTree
-import com.squareup.leakcanary.LeakCanary
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import dagger.android.HasServiceInjector
-import io.fabric.sdk.android.Fabric
 import net.danlew.android.joda.JodaTimeAndroid
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.context.startKoin
+import org.koin.dsl.module
 import timber.log.Timber
 import timber.log.Timber.DebugTree
-import javax.inject.Inject
 
 /**
  * Application class, no rocket science here
  * */
-class App : Application(), HasActivityInjector, HasServiceInjector {
-
-  @Inject
-  lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
-  @Inject
-  lateinit var dispatchingServiceInjector: DispatchingAndroidInjector<Service>
-
-  override fun activityInjector(): AndroidInjector<Activity> {
-    return dispatchingAndroidInjector
-  }
-
-  override fun serviceInjector(): AndroidInjector<Service> {
-    return dispatchingServiceInjector
-  }
+class App : Application() {
 
   /**
-   *  Dagger 2 initialisation
-   * */
-  init {
-    DaggerAppComponent
-        .builder()
-        .application(this)
-        .build()
-        .inject(this)
-  }
-
-  /**
-   * [Fabric] initialisation
    * [LeakCanary] initialisation
    * [Timber] initialisation
    * */
   override fun onCreate() {
     super.onCreate()
 
-    initFabric()
-    initLeakCanary()
     initTimber()
     initJoda()
+    initKoin()
+  }
+
+  private fun initKoin() {
+    startKoin {
+      androidContext(this@App)
+      modules(module {
+        single<AppDatabase> {
+          Room.databaseBuilder(
+                  applicationContext,
+                  AppDatabase::class.java, "biedra-shops.db"
+          ).createFromAsset("biedra-shops.db")
+                  .build()
+        }
+        single { DistanceCalculator() }
+        single { ShopService(ShopsRepository(get<AppDatabase>().shopRoomDao()), get()) }
+        single { BiedraKtorService() }
+        single { LocationService(get()) }
+
+        viewModel { ListViewModel(get(), get()) }
+        viewModel { MapViewModel(get(), get()) }
+        viewModel { SundaysViewModel() }
+        viewModel { InfoViewModel() }
+      })
+    }
   }
 
   private fun initJoda() {
@@ -67,20 +68,5 @@ class App : Application(), HasActivityInjector, HasServiceInjector {
 
   private fun initTimber() {
     Timber.plant(DebugTree(), CrashlyticsTree())
-  }
-
-  private fun initFabric() {
-    val crashlyticsKit = Crashlytics.Builder()
-        .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
-        .build()
-
-    Fabric.with(this, crashlyticsKit)
-  }
-
-  private fun initLeakCanary() {
-    if (LeakCanary.isInAnalyzerProcess(this)) {
-      return
-    }
-    LeakCanary.install(this)
   }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">"Donde esta biedronka"</string>
+    <string name="app_name">Donde esta Biedronka</string>
     <string name="more_actions">"mas acciones"</string>
     <string name="notifications_title">"Notificaciones"</string>
     <string name="range">"distancia"</string>
@@ -9,16 +9,16 @@
     <string name="address">"Dirección:"</string>
     <string name="opening_hours">"Horario de apertura:"</string>
     <string name="distance">"Distancia:"</string>
-    <string name="list">"Lista"</string>
-    <string name="map">"Mapa"</string>
+    <string name="title_list">"Lista"</string>
+    <string name="title_map">"Mapa"</string>
     <string name="settings">"Ajustes"</string>
     <string name="grant_permissions">"Conceder permisos"</string>
     <string name="email_me">"Envíeme un correo electrónico"</string>
     <string name="share_some_stars">"Comparte algunas estrellas"</string>
-    <string name="settings_testimony">"Esta no es una aplicación oficial de Biedronka ™, no tengo conexión con la empresa. \nEsto se hizo como mi proyecto de hobby pet, sandbox digital donde puedo jugar con nuevas bibliotecas y cosas en mi tiempo libre. \n \nPor favor, tenga esto en cuenta cuando ponga esta marca de aplicación o deje un comentario :)
+    <string name="info_text">"Esta no es una aplicación oficial de Biedronka ™, no tengo conexión con la empresa. \nEsto se hizo como mi proyecto de hobby pet, sandbox digital donde puedo jugar con nuevas bibliotecas y cosas en mi tiempo libre. \n \nPor favor, tenga esto en cuenta cuando ponga esta marca de aplicación o deje un comentario :)
   "</string>
     <string name="turn_on_location">"Encienda la ubicación"</string>
     <string name="shop_closed">"La tienda está cerrada hoy"</string>
     <string name="shopping_sundays_subtitle">Los días marcados en verde son los domingos comerciales.</string>
-    <string name="sundays">Domingos</string>
+    <string name="title_sundays">Domingos</string>
 </resources>

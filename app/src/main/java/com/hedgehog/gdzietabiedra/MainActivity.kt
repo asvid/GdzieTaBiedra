@@ -1,55 +1,24 @@
 package com.hedgehog.gdzietabiedra
 
 import android.os.Bundle
-import android.view.ViewGroup
-import com.hedgehog.gdzietabiedra.appservice.LocationWatchdog
-import com.hedgehog.gdzietabiedra.appservice.ShopService
-import com.hedgehog.gdzietabiedra.ribs.RootBuilder
-import com.hedgehog.gdzietabiedra.utils.analytics.Analytics
-import com.karumi.dexter.Dexter
-import com.uber.rib.core.RibActivity
-import com.uber.rib.core.ViewRouter
-import dagger.android.AndroidInjection
-import javax.inject.Inject
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-/**
- * Only [android.app.Activity] in this app. Its used only to start RIBs and provide it's dependencies
- * */
-class MainActivity : RibActivity() {
+class MainActivity : AppCompatActivity() {
 
-  @Inject
-  lateinit var locationWatchdog: LocationWatchdog
-  @Inject
-  lateinit var shopService: ShopService
-  @Inject
-  lateinit var analytics: Analytics
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-  /**
-   * Dagger injection and [LocationWatchdog] registration
-   * */
-  override fun onCreate(savedInstanceState: Bundle?) {
-    AndroidInjection.inject(this)
-    super.onCreate(savedInstanceState)
-    locationWatchdog.register()
-  }
-
-  /**
-   * Builds Root RIB and provides dependencies from [MainActivity]
-   * */
-  override fun createRouter(parentViewGroup: ViewGroup): ViewRouter<*, *, *> =
-      RootBuilder(object : RootBuilder.ParentComponent {
-        override fun locationService() = locationWatchdog
-        override fun shopServices() = shopService
-        override fun dexter() = Dexter.withActivity(this@MainActivity)
-        override fun analytics(): Analytics = analytics
-      })
-          .build(parentViewGroup)
-
-  /**
-   * Unregisters from [LocationWatchdog]
-   * */
-  override fun onDestroy() {
-    super.onDestroy()
-    locationWatchdog.unregister()
-  }
+        val navController = findNavController(R.id.nav_host_fragment)
+        val appBarConfiguration = AppBarConfiguration(setOf(
+                R.id.navigation_list, R.id.navigation_map, R.id.navigation_sundays, R.id.navigation_info))
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+    }
 }
