@@ -11,6 +11,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,7 +37,6 @@ class ListFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_list, container, false)
-        vm.loadData()
         vm.viewState.observe(viewLifecycleOwner) {
             // TODO: 21/11/2020 move location permission handling to upper level?
             when (it) {
@@ -73,8 +73,28 @@ class ListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.info -> findNavController().navigate(R.id.action_navigation_list_to_navigation_info)
+            R.id.search -> focusSearchInput(item)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun focusSearchInput(item: MenuItem) {
+        val searchView = item.actionView as SearchView
+        searchView.isIconifiedByDefault = true
+        searchView.isFocusable = true
+        searchView.isIconified = false
+        searchView.requestFocusFromTouch()
+        item.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                searchView.onActionViewExpanded()
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                searchView.clearFocus()
+                return true
+            }
+        })
     }
 
     private fun displayErrorLoadingShops() {
@@ -106,9 +126,10 @@ class ListFragment : Fragment() {
         progress_view.visibility = GONE
     }
 
-    override fun onResume() {
+    override fun onStart() {
         setupShopList()
-        super.onResume()
+        vm.loadData()
+        super.onStart()
     }
 
     private fun setupShopList() {
@@ -127,12 +148,12 @@ class ListFragment : Fragment() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 vm.shopSearchByQuery(query)
-                return true
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 vm.shopSearchByQuery(newText)
-                return true
+                return false
             }
         })
     }
