@@ -30,8 +30,7 @@
 
     <PreferenceCategory
         app:key="about"
-        app:title="About">
-        <Preference app:summary="@string/info_text" />
+        app:title="@string/info">
     </PreferenceCategory>
 
 </PreferenceScreen>

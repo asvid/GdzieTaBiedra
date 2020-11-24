@@ -1,8 +1,13 @@
 package com.hedgehog.gdzietabiedra.ui.settings
 
+import android.content.ActivityNotFoundException
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
@@ -35,9 +40,18 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.settings_info -> Toast.makeText(requireContext(), "some info!", Toast.LENGTH_SHORT).show()
+            R.id.settings_info -> showAppInfo()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showAppInfo() {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle(R.string.info)
+            setMessage(R.string.info_text)
+            setPositiveButton(R.string.share_some_stars) { _, _ -> goToAppInStore() }
+            setNegativeButton(R.string.email_me) { _, _ -> sendEmailFeedback() }
+        }.show()
     }
 
     private val DIALOG_FRAGMENT_TAG = "TimePreference"
@@ -55,32 +69,27 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-//
-//    private fun setShareStarsButton() {
-//        stars_button.setOnClickListener {
-//            val appPackageName: String = requireContext().packageName
-//
-//            val goToMarket = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName"))
-//            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
-//                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
-//                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-//            try {
-//                startActivity(goToMarket)
-//            } catch (e: ActivityNotFoundException) {
-//                startActivity(Intent(Intent.ACTION_VIEW,
-//                        Uri.parse("http://play.google.com/store/apps/details?id=$appPackageName")))
-//            }
-//        }
-//    }
-//
-//    private fun setEmailButton() {
-//        email_button.setOnClickListener {
-//            val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-//                    "mailto", "app.swiderski@gmail.com", null))
-//            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "from GdzieTaBiedra")
-//            emailIntent.putExtra(Intent.EXTRA_TEXT, "I love your app but,")
-//            requireContext().startActivity(Intent.createChooser(emailIntent, "Send email..."))
-//        }
-//    }
+    private fun goToAppInStore() {
+        val appPackageName: String = requireContext().packageName
+
+        val goToMarket = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName"))
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+        try {
+            startActivity(goToMarket)
+        } catch (e: ActivityNotFoundException) {
+            startActivity(Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=$appPackageName")))
+        }
+    }
+
+    private fun sendEmailFeedback() {
+        val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                "mailto", "app.swiderski@gmail.com", null))
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "from GdzieTaBiedra")
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "I love your app but,")
+        requireContext().startActivity(Intent.createChooser(emailIntent, "Send email..."))
+    }
 
 }
