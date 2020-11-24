@@ -8,9 +8,9 @@ import com.hedgehog.gdzietabiedra.appservice.LocationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.data.repository.shops.AppDatabase
 import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
-import com.hedgehog.gdzietabiedra.ui.info.InfoViewModel
 import com.hedgehog.gdzietabiedra.ui.list.ListViewModel
 import com.hedgehog.gdzietabiedra.ui.map.MapViewModel
+import com.hedgehog.gdzietabiedra.ui.settings.SettingsViewModel
 import com.hedgehog.gdzietabiedra.ui.sundays.SundaysViewModel
 import com.hedgehog.gdzietabiedra.utils.CrashlyticsTree
 import net.danlew.android.joda.JodaTimeAndroid
@@ -57,7 +57,7 @@ class App : Application() {
         viewModel { ListViewModel(get(), get()) }
         viewModel { MapViewModel(get(), get()) }
         viewModel { SundaysViewModel() }
-        viewModel { InfoViewModel() }
+        viewModel { SettingsViewModel() }
       })
     }
   }

@@ -71,7 +71,6 @@ class ListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.info -> findNavController().navigate(R.id.action_navigation_list_to_navigation_info)
             R.id.search -> focusSearchInput(item)
         }
         return super.onOptionsItemSelected(item)

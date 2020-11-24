@@ -8,9 +8,4 @@
         android:tooltipText="@string/search_for_shops"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom" />
-    <item
-        android:id="@+id/info"
-        android:icon="@drawable/ic_baseline_info_24"
-        android:title="@string/info"
-        app:showAsAction="collapseActionView|ifRoom" />
 </menu>
