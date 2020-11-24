@@ -5,9 +5,12 @@ import androidx.room.Room
 import com.hedgehog.gdzietabiedra.api.BiedraKtorService
 import com.hedgehog.gdzietabiedra.appservice.DistanceCalculator
 import com.hedgehog.gdzietabiedra.appservice.LocationService
+import com.hedgehog.gdzietabiedra.appservice.NotificationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
-import com.hedgehog.gdzietabiedra.data.repository.shops.AppDatabase
-import com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository
+import com.hedgehog.gdzietabiedra.data.db.migrations.MIGRATION_1_2
+import com.hedgehog.gdzietabiedra.data.db.AppDatabase
+import com.hedgehog.gdzietabiedra.data.persistance.SharedPrefsWrapper
+import com.hedgehog.gdzietabiedra.data.repository.ShopsRepository
 import com.hedgehog.gdzietabiedra.ui.list.ListViewModel
 import com.hedgehog.gdzietabiedra.ui.map.MapViewModel
 import com.hedgehog.gdzietabiedra.ui.settings.SettingsViewModel
@@ -26,47 +29,50 @@ import timber.log.Timber.DebugTree
  * */
 class App : Application() {
 
-  /**
-   * [LeakCanary] initialisation
-   * [Timber] initialisation
-   * */
-  override fun onCreate() {
-    super.onCreate()
+    /**
+     * [LeakCanary] initialisation
+     * [Timber] initialisation
+     * */
+    override fun onCreate() {
+        super.onCreate()
 
-    initTimber()
-    initJoda()
-    initKoin()
-  }
-
-  private fun initKoin() {
-    startKoin {
-      androidContext(this@App)
-      modules(module {
-        single<AppDatabase> {
-          Room.databaseBuilder(
-                  applicationContext,
-                  AppDatabase::class.java, "biedra-shops.db"
-          ).createFromAsset("biedra-shops.db")
-                  .build()
-        }
-        single { DistanceCalculator() }
-        single { ShopService(ShopsRepository(get<AppDatabase>().shopRoomDao()), get()) }
-        single { BiedraKtorService() }
-        single { LocationService(get()) }
-
-        viewModel { ListViewModel(get(), get()) }
-        viewModel { MapViewModel(get(), get()) }
-        viewModel { SundaysViewModel() }
-        viewModel { SettingsViewModel() }
-      })
+        initTimber()
+        initJoda()
+        initKoin()
     }
-  }
 
-  private fun initJoda() {
-    JodaTimeAndroid.init(this)
-  }
+    private fun initKoin() {
+        startKoin {
+            androidContext(this@App)
+            modules(module {
+                single<AppDatabase> {
+                    Room.databaseBuilder(
+                            applicationContext,
+                            AppDatabase::class.java, "biedra-shops.db")
+                            .createFromAsset("biedra-shops.db")
+                            .addMigrations(MIGRATION_1_2)
+                            .build()
+                }
+                single { DistanceCalculator() }
+                single { ShopService(ShopsRepository(get<AppDatabase>().shopRoomDao()), get()) }
+                single { BiedraKtorService() }
+                single { LocationService(get()) }
+                single { SharedPrefsWrapper(get()) }
+                single { NotificationService(get(), get()) }
 
-  private fun initTimber() {
-    Timber.plant(DebugTree(), CrashlyticsTree())
-  }
+                viewModel { ListViewModel(get(), get()) }
+                viewModel { MapViewModel(get(), get()) }
+                viewModel { SundaysViewModel() }
+                viewModel { SettingsViewModel() }
+            })
+        }
+    }
+
+    private fun initJoda() {
+        JodaTimeAndroid.init(this)
+    }
+
+    private fun initTimber() {
+        Timber.plant(DebugTree(), CrashlyticsTree())
+    }
 }

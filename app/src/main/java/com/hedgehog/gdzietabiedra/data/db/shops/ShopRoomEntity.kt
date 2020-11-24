@@ -1,4 +1,4 @@
-package com.hedgehog.gdzietabiedra.data.repository.shops
+package com.hedgehog.gdzietabiedra.data.db.shops
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

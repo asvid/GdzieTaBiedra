@@ -1,6 +1,6 @@
-[com.hedgehog.gdzietabiedra.data.repository.shops](./index.md)
+[com.hedgehog.gdzietabiedra.data.db.shops](./index.md)
 
-## Package com.hedgehog.gdzietabiedra.data.repository.shops
+## Package com.hedgehog.gdzietabiedra.data.db.shops
 
 ### Types
 

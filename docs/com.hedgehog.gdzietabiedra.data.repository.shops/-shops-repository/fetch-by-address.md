@@ -1,4 +1,4 @@
-[com.hedgehog.gdzietabiedra.data.repository.shops](../index.md) / [ShopsRepository](index.md) / [fetchByAddress](./fetch-by-address.md)
+[com.hedgehog.gdzietabiedra.data.db.shops](../index.md) / [ShopsRepository](index.md) / [fetchByAddress](./fetch-by-address.md)
 
 # fetchByAddress
 

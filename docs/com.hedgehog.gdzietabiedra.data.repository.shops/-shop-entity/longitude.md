@@ -1,4 +1,4 @@
-[com.hedgehog.gdzietabiedra.data.repository.shops](../index.md) / [ShopEntity](index.md) / [longitude](./longitude.md)
+[com.hedgehog.gdzietabiedra.data.db.shops](../index.md) / [ShopEntity](index.md) / [longitude](./longitude.md)
 
 # longitude
 

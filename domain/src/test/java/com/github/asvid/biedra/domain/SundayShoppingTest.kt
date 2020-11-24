@@ -22,4 +22,25 @@ class SundayShoppingTest {
 
         assert(SundayShopping.isShoppingAllowed(testedDay) == isShopOpen)
     }
+
+    @ParameterizedTest
+    @CsvSource(
+            "2018, 1, 1, 2018, 12, 2",
+            "2019, 12, 10, 2019, 12, 15",
+            "2019, 12, 15, 2019, 12, 15",
+            "2021, 12, 15, 2021, 12, 19",
+            )
+    fun `should return expected next shopping sunday after selected day`(
+            year: Int,
+            month: Int,
+            day: Int,
+            nextYear: Int,
+            nextMonth: Int,
+            nextDay: Int,
+    ) {
+        val testedDay = LocalDate(year, month, day)
+        val nextShoppingSunday = LocalDate(nextYear, nextMonth, nextDay)
+
+        assert(SundayShopping.getNextShoppingSunday(testedDay) == nextShoppingSunday)
+    }
 }

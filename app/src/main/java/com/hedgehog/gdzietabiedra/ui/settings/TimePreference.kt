@@ -40,6 +40,7 @@ class TimePreference: DialogPreference {
         persistLong(timeInMillis)
         summary = summary
         notifyChanged()
+        callChangeListener(Date(timeInMillis))
     }
 }
 

@@ -1,4 +1,4 @@
-[com.hedgehog.gdzietabiedra.data.repository.shops](../index.md) / [ShopsRepository](index.md) / [save](./save.md)
+[com.hedgehog.gdzietabiedra.data.db.shops](../index.md) / [ShopsRepository](index.md) / [save](./save.md)
 
 # save
 

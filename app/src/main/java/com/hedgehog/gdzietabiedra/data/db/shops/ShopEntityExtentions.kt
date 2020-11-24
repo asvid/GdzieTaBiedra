@@ -1,4 +1,4 @@
-package com.hedgehog.gdzietabiedra.data.repository.shops
+package com.hedgehog.gdzietabiedra.data.db.shops
 
 import com.github.asvid.biedra.domain.Shop
 import com.github.asvid.biedra.domain.address

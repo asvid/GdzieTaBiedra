@@ -24,7 +24,7 @@ com.hedgehog.gdzietabiedra.appservice
 com.hedgehog.gdzietabiedra.appservice.map
 com.hedgehog.gdzietabiedra.data
 com.hedgehog.gdzietabiedra.data.migration
-com.hedgehog.gdzietabiedra.data.repository.shops
+com.hedgehog.gdzietabiedra.data.db.shops
 com.hedgehog.gdzietabiedra.di
 com.hedgehog.gdzietabiedra.di.components
 com.hedgehog.gdzietabiedra.di.modules

@@ -1,4 +1,4 @@
-[com.hedgehog.gdzietabiedra.data.repository.shops](../index.md) / [ShopEntity](index.md) / [id](./id.md)
+[com.hedgehog.gdzietabiedra.data.db.shops](../index.md) / [ShopEntity](index.md) / [id](./id.md)
 
 # id
 

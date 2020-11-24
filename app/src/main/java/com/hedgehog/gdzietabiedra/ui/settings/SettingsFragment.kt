@@ -1,22 +1,19 @@
 package com.hedgehog.gdzietabiedra.ui.settings
 
 import android.content.ActivityNotFoundException
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.preference.Preference
-import androidx.preference.PreferenceCategory
-import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.*
 import com.hedgehog.gdzietabiedra.BuildConfig
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.ui.views.TimePreference
 import com.hedgehog.gdzietabiedra.ui.views.TimePreferenceDialog
 import org.koin.androidx.viewmodel.compat.ViewModelCompat
+import timber.log.Timber
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -32,6 +29,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         val aboutPrefCategory = findPreference<PreferenceCategory>("about")
         aboutPrefCategory?.addPreference(appVersion)
+
+        findPreference<SwitchPreferenceCompat>("shopping_sunday_notification")?.setOnPreferenceChangeListener { preference, newValue -> vm.handleShoppingSundayNotificatonChange(newValue) }
+        findPreference<SeekBarPreference>("shopping_sunday_notification_days_before")?.setOnPreferenceChangeListener { preference, newValue -> vm.handleShoppingSundayNotificationDaysBeforeChange(newValue) }
+        findPreference<TimePreference>("shopping_sunday_notification_time")?.setOnPreferenceChangeListener { preference, newValue -> vm.handleShoppingSundayNotificationTimeChange(newValue) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

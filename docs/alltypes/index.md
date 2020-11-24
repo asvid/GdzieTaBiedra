@@ -70,18 +70,18 @@
 | [com.github.asvid.biedra.domain.Shop](../com.github.asvid.biedra.domain/-shop/index.md) | Biedronka domain object |
 | [com.github.asvid.biedra.domain.ShopBuilder](../com.github.asvid.biedra.domain/-shop-builder/index.md) | DSL Builder for [Shop](../com.github.asvid.biedra.domain/-shop/index.md) |
 | [com.github.asvid.biedra.domain.ShopDsl](../com.github.asvid.biedra.domain/-shop-dsl/index.md) |  |
-| [com.hedgehog.gdzietabiedra.data.repository.shops.ShopEntity](../com.hedgehog.gdzietabiedra.data.repository.shops/-shop-entity/index.md) |  |
+| [com.hedgehog.gdzietabiedra.data.db.shops.ShopEntity](../com.hedgehog.gdzietabiedra.data.db.shops/-shop-entity/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListAdapter](../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shop-list-adapter/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListItemVH](../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shop-list-item-v-h/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopListListener](../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shop-list-listener/index.md) |  |
 | [com.hedgehog.gdzietabiedra.appservice.map.ShopMarker](../com.hedgehog.gdzietabiedra.appservice.map/-shop-marker/index.md) | Map marker for [Shop](../com.github.asvid.biedra.domain/-shop/index.md) |
-| [com.hedgehog.gdzietabiedra.appservice.ShopService](../com.hedgehog.gdzietabiedra.appservice/-shop-service/index.md) | Only class that provides access to [Shop](../com.github.asvid.biedra.domain/-shop/index.md)s For the moment it's used only to return [Shop](../com.github.asvid.biedra.domain/-shop/index.md)s from [ShopsRepository](../com.hedgehog.gdzietabiedra.data.repository.shops/-shops-repository/index.md), but in future it might be used to manipulate data |
+| [com.hedgehog.gdzietabiedra.appservice.ShopService](../com.hedgehog.gdzietabiedra.appservice/-shop-service/index.md) | Only class that provides access to [Shop](../com.github.asvid.biedra.domain/-shop/index.md)s For the moment it's used only to return [Shop](../com.github.asvid.biedra.domain/-shop/index.md)s from [ShopsRepository](../com.hedgehog.gdzietabiedra.data.db.shops/-shops-repository/index.md), but in future it might be used to manipulate data |
 | [com.hedgehog.gdzietabiedra.api.response.shop.ShopsItem](../com.hedgehog.gdzietabiedra.api.response.shop/-shops-item/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListBuilder](../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shops-list-builder/index.md) | Builder for the {@link ShopsListScope}. |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListInteractor](../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shops-list-interactor/index.md) |  |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListRouter](../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shops-list-router/index.md) | Adds and removes children of {@link ShopsListBuilder.ShopsListScope}. |
 | [com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist.ShopsListView](../com.hedgehog.gdzietabiedra.ribs.bottomnav.shopslist/-shops-list-view/index.md) | Top level view for {@link ShopsListBuilder.ShopsListScope}. |
-| [com.hedgehog.gdzietabiedra.data.repository.shops.ShopsRepository](../com.hedgehog.gdzietabiedra.data.repository.shops/-shops-repository/index.md) |  |
+| [com.hedgehog.gdzietabiedra.data.db.shops.ShopsRepository](../com.hedgehog.gdzietabiedra.data.db.shops/-shops-repository/index.md) |  |
 | [com.hedgehog.gdzietabiedra.api.response.shop.ShopsResponse](../com.hedgehog.gdzietabiedra.api.response.shop/-shops-response/index.md) |  |
 | [io.reactivex.Single](../com.hedgehog.gdzietabiedra.utils/io.reactivex.-single/index.md) (extensions in package com.hedgehog.gdzietabiedra.utils) |  |
 | [com.hedgehog.gdzietabiedra.ribs.splash.SplashBuilder](../com.hedgehog.gdzietabiedra.ribs.splash/-splash-builder/index.md) | Builder for the {@link SplashScope}. |

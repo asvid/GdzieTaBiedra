@@ -1,4 +1,4 @@
-[com.hedgehog.gdzietabiedra.data.repository.shops](../index.md) / [ShopEntity](index.md) / [isTaxFree](./is-tax-free.md)
+[com.hedgehog.gdzietabiedra.data.db.shops](../index.md) / [ShopEntity](index.md) / [isTaxFree](./is-tax-free.md)
 
 # isTaxFree
 

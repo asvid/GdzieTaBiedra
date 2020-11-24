@@ -13,14 +13,14 @@
         <SeekBarPreference
             android:max="10"
             app:dependency="shopping_sunday_notification"
-            app:key="shopping_sunday_notification_days"
+            app:key="shopping_sunday_notification_days_before"
             app:min="0"
             app:seekBarIncrement="1"
             app:showSeekBarValue="true"
             app:title="Days before shopping Sunday" />
 
         <com.hedgehog.gdzietabiedra.ui.views.TimePreference
-            app:key="notification_time"
+            app:key="shopping_sunday_notification_time"
             app:dependency="shopping_sunday_notification"
             android:negativeButtonText="@string/cancel"
             android:positiveButtonText="@string/set"
