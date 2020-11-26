@@ -5,7 +5,6 @@ import android.app.job.JobService
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.appservice.SHOPPING_SUNDAY_CHANNEL_ID
 import timber.log.Timber
 
 class ShoppingSundayNotificationJobService : JobService() {
@@ -20,6 +19,9 @@ class ShoppingSundayNotificationJobService : JobService() {
         with(NotificationManagerCompat.from(this)) {
             notify(1, builder.build())
         }
+
+        // todo: schedule next notification
+
         return true
     }
 

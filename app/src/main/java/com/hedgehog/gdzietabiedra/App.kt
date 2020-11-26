@@ -5,11 +5,12 @@ import androidx.room.Room
 import com.hedgehog.gdzietabiedra.api.BiedraKtorService
 import com.hedgehog.gdzietabiedra.appservice.DistanceCalculator
 import com.hedgehog.gdzietabiedra.appservice.LocationService
-import com.hedgehog.gdzietabiedra.appservice.NotificationService
+import com.hedgehog.gdzietabiedra.appservice.notifications.ShoppingSundayNotificationService
 import com.hedgehog.gdzietabiedra.appservice.ShopService
 import com.hedgehog.gdzietabiedra.data.db.migrations.MIGRATION_1_2
 import com.hedgehog.gdzietabiedra.data.db.AppDatabase
 import com.hedgehog.gdzietabiedra.data.persistance.SharedPrefsWrapper
+import com.hedgehog.gdzietabiedra.data.repository.NotificationsRepository
 import com.hedgehog.gdzietabiedra.data.repository.ShopsRepository
 import com.hedgehog.gdzietabiedra.ui.list.ListViewModel
 import com.hedgehog.gdzietabiedra.ui.map.MapViewModel
@@ -58,12 +59,13 @@ class App : Application() {
                 single { BiedraKtorService() }
                 single { LocationService(get()) }
                 single { SharedPrefsWrapper(get()) }
-                single { NotificationService(get(), get()) }
+                single { NotificationsRepository(get()) }
+                single { ShoppingSundayNotificationService(get(), get()) }
 
                 viewModel { ListViewModel(get(), get()) }
                 viewModel { MapViewModel(get(), get()) }
                 viewModel { SundaysViewModel() }
-                viewModel { SettingsViewModel() }
+                viewModel { SettingsViewModel(get()) }
             })
         }
     }

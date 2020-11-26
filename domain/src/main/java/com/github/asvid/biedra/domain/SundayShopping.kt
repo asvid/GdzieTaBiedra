@@ -2,6 +2,7 @@ package com.github.asvid.biedra.domain
 
 import org.joda.time.DateTimeConstants
 import org.joda.time.LocalDate
+import java.util.*
 
 object SundayShopping {
     val businessDays = listOf(
@@ -40,16 +41,20 @@ object SundayShopping {
             LocalDate(2021, 12, 19),
     )
 
-    fun isShoppingAllowed(date: LocalDate = LocalDate()): Boolean {
+    fun isShoppingAllowed(date: LocalDate = LocalDate.fromDateFields(Date())): Boolean {
         return if (date.dayOfWeek != DateTimeConstants.SUNDAY) true
         else businessDays.contains(date)
     }
 
-    fun getNextShoppingSunday(afterDate: LocalDate = LocalDate()): LocalDate {
+    fun getNextShoppingSunday(afterDate: LocalDate = LocalDate.fromDateFields(Date())): LocalDate {
         return businessDays.first {
-            it.year >= afterDate.year &&
-                    it.monthOfYear >= afterDate.monthOfYear &&
-                    it.dayOfMonth >= afterDate.dayOfMonth
+            it.isAfter(afterDate)
+        }
+    }
+
+    fun getAllRemainingSundays(afterDate: LocalDate = LocalDate.fromDateFields(Date())): List<LocalDate> {
+        return businessDays.filter {
+            it.isAfter(afterDate)
         }
     }
 }

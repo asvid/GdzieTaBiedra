@@ -2,6 +2,7 @@ package com.github.asvid.biedra.domain
 
 import org.joda.time.LocalTime
 import org.junit.jupiter.api.Test
+import kotlin.random.Random
 
 class TimeRangeTest {
 

@@ -1,8 +1,10 @@
 package com.github.asvid.biedra.domain
 
 import org.joda.time.LocalDate
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import java.util.*
 
 class SundayShoppingTest {
 
@@ -27,7 +29,7 @@ class SundayShoppingTest {
     @CsvSource(
             "2018, 1, 1, 2018, 12, 2",
             "2019, 12, 10, 2019, 12, 15",
-            "2019, 12, 15, 2019, 12, 15",
+            "2019, 12, 15, 2019, 12, 22",
             "2021, 12, 15, 2021, 12, 19",
             )
     fun `should return expected next shopping sunday after selected day`(
@@ -42,5 +44,12 @@ class SundayShoppingTest {
         val nextShoppingSunday = LocalDate(nextYear, nextMonth, nextDay)
 
         assert(SundayShopping.getNextShoppingSunday(testedDay) == nextShoppingSunday)
+    }
+
+    @Test
+    fun `should return all shopping sundays after selected day`(){
+        val afterDate = LocalDate(2020, 12, 30)
+        val allRemainingSundays = SundayShopping.getAllRemainingSundays(afterDate)
+        assert(allRemainingSundays.size == 7)
     }
 }
