@@ -30,7 +30,14 @@ class NotificationsRepository constructor(private val sharedPrefsWrapper: Shared
     suspend fun getSundayNotificationIds(): List<Int> {
         return sharedPrefsWrapper.getString(SHOPPING_SUNDAYS_NOTIFICATION_IDS)
                 ?.split(",")
-                ?.map { it.toInt() }
+                ?.filter { it.isNotEmpty() }
+                ?.map {
+                    it.toInt()
+                }
                 ?: listOf()
+    }
+
+    suspend fun removeSundayNotificationIds() {
+        sharedPrefsWrapper.remove(SHOPPING_SUNDAYS_NOTIFICATION_IDS)
     }
 }

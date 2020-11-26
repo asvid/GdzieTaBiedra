@@ -52,26 +52,17 @@ class ShoppingSundayNotificationService(
 
         val serviceComponent = ComponentName(context, ShoppingSundayNotificationJobService::class.java)
         val nextShoppingSundays = SundayShopping.getAllRemainingSundays()
+        val notificationDays = notificationsRepository.getNotificationDays()
+        val notificationTime = notificationsRepository.getNotificationTime()
         nextShoppingSundays.forEach {
             val jobId = Random.nextInt()
             val builder = JobInfo.Builder(jobId, serviceComponent)
-            val jobTime: Long = calculateJobTime(it)
+            val jobTime: Long = SundayShopping.calculateJobTime(it, notificationDays, notificationTime)
             builder.setMinimumLatency(jobTime)
             val jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)
             jobScheduler.schedule(builder.build())
             notificationsRepository.addSundayNotificationId(jobId)
             Timber.d("setting new notification for: $jobTime")
-        }
-    }
-
-    private suspend fun calculateJobTime(nextShoppingSunday: LocalDate): Long {
-        val notificationDays = notificationsRepository.getNotificationDays()
-        val notificationTime = notificationsRepository.getNotificationTime()
-        return if (notificationDays != null && notificationTime != null) {
-            val notificationDateTime1 = nextShoppingSunday.minusDays(notificationDays).toLocalDateTime(LocalTime(notificationTime))
-            notificationDateTime1.toDateTime().millis - System.currentTimeMillis()
-        } else {
-            nextShoppingSunday.toDateTime(LocalTime(12, 0, 0)).millis - System.currentTimeMillis()
         }
     }
 
@@ -83,6 +74,7 @@ class ShoppingSundayNotificationService(
             jobScheduler.cancel(it)
             Timber.d("canceling notification with ID: $it")
         }
+        notificationsRepository.removeSundayNotificationIds()
         Timber.d("canceling notifications DONE")
     }
 }

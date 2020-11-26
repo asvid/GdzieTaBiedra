@@ -1,7 +1,9 @@
 package com.github.asvid.biedra.domain
 
+import org.joda.time.DateTime
 import org.joda.time.DateTimeConstants
 import org.joda.time.LocalDate
+import org.joda.time.LocalTime
 import java.util.*
 
 object SundayShopping {
@@ -30,6 +32,7 @@ object SundayShopping {
             LocalDate(2020, 4, 26),
             LocalDate(2020, 6, 28),
             LocalDate(2020, 8, 30),
+            LocalDate(2020, 12, 6),
             LocalDate(2020, 12, 13),
             LocalDate(2020, 12, 20),
             LocalDate(2021, 1, 31),
@@ -55,6 +58,18 @@ object SundayShopping {
     fun getAllRemainingSundays(afterDate: LocalDate = LocalDate.fromDateFields(Date())): List<LocalDate> {
         return businessDays.filter {
             it.isAfter(afterDate)
+        }
+    }
+
+    fun calculateJobTime(nextShoppingSunday: LocalDate, notificationDays: Int?, notificationTime: Long?): Long {
+        return if (notificationDays != null && notificationTime != null) {
+            val date = nextShoppingSunday.minusDays(notificationDays)
+            val notificationTime1 = Date(notificationTime)
+            val fromDateFields = LocalTime.fromDateFields(notificationTime1)
+            val dateTime = DateTime(date.year, date.monthOfYear, date.dayOfMonth, fromDateFields.hourOfDay, fromDateFields.minuteOfHour)
+            dateTime.toDateTime().millis - System.currentTimeMillis()
+        } else {
+            nextShoppingSunday.toDateTime(LocalTime(12, 0, 0)).millis - System.currentTimeMillis()
         }
     }
 }

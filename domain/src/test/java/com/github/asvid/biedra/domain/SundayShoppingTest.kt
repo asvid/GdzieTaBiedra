@@ -1,5 +1,6 @@
 package com.github.asvid.biedra.domain
 
+import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -51,5 +52,23 @@ class SundayShoppingTest {
         val afterDate = LocalDate(2020, 12, 30)
         val allRemainingSundays = SundayShopping.getAllRemainingSundays(afterDate)
         assert(allRemainingSundays.size == 7)
+    }
+
+    @Test
+    fun `should calculate notification date properly`(){
+        val initDate = LocalDate(2020, 12, 15)
+        val initTime = Date().apply {
+            hours = 12
+            minutes = 30
+        }
+        val calculatedDateTime = SundayShopping.calculateJobTime(initDate, 10, initTime.time) + System.currentTimeMillis()
+        val date = DateTime(calculatedDateTime)
+        println(date)
+
+        assert(date.hourOfDay == 12)
+        assert(date.minuteOfHour == 30)
+        assert(date.dayOfMonth == 5)
+        assert(date.monthOfYear == 12)
+        assert(date.year == 2020)
     }
 }

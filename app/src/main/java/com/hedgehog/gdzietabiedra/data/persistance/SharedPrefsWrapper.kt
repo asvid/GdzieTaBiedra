@@ -20,6 +20,11 @@ class SharedPrefsWrapper(context: Context) {
         sharedPref.edit().putString(key, value).apply()
     }
 
+    suspend fun remove(key: String) {
+        Timber.d("removing data at $key")
+        sharedPref.edit().remove(key).apply()
+    }
+
     suspend fun getLong(key: String): Long? {
         val defaultValue: Long = -1
         val long = sharedPref.getLong(key, defaultValue)

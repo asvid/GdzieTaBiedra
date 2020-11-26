@@ -9,7 +9,7 @@ dependencies {
 
     //  Testing
 //    testImplementation(TestDeps.junit)
-    testImplementation(Libs.jodaTime)
+    testImplementation(Libs.jodaTimeTest)
     testImplementation(TestDeps.junit)
     testImplementation(TestDeps.junitParams)
 }
