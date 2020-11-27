@@ -30,4 +30,10 @@
     <string name="error_loading_shops">Error while loading shops</string>
     <string name="no_shops_found_use_search">No shops around, use search bar or map</string>
     <string name="use_search">Please use search box</string>
+    <string name="shopping_sunday_notification">Shopping Sunday notification</string>
+    <string name="set">Set</string>
+    <string name="cancel">Cancel</string>
+    <string name="notification_time">Time of notification</string>
+    <string name="channel_name">Biedra Sundays</string>
+    <string name="channel_description">Notification about shopping sundays</string>
 </resources>

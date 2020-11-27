@@ -20,6 +20,7 @@ object Libs {
     const val dexter = "com.karumi:dexter:6.2.1"
 
     const val jodaTime = "net.danlew:android.joda:${Versions.jodaTime}"
+    const val jodaTimeTest = "joda-time:joda-time:${Versions.jodaTime}"
     const val calendarView = "com.github.sundeepk:compact-calendar-view:3.0.0"
 
 }
@@ -56,6 +57,7 @@ object Android {
     const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:2.3.1"
     const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:2.3.1"
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    const val preferences = "androidx.preference:preference-ktx:1.1.1"
 }
 
 object Koin {

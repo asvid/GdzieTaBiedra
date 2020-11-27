@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_navigation_list_to_navigation_map"
             app:destination="@id/navigation_map" />
-        <action
-            android:id="@+id/action_navigation_list_to_navigation_info"
-            app:destination="@id/navigation_info" />
     </fragment>
 
     <fragment
@@ -36,8 +33,8 @@
         tools:layout="@layout/fragment_sundays" />
 
     <fragment
-        android:id="@+id/navigation_info"
-        android:name="com.hedgehog.gdzietabiedra.ui.info.InfoFragment"
-        android:label="@string/info"
-        tools:layout="@layout/info_fragment" />
+        android:id="@+id/navigation_settings"
+        android:name="com.hedgehog.gdzietabiedra.ui.settings.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/settings_fragment" />
 </navigation>
