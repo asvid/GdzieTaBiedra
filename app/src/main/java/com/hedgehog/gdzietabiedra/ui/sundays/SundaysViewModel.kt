@@ -1,7 +1,5 @@
 package com.hedgehog.gdzietabiedra.ui.sundays
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class SundaysViewModel : ViewModel() {

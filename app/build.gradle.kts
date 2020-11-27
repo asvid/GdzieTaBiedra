@@ -114,6 +114,7 @@ dependencies {
     implementation(Android.livedataKtx)
     implementation(Android.viewmodelKtx)
     implementation(Android.swipeRefreshLayout)
+    implementation(Android.preferences)
 
     implementation(Libs.calendarView)
 
@@ -138,7 +139,6 @@ dependencies {
 }
 
 dependencies {
-    testImplementation(TestDeps.junit)
     testImplementation(TestDeps.junitParams)
     androidTestImplementation(TestDeps.runner)
     androidTestImplementation(TestDeps.espresso)

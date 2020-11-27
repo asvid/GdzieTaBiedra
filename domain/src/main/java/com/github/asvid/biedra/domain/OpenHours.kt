@@ -90,7 +90,7 @@ fun String.toDate(format: String): Date? {
 }
 
 fun OpenHours.getForToday(): TimeRange? =
-        when (LocalDate().dayOfWeek) {
+        when (LocalDate.fromDateFields(Date()).dayOfWeek) {
             DateTimeConstants.SUNDAY -> this.sunday ?: this.weekDay
             DateTimeConstants.SATURDAY -> this.saturday ?: this.weekDay
             else -> this.weekDay
