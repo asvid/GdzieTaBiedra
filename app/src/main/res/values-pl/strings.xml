@@ -24,4 +24,15 @@
     <string name="shop_closed">Sklep dziś zamknięty</string>
     <string name="shopping_sundays_subtitle">Zaznaczone na zielono dni to niedziele handlowe.</string>
     <string name="title_sundays">Niedziele</string>
+    <string name="location_permissions_info">Aplikacja działa lepiej z udostępnioną lokalizacją</string>
+    <string name="info">Informacje</string>
+    <string name="search_for_shops">Szukaj sklepu</string>
+    <string name="error_loading_shops">Błąd podczas ładowania sklepów</string>
+    <string name="no_shops_found_use_search">Nie znaleziono sklepów, użyj wyszukiwarki lub mapy</string>
+    <string name="use_search">Użyj wyszukiwarki</string>
+    <string name="shopping_sunday_notification">Powiadomienie o niedzielach handlowych</string>
+    <string name="set">Ustaw</string>
+    <string name="cancel">Anuluj</string>
+    <string name="notification_time">Czas notyfikacji</string>
+    <string name="channel_description">Powiadomienie o niedzielach handlowych</string>
 </resources>

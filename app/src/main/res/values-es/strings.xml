@@ -15,10 +15,20 @@
     <string name="grant_permissions">"Conceder permisos"</string>
     <string name="email_me">"Envíeme un correo electrónico"</string>
     <string name="share_some_stars">"Comparte algunas estrellas"</string>
-    <string name="info_text">"Esta no es una aplicación oficial de Biedronka ™, no tengo conexión con la empresa. \nEsto se hizo como mi proyecto de hobby pet, sandbox digital donde puedo jugar con nuevas bibliotecas y cosas en mi tiempo libre. \n \nPor favor, tenga esto en cuenta cuando ponga esta marca de aplicación o deje un comentario :)
-  "</string>
+    <string name="info_text">"Esta no es una aplicación oficial de Biedronka ™, no tengo conexión con la empresa. \nEsto se hizo como mi proyecto de hobby pet, sandbox digital donde puedo jugar con nuevas bibliotecas y cosas en mi tiempo libre. \n \nPor favor, tenga esto en cuenta cuando ponga esta marca de aplicación o deje un comentario :)"</string>
     <string name="turn_on_location">"Encienda la ubicación"</string>
     <string name="shop_closed">"La tienda está cerrada hoy"</string>
     <string name="shopping_sundays_subtitle">Los días marcados en verde son los domingos comerciales.</string>
     <string name="title_sundays">Domingos</string>
+    <string name="location_permissions_info">La aplicación funciona mejor con permisos de ubicación otorgados</string>
+    <string name="info">Información</string>
+    <string name="search_for_shops">Buscar tiendas</string>
+    <string name="error_loading_shops">Error al cargar las tiendas</string>
+    <string name="no_shops_found_use_search">No hay tiendas alrededor, use la barra de búsqueda o el mapa</string>
+    <string name="use_search">Utilice el cuadro de búsqueda</string>
+    <string name="shopping_sunday_notification">Notificación del domingo de compras</string>
+    <string name="set">Establecer</string>
+    <string name="cancel">Cancelar</string>
+    <string name="notification_time">Hora de la notificación</string>
+    <string name="channel_description">Notificación sobre los domingos de compras</string>
 </resources>

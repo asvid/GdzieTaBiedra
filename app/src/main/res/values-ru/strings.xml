@@ -15,10 +15,20 @@
     <string name="grant_permissions">"Разрешения на грант"</string>
     <string name="email_me">"Напишите мне"</string>
     <string name="share_some_stars">"Поделиться несколькими звездами"</string>
-    <string name="info_text">"Это не официальное приложение Biedronka ™, у меня нет связи с компанией. \nЭто сделано как мой любимый любимый проект, цифровая песочница, где я могу играть с новыми библиотеками и вещами в свободное время. \n \nПожалуйста, подумайте об этом, указав этот знак приложения или оставив комментарий :)
-  "</string>
+    <string name="info_text">"Это не официальное приложение Biedronka ™, у меня нет связи с компанией. \nЭто сделано как мой любимый любимый проект, цифровая песочница, где я могу играть с новыми библиотеками и вещами в свободное время. \n \n Пожалуйста, подумайте об этом, указав этот знак приложения или оставив комментарий :)"</string>
     <string name="turn_on_location">"Включить местоположение"</string>
     <string name="shop_closed">"Сегодня магазин закрыт"</string>
     <string name="shopping_sundays_subtitle">Дни, отмеченные зеленым, являются коммерческими воскресеньями.</string>
     <string name="title_sundays">по воскресеньям</string>
+    <string name="location_permissions_info"> Приложение лучше работает с предоставленными разрешениями на местоположение</string>
+    <string name="info"> Информация</string>
+    <string name="search_for_shops"> Поиск магазинов</string>
+    <string name="error_loading_shops"> Ошибка при загрузке магазинов</string>
+    <string name="no_shops_found_use_search"> Нет магазинов, используйте панель поиска или карту</string>
+    <string name="use_search"> Используйте окно поиска</string>
+    <string name="shopping_sunday_notification"> Уведомление о воскресных покупках</string>
+    <string name="set"> Установить</string>
+    <string name="cancel"> Отменить</string>
+    <string name="notification_time"> Время уведомления</string>
+    <string name="channel_description"> Уведомление о воскресных покупках</string>
 </resources>

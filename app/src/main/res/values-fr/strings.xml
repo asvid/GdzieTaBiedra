@@ -15,10 +15,20 @@
     <string name="grant_permissions">"Accorder des autorisations"</string>
     <string name="email_me">"Envoyez moi un email"</string>
     <string name="share_some_stars">"Partager des étoiles"</string>
-    <string name="info_text">"Ce n'est pas une application officielle de Biedronka ™, je n'ai aucun lien avec l'entreprise. \nCela est fait comme mon projet d’animal de passe-temps favori, un bac à sable numérique où je peux jouer avec de nouvelles bibliothèques et autres choses pendant mon temps libre. \n \nPensez-y lorsque vous donnez cette application ou laissez un commentaire :)
-  "</string>
+    <string name="info_text">"Ce n'est pas une application officielle de Biedronka ™, je n'ai aucun lien avec l'entreprise. \nCela est fait comme mon projet d’animal de passe-temps favori, un bac à sable numérique où je peux jouer avec de nouvelles bibliothèques et autres choses pendant mon temps libre. \n \nPensez-y lorsque vous donnez cette application ou laissez un commentaire :)"</string>
     <string name="turn_on_location">"Activer l'emplacement"</string>
     <string name="shop_closed">"La boutique est fermée aujourd'hui"</string>
-    <string name="shopping_sundays_subtitle">Les jours marqués en vert sont des dimanches commerciaux.</string>
+    <string name="shopping_sundays_subtitle">"Les jours marqués en vert sont des dimanches commerciaux."</string>
     <string name="title_sundays">les dimanches</string>
+    <string name = "location_permissions_info">"L'application fonctionne mieux avec les autorisations de localisation accordées"</string>
+    <string name = "info">"Infos"</string>
+    <string name = "search_for_shops">"Rechercher des magasins"</string>
+    <string name = "error_loading_shops">"Erreur lors du chargement des boutiques"</string>
+    <string name = "no_shops_found_use_search">"Pas de magasins à proximité, utilisez la barre de recherche ou la carte"</string>
+    <string name = "use_search">"Veuillez utiliser le champ de recherche"</string>
+    <string name = "shopping_sunday_notification">"Notification Shopping dimanche"</string>
+    <string name = "set">"Définir"</string>
+    <string name = "cancel">"Annuler"</string>
+    <string name = "notification_time">"Heure de la notification"</string>
+    <string name = "channel_description">"Notification sur les dimanches shopping"</string>
 </resources>
