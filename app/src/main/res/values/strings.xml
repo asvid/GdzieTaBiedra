@@ -30,7 +30,7 @@
     <string name="error_loading_shops">Error while loading shops</string>
     <string name="no_shops_found_use_search">No shops around, use search bar or map</string>
     <string name="use_search">Please use search box</string>
-    <string name="shopping_sunday_notification">Shopping Sunday notification</string>
+    <string name="shopping_sunday_notification">Shopping Sundays</string>
     <string name="set">Set</string>
     <string name="cancel">Cancel</string>
     <string name="notification_time">Time of notification</string>
@@ -39,4 +39,6 @@
     <string name="shoping_sunday_seek_bar_label">How many days before?</string>
     <string name="app_version">App version</string>
     <string name="notifications">Notifications</string>
+    <string name="shopping_sunday_notification_content">Next shopping sunday is %1$s</string>
+    <string name="shopping_sunday_notification_title">Shopping Sunday!</string>
 </resources>

@@ -30,7 +30,7 @@
     <string name="error_loading_shops">Błąd podczas ładowania sklepów</string>
     <string name="no_shops_found_use_search">Nie znaleziono sklepów, użyj wyszukiwarki lub mapy</string>
     <string name="use_search">Użyj wyszukiwarki</string>
-    <string name="shopping_sunday_notification">Powiadomienie o niedzielach handlowych</string>
+    <string name="shopping_sunday_notification">Niedziele handlowe</string>
     <string name="set">Ustaw</string>
     <string name="cancel">Anuluj</string>
     <string name="notification_time">Czas notyfikacji</string>
