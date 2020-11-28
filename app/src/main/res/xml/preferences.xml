@@ -4,7 +4,7 @@
 
     <PreferenceCategory
         app:icon="@drawable/ic_notifications_black_24dp"
-        app:title="Notifications">
+        app:title="@string/notifications">
 
         <SwitchPreferenceCompat
             app:key="shopping_sunday_notification"
@@ -13,15 +13,17 @@
         <SeekBarPreference
             android:max="10"
             app:dependency="shopping_sunday_notification"
+            app:singleLineTitle="false"
             app:key="shopping_sunday_notification_days_before"
             app:min="0"
             app:seekBarIncrement="1"
             app:showSeekBarValue="true"
-            app:title="Days before shopping Sunday" />
+            app:title="@string/shoping_sunday_seek_bar_label" />
 
         <com.hedgehog.gdzietabiedra.ui.views.TimePreference
             app:key="shopping_sunday_notification_time"
             app:dependency="shopping_sunday_notification"
+            app:singleLineTitle="false"
             android:negativeButtonText="@string/cancel"
             android:positiveButtonText="@string/set"
             app:title="@string/notification_time"/>
@@ -30,6 +32,7 @@
 
     <PreferenceCategory
         app:key="about"
+        app:icon="@drawable/ic_baseline_info_black_24"
         app:title="@string/info">
     </PreferenceCategory>
 

@@ -31,4 +31,6 @@
     <string name="cancel"> Отменить</string>
     <string name="notification_time"> Время уведомления</string>
     <string name="channel_description"> Уведомление о воскресных покупках</string>
+    <string name="shoping_sunday_seek_bar_label">Сколько дней назад?</string>
+    <string name="notifications">Уведомления</string>
 </resources>

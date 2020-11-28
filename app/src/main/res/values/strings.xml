@@ -35,5 +35,8 @@
     <string name="cancel">Cancel</string>
     <string name="notification_time">Time of notification</string>
     <string name="channel_name" translatable="false">Biedra Sundays</string>
-    <string name="channel_description">Notification about shopping sundays</string>
+    <string name="channel_description">Shopping sundays</string>
+    <string name="shoping_sunday_seek_bar_label">How many days before?</string>
+    <string name="app_version">App version</string>
+    <string name="notifications">Notifications</string>
 </resources>

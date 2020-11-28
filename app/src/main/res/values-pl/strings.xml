@@ -34,5 +34,8 @@
     <string name="set">Ustaw</string>
     <string name="cancel">Anuluj</string>
     <string name="notification_time">Czas notyfikacji</string>
-    <string name="channel_description">Powiadomienie o niedzielach handlowych</string>
+    <string name="channel_description">Niedziele handlowe</string>
+    <string name="shoping_sunday_seek_bar_label">Ile dni przed?</string>
+    <string name="app_version">Wersja aplikacji</string>
+    <string name="notifications">Powiadomienia</string>
 </resources>
