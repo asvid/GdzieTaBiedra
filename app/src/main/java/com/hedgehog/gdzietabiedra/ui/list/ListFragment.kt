@@ -14,6 +14,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.asvid.biedra.domain.Shop
 import com.google.android.material.snackbar.Snackbar
 import com.hedgehog.gdzietabiedra.R
 import com.karumi.dexter.Dexter
@@ -36,8 +37,8 @@ class ListFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_list, container, false)
+
         vm.viewState.observe(viewLifecycleOwner) {
-            // TODO: 21/11/2020 move location permission handling to upper level?
             when (it) {
                 RequestLocationPermission -> requestLocationPermission()
                 LocationPermissionDenied -> {
@@ -49,6 +50,7 @@ class ListFragment : Fragment() {
                 ShopsLoaded -> displayLoadedShops()
                 NoShopsAvailable -> displayNoShopsAvailable()
                 ErrorLoadingShops -> displayErrorLoadingShops()
+                is OpenShopDetails -> openShopDetails(it.shop)
             }
         }
         vm.shopList.observe(viewLifecycleOwner) {
@@ -56,6 +58,11 @@ class ListFragment : Fragment() {
         }
         setHasOptionsMenu(true)
         return root
+    }
+
+    private fun openShopDetails(shop: Shop) {
+        val bundle = bundleOf("shopId" to shop.id)
+        findNavController().navigate(R.id.action_navigation_list_to_navigation_shop_details, bundle)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -133,9 +140,9 @@ class ListFragment : Fragment() {
     private fun setupShopList() {
         val linearLayoutManager = LinearLayoutManager(context)
         shopsAdapter = ShopListAdapter {
-//          vm.shopListItemClicked(it)
-            val bundle = bundleOf("shopId" to it.id)
-            findNavController().navigate(R.id.action_navigation_list_to_navigation_map, bundle)
+          vm.shopListItemClicked(it)
+//            val bundle = bundleOf("shopId" to it.id)
+//            findNavController().navigate(R.id.action_navigation_list_to_navigation_map, bundle)
         }
         shop_list_view.adapter = shopsAdapter
         shop_list_view.layoutManager = linearLayoutManager

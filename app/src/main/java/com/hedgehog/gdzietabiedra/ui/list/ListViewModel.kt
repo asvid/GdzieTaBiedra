@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.appservice.*
+import com.hedgehog.gdzietabiedra.utils.VolatileMutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.isActive
@@ -17,8 +18,8 @@ class ListViewModel(
 ) : ViewModel() {
 
     private var searchJob: Job? = null
-    private val _viewState = MutableLiveData<ListViewState>()
-    val viewState: LiveData<ListViewState> = _viewState
+    private val _viewState = VolatileMutableLiveData<ListViewState>()
+    val viewState: VolatileMutableLiveData<ListViewState> = _viewState
 
     private val _shopList = MutableLiveData<List<Shop>>()
     val shopList: LiveData<List<Shop>> = _shopList
@@ -75,7 +76,11 @@ class ListViewModel(
     }
 
     fun shopListItemClicked(it: Shop) {
+        openShopDetails(it)
+    }
 
+    private fun openShopDetails(it: Shop) {
+        _viewState.postValue(OpenShopDetails(it))
     }
 
     fun locationPermissionDenied() {
@@ -91,3 +96,4 @@ object LoadingShops : ListViewState()
 object ShopsLoaded : ListViewState()
 object NoShopsAvailable : ListViewState()
 object ErrorLoadingShops : ListViewState()
+class OpenShopDetails(val shop: Shop) : ListViewState()

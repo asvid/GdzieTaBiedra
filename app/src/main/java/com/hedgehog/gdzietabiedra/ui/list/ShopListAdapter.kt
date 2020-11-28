@@ -5,8 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.GONE
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.recyclerview.widget.RecyclerView.*
 import com.github.asvid.biedra.domain.Shop
 import com.github.asvid.biedra.domain.SundayShopping
 import com.github.asvid.biedra.domain.getForToday

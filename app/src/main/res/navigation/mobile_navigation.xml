@@ -13,6 +13,14 @@
         <action
             android:id="@+id/action_navigation_list_to_navigation_map"
             app:destination="@id/navigation_map" />
+        <action
+            android:id="@+id/action_navigation_list_to_navigation_shop_details"
+            app:destination="@id/navigation_shop_details"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/navigation_list" />
     </fragment>
 
     <fragment
@@ -35,5 +43,17 @@
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.hedgehog.gdzietabiedra.ui.settings.SettingsFragment"
-        android:label="@string/settings"/>
+        android:label="@string/settings" />
+
+    <fragment
+        android:id="@+id/navigation_shop_details"
+        android:name="com.hedgehog.gdzietabiedra.ui.list.details.ShopDetailsFragment"
+        android:label="@string/title_shop_details"
+        tools:layout="@layout/shop_details_fragment">
+
+        <argument
+            android:name="shopId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

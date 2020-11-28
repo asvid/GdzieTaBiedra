@@ -41,4 +41,5 @@
     <string name="notifications">Notifications</string>
     <string name="shopping_sunday_notification_content">Next shopping sunday is %1$s</string>
     <string name="shopping_sunday_notification_title">Shopping Sunday!</string>
+    <string name="title_shop_details">Details</string>
 </resources>
