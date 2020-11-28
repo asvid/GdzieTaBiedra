@@ -31,4 +31,5 @@
     <string name="cancel">Cancelar</string>
     <string name="notification_time">Hora de la notificación</string>
     <string name="channel_description">Notificación sobre los domingos de compras</string>
+    <string name="shoping_sunday_seek_bar_label">Cuantos dias antes?</string>
 </resources>

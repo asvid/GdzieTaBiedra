@@ -31,4 +31,5 @@
     <string name="cancel"> Annulla </string>
     <string name="notification_time"> Ora della notifica </string>
     <string name="channel_description"> Notifica sugli acquisti la domenica </string>
+    <string name="shoping_sunday_seek_bar_label">Quanti giorni prima?</string>
 </resources>

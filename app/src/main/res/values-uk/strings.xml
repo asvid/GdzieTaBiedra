@@ -31,4 +31,7 @@
     <string name="cancel">Скасувати</string>
     <string name="notification_time">Час повідомлення</string>
     <string name="channel_description">Повідомлення про торгові неділі</string>
+    <string name="shoping_sunday_seek_bar_label">Скільки днів до цього?</string>
+    <string name="app_version">Версія програми</string>
+    <string name="notifications">Повідомлення</string>
 </resources>
