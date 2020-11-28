@@ -7,19 +7,12 @@ import com.hedgehog.gdzietabiedra.data.db.shops.toDomainModel
 
 class ShopsRepository constructor(private val shopDao: ShopRoomDao) {
 
-    suspend fun fetchFirst(number: Int = 1): List<Shop> {
-        return shopDao.getAll().take(number)
-                .map {
-                    it.toDomainModel()
-                }
-    }
-
     suspend fun fetchById(id: String): Shop? {
         return shopDao.getById(id)?.toDomainModel()
     }
 
     suspend fun fetchByAddress(address: String): List<Shop> {
-        return shopDao.fetchForAddress(address)
+        return shopDao.fetchForAddress(address.trim())
                 .map { it.toDomainModel() }
     }
 

@@ -16,9 +16,19 @@
     <string name="grant_permissions">"Надання дозволів"</string>
     <string name="email_me">"Напиши мені електронного листа"</string>
     <string name="share_some_stars">"Поділіться деякими зірками"</string>
-    <string name="info_text">"Це не офіційна програма Biedronka ™, я не має зв'язку з компанією. \ nЦе зроблено як моя тварина-проект, цифрова пісочниця, де я можу грати з новими бібліотеками та іншими матеріалами у вільний час. \ n \ nБудь ласка, враховуйте це при наданні цієї позначки програми або залиште коментар :)
-  "</string>
+    <string name="info_text">"Це не офіційна програма Biedronka ™, я не має зв'язку з компанією. \n Це зроблено як моя тварина-проект, цифрова пісочниця, де я можу грати з новими бібліотеками та іншими матеріалами у вільний час. \n\n Будь ласка, враховуйте це при наданні цієї позначки програми або залиште коментар :)"</string>
     <string name="turn_on_location">"Увімкніть місцезнаходження"</string>
     <string name="shop_closed">"Магазин закрито сьогодні"</string>
     <string name="shopping_sundays_subtitle">"Дни, позначені зеленим, є комерційними недільними днями."</string>
+    <string name="location_permissions_info">Додаток краще працює з наданими дозволами на розташування</string>
+    <string name="info">Інформація</string>
+    <string name="search_for_shops">Пошук магазинів</string>
+    <string name="error_loading_shops">Помилка під час завантаження магазинів</string>
+    <string name="no_shops_found_use_search">Навколо немає магазинів, використовуйте рядок пошуку або карту</string>
+    <string name="use_search">Будь ласка, використовуйте вікно пошуку</string>
+    <string name="shopping_sunday_notification">Повідомлення про покупки в неділю</string>
+    <string name="set">Встановити</string>
+    <string name="cancel">Скасувати</string>
+    <string name="notification_time">Час повідомлення</string>
+    <string name="channel_description">Повідомлення про торгові неділі</string>
 </resources>

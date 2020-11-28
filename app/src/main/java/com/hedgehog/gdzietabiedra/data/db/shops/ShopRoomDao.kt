@@ -25,6 +25,11 @@ interface ShopRoomDao {
                              maxLng: Double): List<ShopRoomEntity>
 
     @Query(
-            "SELECT * FROM shoproomentity WHERE street LIKE '%'||:address||'%' OR city LIKE '%'||:address||'%' ")
+            "SELECT * FROM shoproomentity WHERE " +
+                    "street LIKE '%'||:address||'%' OR " +
+                    "city LIKE '%'||:address||'%' OR " +
+                    "citySlug LIKE '%'||:address||'%' OR " +
+                    "name LIKE '%'||:address||'%' " +
+                    "")
     suspend fun fetchForAddress(address: String): List<ShopRoomEntity>
 }

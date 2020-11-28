@@ -15,10 +15,20 @@
     <string name="grant_permissions">"Concedere le autorizzazioni"</string>
     <string name="email_me">"Mandami un'email"</string>
     <string name="share_some_stars">"Condividi alcune stelle"</string>
-    <string name="info_text">"Questa non è un'app ufficiale Biedronka ™, non ho alcun legame con l'azienda. \nQuesto è il mio progetto di hobby per animali domestici, sandbox digitale in cui posso giocare con nuove librerie e roba nel mio tempo libero. \n \nSi prega di prendere in considerazione questo quando si consegna questo marchio di app o si lascia un commento :)
-  "</string>
+    <string name="info_text">"Questa non è un'app ufficiale Biedronka ™, non ho alcun legame con l'azienda. \nQuesto è il mio progetto di hobby per animali domestici, sandbox digitale in cui posso giocare con nuove librerie e roba nel mio tempo libero. \n \nSi prega di prendere in considerazione questo quando si consegna questo marchio di app o si lascia un commento :)"</string>
     <string name="turn_on_location">"Attiva la posizione"</string>
     <string name="shop_closed">"Il negozio è chiuso oggi"</string>
     <string name="shopping_sundays_subtitle">I giorni segnati in verde sono domeniche commerciali.</string>
     <string name="title_sundays">domenica</string>
+    <string name="location_permissions_info"> "L'app funziona meglio con le autorizzazioni di localizzazione concesse" </string>
+    <string name="info"> Informazioni </string>
+    <string name="search_for_shops"> Cerca negozi </string>
+    <string name="error_loading_shops"> Errore durante il caricamento dei negozi </string>
+    <string name="no_shops_found_use_search"> Nessun negozio in giro, usa la barra di ricerca o la mappa </string>
+    <string name="use_search"> Utilizza la casella di ricerca </string>
+    <string name="shopping_sunday_notification"> Notifica di shopping della domenica </string>
+    <string name="set"> Imposta </string>
+    <string name="cancel"> Annulla </string>
+    <string name="notification_time"> Ora della notifica </string>
+    <string name="channel_description"> Notifica sugli acquisti la domenica </string>
 </resources>
