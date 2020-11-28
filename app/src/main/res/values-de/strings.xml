@@ -31,4 +31,5 @@
     <string name="cancel">Abbrechen</string>
     <string name="notification_time">Zeitpunkt der Benachrichtigung</string>
     <string name="channel_description">Benachrichtigung über Einkaufssonntage</string>
+    <string name="shoping_sunday_seek_bar_label">Wie viele Tage zuvor?</string>
 </resources>

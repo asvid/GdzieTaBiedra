@@ -24,7 +24,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setHasOptionsMenu(true)
 
         val appVersion = Preference(context).apply {
-            title = "App version"
+            title = getString(R.string.app_version)
             summary = "${BuildConfig.VERSION_NAME}(${BuildConfig.VERSION_CODE})"
         }
         val aboutPrefCategory = findPreference<PreferenceCategory>("about")
