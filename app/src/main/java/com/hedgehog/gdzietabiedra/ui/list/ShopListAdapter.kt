@@ -3,7 +3,6 @@ package com.hedgehog.gdzietabiedra.ui.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import com.github.asvid.biedra.domain.Shop
@@ -16,7 +15,8 @@ import java.util.*
 import kotlin.math.roundToInt
 
 class ShopListAdapter(
-        val itemClicked: (Shop) -> Unit
+        val mapButtonClicked: (Shop) -> Unit,
+        val infoBUttonClicked: (Shop) -> Unit
 ) : RecyclerView.Adapter<ShopListItemVH>() {
 
     private var items: List<Shop> = Collections.emptyList()
@@ -34,8 +34,14 @@ class ShopListAdapter(
     override fun onBindViewHolder(holder: ShopListItemVH, position: Int) {
         val item = items[position]
         holder.setViewHolder(item)
-        holder.view.setOnClickListener {
-            itemClicked(item)
+        holder.view.item_body.setOnClickListener {
+            infoBUttonClicked(item)
+        }
+        holder.view.map_button.setOnClickListener {
+            mapButtonClicked(item)
+        }
+        holder.view.info_button.setOnClickListener {
+            infoBUttonClicked(item)
         }
     }
 
@@ -65,25 +71,28 @@ class ShopListItemVH(val view: View) : ViewHolder(view) {
 
         val openingHoursText: String =
                 if (SundayShopping.isShoppingAllowed())
-                    item.openHours.getForToday().toString()
+                    view.resources.getString(
+                            R.string.opening_hours,
+                            item.openHours.getForToday().toString()
+                    )
                 else view.resources.getString(R.string.shop_closed)
 
         view.shop_address.text = item.address.toString()
         if (item.distance == null) {
             view.distance_label.visibility = GONE
-            view.shop_distance.visibility = GONE
         } else {
-            view.shop_distance.text = generateDistanceText(item.distance)
+            view.distance_label.text = generateDistanceText(item.distance)
         }
-        view.shop_open_hours.text = openingHoursText
+        view.open_hours_label.text = openingHoursText
     }
 
     private fun generateDistanceText(distance: Double?): CharSequence {
-        return when {
+        val distanceText =  when {
             distance == null -> ""
             distance > 5000 -> "${(distance / 1000).roundToInt()} km"
             distance > 1000 -> "${(distance / 1000).round(2)} km"
             else -> "${distance.roundToInt()} m"
         }
+        return view.resources.getString(R.string.distance, distanceText)
     }
 }

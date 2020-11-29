@@ -7,8 +7,8 @@
     <string name="when_shop_is_in_area">"wenn ein Geschäft in der Nähe ist"</string>
     <string name="navigate_to_shop">"zum Geschäft navigieren"</string>
     <string name="address">"Adresse:"</string>
-    <string name="opening_hours">"Öffnungszeiten:"</string>
-    <string name="distance">"Entfernung:"</string>
+    <string name="opening_hours">"Öffnungszeiten: %1$s"</string>
+    <string name="distance">"Entfernung: %1$s"</string>
     <string name="title_list">"Liste"</string>
     <string name="title_map">"Karte"</string>
     <string name="settings">"die Einstellungen"</string>

@@ -75,8 +75,12 @@ class ListViewModel(
         }
     }
 
-    fun shopListItemClicked(it: Shop) {
-        openShopDetails(it)
+    fun shopListItemMapButtonClicked(it: Shop) {
+        openMapWithShop(it)
+    }
+
+    private fun openMapWithShop(it: Shop) {
+        _viewState.postValue(OpenMapWithShop(it))
     }
 
     private fun openShopDetails(it: Shop) {
@@ -85,6 +89,10 @@ class ListViewModel(
 
     fun locationPermissionDenied() {
         _viewState.postValue(LocationPermissionDenied)
+    }
+
+    fun shopListItemInfoButtonClicked(it: Shop) {
+        openShopDetails(it)
     }
 }
 
@@ -97,3 +105,4 @@ object ShopsLoaded : ListViewState()
 object NoShopsAvailable : ListViewState()
 object ErrorLoadingShops : ListViewState()
 class OpenShopDetails(val shop: Shop) : ListViewState()
+class OpenMapWithShop(val shop: Shop) : ListViewState()

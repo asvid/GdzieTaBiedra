@@ -7,8 +7,8 @@
     <string name="when_shop_is_in_area">"коли магазин знаходиться в районі"</string>
     <string name="navigate_to_shop">"перейти до магазину"</string>
     <string name="address">"Адреса:"</string>
-    <string name="opening_hours">"Години роботи:"</string>
-    <string name="distance">"Відстань:"</string>
+    <string name="opening_hours">"Години роботи: %1$s"</string>
+    <string name="distance">"Відстань: %1$s"</string>
     <string name="title_list">"Перелік"</string>
     <string name="title_map">"Карта"</string>
     <string name="title_sundays">"Неділі"</string>

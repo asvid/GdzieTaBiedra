@@ -51,6 +51,7 @@ class ListFragment : Fragment() {
                 NoShopsAvailable -> displayNoShopsAvailable()
                 ErrorLoadingShops -> displayErrorLoadingShops()
                 is OpenShopDetails -> openShopDetails(it.shop)
+                is OpenMapWithShop -> openMapWithShop(it.shop)
             }
         }
         vm.shopList.observe(viewLifecycleOwner) {
@@ -58,6 +59,11 @@ class ListFragment : Fragment() {
         }
         setHasOptionsMenu(true)
         return root
+    }
+
+    private fun openMapWithShop(shop: Shop) {
+        val bundle = bundleOf("shopId" to shop.id)
+        findNavController().navigate(R.id.action_navigation_list_to_navigation_map, bundle)
     }
 
     private fun openShopDetails(shop: Shop) {
@@ -139,11 +145,14 @@ class ListFragment : Fragment() {
 
     private fun setupShopList() {
         val linearLayoutManager = LinearLayoutManager(context)
-        shopsAdapter = ShopListAdapter {
-          vm.shopListItemClicked(it)
-//            val bundle = bundleOf("shopId" to it.id)
-//            findNavController().navigate(R.id.action_navigation_list_to_navigation_map, bundle)
-        }
+        shopsAdapter = ShopListAdapter(
+                {
+                    vm.shopListItemMapButtonClicked(it)
+                },
+                {
+                    vm.shopListItemInfoButtonClicked(it)
+                }
+        )
         shop_list_view.adapter = shopsAdapter
         shop_list_view.layoutManager = linearLayoutManager
         shop_list_view.addItemDecoration(MarginItemDecoration(resources.getDimension(R.dimen.default_padding).toInt()))
