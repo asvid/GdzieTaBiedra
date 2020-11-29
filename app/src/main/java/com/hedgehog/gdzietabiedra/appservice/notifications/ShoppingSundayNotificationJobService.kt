@@ -24,8 +24,6 @@ class ShoppingSundayNotificationJobService : JobService() {
             notify(1, builder.build())
         }
 
-        // todo: schedule next notification
-
         return true
     }
 

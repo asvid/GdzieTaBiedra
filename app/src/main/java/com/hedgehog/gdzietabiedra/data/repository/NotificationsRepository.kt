@@ -13,7 +13,7 @@ class NotificationsRepository constructor(private val sharedPrefsWrapper: Shared
     }
 
     suspend fun getNotificationDays(): Int? {
-        return sharedPrefsWrapper.getInt("shopping_sunday_notification_days")
+        return sharedPrefsWrapper.getInt("shopping_sunday_notification_days_before")
     }
 
     suspend fun addSundayNotificationId(jobId: Int) {
