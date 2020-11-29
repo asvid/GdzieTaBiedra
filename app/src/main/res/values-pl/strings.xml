@@ -38,4 +38,6 @@
     <string name="shoping_sunday_seek_bar_label">Ile dni przed?</string>
     <string name="app_version">Wersja aplikacji</string>
     <string name="notifications">Powiadomienia</string>
+    <string name="shopping_sunday_notification_title">Niedziela Handlowa!</string>
+    <string name="shopping_sunday_notification_content">Następna niedziela handlowa to  %1$s</string>
 </resources>
