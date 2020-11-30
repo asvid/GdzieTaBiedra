@@ -5,7 +5,7 @@ object Versions {
     const val koin = "2.2.0-beta-2"
     const val coroutines = "1.3.9"
     const val roomDB = "2.2.5"
-    const val googlePlayServices = "16.0.0"
+    const val googlePlayServices = "17.0.0"
     const val jodaTime = "2.10.6"
     const val timber = "4.7.1"
     const val firebaseBom = "26.0.0"
@@ -42,6 +42,8 @@ object Firebase {
 object Google {
     const val maps = "com.google.android.gms:play-services-maps:${Versions.googlePlayServices}"
     const val location = "com.google.android.gms:play-services-location:${Versions.googlePlayServices}"
+    const val mapUtils = "com.google.maps.android:android-maps-utils:2.1.0"
+    const val mapUtilsKtx = "com.google.maps.android:maps-utils-ktx:2.2.0"
 }
 
 object Android {

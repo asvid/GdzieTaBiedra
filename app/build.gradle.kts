@@ -123,6 +123,8 @@ dependencies {
     implementation(Room.ktx)
 
     implementation(Google.maps)
+    implementation(Google.mapUtils)
+    implementation(Google.mapUtilsKtx)
     implementation(Google.location)
 
     implementation(Ktor.clientAndroid)

@@ -72,10 +72,9 @@ class MapViewModel(
     }
 
     private suspend fun populateWithMarkers(location: Location) {
-        shopService.getShopsInCloseArea(location)
-                .forEach {
-                    mapProvider.drawMarker(ShopMarker.create(it), false)
-                }
+        val markers = shopService.getShopsInCloseArea(location)
+                .map { ShopMarker.create(it) }
+        mapProvider.drawMarkers(markers)
     }
 
     private fun removeShopSelection() {
