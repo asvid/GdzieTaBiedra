@@ -1,24 +1,14 @@
 package com.hedgehog.gdzietabiedra.appservice.map
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Bitmap.createScaledBitmap
-import android.graphics.BitmapFactory
 import com.github.asvid.biedra.domain.Location
 import com.github.asvid.biedra.domain.Shop
-import com.github.asvid.biedra.domain.SundayShopping
-import com.github.asvid.biedra.domain.getForToday
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.collections.MarkerManager
-import com.google.maps.android.data.Renderer
-import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.*
 import com.hedgehog.gdzietabiedra.utils.toLatLng
 import com.hedgehog.gdzietabiedra.utils.toPosition
@@ -33,7 +23,6 @@ import kotlinx.coroutines.flow.callbackFlow
 private const val MEDIUM_MAP_ZOOM = 13f
 private const val CLOSE_MAP_ZOOM = 15f
 private const val FAR_MAP_ZOOM = 10f
-private const val MAP_MARKER_SIZE = 150
 
 /**
  * Map provider build around [GoogleMap]
@@ -43,16 +32,13 @@ private const val MAP_MARKER_SIZE = 150
 @ExperimentalCoroutinesApi
 class GoogleMapProvider private constructor(private val context: Context) : MapProvider {
 
+    private lateinit var markerClusterRenderer: MarkerClusterRenderer
     private lateinit var map: GoogleMap
-
-    //    private val mapMarkers = hashMapOf<Marker, ShopMarker>()
-    private val newMapMarkers = mutableListOf<ShopMarker>()
-    private val markerChannel = BroadcastChannel<ShopMarker>(1)
-    private val mapClickChannel = BroadcastChannel<LatLng>(1)
-    private val markerIcon = BitmapDescriptorFactory.fromBitmap(
-            resizeMapIcons(R.mipmap.bierdra_map_marker, MAP_MARKER_SIZE, MAP_MARKER_SIZE))
     private lateinit var clusterManager: ClusterManager<ShopMarker>
     private lateinit var markerManager: MarkerManager
+
+    private val markerChannel = BroadcastChannel<ShopMarker>(1)
+    private val mapClickChannel = BroadcastChannel<LatLng>(1)
 
     companion object {
         fun create(googleMap: GoogleMap, context: Context): GoogleMapProvider {
@@ -73,34 +59,16 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
     }
 
     override fun drawMarkers(points: Collection<ShopMarker>) {
+        clusterManager.clearItems()
         points.forEach { shopMarker ->
-            drawMarker(shopMarker, false)
+            clusterManager.addItem(shopMarker)
         }
         clusterManager.cluster()
     }
 
-    private fun resizeMapIcons(iconResId: Int, width: Int, height: Int): Bitmap {
-        val imageBitmap = BitmapFactory.decodeResource(context.resources, iconResId)
-        return createScaledBitmap(imageBitmap, width, height, false)
-    }
-
     override fun drawMarker(point: ShopMarker, showInfo: Boolean) {
-        if (newMapMarkers.contains(point)) return
-
-        val openingHoursText: String =
-                if (SundayShopping.isShoppingAllowed())
-                    point.shop.openHours.getForToday().toString()
-                else context.resources.getString(R.string.shop_closed)
-
-        val markerOptions = MarkerOptions()
-                .position(point.location.toLatLng())
-                .title(point.shop.address.toString())
-                .snippet(openingHoursText)
-                .icon(markerIcon)
-//        val marker = map.addMarker(markerOptions)
-//        if (showInfo) marker.showInfoWindow()
-//        mapMarkers[marker] = point
         clusterManager.addItem(point)
+        clusterManager.cluster()
     }
 
     override fun getMapCenterPosition(): Location {
@@ -116,21 +84,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
             if (reason == REASON_GESTURE) {
                 map.setOnCameraIdleListener {
                     this.offer(getMapCenterPosition())
-//                    mapMarkers.keys.forEach { marker ->
-//                        marker.hideInfoWindow()
-//                        val bounds = map.projection.visibleRegion.latLngBounds
-//                        if (!bounds.contains(marker.position)) {
-//                            marker.remove()
-//                        }
-//                    }
-//                    newMapMarkers.forEach { marker ->
-//                        val bounds = map.projection.visibleRegion.latLngBounds
-//                        if (!bounds.contains(marker.position)) {
-//                            clusterManager.removeItem(marker)
-//                        }
-//                    }
                     clusterManager.clearItems()
-                    newMapMarkers.clear()
                 }
             } else {
                 map.setOnCameraIdleListener(null)
@@ -140,7 +94,6 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
     }
 
     override fun clearMap() {
-        newMapMarkers.clear()
         clusterManager.clearItems()
         map.clear()
     }
@@ -160,20 +113,29 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
     override fun selectShop(shop: Shop) {
         map.clear()
         val shopMarker = ShopMarker.create(shop)
-        drawMarker(shopMarker, true)
+        clusterManager.addItem(shopMarker)
         goToPosition(shop.location, CLOSE)
-        markerChannel.offer(shopMarker)
+        markerClusterRenderer.listenOnceForRender { marker ->
+            marker.showInfoWindow()
+            markerChannel.offer(shopMarker)
+        }
     }
 
     private fun setUpClusterer(googleMap: GoogleMap) {
         markerManager = MarkerManager(googleMap)
         clusterManager = ClusterManager(context, googleMap, markerManager)
+        markerClusterRenderer = MarkerClusterRenderer(context, googleMap, clusterManager)
+        clusterManager.renderer = markerClusterRenderer
+        markerClusterRenderer.setAnimation(false)
         map.setOnCameraIdleListener(clusterManager)
         map.setOnMarkerClickListener(clusterManager)
+        markerManager.Collection().setOnMarkerClickListener {
+            it.showInfoWindow()
+            false
+        }
         clusterManager.setOnClusterItemClickListener {
             markerChannel.offer(it)
-//            marker.showInfoWindow()
+            false
         }
-        clusterManager.renderer = MarkerClusterRenderer(context, googleMap, clusterManager)
     }
 }
