@@ -13,8 +13,9 @@ import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.utils.toLatLng
+import kotlin.math.roundToInt
 
-private const val MARKER_DIMENSION = 128
+private const val MARKER_DIMENSION = 32
 
 class MarkerClusterRenderer(
         val context: Context,
@@ -48,8 +49,10 @@ class MarkerClusterRenderer(
     }
 
     private fun resizeMapIcons(iconResId: Int, width: Int, height: Int): Bitmap {
+        val density = context.resources.displayMetrics.density
+
         val imageBitmap = BitmapFactory.decodeResource(context.resources, iconResId)
-        return Bitmap.createScaledBitmap(imageBitmap, width, height, false)
+        return Bitmap.createScaledBitmap(imageBitmap, (width * density).roundToInt(), (height* density).toInt(), false)
     }
 
     fun listenOnceForRender(renderingListener: (marker: Marker) -> Unit) {
