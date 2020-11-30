@@ -26,7 +26,7 @@ class ShoppingSundayNotificationJobService : JobService() {
         }
 
         val builder = NotificationCompat.Builder(this, SHOPPING_SUNDAY_CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.ic_ladybug)
                 .setContentTitle(getString(R.string.shopping_sunday_notification_title))
                 .setContentText(getString(R.string.shopping_sunday_notification_content, nextShoppingSunday))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
