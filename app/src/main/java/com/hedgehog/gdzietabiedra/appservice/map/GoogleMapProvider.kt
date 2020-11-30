@@ -16,6 +16,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.collections.MarkerManager
+import com.google.maps.android.data.Renderer
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.*
 import com.hedgehog.gdzietabiedra.utils.toLatLng
@@ -42,13 +44,15 @@ private const val MAP_MARKER_SIZE = 150
 class GoogleMapProvider private constructor(private val context: Context) : MapProvider {
 
     private lateinit var map: GoogleMap
-//    private val mapMarkers = hashMapOf<Marker, ShopMarker>()
+
+    //    private val mapMarkers = hashMapOf<Marker, ShopMarker>()
     private val newMapMarkers = mutableListOf<ShopMarker>()
     private val markerChannel = BroadcastChannel<ShopMarker>(1)
     private val mapClickChannel = BroadcastChannel<LatLng>(1)
     private val markerIcon = BitmapDescriptorFactory.fromBitmap(
             resizeMapIcons(R.mipmap.bierdra_map_marker, MAP_MARKER_SIZE, MAP_MARKER_SIZE))
     private lateinit var clusterManager: ClusterManager<ShopMarker>
+    private lateinit var markerManager: MarkerManager
 
     companion object {
         fun create(googleMap: GoogleMap, context: Context): GoogleMapProvider {
@@ -62,18 +66,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
     private fun initialize(googleMap: GoogleMap, context: Context) {
         this.map = googleMap
         this.map.setInfoWindowAdapter(BiedraInfoAdapter(context))
-        setUpClusterer()
-        this.map.setOnMarkerClickListener { marker ->
-//            mapMarkers[marker]?.let {
-//                markerChannel.offer(it)
-//                marker.showInfoWindow()
-//            }
-//            marker.showInfoWindow()
-//            markerChannel.offer(newMapMarkers.find {
-//                marker.
-//            })
-            true
-        }
+        setUpClusterer(googleMap)
         this.map.setOnMapClickListener {
             mapClickChannel.offer(it)
         }
@@ -107,7 +100,6 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
 //        val marker = map.addMarker(markerOptions)
 //        if (showInfo) marker.showInfoWindow()
 //        mapMarkers[marker] = point
-        newMapMarkers.add(point)
         clusterManager.addItem(point)
     }
 
@@ -173,9 +165,15 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
         markerChannel.offer(shopMarker)
     }
 
-    private fun setUpClusterer() {
-        clusterManager = ClusterManager(context, map)
+    private fun setUpClusterer(googleMap: GoogleMap) {
+        markerManager = MarkerManager(googleMap)
+        clusterManager = ClusterManager(context, googleMap, markerManager)
         map.setOnCameraIdleListener(clusterManager)
         map.setOnMarkerClickListener(clusterManager)
+        clusterManager.setOnClusterItemClickListener {
+            markerChannel.offer(it)
+//            marker.showInfoWindow()
+        }
+        clusterManager.renderer = MarkerClusterRenderer(context, googleMap, clusterManager)
     }
 }
