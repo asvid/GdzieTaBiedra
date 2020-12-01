@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">"Де знаходиться Бідронка"</string>
+    <string name="app_name">Biedra</string>
     <string name="more_actions">"більше дій"</string>
     <string name="notifications_title">"Сповіщення"</string>
     <string name="range">"діапазон"</string>
