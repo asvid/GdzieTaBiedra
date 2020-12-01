@@ -21,6 +21,7 @@ android {
         targetSdkVersion(Build.targetSdkVersion)
         compileSdkVersion(Build.compileSdkVersion)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
     }
     buildTypes {
         getByName("release") {
@@ -54,6 +55,7 @@ android {
         jvmTarget = "1.8"
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -77,8 +79,6 @@ android {
     productFlavors {
         create("dev") {
             dimension = "type"
-//            versionNameSuffix = "-dev"
-//            applicationIdSuffix = ".dev"
         }
         create("production") {
             dimension = "type"
@@ -97,6 +97,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.1")
 
     implementation(Libs.kotlin)
     implementation(Libs.coroutines)

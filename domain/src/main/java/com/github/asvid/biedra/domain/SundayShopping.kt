@@ -61,15 +61,9 @@ object SundayShopping {
         }
     }
 
-    fun calculateJobTime(nextShoppingSunday: LocalDate, notificationDays: Int?, notificationTime: Long?): Long {
-        return if (notificationDays != null && notificationTime != null) {
-            val date = nextShoppingSunday.minusDays(notificationDays)
-            val notificationTime1 = Date(notificationTime)
-            val fromDateFields = LocalTime.fromDateFields(notificationTime1)
-            val dateTime = DateTime(date.year, date.monthOfYear, date.dayOfMonth, fromDateFields.hourOfDay, fromDateFields.minuteOfHour)
-            dateTime.toDateTime().millis - System.currentTimeMillis()
-        } else {
-            nextShoppingSunday.toDateTime(LocalTime(12, 0, 0)).millis - System.currentTimeMillis()
-        }
+    fun calculateJobTime(nextShoppingSunday: LocalDate, notificationDays: Int, notificationTime: java.time.LocalTime): Long {
+        val date = nextShoppingSunday.minusDays(notificationDays)
+        val dateTime = DateTime(date.year, date.monthOfYear, date.dayOfMonth, notificationTime.hour, notificationTime.minute)
+        return dateTime.toDateTime().millis - System.currentTimeMillis()
     }
 }
