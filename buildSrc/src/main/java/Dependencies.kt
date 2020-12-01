@@ -22,7 +22,6 @@ object Libs {
     const val jodaTime = "net.danlew:android.joda:${Versions.jodaTime}"
     const val jodaTimeTest = "joda-time:joda-time:${Versions.jodaTime}"
     const val calendarView = "com.github.sundeepk:compact-calendar-view:3.0.0"
-
 }
 
 object Room {
@@ -36,13 +35,12 @@ object Firebase {
     const val bom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
     const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
     const val analytics = "com.google.firebase:firebase-analytics-ktx"
-
 }
 
 object Google {
     const val maps = "com.google.android.gms:play-services-maps:${Versions.googlePlayServices}"
     const val location = "com.google.android.gms:play-services-location:${Versions.googlePlayServices}"
-    const val mapUtils = "com.google.maps.android:android-maps-utils:2.1.0"
+    const val mapUtils = "com.google.maps.android:android-maps-utils:2.2.0"
     const val mapUtilsKtx = "com.google.maps.android:maps-utils-ktx:2.2.0"
 }
 
