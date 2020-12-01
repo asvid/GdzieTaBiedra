@@ -10,10 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.preference.*
 import com.hedgehog.gdzietabiedra.BuildConfig
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.ui.views.TimePreference
-import com.hedgehog.gdzietabiedra.ui.views.TimePreferenceDialog
 import org.koin.androidx.viewmodel.compat.ViewModelCompat
-import timber.log.Timber
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

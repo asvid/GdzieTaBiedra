@@ -20,7 +20,7 @@
             app:showSeekBarValue="true"
             app:title="@string/shoping_sunday_seek_bar_label" />
 
-        <com.hedgehog.gdzietabiedra.ui.views.TimePreference
+        <com.hedgehog.gdzietabiedra.ui.settings.TimePreference
             app:key="shopping_sunday_notification_time"
             app:dependency="shopping_sunday_notification"
             app:singleLineTitle="false"

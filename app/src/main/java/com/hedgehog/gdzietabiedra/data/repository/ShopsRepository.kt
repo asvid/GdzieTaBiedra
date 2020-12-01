@@ -7,6 +7,11 @@ import com.hedgehog.gdzietabiedra.data.db.shops.toDomainModel
 
 class ShopsRepository constructor(private val shopDao: ShopRoomDao) {
 
+    suspend fun fetchAll(): List<Shop> {
+        return shopDao.getAll()
+                .map { it.toDomainModel() }
+    }
+
     suspend fun fetchById(id: String): Shop? {
         return shopDao.getById(id)?.toDomainModel()
     }

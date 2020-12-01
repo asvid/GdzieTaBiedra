@@ -58,6 +58,10 @@ class ShopService constructor(
                 }
     }
 
+    suspend fun getAllShops(): List<Shop> {
+        return shopsRepository.fetchAll()
+    }
+
     private fun Shop.calculateDistance(observerLocation: Location?) {
         distance = if (observerLocation == null) {
             null

@@ -39,6 +39,6 @@
     <string name="shoping_sunday_seek_bar_label">How many days before?</string>
     <string name="app_version">App version</string>
     <string name="notifications">Notifications</string>
-    <string name="shopping_sunday_notification_content">Next shopping sunday is %1$s</string>
+    <string name="shopping_sunday_notification_content">Next shopping Sunday is %1$s</string>
     <string name="shopping_sunday_notification_title">Shopping Sunday!</string>
 </resources>

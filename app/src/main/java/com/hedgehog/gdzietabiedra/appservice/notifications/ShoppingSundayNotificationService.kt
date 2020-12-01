@@ -13,9 +13,7 @@ import com.github.asvid.biedra.domain.SundayShopping
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.data.repository.NotificationsRepository
 import org.joda.time.Duration
-import org.joda.time.LocalDate
 import org.joda.time.LocalDateTime
-import org.joda.time.LocalTime
 import timber.log.Timber
 import kotlin.random.Random
 

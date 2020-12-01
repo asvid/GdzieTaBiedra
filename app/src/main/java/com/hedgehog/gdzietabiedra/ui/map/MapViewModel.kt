@@ -14,6 +14,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -53,6 +54,7 @@ class MapViewModel(
             mapProvider.shopMarkerClicked().collect { marker ->
                 _showNavButton.postValue(true)
                 shopSelected = marker.shop
+                Timber.d("show navigation button")
             }
         }
         viewModelScope.launch {
@@ -60,6 +62,7 @@ class MapViewModel(
                 removeShopSelection()
                 populateWithMarkers(location)
                 _showNavButton.postValue(false)
+                Timber.d("hide navigation button")
             }
         }
     }
@@ -72,10 +75,9 @@ class MapViewModel(
     }
 
     private suspend fun populateWithMarkers(location: Location) {
-        shopService.getShopsInCloseArea(location)
-                .forEach {
-                    mapProvider.drawMarker(ShopMarker.create(it), false)
-                }
+        val markers = shopService.getShopsInCloseArea(location)
+                .map { ShopMarker.create(it) }
+        mapProvider.drawMarkers(markers)
     }
 
     private fun removeShopSelection() {

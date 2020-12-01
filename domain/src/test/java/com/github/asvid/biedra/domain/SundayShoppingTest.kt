@@ -5,6 +5,9 @@ import org.joda.time.LocalDate
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.util.*
 
 class SundayShoppingTest {
@@ -32,7 +35,7 @@ class SundayShoppingTest {
             "2019, 12, 10, 2019, 12, 15",
             "2019, 12, 15, 2019, 12, 22",
             "2021, 12, 15, 2021, 12, 19",
-            )
+    )
     fun `should return expected next shopping sunday after selected day`(
             year: Int,
             month: Int,
@@ -48,20 +51,17 @@ class SundayShoppingTest {
     }
 
     @Test
-    fun `should return all shopping sundays after selected day`(){
+    fun `should return all shopping sundays after selected day`() {
         val afterDate = LocalDate(2020, 12, 30)
         val allRemainingSundays = SundayShopping.getAllRemainingSundays(afterDate)
         assert(allRemainingSundays.size == 7)
     }
 
     @Test
-    fun `should calculate notification date properly`(){
+    fun `should calculate notification date properly`() {
         val initDate = LocalDate(2020, 12, 15)
-        val initTime = Date().apply {
-            hours = 12
-            minutes = 30
-        }
-        val calculatedDateTime = SundayShopping.calculateJobTime(initDate, 10, initTime.time) + System.currentTimeMillis()
+        val initTime = LocalTime.of(12, 300)
+        val calculatedDateTime = SundayShopping.calculateJobTime(initDate, 10, initTime) + System.currentTimeMillis()
         val date = DateTime(calculatedDateTime)
         println(date)
 
@@ -70,5 +70,12 @@ class SundayShoppingTest {
         assert(date.dayOfMonth == 5)
         assert(date.monthOfYear == 12)
         assert(date.year == 2020)
+    }
+
+    @Test
+    fun `dummy`() {
+        val formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale("pl"))
+        println(LocalTime.of(5, 2).format(formatter))
+        println(LocalTime.of(15, 2).format(formatter))
     }
 }
