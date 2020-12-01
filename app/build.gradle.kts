@@ -55,9 +55,9 @@ android {
         jvmTarget = "1.8"
     }
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        isCoreLibraryDesugaringEnabled = true // adds support for LocalTime for API<26
+        sourceCompatibility = JavaVersion.VERSION_1_8 // MapUtils won't work on API23 without it
+        targetCompatibility = JavaVersion.VERSION_1_8 // MapUtils won't work on API23 without it
     }
     lintOptions {
         isAbortOnError = false
@@ -97,7 +97,6 @@ android {
 
 dependencies {
     implementation(project(":domain"))
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.1")
 
     implementation(Libs.kotlin)
     implementation(Libs.coroutines)
@@ -120,6 +119,7 @@ dependencies {
     implementation(Android.viewmodelKtx)
     implementation(Android.swipeRefreshLayout)
     implementation(Android.preferences)
+    coreLibraryDesugaring(Android.coreLibDesugaring)
 
     implementation(Libs.calendarView)
 

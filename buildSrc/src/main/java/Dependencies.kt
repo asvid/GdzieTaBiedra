@@ -58,6 +58,7 @@ object Android {
     const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:2.3.1"
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val preferences = "androidx.preference:preference-ktx:1.1.1"
+    const val coreLibDesugaring = "com.android.tools:desugar_jdk_libs:1.1.1"
 }
 
 object Koin {
