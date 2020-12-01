@@ -11,14 +11,13 @@ import androidx.core.app.NotificationManagerCompat
 import com.github.asvid.biedra.domain.SundayShopping
 import com.hedgehog.gdzietabiedra.MainActivity
 import com.hedgehog.gdzietabiedra.R
-import com.hedgehog.gdzietabiedra.utils.print
+import com.hedgehog.gdzietabiedra.utils.toLocalFormat
 import timber.log.Timber
-import java.text.DateFormat
 
 class ShoppingSundayNotificationJobService : JobService() {
     override fun onStartJob(params: JobParameters): Boolean {
         Timber.d("starting a job")
-        val nextShoppingSunday = SundayShopping.getNextShoppingSunday().print(applicationContext)
+        val nextShoppingSunday = SundayShopping.getNextShoppingSunday().toLocalFormat(applicationContext)
         val resultIntent = Intent(this, MainActivity::class.java)
         val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(this).run {
             addNextIntentWithParentStack(resultIntent)

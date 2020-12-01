@@ -24,7 +24,7 @@ fun Location.toLatLng(): LatLng = LatLng(this.lat, this.lng)
 
 fun LatLng.toPosition(): Location = Location(this.latitude, this.longitude)
 
-fun LocalDate.print(context: Context): String {
+fun LocalDate.toLocalFormat(context: Context): String {
     val date = this.toDate()
     val dateFormat: DateFormat = android.text.format.DateFormat.getDateFormat(context)
     return dateFormat.format(date)
