@@ -51,10 +51,8 @@ class ShopService constructor(
     suspend fun getShopsInCloseArea(location: Location?): List<Shop> {
         return if (location == null) listOf()
         else shopsRepository.fetchByLocationAndRange(location, 0.1)
-                .apply {
-                    this.forEach {
-                        it.calculateDistance(location)
-                    }
+                .onEach {
+                    it.calculateDistance(location)
                 }
     }
 
@@ -72,5 +70,11 @@ class ShopService constructor(
 
     suspend fun getShopById(shopId: String): Shop? {
         return shopsRepository.fetchById(shopId)
+    }
+
+    suspend fun getShopById(shopId: String, observerLocation: Location?): Shop? {
+        return shopsRepository.fetchById(shopId).apply {
+            this?.calculateDistance(observerLocation)
+        }
     }
 }

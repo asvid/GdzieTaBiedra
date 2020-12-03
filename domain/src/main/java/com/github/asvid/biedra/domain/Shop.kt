@@ -12,10 +12,14 @@ package com.github.asvid.biedra.domain
 data class Shop(
         val id: String,
         val address: Address,
+        val name: String?,
         var distance: Double?,
         val location: Location,
-        val openHours: OpenHours
+        val openHours: OpenHours,
+        val features: Set<ShopFeature>
 )
+
+fun Shop.printName() = this.name ?: this.address.toString()
 
 /**
  * DSL method for creating [Shop]
@@ -33,19 +37,22 @@ annotation class ShopDsl
  * @property distance
  * @property location uses [ProcessBuilder]
  * @property openHours uses [OpenHoursBuilder]
+ * @property features uses [FeaturesBuilder]
  * */
 @ShopDsl
 class ShopBuilder {
+    var id: String = ""
+    var name: String? = null
+    var distance: Double? = null
+    lateinit var address: Address
+    lateinit var openHours: OpenHours
+    lateinit var location: Location
+    lateinit var features: Set<ShopFeature>
 
-  var id: String = ""
-  var distance: Double? = null
-  lateinit var address: Address
-  lateinit var openHours: OpenHours
-  lateinit var location: Location
+    fun address(block: AddressBuilder.() -> Unit) = AddressBuilder().apply(block).build()
+    fun openHours(block: OpenHoursBuilder.() -> Unit) = OpenHoursBuilder().apply(block).build()
+    fun location(block: LocationBuilder.() -> Unit) = LocationBuilder().apply(block).build()
+    fun features(block: FeaturesBuilder.() -> Unit) = FeaturesBuilder().apply(block).build()
 
-  fun address(block: AddressBuilder.() -> Unit) = AddressBuilder().apply(block).build()
-  fun openHours(block: OpenHoursBuilder.() -> Unit) = OpenHoursBuilder().apply(block).build()
-  fun location(block: PositionBuilder.() -> Unit) = PositionBuilder().apply(block).build()
-
-  fun build(): Shop = Shop(id, address, distance, location, openHours)
+    fun build(): Shop = Shop(id, address, name, distance, location, openHours, features)
 }

@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView.*
 import com.github.asvid.biedra.domain.Shop
 import com.github.asvid.biedra.domain.SundayShopping
 import com.github.asvid.biedra.domain.getForToday
+import com.github.asvid.biedra.domain.printName
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.utils.generateDistanceText
 import com.hedgehog.gdzietabiedra.utils.round
 import kotlinx.android.synthetic.main.shop_list_item.view.*
 import java.util.*
@@ -77,22 +79,12 @@ class ShopListItemVH(val view: View) : ViewHolder(view) {
                     )
                 else view.resources.getString(R.string.shop_closed)
 
-        view.shop_address.text = item.address.toString()
+        view.shop_address.text = item.printName()
         if (item.distance == null) {
             view.distance_label.visibility = GONE
         } else {
-            view.distance_label.text = generateDistanceText(item.distance)
+            view.distance_label.text = item.distance.generateDistanceText(view.resources)
         }
         view.open_hours_label.text = openingHoursText
-    }
-
-    private fun generateDistanceText(distance: Double?): CharSequence {
-        val distanceText =  when {
-            distance == null -> ""
-            distance > 5000 -> "${(distance / 1000).roundToInt()} km"
-            distance > 1000 -> "${(distance / 1000).round(2)} km"
-            else -> "${distance.roundToInt()} m"
-        }
-        return view.resources.getString(R.string.distance, distanceText)
     }
 }

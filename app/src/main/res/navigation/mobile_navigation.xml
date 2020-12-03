@@ -49,7 +49,7 @@
         android:id="@+id/navigation_shop_details"
         android:name="com.hedgehog.gdzietabiedra.ui.list.details.ShopDetailsFragment"
         android:label="@string/title_shop_details"
-        tools:layout="@layout/shop_details_fragment">
+        tools:layout="@layout/fragment_shop_details">
 
         <argument
             android:name="shopId"

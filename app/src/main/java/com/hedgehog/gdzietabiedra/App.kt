@@ -67,7 +67,7 @@ class App : Application() {
                 viewModel { MapViewModel(get(), get()) }
                 viewModel { SundaysViewModel() }
                 viewModel { SettingsViewModel(get()) }
-                viewModel { ShopDetailsViewModel(get()) }
+                viewModel { ShopDetailsViewModel(get(), get()) }
             })
         }
     }
