@@ -21,6 +21,7 @@ android {
         targetSdkVersion(Build.targetSdkVersion)
         compileSdkVersion(Build.compileSdkVersion)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
     }
     buildTypes {
         getByName("release") {
@@ -53,6 +54,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true // adds support for LocalTime for API<26
+        sourceCompatibility = JavaVersion.VERSION_1_8 // MapUtils won't work on API23 without it
+        targetCompatibility = JavaVersion.VERSION_1_8 // MapUtils won't work on API23 without it
+    }
     lintOptions {
         isAbortOnError = false
     }
@@ -73,8 +79,6 @@ android {
     productFlavors {
         create("dev") {
             dimension = "type"
-//            versionNameSuffix = "-dev"
-//            applicationIdSuffix = ".dev"
         }
         create("production") {
             dimension = "type"
@@ -115,6 +119,7 @@ dependencies {
     implementation(Android.viewmodelKtx)
     implementation(Android.swipeRefreshLayout)
     implementation(Android.preferences)
+    coreLibraryDesugaring(Android.coreLibDesugaring)
 
     implementation(Libs.calendarView)
 
@@ -123,6 +128,8 @@ dependencies {
     implementation(Room.ktx)
 
     implementation(Google.maps)
+    implementation(Google.mapUtils)
+    implementation(Google.mapUtilsKtx)
     implementation(Google.location)
 
     implementation(Ktor.clientAndroid)

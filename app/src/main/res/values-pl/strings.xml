@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Gdzie Ta Biedra</string>
+    <string name="app_name">Biedra</string>
     <string name="more_actions">więcej</string>
     <string name="notifications_title">Powiadomienia</string>
     <string name="range">zasięg</string>
@@ -38,4 +38,6 @@
     <string name="shoping_sunday_seek_bar_label">Ile dni przed?</string>
     <string name="app_version">Wersja aplikacji</string>
     <string name="notifications">Powiadomienia</string>
+    <string name="shopping_sunday_notification_title">Niedziela Handlowa!</string>
+    <string name="shopping_sunday_notification_content">Następna niedziela handlowa to  %1$s</string>
 </resources>

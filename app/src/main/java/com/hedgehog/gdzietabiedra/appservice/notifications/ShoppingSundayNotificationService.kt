@@ -12,8 +12,8 @@ import android.os.Build.VERSION_CODES
 import com.github.asvid.biedra.domain.SundayShopping
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.data.repository.NotificationsRepository
-import org.joda.time.LocalDate
-import org.joda.time.LocalTime
+import org.joda.time.Duration
+import org.joda.time.LocalDateTime
 import timber.log.Timber
 import kotlin.random.Random
 
@@ -36,6 +36,7 @@ class ShoppingSundayNotificationService(
         if (VERSION.SDK_INT >= VERSION_CODES.O) {
             val notificationManager: NotificationManager = context.getSystemService(JobService.NOTIFICATION_SERVICE) as NotificationManager
             if (notificationManager.getNotificationChannel(SHOPPING_SUNDAY_CHANNEL_ID) == null) {
+                Timber.d("Creating new notification channel")
                 val name = context.getString(R.string.channel_name)
                 val descriptionText = context.getString(R.string.channel_description)
                 val importance = NotificationManager.IMPORTANCE_DEFAULT
@@ -43,6 +44,8 @@ class ShoppingSundayNotificationService(
                     description = descriptionText
                 }
                 notificationManager.createNotificationChannel(channel)
+            } else {
+                Timber.d("Notification channel was already created")
             }
         }
     }
@@ -54,21 +57,22 @@ class ShoppingSundayNotificationService(
         val nextShoppingSundays = SundayShopping.getAllRemainingSundays()
         val notificationDays = notificationsRepository.getNotificationDays()
         val notificationTime = notificationsRepository.getNotificationTime()
-        nextShoppingSundays.forEach {
+        nextShoppingSundays.forEach { localDate ->
             val jobId = Random.nextInt()
             val builder = JobInfo.Builder(jobId, serviceComponent)
-            val jobTime: Long = SundayShopping.calculateJobTime(it, notificationDays, notificationTime)
+            val jobTime: Long = SundayShopping.calculateJobTime(localDate, notificationDays, notificationTime)
             builder.setMinimumLatency(jobTime)
             val jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)
-            jobScheduler.schedule(builder.build())
-            notificationsRepository.addSundayNotificationId(jobId)
-            Timber.d("setting new notification for: $jobTime")
+            builder.build().let { jobInfo ->
+                jobScheduler.schedule(jobInfo)
+                notificationsRepository.addSundayNotificationId(jobInfo.id)
+                Timber.d("setting new notification for date/time: ${LocalDateTime().plus(Duration.millis(jobTime))}")
+            }
         }
     }
 
     suspend fun cancelShoppingSundayNotifications() {
         Timber.d("canceling notifications")
-
         val jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)
         notificationsRepository.getSundayNotificationIds().forEach {
             jobScheduler.cancel(it)

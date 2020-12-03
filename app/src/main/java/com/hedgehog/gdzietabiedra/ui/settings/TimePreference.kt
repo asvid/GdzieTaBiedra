@@ -1,4 +1,4 @@
-package com.hedgehog.gdzietabiedra.ui.views
+package com.hedgehog.gdzietabiedra.ui.settings
 
 import android.content.Context
 import android.content.res.TypedArray
@@ -9,9 +9,13 @@ import android.view.View
 import android.widget.TimePicker
 import androidx.preference.DialogPreference
 import androidx.preference.PreferenceDialogFragmentCompat
-import java.util.*
+import com.hedgehog.gdzietabiedra.data.repository.DEFAULT_NOTIFICATION_HOUR
+import com.hedgehog.gdzietabiedra.data.repository.DEFAULT_NOTIFICATION_MINUTE
+import com.hedgehog.gdzietabiedra.utils.toLocalFormat
+import com.hedgehog.gdzietabiedra.utils.toLocalTime
+import java.time.LocalTime
 
-class TimePreference: DialogPreference {
+class TimePreference : DialogPreference {
 
     constructor(context: Context) : super(context) {
     }
@@ -21,7 +25,6 @@ class TimePreference: DialogPreference {
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
     }
-
 
     override fun onGetDefaultValue(a: TypedArray, index: Int): String? {
         return a.getString(index)
@@ -33,19 +36,19 @@ class TimePreference: DialogPreference {
     }
 
     override fun getSummary(): CharSequence? {
-        return DateFormat.getTimeFormat(context).format(Date(getPersistedLong(System.currentTimeMillis())))
+        return getPersistedString(null)?.toLocalTime()?.toLocalFormat()
+                ?: LocalTime.of(DEFAULT_NOTIFICATION_HOUR, DEFAULT_NOTIFICATION_MINUTE).toLocalFormat()
     }
 
-    fun save(timeInMillis: Long) {
-        persistLong(timeInMillis)
+    fun save(selectedTime: String) {
+        persistString(selectedTime)
         summary = summary
         notifyChanged()
-        callChangeListener(Date(timeInMillis))
+        callChangeListener(selectedTime)
     }
 }
 
 class TimePreferenceDialog : PreferenceDialogFragmentCompat() {
-    private val calendar: Calendar = Calendar.getInstance()
     private var picker: TimePicker? = null
 
     companion object {
@@ -66,20 +69,15 @@ class TimePreferenceDialog : PreferenceDialogFragmentCompat() {
 
     override fun onBindDialogView(v: View) {
         super.onBindDialogView(v)
-        picker?.hour = calendar.get(Calendar.HOUR_OF_DAY)
-        picker?.minute = calendar.get(Calendar.MINUTE)
+        val currentTime = LocalTime.now()
+        picker?.hour = currentTime.hour
+        picker?.minute = currentTime.minute
     }
 
     override fun onDialogClosed(positiveResult: Boolean) {
         if (positiveResult) {
-            val date = Date()
-            calendar.time = date
-            calendar.set(Calendar.HOUR_OF_DAY, picker?.currentHour ?: 0)
-            calendar.set(Calendar.MINUTE, picker?.currentMinute ?: 0)
-            calendar.set(Calendar.SECOND, 0)
-            calendar.set(Calendar.MILLISECOND, 0)
-
-            (preference as TimePreference).save(calendar.timeInMillis)
+            val selectedTime = "${String.format("%02d", picker?.hour ?: 0)}:${String.format("%02d", picker?.minute ?: 0)}"
+            (preference as TimePreference).save(selectedTime)
         }
     }
 }

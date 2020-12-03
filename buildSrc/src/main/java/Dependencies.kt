@@ -5,7 +5,7 @@ object Versions {
     const val koin = "2.2.0-beta-2"
     const val coroutines = "1.3.9"
     const val roomDB = "2.2.5"
-    const val googlePlayServices = "16.0.0"
+    const val googlePlayServices = "17.0.0"
     const val jodaTime = "2.10.6"
     const val timber = "4.7.1"
     const val firebaseBom = "26.0.0"
@@ -22,7 +22,6 @@ object Libs {
     const val jodaTime = "net.danlew:android.joda:${Versions.jodaTime}"
     const val jodaTimeTest = "joda-time:joda-time:${Versions.jodaTime}"
     const val calendarView = "com.github.sundeepk:compact-calendar-view:3.0.0"
-
 }
 
 object Room {
@@ -36,12 +35,13 @@ object Firebase {
     const val bom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
     const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
     const val analytics = "com.google.firebase:firebase-analytics-ktx"
-
 }
 
 object Google {
     const val maps = "com.google.android.gms:play-services-maps:${Versions.googlePlayServices}"
     const val location = "com.google.android.gms:play-services-location:${Versions.googlePlayServices}"
+    const val mapUtils = "com.google.maps.android:android-maps-utils:2.2.0"
+    const val mapUtilsKtx = "com.google.maps.android:maps-utils-ktx:2.2.0"
 }
 
 object Android {
@@ -58,6 +58,7 @@ object Android {
     const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:2.3.1"
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val preferences = "androidx.preference:preference-ktx:1.1.1"
+    const val coreLibDesugaring = "com.android.tools:desugar_jdk_libs:1.1.1"
 }
 
 object Koin {
