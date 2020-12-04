@@ -5,5 +5,5 @@ object Build {
   const val buildToolsVersion = "29.0.3"
   const val appId = "com.hedgehog.gdzietabiedra"
   const val versionCode = 100
-  const val versionName = "3.2.0"
+  const val versionName = "3.3.0"
 }
