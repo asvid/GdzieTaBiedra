@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.github.asvid.biedra.domain.OpenHours
 import com.github.asvid.biedra.domain.Shop
 import com.github.asvid.biedra.domain.printName
 import com.hedgehog.gdzietabiedra.R
@@ -16,8 +15,6 @@ import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
 import com.hedgehog.gdzietabiedra.utils.generateDistanceText
 import kotlinx.android.synthetic.main.fragment_shop_details.*
 import org.koin.androidx.viewmodel.compat.ViewModelCompat.viewModel
-import java.text.DateFormatSymbols
-import java.util.*
 
 class ShopDetailsFragment : Fragment() {
 
@@ -30,9 +27,9 @@ class ShopDetailsFragment : Fragment() {
         }
         vm.shopData.observe(viewLifecycleOwner) { shop ->
             shop_name_view.text = shop.printName()
-            shop_features_view.text = shop.features.toString()
-            shop_open_hours_view.text = shop.openHours.prettyPrint()
+            shop_address_view.text = shop.address.toString()
             shop_distance_view.text = shop.distance.generateDistanceText(resources)
+            shop_open_hours_view.text = shop.openHours.prettyPrint()
 
             start_navigation_button.setOnClickListener {
                 startNavigation(shop)
@@ -44,7 +41,12 @@ class ShopDetailsFragment : Fragment() {
 
     override fun onResume() {
         setupMap()
+        setupRecycler()
         super.onResume()
+    }
+
+    private fun setupRecycler() {
+
     }
 
     override fun onDestroyView() {
@@ -66,21 +68,5 @@ class ShopDetailsFragment : Fragment() {
         intent.data = Uri.parse("geo:" + shop.location.lat + "," +
                 shop.location.lng + "?q=" + shop.address)
         requireContext().startActivity(intent)
-    }
-}
-
-fun OpenHours.prettyPrint(): String {
-    val symbols = DateFormatSymbols(Locale.getDefault()).shortWeekdays
-    return if (this.sunday == null) {
-        """
-    ${symbols[2]}-${symbols[6]} : ${this.weekDay}
-    ${symbols[7]} : ${this.saturday}
-""".trimIndent()
-    } else {
-        """
-    ${symbols[2]}-${symbols[6]} : ${this.weekDay}
-    ${symbols[7]} : ${this.saturday}
-    ${symbols[1]} : ${this.sunday}
-""".trimIndent()
     }
 }

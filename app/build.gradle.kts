@@ -53,6 +53,7 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+        useIR = true
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true // adds support for LocalTime for API<26
@@ -73,25 +74,6 @@ android {
     }
     packagingOptions {
         exclude("META-INF/proguard/androidx-annotations.pro")
-    }
-
-    flavorDimensions("type")
-    productFlavors {
-        create("dev") {
-            dimension = "type"
-        }
-        create("production") {
-            dimension = "type"
-        }
-    }
-
-    variantFilter {
-        if (buildType.name == "debug" && flavors[0].name != "dev") {
-            ignore = true
-        }
-        if (buildType.name == "release" && flavors[0].name != "production") {
-            ignore = true
-        }
     }
 }
 
