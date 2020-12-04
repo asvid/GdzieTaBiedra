@@ -42,4 +42,11 @@
     <string name="shopping_sunday_notification_content">Next shopping Sunday is %1$s</string>
     <string name="shopping_sunday_notification_title">Shopping Sunday!</string>
     <string name="title_shop_details">Details</string>
+    <string name="bakery">Bakery</string>
+    <string name="relax">Relax</string>
+    <string name="atm">ATM</string>
+    <string name="new_shop">New shop</string>
+    <string name="euro_accepted">Euro accepted</string>
+    <string name="tax_free">TaxFree</string>
+    <string name="card_payment">Card payments</string>
 </resources>

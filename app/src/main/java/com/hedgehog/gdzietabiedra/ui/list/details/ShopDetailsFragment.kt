@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.github.asvid.biedra.domain.Shop
+import com.github.asvid.biedra.domain.ShopFeature
 import com.github.asvid.biedra.domain.printName
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
@@ -34,6 +36,7 @@ class ShopDetailsFragment : Fragment() {
             start_navigation_button.setOnClickListener {
                 startNavigation(shop)
             }
+            setupShopFeatures(shop.features)
         }
         (activity as AppCompatActivity?)?.supportActionBar?.hide()
         return inflater.inflate(R.layout.fragment_shop_details, container, false)
@@ -68,5 +71,12 @@ class ShopDetailsFragment : Fragment() {
         intent.data = Uri.parse("geo:" + shop.location.lat + "," +
                 shop.location.lng + "?q=" + shop.address)
         requireContext().startActivity(intent)
+    }
+
+    private fun setupShopFeatures(features: Set<ShopFeature>) {
+        val layoutManager = GridLayoutManager(context, features.size)
+        val adapter = ShopFeatureAdapter(features.toList())
+        shop_features_view.adapter = adapter
+        shop_features_view.layoutManager = layoutManager
     }
 }
