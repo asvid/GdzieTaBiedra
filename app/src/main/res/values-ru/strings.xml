@@ -33,4 +33,11 @@
     <string name="channel_description"> Уведомление о воскресных покупках</string>
     <string name="shoping_sunday_seek_bar_label">Сколько дней назад?</string>
     <string name="notifications">Уведомления</string>
+    <string name="bakery">пекарня</string>
+    <string name="relax">ресторан</string>
+    <string name="atm">банкомат</string>
+    <string name="new_shop">новый магазин</string>
+    <string name="euro_accepted">евро</string>
+    <string name="tax_free">налог бесплатно</string>
+    <string name="card_payment">оплата картой</string>
 </resources>

@@ -34,4 +34,11 @@
     <string name="shoping_sunday_seek_bar_label">Скільки днів до цього?</string>
     <string name="app_version">Версія програми</string>
     <string name="notifications">Повідомлення</string>
+    <string name="card_payment">Оплата карткою</string>
+    <string name="tax_free">обкладаються податком</string>
+    <string name="euro_accepted">Євро</string>
+    <string name="new_shop">"новий магазин новий магазин new store "</string>
+    <string name="atm">банкомат</string>
+    <string name="relax">ресторан</string>
+    <string name="bakery">пекарня</string>
 </resources>

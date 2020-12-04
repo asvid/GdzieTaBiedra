@@ -78,5 +78,7 @@ class ShopDetailsFragment : Fragment() {
         val adapter = ShopFeatureAdapter(features.toList())
         shop_features_view.adapter = adapter
         shop_features_view.layoutManager = layoutManager
+        shop_features_view.isNestedScrollingEnabled = false
+        shop_features_view.suppressLayout(true)
     }
 }
