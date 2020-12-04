@@ -2,6 +2,7 @@ package com.github.asvid.biedra.domain
 
 import org.joda.time.DateTimeConstants
 import org.joda.time.LocalDate
+import java.text.DateFormatSymbols
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -17,7 +18,23 @@ data class OpenHours(
         val weekDay: TimeRange?,
         val saturday: TimeRange?,
         val sunday: TimeRange?
-)
+) {
+    fun prettyPrint(): String {
+        val symbols = DateFormatSymbols(Locale.getDefault()).shortWeekdays
+        return if (this.sunday == null) {
+            """
+                ${symbols[2]}-${symbols[6]} : ${this.weekDay}
+                ${symbols[7]} : ${this.saturday}
+            """.trimIndent()
+        } else {
+            """
+                ${symbols[2]}-${symbols[6]} : ${this.weekDay}
+                ${symbols[7]} : ${this.saturday}
+                ${symbols[1]} : ${this.sunday}
+            """.trimIndent()
+        }
+    }
+}
 
 /**
  * DLS method for [OpenHours]

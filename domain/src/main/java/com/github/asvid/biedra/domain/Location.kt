@@ -14,7 +14,7 @@ data class Location(
 /**
  * DLS method for [Location]
  * */
-fun location(block: PositionBuilder.() -> Unit): Location = PositionBuilder().apply(block).build()
+fun location(block: LocationBuilder.() -> Unit): Location = LocationBuilder().apply(block).build()
 
 /**
  * DLS builder for [Location]
@@ -23,7 +23,7 @@ fun location(block: PositionBuilder.() -> Unit): Location = PositionBuilder().ap
  * @property lng
  * */
 @ShopDsl
-class PositionBuilder {
+class LocationBuilder {
   var lat: Double = 0.0
   var lng: Double = 0.0
 

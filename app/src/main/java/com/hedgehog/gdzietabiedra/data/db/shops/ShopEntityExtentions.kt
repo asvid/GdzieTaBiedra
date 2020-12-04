@@ -1,9 +1,6 @@
 package com.hedgehog.gdzietabiedra.data.db.shops
 
-import com.github.asvid.biedra.domain.Shop
-import com.github.asvid.biedra.domain.address
-import com.github.asvid.biedra.domain.openHours
-import com.github.asvid.biedra.domain.location
+import com.github.asvid.biedra.domain.*
 
 internal fun ShopRoomEntity.toDomainModel(): Shop {
     val entity = this
@@ -14,6 +11,7 @@ internal fun ShopRoomEntity.toDomainModel(): Shop {
                 streetName = street.orEmpty()
                 streetNumber = entity.streetNumber.orEmpty()
             },
+            this.name,
             this.distance,
             location {
                 lat = entity.latitude ?: 0.0
@@ -23,5 +21,16 @@ internal fun ShopRoomEntity.toDomainModel(): Shop {
                 weekDay = hours
                 saturday = hoursSaturday
                 sunday = hoursSunday
-            })
+            },
+            features {
+                relax = entity.relax
+                bakery = entity.bakery
+                relax = entity.relax
+                atm = entity.atm
+                cardPayment = entity.cardPayment
+                isTaxFree = entity.isTaxFree
+                isEuro = entity.isEuro
+                isNew = entity.isNew
+            }
+    )
 }

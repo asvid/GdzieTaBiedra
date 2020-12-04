@@ -7,8 +7,8 @@
     <string name="when_shop_is_in_area">"когда магазин находится в районе"</string>
     <string name="navigate_to_shop">"перейти в магазин"</string>
     <string name="address">"Адрес:"</string>
-    <string name="opening_hours">"Часы работы:"</string>
-    <string name="distance">"Расстояние:"</string>
+    <string name="opening_hours">"Часы работы: %1$s"</string>
+    <string name="distance">"Расстояние: %1$s"</string>
     <string name="title_list">"Список"</string>
     <string name="title_map">"карта"</string>
     <string name="settings">"настройки"</string>
@@ -33,4 +33,11 @@
     <string name="channel_description"> Уведомление о воскресных покупках</string>
     <string name="shoping_sunday_seek_bar_label">Сколько дней назад?</string>
     <string name="notifications">Уведомления</string>
+    <string name="bakery">пекарня</string>
+    <string name="relax">ресторан</string>
+    <string name="atm">банкомат</string>
+    <string name="new_shop">новый магазин</string>
+    <string name="euro_accepted">евро</string>
+    <string name="tax_free">налог бесплатно</string>
+    <string name="card_payment">оплата картой</string>
 </resources>

@@ -13,6 +13,7 @@ import com.hedgehog.gdzietabiedra.data.persistance.SharedPrefsWrapper
 import com.hedgehog.gdzietabiedra.data.repository.NotificationsRepository
 import com.hedgehog.gdzietabiedra.data.repository.ShopsRepository
 import com.hedgehog.gdzietabiedra.ui.list.ListViewModel
+import com.hedgehog.gdzietabiedra.ui.list.details.ShopDetailsViewModel
 import com.hedgehog.gdzietabiedra.ui.map.MapViewModel
 import com.hedgehog.gdzietabiedra.ui.settings.SettingsViewModel
 import com.hedgehog.gdzietabiedra.ui.sundays.SundaysViewModel
@@ -66,6 +67,7 @@ class App : Application() {
                 viewModel { MapViewModel(get(), get()) }
                 viewModel { SundaysViewModel() }
                 viewModel { SettingsViewModel(get()) }
+                viewModel { ShopDetailsViewModel(get(), get()) }
             })
         }
     }

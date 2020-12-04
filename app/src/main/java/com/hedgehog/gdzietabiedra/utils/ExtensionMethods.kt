@@ -1,13 +1,12 @@
 package com.hedgehog.gdzietabiedra.utils
 
 import android.content.Context
+import android.content.res.Resources
 import com.github.asvid.biedra.domain.Location
-import com.github.asvid.biedra.domain.SundayShopping
 import com.google.android.gms.maps.model.LatLng
+import com.hedgehog.gdzietabiedra.R
 import org.joda.time.LocalDate
 import java.text.DateFormat
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -38,4 +37,14 @@ fun String.toLocalTime(separator: String = ":"): LocalTime {
 fun LocalTime.toLocalFormat(locale: Locale = Locale.getDefault()): String {
     val formatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(locale)
     return this.format(formatter)
+}
+
+fun Double?.generateDistanceText(resources: Resources): String {
+    val distanceText = when {
+        this == null -> ""
+        this > 5000 -> "${(this / 1000).roundToInt()} km"
+        this > 1000 -> "${(this / 1000).round(2)} km"
+        else -> "${this.roundToInt()} m"
+    }
+    return resources.getString(R.string.distance, distanceText)
 }

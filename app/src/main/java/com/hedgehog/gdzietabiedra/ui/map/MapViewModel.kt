@@ -46,15 +46,14 @@ class MapViewModel(
             } else {
                 initialySelectedShop?.let {
                     mapProvider.selectShop(it)
+                    selectShop(it)
                 }
             }
         }
 
         viewModelScope.launch {
             mapProvider.shopMarkerClicked().collect { marker ->
-                _showNavButton.postValue(true)
-                shopSelected = marker.shop
-                Timber.d("show navigation button")
+                selectShop(marker.shop)
             }
         }
         viewModelScope.launch {
@@ -65,6 +64,11 @@ class MapViewModel(
                 Timber.d("hide navigation button")
             }
         }
+    }
+
+    private fun selectShop(it: Shop) {
+        _showNavButton.postValue(true)
+        shopSelected = it
     }
 
     private suspend fun moveMapToPosition(location: Location) {

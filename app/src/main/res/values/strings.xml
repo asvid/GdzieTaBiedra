@@ -6,9 +6,9 @@
     <string name="range">range</string>
     <string name="when_shop_is_in_area">when shop is in area</string>
     <string name="navigate_to_shop">navigate to shop</string>
-    <string name="address">Address:</string>
-    <string name="opening_hours">Opening hours:</string>
-    <string name="distance">Distance:</string>
+    <string name="address">Address: %1$s</string>
+    <string name="opening_hours">Opening hours: %1$s</string>
+    <string name="distance">Distance: %1$s</string>
     <string name="title_list">List</string>
     <string name="title_map">Map</string>
     <string name="title_sundays">Sundays</string>
@@ -41,4 +41,12 @@
     <string name="notifications">Notifications</string>
     <string name="shopping_sunday_notification_content">Next shopping Sunday is %1$s</string>
     <string name="shopping_sunday_notification_title">Shopping Sunday!</string>
+    <string name="title_shop_details">Details</string>
+    <string name="bakery">Bakery</string>
+    <string name="relax">Relax</string>
+    <string name="atm">ATM</string>
+    <string name="new_shop">New shop</string>
+    <string name="euro_accepted">Euro accepted</string>
+    <string name="tax_free">TaxFree</string>
+    <string name="card_payment">Card payments</string>
 </resources>
