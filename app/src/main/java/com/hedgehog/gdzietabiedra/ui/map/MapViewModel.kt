@@ -7,9 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.asvid.biedra.domain.Location
 import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.appservice.*
-import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
 import com.hedgehog.gdzietabiedra.appservice.map.MapProvider
-import com.hedgehog.gdzietabiedra.appservice.map.ShopMarker
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
@@ -32,8 +30,8 @@ class MapViewModel(
     val openNavigation: LiveData<Shop> = _openNavigation
     private var shopSelected: Shop? = null
 
-    fun mapLoaded(gmapprovider: GoogleMapProvider) {
-        mapProvider = gmapprovider
+    fun mapLoaded(mapProvider: MapProvider) {
+        this.mapProvider = mapProvider
         _showNavButton.postValue(false)
 
         viewModelScope.launch {
@@ -45,7 +43,7 @@ class MapViewModel(
                 }
             } else {
                 initialySelectedShop?.let {
-                    mapProvider.selectShop(it)
+                    mapProvider.showSingleShop(it)
                     selectShop(it)
                 }
             }
@@ -72,16 +70,17 @@ class MapViewModel(
     }
 
     private suspend fun moveMapToPosition(location: Location) {
-        mapProvider.clearMap()
         removeShopSelection()
-        mapProvider.goToPosition(location)
-        populateWithMarkers(location)
+        mapProvider.goToPosition(location) {
+            viewModelScope.launch {
+                populateWithMarkers(location)
+            }
+        }
     }
 
     private suspend fun populateWithMarkers(location: Location) {
-        val markers = shopService.getShopsInCloseArea(location)
-                .map { ShopMarker.create(it) }
-        mapProvider.drawMarkers(markers)
+        val shopsInArea = shopService.getShopsInCloseArea(location)
+        mapProvider.drawMarkersForShops(shopsInArea)
     }
 
     private fun removeShopSelection() {
