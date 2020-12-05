@@ -9,7 +9,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
-import com.github.asvid.biedra.domain.SundayShopping
+import com.github.asvid.biedra.domain.shops.SundayShopping
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.data.repository.NotificationsRepository
 import org.joda.time.Duration

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.github.asvid.biedra.domain.SundayShopping
+import com.github.asvid.biedra.domain.shops.SundayShopping
 import com.github.sundeepk.compactcalendarview.CompactCalendarView
 import com.github.sundeepk.compactcalendarview.domain.Event
 import com.hedgehog.gdzietabiedra.R.layout

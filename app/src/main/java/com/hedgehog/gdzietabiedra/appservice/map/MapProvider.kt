@@ -1,7 +1,7 @@
 package com.hedgehog.gdzietabiedra.appservice.map
 
-import com.github.asvid.biedra.domain.Location
-import com.github.asvid.biedra.domain.Shop
+import com.github.asvid.biedra.domain.shops.Location
+import com.github.asvid.biedra.domain.shops.Shop
 import com.google.android.gms.maps.model.LatLng
 import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.MEDIUM
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -14,7 +14,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.asvid.biedra.domain.Shop
+import com.github.asvid.biedra.domain.shops.Shop
 import com.google.android.material.snackbar.Snackbar
 import com.hedgehog.gdzietabiedra.R
 import com.karumi.dexter.Dexter

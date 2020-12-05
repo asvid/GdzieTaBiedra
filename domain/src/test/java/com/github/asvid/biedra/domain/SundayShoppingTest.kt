@@ -1,5 +1,6 @@
 package com.github.asvid.biedra.domain
 
+import com.github.asvid.biedra.domain.shops.SundayShopping
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import org.junit.jupiter.api.Test

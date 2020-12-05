@@ -1,6 +1,6 @@
 package com.hedgehog.gdzietabiedra.appservice
 
-import com.github.asvid.biedra.domain.Location
+import com.github.asvid.biedra.domain.shops.Location
 import kotlin.math.acos
 import kotlin.math.cos
 import kotlin.math.sin

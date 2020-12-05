@@ -6,8 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Looper
-import com.github.asvid.biedra.domain.Location
-import com.github.asvid.biedra.domain.location
+import com.github.asvid.biedra.domain.shops.Location
 import com.google.android.gms.location.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine

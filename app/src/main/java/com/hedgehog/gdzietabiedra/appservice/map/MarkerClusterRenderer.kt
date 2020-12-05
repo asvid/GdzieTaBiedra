@@ -3,9 +3,9 @@ package com.hedgehog.gdzietabiedra.appservice.map
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.github.asvid.biedra.domain.SundayShopping
-import com.github.asvid.biedra.domain.getForToday
-import com.github.asvid.biedra.domain.printName
+import com.github.asvid.biedra.domain.shops.SundayShopping
+import com.github.asvid.biedra.domain.shops.getForToday
+import com.github.asvid.biedra.domain.shops.printName
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker

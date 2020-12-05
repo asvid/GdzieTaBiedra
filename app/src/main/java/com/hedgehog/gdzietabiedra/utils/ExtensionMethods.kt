@@ -2,7 +2,7 @@ package com.hedgehog.gdzietabiedra.utils
 
 import android.content.Context
 import android.content.res.Resources
-import com.github.asvid.biedra.domain.Location
+import com.github.asvid.biedra.domain.shops.Location
 import com.google.android.gms.maps.model.LatLng
 import com.hedgehog.gdzietabiedra.R
 import org.joda.time.LocalDate

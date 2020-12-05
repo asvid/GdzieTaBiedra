@@ -1,5 +1,6 @@
 package com.github.asvid.biedra.domain
 
+import com.github.asvid.biedra.domain.shops.toOpenHours
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.asvid.biedra.domain.Shop
+import com.github.asvid.biedra.domain.shops.Shop
 import com.hedgehog.gdzietabiedra.appservice.*
 import com.hedgehog.gdzietabiedra.utils.VolatileMutableLiveData
 import kotlinx.coroutines.Dispatchers

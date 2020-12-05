@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.github.asvid.biedra.domain.Shop
-import com.github.asvid.biedra.domain.ShopFeature
-import com.github.asvid.biedra.domain.printName
+import com.github.asvid.biedra.domain.shops.Shop
+import com.github.asvid.biedra.domain.shops.ShopFeature
+import com.github.asvid.biedra.domain.shops.printName
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.appservice.map.GoogleMapProvider
 import com.hedgehog.gdzietabiedra.utils.generateDistanceText

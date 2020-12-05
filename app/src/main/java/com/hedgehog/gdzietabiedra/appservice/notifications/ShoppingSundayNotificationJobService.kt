@@ -8,7 +8,7 @@ import android.app.job.JobService
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.github.asvid.biedra.domain.SundayShopping
+import com.github.asvid.biedra.domain.shops.SundayShopping
 import com.hedgehog.gdzietabiedra.MainActivity
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.utils.toLocalFormat

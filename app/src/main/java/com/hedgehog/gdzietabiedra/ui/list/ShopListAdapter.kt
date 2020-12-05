@@ -5,16 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
-import com.github.asvid.biedra.domain.Shop
-import com.github.asvid.biedra.domain.SundayShopping
-import com.github.asvid.biedra.domain.getForToday
-import com.github.asvid.biedra.domain.printName
+import com.github.asvid.biedra.domain.shops.Shop
+import com.github.asvid.biedra.domain.shops.SundayShopping
+import com.github.asvid.biedra.domain.shops.getForToday
+import com.github.asvid.biedra.domain.shops.printName
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.utils.generateDistanceText
-import com.hedgehog.gdzietabiedra.utils.round
 import kotlinx.android.synthetic.main.shop_list_item.view.*
 import java.util.*
-import kotlin.math.roundToInt
 
 class ShopListAdapter(
         val mapButtonClicked: (Shop) -> Unit,

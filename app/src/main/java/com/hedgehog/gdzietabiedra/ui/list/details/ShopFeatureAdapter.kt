@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.github.asvid.biedra.domain.*
+import com.github.asvid.biedra.domain.shops.ShopFeature
 import com.hedgehog.gdzietabiedra.R
 import kotlinx.android.synthetic.main.shop_feature_item.view.*
 

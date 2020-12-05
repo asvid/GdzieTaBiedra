@@ -1,8 +1,8 @@
 package com.hedgehog.gdzietabiedra.appservice.map
 
 import android.content.Context
-import com.github.asvid.biedra.domain.Location
-import com.github.asvid.biedra.domain.Shop
+import com.github.asvid.biedra.domain.shops.Location
+import com.github.asvid.biedra.domain.shops.Shop
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE

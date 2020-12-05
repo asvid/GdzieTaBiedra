@@ -1,8 +1,8 @@
 package com.github.asvid.biedra.domain
 
+import com.github.asvid.biedra.domain.shops.TimeRange
 import org.joda.time.LocalTime
 import org.junit.jupiter.api.Test
-import kotlin.random.Random
 
 class TimeRangeTest {
 

@@ -1,7 +1,7 @@
 package com.hedgehog.gdzietabiedra.appservice
 
-import com.github.asvid.biedra.domain.Location
-import com.github.asvid.biedra.domain.Shop
+import com.github.asvid.biedra.domain.shops.Location
+import com.github.asvid.biedra.domain.shops.Shop
 import com.hedgehog.gdzietabiedra.data.repository.ShopsRepository
 import timber.log.Timber
 

@@ -1,12 +1,10 @@
 package com.hedgehog.gdzietabiedra.appservice.map
 
-import com.github.asvid.biedra.domain.Location
-import com.github.asvid.biedra.domain.Shop
-import com.github.asvid.biedra.domain.SundayShopping
-import com.github.asvid.biedra.domain.getForToday
+import com.github.asvid.biedra.domain.shops.Location
+import com.github.asvid.biedra.domain.shops.Shop
+import com.github.asvid.biedra.domain.shops.getForToday
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
-import com.hedgehog.gdzietabiedra.R
 
 /**
  * Map marker for [Shop]
