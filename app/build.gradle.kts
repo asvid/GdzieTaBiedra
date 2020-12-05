@@ -127,12 +127,15 @@ dependencies {
     implementation(platform(Firebase.bom))
     implementation(Firebase.crashlytics)
     implementation(Firebase.analytics)
-}
 
-dependencies {
+    testImplementation(TestDeps.junit)
     testImplementation(TestDeps.junitParams)
     androidTestImplementation(TestDeps.runner)
     androidTestImplementation(TestDeps.espresso)
     testImplementation(Koin.test)
     testImplementation(Room.testing)
+}
+
+tasks.withType<Test>(){
+    useJUnitPlatform()
 }
