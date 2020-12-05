@@ -7,9 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.asvid.biedra.domain.Shop
 import com.hedgehog.gdzietabiedra.appservice.*
 import com.hedgehog.gdzietabiedra.appservice.map.MapProvider
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class ShopDetailsViewModel(
         private val shopService: ShopService,
@@ -34,7 +32,7 @@ class ShopDetailsViewModel(
         this.mapProvider = mapProvider
         viewModelScope.launch {
             _shopData.observeForever {
-                mapProvider.selectShop(it)
+                mapProvider.showSingleShop(it)
             }
         }
     }

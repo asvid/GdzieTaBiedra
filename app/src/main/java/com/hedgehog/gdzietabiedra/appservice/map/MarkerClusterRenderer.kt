@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.github.asvid.biedra.domain.SundayShopping
 import com.github.asvid.biedra.domain.getForToday
+import com.github.asvid.biedra.domain.printName
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
@@ -15,11 +16,12 @@ import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.utils.toLatLng
 import kotlin.math.roundToInt
 
+
 private const val MARKER_DIMENSION = 32
 
 class MarkerClusterRenderer(
         val context: Context,
-        map: GoogleMap,
+        val map: GoogleMap,
         clusterManager: ClusterManager<ShopMarker>
 ) : DefaultClusterRenderer<ShopMarker>(context, map, clusterManager) {
 
@@ -30,7 +32,7 @@ class MarkerClusterRenderer(
     override fun onBeforeClusterItemRendered(item: ShopMarker, markerOptions: MarkerOptions) {
         markerOptions.apply {
             position(item.location.toLatLng())
-            title(item.shop.address.toString())
+            title(item.shop.printName())
             snippet(generateSnippet(item))
             icon(markerIcon)
         }
@@ -50,12 +52,11 @@ class MarkerClusterRenderer(
 
     private fun resizeMapIcons(iconResId: Int, width: Int, height: Int): Bitmap {
         val density = context.resources.displayMetrics.density
-
         val imageBitmap = BitmapFactory.decodeResource(context.resources, iconResId)
-        return Bitmap.createScaledBitmap(imageBitmap, (width * density).roundToInt(), (height* density).toInt(), false)
+        return Bitmap.createScaledBitmap(imageBitmap, (width * density).roundToInt(), (height * density).toInt(), false)
     }
 
-    fun listenOnceForRender(renderingListener: (marker: Marker) -> Unit) {
+    fun listenToRenderOnce(renderingListener: (marker: Marker) -> Unit) {
         this.renderingListener = renderingListener
     }
 }

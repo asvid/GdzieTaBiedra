@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.compat.ViewModelCompat
-import timber.log.Timber
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -52,10 +51,9 @@ class MapFragment : Fragment() {
     private fun setupMap() {
         map_view.onCreate(null)
         map_view.getMapAsync {
-            Timber.d("map is loaded")
-            val googleMapProvider = GoogleMapProvider.create(it, requireContext())
+            val mapProvider = GoogleMapProvider.create(it, requireContext())
             map_view.onResume()
-            vm.mapLoaded(googleMapProvider)
+            vm.mapLoaded(mapProvider)
         }
     }
 

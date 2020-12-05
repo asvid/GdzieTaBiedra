@@ -7,6 +7,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.collections.MarkerManager
 import com.hedgehog.gdzietabiedra.appservice.map.MapZoom.*
@@ -19,6 +20,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.callbackFlow
+import timber.log.Timber
 
 private const val MEDIUM_MAP_ZOOM = 13f
 private const val CLOSE_MAP_ZOOM = 15f
@@ -44,31 +46,44 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
         fun create(googleMap: GoogleMap, context: Context): GoogleMapProvider {
             return GoogleMapProvider(context)
                     .also {
-                        it.initialize(googleMap, context)
+                        it.initialize(googleMap)
                     }
         }
     }
 
-    private fun initialize(googleMap: GoogleMap, context: Context) {
+    private fun initialize(googleMap: GoogleMap) {
         this.map = googleMap
-        this.map.setInfoWindowAdapter(BiedraInfoAdapter(context))
         setUpClusterer(googleMap)
         this.map.setOnMapClickListener {
             mapClickChannel.offer(it)
         }
     }
 
-    override fun drawMarkers(points: Collection<ShopMarker>) {
-        clusterManager.clearItems()
-        points.forEach { shopMarker ->
-            clusterManager.addItem(shopMarker)
+    override fun drawMarkersForShops(shops: List<Shop>) {
+        clearMap()
+        Timber.d("${shops.size}")
+        val latLngBounds = getMapVisibleBounds()
+        shops.forEach { shop ->
+            if (isInBounds(shop.location, latLngBounds)) {
+                clusterManager.addItem(ShopMarker.create(shop))
+            } else {
+                Timber.d("shop outside visible map")
+            }
         }
+
         clusterManager.cluster()
+        Timber.d("cluster size: ${clusterManager.markerCollection.markers.size}")
+
+    }
+
+    private fun getMapVisibleBounds(): LatLngBounds {
+        val latLngBounds = map.projection.visibleRegion.latLngBounds
+        Timber.d("latLngBounds: $latLngBounds")
+        return latLngBounds
     }
 
     override fun drawMarker(point: ShopMarker, showInfo: Boolean) {
-        clusterManager.addItem(point)
-        clusterManager.cluster()
+        // NOOP
     }
 
     override fun getMapCenterPosition(): Location {
@@ -84,7 +99,6 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
             if (reason == REASON_GESTURE) {
                 map.setOnCameraIdleListener {
                     this.offer(getMapCenterPosition())
-                    clusterManager.clearItems()
                 }
             } else {
                 map.setOnCameraIdleListener(null)
@@ -98,7 +112,7 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
         map.clear()
     }
 
-    override fun goToPosition(location: Location, mapZoom: MapZoom) {
+    override fun goToPosition(location: Location, mapZoom: MapZoom, onFinished: (() -> Unit)?) {
         val googleMapZoom = when (mapZoom) {
             CLOSE -> CLOSE_MAP_ZOOM
             MEDIUM -> MEDIUM_MAP_ZOOM
@@ -106,36 +120,53 @@ class GoogleMapProvider private constructor(private val context: Context) : MapP
         }
         map.animateCamera(
                 CameraUpdateFactory
-                        .newLatLngZoom(location.toLatLng(), googleMapZoom), 100, null
+                        .newLatLngZoom(location.toLatLng(), googleMapZoom), 100, object : GoogleMap.CancelableCallback {
+            override fun onFinish() {
+                onFinished?.invoke()
+            }
+
+            override fun onCancel() {
+                // noop
+            }
+        }
         )
     }
 
-    override fun selectShop(shop: Shop) {
-        map.clear()
+    override fun showSingleShop(shop: Shop) {
+        clearMap()
         val shopMarker = ShopMarker.create(shop)
         clusterManager.addItem(shopMarker)
-        goToPosition(shop.location, CLOSE)
-        markerClusterRenderer.listenOnceForRender { marker ->
-            marker.showInfoWindow()
-            markerChannel.offer(shopMarker)
+        goToPosition(shop.location, CLOSE) {
+            markerClusterRenderer.listenToRenderOnce { marker ->
+                marker.showInfoWindow()
+                markerChannel.offer(shopMarker)
+            }
         }
     }
 
     private fun setUpClusterer(googleMap: GoogleMap) {
         markerManager = MarkerManager(googleMap)
-        clusterManager = ClusterManager(context, googleMap, markerManager)
-        markerClusterRenderer = MarkerClusterRenderer(context, googleMap, clusterManager)
-        clusterManager.renderer = markerClusterRenderer
-        markerClusterRenderer.setAnimation(false)
-        map.setOnCameraIdleListener(clusterManager)
-        map.setOnMarkerClickListener(clusterManager)
         markerManager.Collection().setOnMarkerClickListener {
             it.showInfoWindow()
             false
         }
+
+        clusterManager = ClusterManager(context, googleMap, markerManager)
+
+        markerClusterRenderer = MarkerClusterRenderer(context, googleMap, clusterManager)
+        markerClusterRenderer.setAnimation(true)
+
+        clusterManager.markerCollection.setInfoWindowAdapter(BiedraInfoAdapter(context))
+        clusterManager.renderer = markerClusterRenderer
         clusterManager.setOnClusterItemClickListener {
             markerChannel.offer(it)
             false
         }
+
+        map.setOnCameraIdleListener(clusterManager)
+    }
+
+    private fun isInBounds(location: Location, latLngBounds: LatLngBounds): Boolean {
+        return latLngBounds.contains(location.toLatLng())
     }
 }
