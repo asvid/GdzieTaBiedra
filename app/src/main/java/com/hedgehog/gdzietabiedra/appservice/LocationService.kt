@@ -20,8 +20,7 @@ class LocationService(private val context: Context) {
     suspend fun getLocation(): LocationServiceResult = suspendCoroutine { continuation ->
         if (!isPermissionGranted()) {
             continuation.resume(PermissionRequired)
-        }
-        if (isLocationServiceAvailable()) {
+        } else if (isLocationServiceAvailable()) {
             fusedLocationClient.lastLocation.addOnSuccessListener { foundLocation ->
                 if (foundLocation == null) {
                     requestNewLocationAndContinue {

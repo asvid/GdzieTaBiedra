@@ -37,9 +37,11 @@ android {
                         )
                     }
             manifestPlaceholders["appName"] = "@string/app_name"
+            manifestPlaceholders["crashlyticsCollectionEnabled"] = true
         }
         getByName("debug") {
             manifestPlaceholders["appName"] = "Biedra - Debug"
+            manifestPlaceholders["crashlyticsCollectionEnabled"] = false
             debuggable(true)
             multiDexEnabled = true
             firebaseCrashlytics {
