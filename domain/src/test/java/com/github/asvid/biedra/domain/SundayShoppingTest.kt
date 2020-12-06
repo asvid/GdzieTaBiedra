@@ -1,11 +1,9 @@
 package com.github.asvid.biedra.domain
 
-import org.joda.time.DateTime
-import org.joda.time.LocalDate
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import java.time.LocalTime
+import java.time.*
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
@@ -24,7 +22,7 @@ class SundayShoppingTest {
             day: Int,
             isShopOpen: Boolean
     ) {
-        val testedDay = LocalDate(year, month, day)
+        val testedDay = LocalDate.of(year, month, day)
 
         assert(SundayShopping.isShoppingAllowed(testedDay) == isShopOpen)
     }
@@ -44,31 +42,31 @@ class SundayShoppingTest {
             nextMonth: Int,
             nextDay: Int,
     ) {
-        val testedDay = LocalDate(year, month, day)
-        val nextShoppingSunday = LocalDate(nextYear, nextMonth, nextDay)
+        val testedDay = LocalDate.of(year, month, day)
+        val nextShoppingSunday = LocalDate.of(nextYear, nextMonth, nextDay)
 
         assert(SundayShopping.getNextShoppingSunday(testedDay) == nextShoppingSunday)
     }
 
     @Test
     fun `should return all shopping sundays after selected day`() {
-        val afterDate = LocalDate(2020, 12, 30)
+        val afterDate = LocalDate.of(2020, 12, 30)
         val allRemainingSundays = SundayShopping.getAllRemainingSundays(afterDate)
         assert(allRemainingSundays.size == 7)
     }
 
     @Test
     fun `should calculate notification date properly`() {
-        val initDate = LocalDate(2020, 12, 15)
+        val initDate = LocalDate.of(2020, 12, 15)
         val initTime = LocalTime.of(12, 30)
         val calculatedDateTime = SundayShopping.calculateJobTime(initDate, 10, initTime) + System.currentTimeMillis()
-        val date = DateTime(calculatedDateTime)
+        val date = Instant.ofEpochMilli(calculatedDateTime).atZone(ZoneId.systemDefault()).toLocalDateTime()
         println(date)
 
-        assert(date.hourOfDay == 12)
-        assert(date.minuteOfHour == 30)
+        assert(date.hour == 12)
+        assert(date.minute == 30)
         assert(date.dayOfMonth == 5)
-        assert(date.monthOfYear == 12)
+        assert(date.monthValue == 12)
         assert(date.year == 2020)
     }
 

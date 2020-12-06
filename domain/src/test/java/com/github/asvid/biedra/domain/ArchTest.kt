@@ -13,4 +13,10 @@ class ArchTest {
         val rule = noClasses().should().dependOnClassesThat().resideInAPackage("..android..")
         rule.check(importedClasses)
     }
+
+    @ArchTest
+    fun `JodaTime shouldn't be used in domain package`(importedClasses: JavaClasses) {
+        val rule = noClasses().should().dependOnClassesThat().resideInAPackage("..joda..")
+        rule.check(importedClasses)
+    }
 }

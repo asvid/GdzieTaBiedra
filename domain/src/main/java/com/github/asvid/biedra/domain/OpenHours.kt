@@ -1,10 +1,10 @@
 package com.github.asvid.biedra.domain
 
-import org.joda.time.DateTimeConstants
-import org.joda.time.LocalDate
 import java.text.DateFormatSymbols
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.DayOfWeek
+import java.time.LocalDate
 import java.util.*
 
 /**
@@ -107,8 +107,8 @@ fun String.toDate(format: String): Date? {
 }
 
 fun OpenHours.getForToday(): TimeRange? =
-        when (LocalDate.fromDateFields(Date()).dayOfWeek) {
-            DateTimeConstants.SUNDAY -> this.sunday ?: this.weekDay
-            DateTimeConstants.SATURDAY -> this.saturday ?: this.weekDay
+        when (LocalDate.now().dayOfWeek) {
+            DayOfWeek.SATURDAY -> this.saturday ?: this.weekDay
+            DayOfWeek.SUNDAY -> this.sunday ?: this.weekDay
             else -> this.weekDay
         }

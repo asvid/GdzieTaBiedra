@@ -8,11 +8,8 @@ plugins {
 
 dependencies {
     implementation(Libs.kotlin)
-    implementation(Libs.jodaTime)
 
     //  Testing
-//    testImplementation(TestDeps.junit)
-    testImplementation(Libs.jodaTimeTest)
     testImplementation(TestDeps.junit)
     testImplementation(TestDeps.junitParams)
     testImplementation("com.tngtech.archunit:archunit-junit5:0.14.1")

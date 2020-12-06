@@ -1,24 +1,23 @@
 package com.github.asvid.biedra.domain
 
-import org.joda.time.LocalTime
 import org.junit.jupiter.api.Test
-import kotlin.random.Random
+import java.time.LocalTime
 
 class TimeRangeTest {
 
   @Test
   fun `when time is in range method should return true`() {
-    val start = LocalTime(6, 0)
-    val end = LocalTime(21, 0)
+    val start = LocalTime.of(6, 0)
+    val end = LocalTime.of(21, 0)
 
     val timeRange = TimeRange(start, end)
 
-    val inRange = LocalTime(8, 0)
-    val inRange2 = LocalTime(6, 0)
-    val inRange3 = LocalTime(21, 0)
-    val notInRange = LocalTime(3, 0)
-    val notInRange2 = LocalTime(5, 59)
-    val notInRange3 = LocalTime(21, 1)
+    val inRange = LocalTime.of(8, 0)
+    val inRange2 = LocalTime.of(6, 0)
+    val inRange3 = LocalTime.of(21, 0)
+    val notInRange = LocalTime.of(3, 0)
+    val notInRange2 = LocalTime.of(5, 59)
+    val notInRange3 = LocalTime.of(21, 1)
 
     assert(timeRange.withinRange(inRange))
     assert(timeRange.withinRange(inRange2))

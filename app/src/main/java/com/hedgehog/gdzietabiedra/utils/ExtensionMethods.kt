@@ -5,8 +5,7 @@ import android.content.res.Resources
 import com.github.asvid.biedra.domain.Location
 import com.google.android.gms.maps.model.LatLng
 import com.hedgehog.gdzietabiedra.R
-import org.joda.time.LocalDate
-import java.text.DateFormat
+import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -23,11 +22,12 @@ fun Location.toLatLng(): LatLng = LatLng(this.lat, this.lng)
 
 fun LatLng.toPosition(): Location = Location(this.latitude, this.longitude)
 
-fun LocalDate.toLocalFormat(context: Context): String {
-    val date = this.toDate()
-    val dateFormat: DateFormat = android.text.format.DateFormat.getDateFormat(context)
-    return dateFormat.format(date)
+fun LocalDate.toLocalFormat(locale: Locale = Locale.getDefault()): String {
+    val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(locale)
+    return this.format(formatter)
 }
+
+fun Context.getLocale(): Locale = resources.configuration.locale
 
 fun String.toLocalTime(separator: String = ":"): LocalTime {
     val timeString = this.split(separator)
