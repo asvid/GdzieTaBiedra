@@ -12,9 +12,9 @@ import android.os.Build.VERSION_CODES
 import com.github.asvid.biedra.domain.SundayShopping
 import com.hedgehog.gdzietabiedra.R
 import com.hedgehog.gdzietabiedra.data.repository.NotificationsRepository
-import org.joda.time.Duration
-import org.joda.time.LocalDateTime
 import timber.log.Timber
+import java.time.Duration
+import java.time.LocalDateTime
 import kotlin.random.Random
 
 const val SHOPPING_SUNDAY_CHANNEL_ID = "Biedra_Sundays"
@@ -60,13 +60,13 @@ class ShoppingSundayNotificationService(
         nextShoppingSundays.forEach { localDate ->
             val jobId = Random.nextInt()
             val builder = JobInfo.Builder(jobId, serviceComponent)
-            val jobTime: Long = SundayShopping.calculateJobTime(localDate, notificationDays, notificationTime)
-            builder.setMinimumLatency(jobTime)
+            val jobDelayMills: Long = SundayShopping.calculateJobDelay(localDate, notificationDays, notificationTime)
+            builder.setMinimumLatency(jobDelayMills)
             val jobScheduler: JobScheduler = context.getSystemService(JobScheduler::class.java)
             builder.build().let { jobInfo ->
                 jobScheduler.schedule(jobInfo)
                 notificationsRepository.addSundayNotificationId(jobInfo.id)
-                Timber.d("setting new notification for date/time: ${LocalDateTime().plus(Duration.millis(jobTime))}")
+                Timber.d("setting new notification for date/time: ${LocalDateTime.now().plus(Duration.ofMillis(jobDelayMills))}")
             }
         }
     }

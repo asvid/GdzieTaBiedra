@@ -60,7 +60,7 @@ object SundayShopping {
         }
     }
 
-    fun calculateJobTime(nextShoppingSunday: LocalDate, notificationDays: Int, notificationTime: java.time.LocalTime): Long {
+    fun calculateJobDelay(nextShoppingSunday: LocalDate, notificationDays: Int, notificationTime: java.time.LocalTime): Long {
         val date = nextShoppingSunday.minusDays(notificationDays.toLong())
         val dateTime = LocalDateTime.of(date.year, date.monthValue, date.dayOfMonth, notificationTime.hour, notificationTime.minute)
         return dateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() - System.currentTimeMillis()

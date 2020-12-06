@@ -59,7 +59,7 @@ class SundayShoppingTest {
     fun `should calculate notification date properly`() {
         val initDate = LocalDate.of(2020, 12, 15)
         val initTime = LocalTime.of(12, 30)
-        val calculatedDateTime = SundayShopping.calculateJobTime(initDate, 10, initTime) + System.currentTimeMillis()
+        val calculatedDateTime = SundayShopping.calculateJobDelay(initDate, 10, initTime) + System.currentTimeMillis()
         val date = Instant.ofEpochMilli(calculatedDateTime).atZone(ZoneId.systemDefault()).toLocalDateTime()
         println(date)
 
