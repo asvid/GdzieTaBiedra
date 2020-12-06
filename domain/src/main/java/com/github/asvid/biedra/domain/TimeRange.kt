@@ -34,6 +34,7 @@ class TimeRange(val start: LocalTime, val end: LocalTime) {
     }
 
     fun withinRange(inRange: LocalTime?): Boolean {
-        return this.start.isBefore(inRange) && this.end.isAfter(inRange)
+        return (this.start.isBefore(inRange) || this.start == inRange) &&
+                (this.end.isAfter(inRange) || this.end == inRange)
     }
 }
