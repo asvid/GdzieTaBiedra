@@ -1,6 +1,5 @@
 package com.github.asvid.biedra.domain.recipes
 
-data class DifficultyLevel(
-        val id: Int,
-        val name: String
-)
+enum class DifficultyLevel {
+    Easy, Medium, Hard
+}
