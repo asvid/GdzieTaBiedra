@@ -6,7 +6,6 @@ object Versions {
     const val coroutines = "1.3.9"
     const val roomDB = "2.2.5"
     const val googlePlayServices = "17.0.0"
-    const val jodaTime = "2.10.6"
     const val timber = "4.7.1"
     const val firebaseBom = "26.0.0"
     const val junit = "5.7.0"
@@ -19,8 +18,6 @@ object Libs {
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     const val dexter = "com.karumi:dexter:6.2.1"
 
-    const val jodaTime = "net.danlew:android.joda:${Versions.jodaTime}"
-    const val jodaTimeTest = "joda-time:joda-time:${Versions.jodaTime}"
     const val calendarView = "com.github.sundeepk:compact-calendar-view:3.0.0"
 }
 
@@ -66,8 +63,6 @@ object Koin {
     const val scope = "org.koin:koin-androidx-scope:${Versions.koin}"
     const val viewmodel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
     const val fragment = "org.koin:koin-androidx-fragment:${Versions.koin}"
-    const val workmanager = "org.koin:koin-androidx-workmanager:${Versions.koin}"
-    const val compose = "org.koin:koin-androidx-compose:${Versions.koin}"
     const val test = "org.koin:koin-test:${Versions.koin}"
 }
 
@@ -79,9 +74,6 @@ object Ktor {
 }
 
 object TestDeps {
-    const val mockito = "org.mockito:mockito-core:2.0.42-beta"
-    const val assertj = "org.assertj:assertj-core:2.6.0"
-    const val compileTesting = "com.google.testing.compile:compile-testing:0.11"
     const val runner = "com.android.support.test:runner:1.0.2"
     const val espresso = "com.android.support.test.espresso:espresso-core:3.0.2"
     const val junit = "org.junit.jupiter:junit-jupiter:${Versions.junit}"

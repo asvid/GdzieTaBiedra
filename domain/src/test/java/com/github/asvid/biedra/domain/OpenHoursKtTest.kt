@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
-
 class OpenHoursKtTest {
 
     @ParameterizedTest
@@ -27,10 +26,10 @@ class OpenHoursKtTest {
     ) {
         val openingHours = openingHoursString.toOpenHours()!!
 
-        assertEquals(startHour, openingHours.start.hourOfDay)
-        assertEquals(startMinutes, openingHours.start.minuteOfHour)
-        assertEquals(endHour, openingHours.end.hourOfDay)
-        assertEquals(endMinutes, openingHours.end.minuteOfHour)
+        assertEquals(startHour, openingHours.start.hour)
+        assertEquals(startMinutes, openingHours.start.minute)
+        assertEquals(endHour, openingHours.end.hour)
+        assertEquals(endMinutes, openingHours.end.minute)
     }
 
     @Test

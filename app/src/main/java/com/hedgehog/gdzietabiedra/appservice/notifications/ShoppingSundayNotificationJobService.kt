@@ -17,7 +17,7 @@ import timber.log.Timber
 class ShoppingSundayNotificationJobService : JobService() {
     override fun onStartJob(params: JobParameters): Boolean {
         Timber.d("starting a job")
-        val nextShoppingSunday = SundayShopping.getNextShoppingSunday().toLocalFormat(applicationContext)
+        val nextShoppingSunday = SundayShopping.getNextShoppingSunday().toLocalFormat()
         val resultIntent = Intent(this, MainActivity::class.java)
         val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(this).run {
             addNextIntentWithParentStack(resultIntent)

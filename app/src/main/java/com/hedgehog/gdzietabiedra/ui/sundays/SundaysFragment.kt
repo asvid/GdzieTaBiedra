@@ -13,6 +13,7 @@ import com.hedgehog.gdzietabiedra.R.layout
 import kotlinx.android.synthetic.main.fragment_sundays.*
 import org.koin.androidx.viewmodel.compat.ViewModelCompat
 import java.text.SimpleDateFormat
+import java.time.ZoneId
 import java.util.*
 
 class SundaysFragment : Fragment() {
@@ -43,7 +44,7 @@ class SundaysFragment : Fragment() {
         })
         calendar_view.setUseThreeLetterAbbreviation(true)
         SundayShopping.businessDays.forEach {
-            calendar_view.addEvent(Event(Color.GREEN, it.toDate().time))
+            calendar_view.addEvent(Event(Color.GREEN, it.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()))
         }
 
         month_left_arrow.setOnClickListener { calendar_view.scrollLeft() }
