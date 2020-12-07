@@ -1,10 +1,12 @@
 package com.hedgehog.gdzietabiedra.data.db.shops
 
 import androidx.room.*
+import com.hedgehog.gdzietabiedra.data.db.shops.ShopRoomEntity.Companion.ID
+import com.hedgehog.gdzietabiedra.data.db.shops.ShopRoomEntity.Companion.TABLE_NAME
 
 @Dao
 interface ShopRoomDao {
-    @Query("SELECT * FROM shoproomentity")
+    @Query("SELECT * FROM $TABLE_NAME")
     suspend fun getAll(): List<ShopRoomEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -16,11 +18,10 @@ interface ShopRoomDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(it: ShopRoomEntity)
 
-    @Query("SELECT * FROM shoproomentity WHERE id=:id")
+    @Query("SELECT * FROM $TABLE_NAME WHERE $ID=:id")
     suspend fun getById(id: String): ShopRoomEntity?
 
-    @Query(
-            "SELECT * FROM shoproomentity WHERE latitude BETWEEN :minLat AND :maxLat AND longitude BETWEEN :minLng AND :maxLng")
+    @Query("SELECT * FROM $TABLE_NAME WHERE latitude BETWEEN :minLat AND :maxLat AND longitude BETWEEN :minLng AND :maxLng")
     suspend fun fetchInRange(minLat: Double, maxLat: Double, minLng: Double,
                              maxLng: Double): List<ShopRoomEntity>
 

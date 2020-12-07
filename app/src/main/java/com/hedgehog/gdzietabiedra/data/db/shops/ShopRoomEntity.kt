@@ -1,11 +1,16 @@
 package com.hedgehog.gdzietabiedra.data.db.shops
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+internal const val TABLE_NAME = "shoproomentity"
+internal const val ID = "id"
+
+@Entity(tableName = TABLE_NAME)
 data class ShopRoomEntity(
         @PrimaryKey
+        @ColumnInfo(name = ID)
         var id: String = "",
         var shopNumber: Int? = null,
         var city: String? = null,
