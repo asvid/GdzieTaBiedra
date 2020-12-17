@@ -5,14 +5,13 @@ import androidx.room.ForeignKey.CASCADE
 import androidx.room.ForeignKey.RESTRICT
 import com.github.asvid.biedra.domain.recipes.*
 import com.hedgehog.gdzietabiedra.data.db.recipes.cuisine.CuisineEntity
-import com.hedgehog.gdzietabiedra.data.db.recipes.ingredient.IngredientEntity
+import com.hedgehog.gdzietabiedra.data.db.recipes.ingredient.IngredientAndAmountEntity
 import com.hedgehog.gdzietabiedra.data.db.recipes.mainingredient.MainIngredientEntity
 
 internal const val TABLE_NAME = "recipes"
 const val ID = "recipe_id"
 internal const val CUISINE_ID = "cuisine_id"
 internal const val MAIN_INGREDIENT_ID = "main_ingredient_id"
-internal const val INGREDIENTS = "ingredients"
 
 @Entity(tableName = TABLE_NAME,
         foreignKeys = [
@@ -42,19 +41,23 @@ data class RecipeEntity(
         val portions: Int?,
         val difficultyLevel: DifficultyLevel?, // simple ENUM
 
-        @ColumnInfo(name = MAIN_INGREDIENT_ID)
+        @Embedded
         val mainIngredient: MainIngredient?,
 
         @Relation(
-                parentColumn = INGREDIENTS,
-                entityColumn = IngredientEntity.ID,
-                entity = IngredientEntity::class)
-        val ingredients: List<Ingredient>,
+                parentColumn = ID,
+                entityColumn = IngredientAndAmountEntity.RECIPE_ID,
+                entity = IngredientAndAmountEntity::class)
+        val ingredients: List<IngredientAndAmountEntity>,
         val recipeType: RecipeType?, // simple ENUM
 
         @ColumnInfo(name = CUISINE_ID)
         val cuisineId: Int?,
         val metaTitle: String?,
         val metaDescription: String?,
-        val images: List<RecipeImage>,
-)
+        val images: List<String>,
+) {
+    companion object {
+        const val ID = "recipe_id"
+    }
+}

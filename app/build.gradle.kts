@@ -8,8 +8,6 @@ plugins {
     id("com.google.gms.google-services")
 }
 
-apply(from = "../DokkaConfig.gradle")
-
 android {
     defaultConfig {
         applicationId = Build.appId

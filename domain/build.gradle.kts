@@ -1,8 +1,4 @@
-import Koin.test
-import org.gradle.internal.impldep.org.fusesource.jansi.AnsiRenderer.test
-
 plugins {
-    id("java-library")
     id("kotlin")
 }
 
@@ -11,7 +7,6 @@ dependencies {
     implementation(Libs.jodaTime)
 
     //  Testing
-//    testImplementation(TestDeps.junit)
     testImplementation(Libs.jodaTimeTest)
     testImplementation(TestDeps.junit)
     testImplementation(TestDeps.junitParams)

@@ -16,12 +16,25 @@
 -keepclasseswithmembers class * {
     @com.squareup.moshi.* <methods>;
 }
--keep @com.squareup.moshi.JsonQualifier interface *
 -keepclassmembers class kotlin.Metadata {
     public <methods>;
 }
 
--keepclassmembers class * {
-    @com.squareup.moshi.FromJson <methods>;
-    @com.squareup.moshi.ToJson <methods>;
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.AnnotationsKt # core serialization annotations
+
+# kotlinx-serialization-json specific. Add this if you have java.lang.NoClassDefFoundError kotlinx.serialization.json.JsonObjectSerializer
+-keepclassmembers class kotlinx.serialization.json.** {
+    *** Companion;
+}
+-keepclasseswithmembers class kotlinx.serialization.json.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+-keep,includedescriptorclasses class com.hedgehog.gdzietabiedra.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.hedgehog.gdzietabiedra.** { # <-- change package name to your app's
+    *** Companion;
+}
+-keepclasseswithmembers class com.hedgehog.gdzietabiedra.** { # <-- change package name to your app's
+    kotlinx.serialization.KSerializer serializer(...);
 }
