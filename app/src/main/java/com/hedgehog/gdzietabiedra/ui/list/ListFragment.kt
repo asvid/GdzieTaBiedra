@@ -43,7 +43,7 @@ class ListFragment : Fragment() {
                 RequestLocationPermission -> requestLocationPermission()
                 LocationPermissionDenied -> {
                     displayLocationPermissionSnackbar()
-                    displayNoShopsAvailable()
+                    displayNoLocationInfo()
                 }
                 NoAvailableLocation -> displayNoLocationInfo()
                 LoadingShops -> displayLoading()
@@ -119,21 +119,24 @@ class ListFragment : Fragment() {
 
     private fun displayLoadedShops() {
         list_info_text_view.visibility = GONE
+        shop_list_layout.visibility = VISIBLE
         shop_list_layout.isRefreshing = false
     }
 
     private fun displayLoading() {
         list_info_text_view.visibility = GONE
+        shop_list_layout.visibility = VISIBLE
         shop_list_layout.isRefreshing = true
     }
 
     private fun displayNoLocationInfo() {
-        displayText(R.string.use_search)
+        displayText(R.string.turn_on_location)
     }
 
     private fun displayText(resId: Int) {
         list_info_text_view.setText(resId)
         list_info_text_view.visibility = VISIBLE
+        shop_list_layout.visibility = GONE
         shop_list_layout.isRefreshing = false
     }
 

@@ -2,22 +2,44 @@ package com.hedgehog.gdzietabiedra.appservice
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.LocationManager
-import android.os.Looper
 import com.github.asvid.biedra.domain.Location
-import com.github.asvid.biedra.domain.location
 import com.google.android.gms.location.*
+import com.hedgehog.gdzietabiedra.appservice.notifications.LocationProviderChangedReceiver
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.suspendCancellableCoroutine
+import timber.log.Timber
 import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 @SuppressLint("MissingPermission")
+@ExperimentalCoroutinesApi
+
 class LocationService(private val context: Context) {
 
     private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 
-    suspend fun getLocation(): LocationServiceResult = suspendCoroutine { continuation ->
+    val locationServiceStatus : Flow<Boolean> = callbackFlow {
+        val br: BroadcastReceiver = LocationProviderChangedReceiver { isLocationOn ->
+            offer(isLocationOn)
+        }
+        val filter = IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION)
+        context.registerReceiver(br, filter)
+        awaitClose{
+            Timber.d("unregistering receiver")
+            context.unregisterReceiver(br)
+        }
+    }.distinctUntilChanged()
+
+    suspend fun getLocation(): LocationServiceResult = suspendCancellableCoroutine { continuation ->
+
         if (!isPermissionGranted()) {
             continuation.resume(PermissionRequired)
         } else if (isLocationServiceAvailable()) {
@@ -36,16 +58,17 @@ class LocationService(private val context: Context) {
     }
 
     private fun requestNewLocationAndContinue(continueFunction: (LocationServiceResult) -> Unit) {
+
         fusedLocationClient.requestLocationUpdates(getLocationRequest(), object : LocationCallback() {
-            override fun onLocationResult(locationServiceResult: LocationResult?) {
-                if (locationServiceResult != null && locationServiceResult.locations.isNotEmpty()) {
-                    val newLocation = locationServiceResult.locations[0]
-                    continueFunction(Success(Location(newLocation.latitude, newLocation.longitude)))
+            override fun onLocationResult(locationServiceResult: LocationResult) {
+                val lastLocation = locationServiceResult.lastLocation
+                if (lastLocation != null) {
+                    continueFunction(Success(Location(lastLocation.latitude, lastLocation.longitude)))
                 } else {
                     continueFunction(Error("location was not available"))
                 }
             }
-        }, Looper.myLooper())
+        }, null)
     }
 
     private fun getLocationRequest() = LocationRequest.create().apply {
@@ -56,11 +79,7 @@ class LocationService(private val context: Context) {
 
     private fun isLocationServiceAvailable(): Boolean {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-        val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        val isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-
-        return isGpsEnabled or isNetworkEnabled
+        return locationManager.isLocationEnabled
     }
 
     private fun isPermissionGranted(): Boolean {

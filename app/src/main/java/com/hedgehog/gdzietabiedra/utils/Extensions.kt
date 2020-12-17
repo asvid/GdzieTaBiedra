@@ -4,12 +4,18 @@ import android.content.Context
 import android.content.res.Resources
 import com.github.asvid.biedra.domain.Location
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.tasks.Task
 import com.hedgehog.gdzietabiedra.R
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.channels.SendChannel
+import kotlinx.coroutines.suspendCancellableCoroutine
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlin.math.roundToInt
 
 fun Double.round(decimals: Int): Double {
@@ -48,3 +54,33 @@ fun Double?.generateDistanceText(resources: Resources): String {
     }
     return resources.getString(R.string.distance, distanceText)
 }
+
+suspend fun <T> Task<T>.await(): T {
+    // fast path
+    if (isComplete) {
+        val e = exception
+        return if (e == null) {
+            if (isCanceled) {
+                throw CancellationException("Task $this was cancelled normally.")
+            } else {
+                @Suppress("UNCHECKED_CAST")
+                result as T
+            }
+        } else {
+            throw e
+        }
+    }
+
+    return suspendCancellableCoroutine { cont ->
+        addOnCompleteListener {
+            val e = exception
+            if (e == null) {
+                @Suppress("UNCHECKED_CAST")
+                if (isCanceled) cont.cancel() else cont.resume(result as T)
+            } else {
+                cont.resumeWithException(e)
+            }
+        }
+    }
+}
+
