@@ -29,6 +29,15 @@ class ListViewModel(
     fun loadData() {
         _viewState.postValue(LoadingShops)
         loadShopsForUserLocation()
+
+        viewModelScope.launch(Dispatchers.IO + Job()) {
+            locationService.locationServiceStatus.collect { locationServiceIsOn ->
+                Timber.d("is location on from ViewModel: $locationServiceIsOn")
+                if(locationServiceIsOn){
+                    loadShopsForUserLocation()
+                }
+            }
+        }
     }
 
     private fun loadShopsForUserLocation() {
@@ -38,12 +47,6 @@ class ListViewModel(
                 is Error -> locationNotAvailable()
                 is PermissionRequired -> requestLocationPermission()
                 is LocationNotAvailable -> locationNotAvailable()
-            }
-        }
-
-        viewModelScope.launch(Dispatchers.IO + Job()) {
-            locationService.locationServiceStatus.collect {
-                Timber.d("is location on from ViewModel: $it")
             }
         }
     }

@@ -7,9 +7,11 @@ import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.os.Looper
 import com.github.asvid.biedra.domain.Location
 import com.google.android.gms.location.*
 import com.hedgehog.gdzietabiedra.appservice.notifications.LocationProviderChangedReceiver
+import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +23,6 @@ import kotlin.coroutines.resume
 
 @SuppressLint("MissingPermission")
 @ExperimentalCoroutinesApi
-
 class LocationService(private val context: Context) {
 
     private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
@@ -39,26 +40,28 @@ class LocationService(private val context: Context) {
     }.distinctUntilChanged()
 
     suspend fun getLocation(): LocationServiceResult = suspendCancellableCoroutine { continuation ->
-
         if (!isPermissionGranted()) {
             continuation.resume(PermissionRequired)
         } else if (isLocationServiceAvailable()) {
-            fusedLocationClient.lastLocation.addOnSuccessListener { foundLocation ->
-                if (foundLocation == null) {
-                    requestNewLocationAndContinue {
-                        continuation.resume(it)
-                    }
-                } else {
-                    continuation.resume(Success(Location(foundLocation.latitude, foundLocation.longitude)))
-                }
-            }
+            getLastKnownLocation(continuation)
         } else {
             continuation.resume(LocationNotAvailable)
         }
     }
 
-    private fun requestNewLocationAndContinue(continueFunction: (LocationServiceResult) -> Unit) {
+    private fun getLastKnownLocation(continuation: CancellableContinuation<LocationServiceResult>) {
+        fusedLocationClient.lastLocation.addOnSuccessListener { foundLocation ->
+            if (foundLocation == null) {
+                requestNewLocationAndContinue {
+                    continuation.resume(it)
+                }
+            } else {
+                continuation.resume(Success(Location(foundLocation.latitude, foundLocation.longitude)))
+            }
+        }
+    }
 
+    private fun requestNewLocationAndContinue(continueFunction: (LocationServiceResult) -> Unit) {
         fusedLocationClient.requestLocationUpdates(getLocationRequest(), object : LocationCallback() {
             override fun onLocationResult(locationServiceResult: LocationResult) {
                 val lastLocation = locationServiceResult.lastLocation
@@ -68,7 +71,7 @@ class LocationService(private val context: Context) {
                     continueFunction(Error("location was not available"))
                 }
             }
-        }, null)
+        }, Looper.getMainLooper())
     }
 
     private fun getLocationRequest() = LocationRequest.create().apply {
