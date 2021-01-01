@@ -3,7 +3,7 @@ object Versions {
     const val kotlinSerialization = "1.0.0."
     const val ktor: String = "1.4.1"
     const val koin = "2.2.0-beta-2"
-    const val coroutines = "1.3.9"
+    const val coroutines = "1.4.2"
     const val roomDB = "2.2.5"
     const val googlePlayServices = "17.0.0"
     const val timber = "4.7.1"

@@ -9,8 +9,10 @@ import com.hedgehog.gdzietabiedra.appservice.*
 import com.hedgehog.gdzietabiedra.utils.VolatileMutableLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class ListViewModel(
         private val shopService: ShopService,
@@ -27,10 +29,19 @@ class ListViewModel(
     fun loadData() {
         _viewState.postValue(LoadingShops)
         loadShopsForUserLocation()
+
+        viewModelScope.launch(Dispatchers.IO + Job()) {
+            locationService.locationServiceStatus.collect { locationServiceIsOn ->
+                Timber.d("is location on from ViewModel: $locationServiceIsOn")
+                if(locationServiceIsOn){
+                    loadShopsForUserLocation()
+                }
+            }
+        }
     }
 
     private fun loadShopsForUserLocation() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO + Job()) {
             when (val location = locationService.getLocation()) {
                 is Success -> loadShopsForLocation(location)
                 is Error -> locationNotAvailable()
