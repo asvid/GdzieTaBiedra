@@ -11,6 +11,7 @@ import android.os.Looper
 import com.github.asvid.biedra.domain.Location
 import com.google.android.gms.location.*
 import com.hedgehog.gdzietabiedra.appservice.notifications.LocationProviderChangedReceiver
+import com.hedgehog.gdzietabiedra.utils.resumeIfActive
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -27,13 +28,13 @@ class LocationService(private val context: Context) {
 
     private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 
-    val locationServiceStatus : Flow<Boolean> = callbackFlow {
+    val locationServiceStatus: Flow<Boolean> = callbackFlow {
         val br: BroadcastReceiver = LocationProviderChangedReceiver { isLocationOn ->
             offer(isLocationOn)
         }
         val filter = IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION)
         context.registerReceiver(br, filter)
-        awaitClose{
+        awaitClose {
             Timber.d("unregistering receiver")
             context.unregisterReceiver(br)
         }
@@ -41,11 +42,11 @@ class LocationService(private val context: Context) {
 
     suspend fun getLocation(): LocationServiceResult = suspendCancellableCoroutine { continuation ->
         if (!isPermissionGranted()) {
-            continuation.resume(PermissionRequired)
+            continuation.resumeIfActive(PermissionRequired)
         } else if (isLocationServiceAvailable()) {
             getLastKnownLocation(continuation)
         } else {
-            continuation.resume(LocationNotAvailable)
+                continuation.resumeIfActive(LocationNotAvailable)
         }
     }
 
@@ -53,10 +54,10 @@ class LocationService(private val context: Context) {
         fusedLocationClient.lastLocation.addOnSuccessListener { foundLocation ->
             if (foundLocation == null) {
                 requestNewLocationAndContinue {
-                    continuation.resume(it)
+                    continuation.resumeIfActive(it)
                 }
             } else {
-                continuation.resume(Success(Location(foundLocation.latitude, foundLocation.longitude)))
+                continuation.resumeIfActive(Success(Location(foundLocation.latitude, foundLocation.longitude)))
             }
         }
     }

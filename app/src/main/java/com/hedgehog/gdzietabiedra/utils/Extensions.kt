@@ -6,6 +6,7 @@ import com.github.asvid.biedra.domain.Location
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Task
 import com.hedgehog.gdzietabiedra.R
+import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -82,5 +83,10 @@ suspend fun <T> Task<T>.await(): T {
             }
         }
     }
+}
+
+fun <T> CancellableContinuation<T>.resumeIfActive(result: T) {
+    if (this.isActive)
+        this.resume(result)
 }
 
