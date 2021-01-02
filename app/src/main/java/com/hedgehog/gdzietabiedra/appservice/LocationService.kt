@@ -7,7 +7,9 @@ import android.content.Context
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.os.Build
 import android.os.Looper
+import android.provider.Settings
 import com.github.asvid.biedra.domain.Location
 import com.google.android.gms.location.*
 import com.hedgehog.gdzietabiedra.appservice.notifications.LocationProviderChangedReceiver
@@ -20,7 +22,6 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.suspendCancellableCoroutine
 import timber.log.Timber
-import kotlin.coroutines.resume
 
 @SuppressLint("MissingPermission")
 @ExperimentalCoroutinesApi
@@ -82,8 +83,16 @@ class LocationService(private val context: Context) {
     }
 
     private fun isLocationServiceAvailable(): Boolean {
-        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isLocationEnabled
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            // This is new method provided in API 28
+            val lm = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            lm.isLocationEnabled
+        } else {
+            // This is Deprecated in API 28
+            val mode: Int = Settings.Secure.getInt(context.contentResolver, Settings.Secure.LOCATION_MODE,
+                    Settings.Secure.LOCATION_MODE_OFF)
+            mode != Settings.Secure.LOCATION_MODE_OFF
+        }
     }
 
     private fun isPermissionGranted(): Boolean {
