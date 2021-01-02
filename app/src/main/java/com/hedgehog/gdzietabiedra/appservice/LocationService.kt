@@ -13,6 +13,7 @@ import android.provider.Settings
 import com.github.asvid.biedra.domain.Location
 import com.google.android.gms.location.*
 import com.hedgehog.gdzietabiedra.appservice.notifications.LocationProviderChangedReceiver
+import com.hedgehog.gdzietabiedra.utils.isLocationServiceAvailable
 import com.hedgehog.gdzietabiedra.utils.resumeIfActive
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -44,7 +45,7 @@ class LocationService(private val context: Context) {
     suspend fun getLocation(): LocationServiceResult = suspendCancellableCoroutine { continuation ->
         if (!isPermissionGranted()) {
             continuation.resumeIfActive(PermissionRequired)
-        } else if (isLocationServiceAvailable()) {
+        } else if (context.isLocationServiceAvailable()) {
             getLastKnownLocation(continuation)
         } else {
                 continuation.resumeIfActive(LocationNotAvailable)
@@ -80,19 +81,6 @@ class LocationService(private val context: Context) {
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         setExpirationDuration(5000)
         numUpdates = 1
-    }
-
-    private fun isLocationServiceAvailable(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            // This is new method provided in API 28
-            val lm = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            lm.isLocationEnabled
-        } else {
-            // This is Deprecated in API 28
-            val mode: Int = Settings.Secure.getInt(context.contentResolver, Settings.Secure.LOCATION_MODE,
-                    Settings.Secure.LOCATION_MODE_OFF)
-            mode != Settings.Secure.LOCATION_MODE_OFF
-        }
     }
 
     private fun isPermissionGranted(): Boolean {
