@@ -9,6 +9,9 @@ import android.os.Looper
 import com.github.asvid.biedra.domain.Location
 import com.github.asvid.biedra.domain.location
 import com.google.android.gms.location.*
+import com.hedgehog.gdzietabiedra.utils.isLocationServiceAvailable
+import com.hedgehog.gdzietabiedra.utils.resumeIfActive
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -17,21 +20,21 @@ class LocationService(private val context: Context) {
 
     private var fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
 
-    suspend fun getLocation(): LocationServiceResult = suspendCoroutine { continuation ->
+    suspend fun getLocation(): LocationServiceResult = suspendCancellableCoroutine { continuation ->
         if (!isPermissionGranted()) {
-            continuation.resume(PermissionRequired)
-        } else if (isLocationServiceAvailable()) {
+            continuation.resumeIfActive(PermissionRequired)
+        } else if (context.isLocationServiceAvailable()) {
             fusedLocationClient.lastLocation.addOnSuccessListener { foundLocation ->
                 if (foundLocation == null) {
                     requestNewLocationAndContinue {
-                        continuation.resume(it)
+                        continuation.resumeIfActive(it)
                     }
                 } else {
-                    continuation.resume(Success(Location(foundLocation.latitude, foundLocation.longitude)))
+                    continuation.resumeIfActive(Success(Location(foundLocation.latitude, foundLocation.longitude)))
                 }
             }
         } else {
-            continuation.resume(LocationNotAvailable)
+            continuation.resumeIfActive(LocationNotAvailable)
         }
     }
 
@@ -52,15 +55,6 @@ class LocationService(private val context: Context) {
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         setExpirationDuration(5000)
         numUpdates = 1
-    }
-
-    private fun isLocationServiceAvailable(): Boolean {
-        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-        val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        val isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-
-        return isGpsEnabled or isNetworkEnabled
     }
 
     private fun isPermissionGranted(): Boolean {
