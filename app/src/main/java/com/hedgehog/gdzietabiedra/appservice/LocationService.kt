@@ -4,16 +4,12 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.LocationManager
 import android.os.Looper
 import com.github.asvid.biedra.domain.Location
-import com.github.asvid.biedra.domain.location
 import com.google.android.gms.location.*
 import com.hedgehog.gdzietabiedra.utils.isLocationServiceAvailable
 import com.hedgehog.gdzietabiedra.utils.resumeIfActive
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 @SuppressLint("MissingPermission")
 class LocationService(private val context: Context) {
