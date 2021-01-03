@@ -129,6 +129,7 @@ class ListFragment : Fragment() {
 
     private fun displayNoLocationInfo() {
         displayText(R.string.use_search)
+        shopsAdapter.clearItems()
     }
 
     private fun displayText(resId: Int) {
