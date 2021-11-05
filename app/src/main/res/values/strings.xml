@@ -49,4 +49,6 @@
     <string name="euro_accepted">Euro accepted</string>
     <string name="tax_free">TaxFree</string>
     <string name="card_payment">Card payments</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

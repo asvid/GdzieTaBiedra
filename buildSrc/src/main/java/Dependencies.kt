@@ -1,14 +1,15 @@
 object Versions {
-    const val kotlin = "1.4.20"
-    const val kotlinSerialization = "1.0.0."
+    const val kotlin = "1.5.31"
+    const val kotlinSerialization = "1.3.0."
     const val ktor: String = "1.4.1"
     const val koin = "2.2.0-beta-2"
-    const val coroutines = "1.4.2"
-    const val roomDB = "2.2.5"
+    const val coroutines = "1.5.2"
+    const val roomDB = "2.4.0-beta01"
     const val googlePlayServices = "17.0.0"
     const val timber = "4.7.1"
     const val firebaseBom = "26.0.0"
     const val junit = "5.7.0"
+    const val compose = "1.0.5"
 }
 
 object Libs {
@@ -43,9 +44,10 @@ object Google {
 
 object Android {
     const val cardView = "androidx.cardview:cardview:1.0.0"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.1"
+    const val constraintLayoutCompose = "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc01"
     const val recyclerView = "androidx.recyclerview:recyclerview:1.1.0"
-    const val appCompat = "androidx.appcompat:appcompat:1.2.0"
+    const val appCompat = "androidx.appcompat:appcompat:1.3.1"
     const val material = "com.google.android.material:material:1.2.1"
     const val navigationFragment = "androidx.navigation:navigation-fragment:2.3.1"
     const val navigationUi = "androidx.navigation:navigation-ui:2.3.1"
@@ -56,6 +58,18 @@ object Android {
     const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val preferences = "androidx.preference:preference-ktx:1.1.1"
     const val coreLibDesugaring = "com.android.tools:desugar_jdk_libs:1.1.1"
+}
+
+object Compose{
+    const val ui = "androidx.compose.ui:ui:${Versions.compose}"
+    const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
+    const val foundationLayout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
+    const val material = "androidx.compose.material:material:${Versions.compose}"
+    const val materialIcons = "androidx.compose.material:material-icons-extended:${Versions.compose}"
+    const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
+    const val animation = "androidx.compose.animation:animation:${Versions.compose}"
+    const val runtime = "androidx.compose.runtime:runtime:${Versions.compose}"
+    const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
 }
 
 object Koin {

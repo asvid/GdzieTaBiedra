@@ -15,6 +15,7 @@ buildscript {
         classpath(ProjectDeps.googleServices)
         classpath(ProjectDeps.crashlytics)
         classpath(ProjectDeps.dokka)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
     }
 }
 

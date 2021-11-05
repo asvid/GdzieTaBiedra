@@ -27,7 +27,7 @@ data class ShopRoomEntity(
         var isNew: Boolean = false,
         var special: Int? = null,
         var sublease: String? = null,
-        val name: String? = null,
-        val citySlug: String? = null,
-        val provinceId: String? = null
+        var name: String? = null,
+        var citySlug: String? = null,
+        var provinceId: String? = null
 )

@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.hedgehog.gdzietabiedra.ui.settings.SettingsFragment"
+        android:name="com.hedgehog.gdzietabiedra.ui.settings.SettingsJetpack"
         android:label="@string/settings" />
 
     <fragment

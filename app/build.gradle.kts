@@ -30,19 +30,19 @@ android {
             proguardFile(getDefaultProguardFile("proguard-android.txt"))
             proguardFile(file("proguard-rules.pro"))
             rootProject.file("proguard")
-                    .listFiles()?.let { files ->
-                        proguardFiles(*files
-                                .filter { it.name.startsWith("proguard") }
-                                .toTypedArray()
-                        )
-                    }
+                .listFiles()?.let { files ->
+                    proguardFiles(*files
+                        .filter { it.name.startsWith("proguard") }
+                        .toTypedArray()
+                    )
+                }
             manifestPlaceholders["appName"] = "@string/app_name"
             manifestPlaceholders["crashlyticsCollectionEnabled"] = true
         }
         getByName("debug") {
             manifestPlaceholders["appName"] = "Biedra - Debug"
             manifestPlaceholders["crashlyticsCollectionEnabled"] = false
-            debuggable(true)
+            isDebuggable = true
             multiDexEnabled = true
             firebaseCrashlytics {
                 mappingFileUploadEnabled = false
@@ -55,7 +55,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
-        useIR = true
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true // adds support for LocalTime for API<26
@@ -76,6 +75,12 @@ android {
     }
     packagingOptions {
         exclude("META-INF/proguard/androidx-annotations.pro")
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.0.5"
+    }
+    buildFeatures {
+        compose = true
     }
 }
 
@@ -103,6 +108,7 @@ dependencies {
     implementation(Android.viewmodelKtx)
     implementation(Android.swipeRefreshLayout)
     implementation(Android.preferences)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     coreLibraryDesugaring(Android.coreLibDesugaring)
 
     implementation(Libs.calendarView)
@@ -127,6 +133,16 @@ dependencies {
     implementation(Firebase.crashlytics)
     implementation(Firebase.analytics)
 
+    implementation(Compose.runtime)
+    implementation(Compose.ui)
+    implementation(Compose.uiTooling)
+    implementation(Compose.runtimeLivedata)
+    implementation(Compose.foundation)
+    implementation(Compose.foundationLayout)
+    implementation(Compose.material)
+    implementation(Compose.materialIcons)
+    implementation(Compose.animation)
+
     testImplementation(TestDeps.junit)
     testImplementation(TestDeps.junitParams)
     androidTestImplementation(TestDeps.runner)
@@ -135,6 +151,6 @@ dependencies {
     testImplementation(Room.testing)
 }
 
-tasks.withType<Test>(){
+tasks.withType<Test>() {
     useJUnitPlatform()
 }
