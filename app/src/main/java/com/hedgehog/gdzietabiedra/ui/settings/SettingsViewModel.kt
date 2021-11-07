@@ -3,13 +3,18 @@ package com.hedgehog.gdzietabiedra.ui.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hedgehog.gdzietabiedra.appservice.notifications.ShoppingSundayNotificationService
+import com.hedgehog.gdzietabiedra.data.repository.NotificationsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.time.LocalTime
 
 class SettingsViewModel(
-        val shoppingSundayNotificationService: ShoppingSundayNotificationService
+    val shoppingSundayNotificationService: ShoppingSundayNotificationService,
+    val notificationsRepository: NotificationsRepository,
 ) : ViewModel() {
+
+    //TODO: read preferences and set them in view
 
     fun handleShoppingSundayNotificatonChange(newValue: Any): Boolean {
         if (newValue as Boolean) {
@@ -31,15 +36,29 @@ class SettingsViewModel(
         }
     }
 
-    fun handleShoppingSundayNotificationDaysBeforeChange(newValue: Any?): Boolean {
+    fun handleShoppingSundayNotificationDaysBeforeChange(newValue: Int): Boolean {
         Timber.d("new days before is: $newValue")
+        notificationsRepository.setNotificationDays(newValue)
         setNotificationsForSundays()
         return true
     }
 
-    fun handleShoppingSundayNotificationTimeChange(newValue: Any?): Boolean {
+    fun handleShoppingSundayNotificationTimeChange(newValue: LocalTime): Boolean {
         Timber.d("new time is: $newValue")
+        notificationsRepository.setNotificationTime(newValue)
         setNotificationsForSundays()
         return true
+    }
+
+    fun getNotificationOn(): Boolean {
+        return notificationsRepository.getNotificationOn()
+    }
+
+    fun getNotificationDays(): Int {
+        return notificationsRepository.getNotificationDays()
+    }
+
+    fun getNotificationTime(): LocalTime {
+        return notificationsRepository.getNotificationTime()
     }
 }

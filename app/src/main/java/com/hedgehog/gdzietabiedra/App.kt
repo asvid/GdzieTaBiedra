@@ -64,7 +64,7 @@ class App : Application() {
                 viewModel { ListViewModel(get(), get()) }
                 viewModel { MapViewModel(get(), get()) }
                 viewModel { SundaysViewModel() }
-                viewModel { SettingsViewModel(get()) }
+                viewModel { SettingsViewModel(get(), get()) }
                 viewModel { ShopDetailsViewModel(get(), get()) }
             })
         }
