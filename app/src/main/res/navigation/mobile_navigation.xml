@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_list"
-        android:name="com.hedgehog.gdzietabiedra.ui.list.ListFragment"
+        android:name="com.hedgehog.gdzietabiedra.ui.list.ListJetpack"
         android:label="@string/title_list"
         tools:layout="@layout/fragment_list">
         <action
