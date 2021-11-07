@@ -9,12 +9,17 @@ import android.view.*
 import android.widget.TimePicker
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.Image
-import androidx.fragment.app.Fragment
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Alarm
+import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
@@ -22,9 +27,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import com.hedgehog.gdzietabiedra.BuildConfig
 import com.hedgehog.gdzietabiedra.R
+import com.hedgehog.gdzietabiedra.ui.styles.BiedraTheme
+import com.hedgehog.gdzietabiedra.ui.styles.SettingsTitle
 import org.koin.androidx.viewmodel.compat.ViewModelCompat
 import java.time.LocalTime
 import kotlin.math.round
@@ -43,8 +50,10 @@ class SettingsJetpack : Fragment() {
         setHasOptionsMenu(true)
         return ComposeView(requireContext()).apply {
             setContent {
-                SettingsContent(
-                )
+                BiedraTheme {
+                    SettingsContent(
+                    )
+                }
             }
         }
     }
@@ -58,7 +67,7 @@ class SettingsJetpack : Fragment() {
 
         val timePicker = TimePickerDialog(
             context,
-            { timePicker: TimePicker, hour: Int, minute: Int ->
+            { _: TimePicker, hour: Int, minute: Int ->
                 val newValue = LocalTime.of(hour, minute)
                 vm.handleShoppingSundayNotificationTimeChange(newValue)
                 notificationTime = newValue
@@ -67,19 +76,15 @@ class SettingsJetpack : Fragment() {
 
         return Column {
             Row {
-                Image(
-                    painter = painterResource(R.drawable.ic_notifications_black_24dp),
-                    "Notifications icon"
-                )
-                Text("Powiadomienia")
+                Icon(Icons.Rounded.Notifications, contentDescription = "Notification icon", modifier = Modifier.padding(8.dp))
+                SettingsTitle(getString(R.string.notifications))
             }
             Row(
-                modifier =
-                Modifier.padding(start = 24.dp)
+                modifier = Modifier.padding(8.dp)
             ) {
                 Column {
                     Row {
-                        Text("Niedziele handlowe")
+                        Text(getString(R.string.shopping_sunday_notification))
                         Switch(
                             checked = notificationsOn,
                             onCheckedChange = {
@@ -88,7 +93,13 @@ class SettingsJetpack : Fragment() {
                             })
                     }
 
-                    Text("Ile dni przed: ${round(daysSliderValue)}")
+                    Text(
+                        getString(R.string.shoping_sunday_seek_bar_label) + " : ${
+                            round(
+                                daysSliderValue
+                            )
+                        }"
+                    )
                     Row {
                         Slider(
                             valueRange = 0f..10f,
@@ -101,45 +112,30 @@ class SettingsJetpack : Fragment() {
                             enabled = notificationsOn
                         )
                     }
-                    ClickableText(
-                        text = AnnotatedString("Czas notyfikacji: ${notificationTime}"),
-                        onClick = {
-//                            showTimeDialog(notificationTime)
-                            timePicker.show()
-                        }
-                    )
+                    Row(modifier = Modifier.clickable { timePicker.show() }) {
+                        Text(getString(R.string.notification_time) + ": ")
+                        Icon(Icons.Rounded.Alarm, contentDescription = "Notification time icon")
+                        Text("$notificationTime")
+                    }
                 }
             }
 
-            Divider()
+            Divider(modifier = Modifier.padding(8.dp))
 
             Row {
                 Row {
-                    Image(
-                        painter = painterResource(R.drawable.ic_baseline_info_black_24),
-                        "Informations icon"
-                    )
-                    Text("Informacje")
+                    Icon(Icons.Rounded.Info, contentDescription = "Notification icon", modifier = Modifier.padding(8.dp))
+                    SettingsTitle(getString(R.string.info))
                 }
             }
             Row(
-                modifier =
-                Modifier.padding(start = 24.dp)
+                modifier = Modifier.padding(8.dp)
             ) {
                 Column {
-                    Text("Wersja aplikacji")
-                    Text("3.2.1")
+                    Text(getString(R.string.app_version) + ": " + BuildConfig.VERSION_NAME)
                 }
             }
         }
-    }
-
-    private fun showTimeDialog(notificationTime: LocalTime) {
-        val DIALOG_FRAGMENT_TAG = "TimePreference"
-        val f: DialogFragment =
-            TimePreferenceDialog.newInstance(notificationTime.toString())
-        f.setTargetFragment(this, 0)
-        f.show(parentFragmentManager, DIALOG_FRAGMENT_TAG)
     }
 
     @Preview

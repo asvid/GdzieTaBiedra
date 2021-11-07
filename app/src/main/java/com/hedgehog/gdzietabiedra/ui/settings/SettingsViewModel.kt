@@ -16,8 +16,9 @@ class SettingsViewModel(
 
     //TODO: read preferences and set them in view
 
-    fun handleShoppingSundayNotificatonChange(newValue: Any): Boolean {
-        if (newValue as Boolean) {
+    fun handleShoppingSundayNotificatonChange(newValue: Boolean): Boolean {
+        notificationsRepository.setNotificationOn(newValue)
+        if (newValue) {
             // turn on notifications, check saved days before and time
             setNotificationsForSundays()
         } else {
